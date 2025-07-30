@@ -1,6 +1,9 @@
+import 'package:better_ui/theme/themes/better_dark_theme.dart';
+import 'package:better_ui/theme/themes/better_light_theme.dart';
+import 'package:example/i18n/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -21,11 +24,35 @@ class Home extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text("Flutter 移动端组件库", style: TextStyle(fontSize: 16.sp)),
+              ElevatedButton(
+                onPressed: () {
+                  Get.changeTheme(betterDarkTheme);
+                },
+                child: Text('切换黑暗主题'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Get.changeTheme(betterLightTheme);
+                },
+                child: Text('切换白色主题'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  I18nTranslations.updateLocale(I18nLocale.en_US);
+                },
+                child: Text('切换英文'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  I18nTranslations.updateLocale(I18nLocale.zh_CN);
+                },
+                child: Text('切换中文'),
+              ),
+              Text("Flutter ${"移动端组件库".tr}", style: TextStyle(fontSize: 16.sp)),
               SizedBox(height: 20.h),
-              Text("基础组件", style: TextStyle(fontSize: 14.sp)),
+              Text("基础组件".tr, style: TextStyle(fontSize: 14.sp)),
               SizedBox(height: 10.h),
-              renderRow(context, "Button"),
+              renderRow(context, "按钮".tr),
             ],
           ),
         ),
@@ -36,7 +63,7 @@ class Home extends StatelessWidget {
   Widget renderRow(BuildContext context, String title) {
     return ElevatedButton(
       onPressed: () {
-        context.push("/betterButton");
+        Get.toNamed("/betterButton");
       },
       style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
       child: SizedBox(

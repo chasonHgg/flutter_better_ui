@@ -38,9 +38,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   better_ui:
     path: ../
-  go_router: ^16.0.0
   flutter_screenutil: ^5.9.3
-  provider: ^6.1.5
+  get: ^4.7.2
 
 dev_dependencies:
   flutter_test:

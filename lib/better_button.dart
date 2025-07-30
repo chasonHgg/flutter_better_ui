@@ -19,12 +19,12 @@ class BetterButton extends StatelessWidget {
   final double? loadingStrokeWidth;
   final Widget? loadingWidget;
   final Color? loadingColor;
+  final double? loadingMarginRight;
   final Widget? prefix;
   final Widget? suffix;
   final double? width;
   final double? height;
   final BetterButtonLoadingType? loadingType;
-  final double? loadingMarginRight;
   final String? text;
   final TextStyle? textStyle;
   final EdgeInsetsGeometry? padding;
@@ -56,12 +56,12 @@ class BetterButton extends StatelessWidget {
     this.loadingStrokeWidth = 1,
     this.loadingWidget,
     this.loadingColor,
+    this.loadingMarginRight = 8,
     this.prefix,
     this.suffix,
     this.width,
     this.height = 44,
     this.loadingType = BetterButtonLoadingType.circular,
-    this.loadingMarginRight = 8,
     this.text,
     this.textStyle,
     this.padding,
@@ -237,7 +237,8 @@ class BetterButton extends StatelessWidget {
     //获取文本
     if (text != null &&
         child == null &&
-        (loading == false || hideContentWhenLoading == false)) {
+        (loading == false ||
+            (loading == true && hideContentWhenLoading == false))) {
       children.add(Text(text!, style: finalTextStyle));
     }
     //获取自定义内容
