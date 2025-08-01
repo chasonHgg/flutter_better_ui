@@ -1,6 +1,7 @@
 import 'package:better_ui/animation/spinner/spinner.dart';
 import 'package:better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:better_ui/theme/better_theme_extension.dart';
+import 'package:better_ui/utils/better_util.dart';
 import 'package:flutter/material.dart';
 
 enum BetterButtonLoadingType { circular, spinner }
@@ -73,7 +74,7 @@ class BetterButton extends StatelessWidget {
     this.hideContentWhenLoading = true,
     this.loadingText,
     this.child,
-    this.borderWidth = 1,
+    this.borderWidth,
   });
 
   @override
@@ -90,6 +91,11 @@ class BetterButton extends StatelessWidget {
     Color finalLoadingColor = loadingColor ?? buttonTheme.loadingColor;
 
     TextStyle? finalTextStyle = textStyle ?? TextStyle();
+
+    double finalBorderWidth = borderWidth ?? 1;
+    if (borderWidth == null && BetterUtil.shouldUseHairlineBorder(context)) {
+      finalBorderWidth = 0.5;
+    }
 
     //获取主题色
     Color primaryColor = Theme.of(
@@ -261,6 +267,7 @@ class BetterButton extends StatelessWidget {
       style: ButtonStyle(
         padding: WidgetStateProperty.all(EdgeInsets.zero),
         minimumSize: WidgetStateProperty.all(Size.zero),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         backgroundColor: WidgetStateProperty.all(Colors.transparent),
         shadowColor: WidgetStateProperty.all(Colors.transparent),
         overlayColor: WidgetStateProperty.all(
@@ -276,7 +283,7 @@ class BetterButton extends StatelessWidget {
           ),
         ),
         side: WidgetStateProperty.all(
-          BorderSide(color: finalBorderColor, width: borderWidth ?? 1),
+          BorderSide(color: finalBorderColor, width: finalBorderWidth),
         ),
       ),
       onPressed: disabled == true ? null : onClick ?? () {},

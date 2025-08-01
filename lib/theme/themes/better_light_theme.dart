@@ -1,14 +1,16 @@
 import 'package:better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:better_ui/theme/better_theme_extension.dart';
+import 'package:better_ui/theme/child_themes/better_cell_theme.dart';
 import 'package:better_ui/utils/color_util.dart';
 import 'package:flutter/material.dart';
 
 ThemeData betterLightTheme = ThemeData(
   brightness: Brightness.light,
+  dividerColor: ColorUtil.hexToColor('#ebedf0'),
   appBarTheme: ThemeData.light().appBarTheme.copyWith(
     backgroundColor: ColorUtil.hexToColor('#ffffff'),
   ),
-  scaffoldBackgroundColor: ColorUtil.hexToColor('#ffffff'),
+  scaffoldBackgroundColor: ColorUtil.hexToColor('#f7f8fa'),
   textTheme: TextTheme(
     bodyLarge: TextStyle(color: ColorUtil.hexToColor('#323233')),
     bodyMedium: TextStyle(color: ColorUtil.hexToColor('#323233')),
@@ -35,6 +37,28 @@ ThemeData betterLightTheme = ThemeData(
         warningTextColor: ColorUtil.hexToColor('#ffffff'),
         dangerTextColor: ColorUtil.hexToColor('#ffffff'),
         loadingColor: ColorUtil.hexToColor('#323233'),
+      ),
+      cellTheme: BetterCellTheme(
+        height: 44,
+        backgroundColor: ColorUtil.hexToColor('#ffffff'),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        titleTextStyle: TextStyle(
+          color: ColorUtil.hexToColor('#323233'),
+          fontSize: 14,
+        ),
+        valueTextStyle: TextStyle(
+          fontSize: 14,
+          color: ColorUtil.hexToColor('#969799'),
+        ),
+        border: Border(
+          bottom: BorderSide(
+            color: ColorUtil.hexToColor('#ebedf0'),
+            width: 0.5,
+          ),
+        ),
+        arrowRightSize: 14,
+        arrowRightColor: ColorUtil.hexToColor('#969799'),
+        overlayColor: ColorUtil.hexToColor('#f2f3f5'),
       ),
     ),
   ],

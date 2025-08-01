@@ -3,22 +3,17 @@ import 'package:better_ui/better_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class BetterButtonPage extends StatefulWidget {
+class BetterButtonPage extends StatelessWidget {
   const BetterButtonPage({super.key});
 
-  @override
-  State<BetterButtonPage> createState() => _BetterButtonPageState();
-}
-
-class _BetterButtonPageState extends State<BetterButtonPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('按钮'.tr),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0.5), // 边框高度
-          child: Container(color: Colors.grey[300], height: 0.5),
+          preferredSize: Size.fromHeight(0.5),
+          child: Container(color: Theme.of(context).dividerColor, height: 0.5),
         ),
       ),
       body: SingleChildScrollView(

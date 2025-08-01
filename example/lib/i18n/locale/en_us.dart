@@ -18,4 +18,8 @@ Map<String, String> enUS = {
   '禁用状态': 'Disabled State',
   '禁用按钮': 'Disabled Button',
   '自定义内容': 'Custom Content',
+  '单元格': 'Cell',
+  '内容': 'Content',
+  '自定义单元格': 'Custom Cell',
+  '禁止点击': 'Disabled Click',
 };

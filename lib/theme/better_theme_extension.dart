@@ -1,4 +1,5 @@
 import 'package:better_ui/theme/child_themes/better_button_theme.dart';
+import 'package:better_ui/theme/child_themes/better_cell_theme.dart';
 import 'package:flutter/material.dart';
 
 // UI主题扩展
@@ -11,6 +12,8 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
 
   //按钮主题
   final BetterButtonTheme buttonTheme;
+  //单元格主题
+  final BetterCellTheme cellTheme;
 
   const BetterThemeExtension({
     required this.primaryColor,
@@ -19,6 +22,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     required this.warningColor,
     required this.dangerColor,
     required this.buttonTheme,
+    required this.cellTheme,
   });
 
   @override
@@ -29,6 +33,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     Color? warningColor,
     Color? dangerColor,
     BetterButtonTheme? buttonTheme,
+    BetterCellTheme? cellTheme,
   }) {
     return BetterThemeExtension(
       primaryColor: primaryColor ?? this.primaryColor,
@@ -37,6 +42,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       warningColor: warningColor ?? this.warningColor,
       dangerColor: dangerColor ?? this.dangerColor,
       buttonTheme: buttonTheme ?? this.buttonTheme,
+      cellTheme: cellTheme ?? this.cellTheme,
     );
   }
 
@@ -58,6 +64,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
           Color.lerp(warningColor, other.warningColor, t) ?? warningColor,
       dangerColor: Color.lerp(dangerColor, other.dangerColor, t) ?? dangerColor,
       buttonTheme: BetterButtonTheme.lerp(buttonTheme, other.buttonTheme, t),
+      cellTheme: BetterCellTheme.lerp(cellTheme, other.cellTheme, t),
     );
   }
 }

@@ -10,8 +10,7 @@ class I18nTranslations extends Translations {
   Map<String, Map<String, String>> get keys => {'zh_CN': zhCN, 'en_US': enUS};
 
   static void updateLocale(I18nLocale locale) {
-    var localeString = locale.toString().split('.').last;
-    var localeSplit = localeString.split('_');
+    var localeSplit = locale.toString().split('_');
     Get.updateLocale(Locale(localeSplit[0], localeSplit[1]));
   }
 }

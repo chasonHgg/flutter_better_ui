@@ -1,10 +1,12 @@
 import 'package:better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:better_ui/theme/better_theme_extension.dart';
+import 'package:better_ui/theme/child_themes/better_cell_theme.dart';
 import 'package:better_ui/utils/color_util.dart';
 import 'package:flutter/material.dart';
 
 ThemeData betterDarkTheme = ThemeData(
   brightness: Brightness.dark,
+  dividerColor: ColorUtil.hexToColor('#3a3a3c'),
   appBarTheme: ThemeData.dark().appBarTheme.copyWith(
     backgroundColor: ColorUtil.hexToColor('#141218'),
   ),
@@ -34,6 +36,28 @@ ThemeData betterDarkTheme = ThemeData(
         warningTextColor: ColorUtil.hexToColor('#ffffff'),
         dangerTextColor: ColorUtil.hexToColor('#ffffff'),
         loadingColor: ColorUtil.hexToColor('#ffffff'),
+      ),
+      cellTheme: BetterCellTheme(
+        height: 44,
+        backgroundColor: ColorUtil.hexToColor('#141218'),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        titleTextStyle: TextStyle(
+          fontSize: 14,
+          color: ColorUtil.hexToColor('#ffffff'),
+        ),
+        valueTextStyle: TextStyle(
+          fontSize: 14,
+          color: ColorUtil.hexToColor('#969799'),
+        ),
+        border: Border(
+          bottom: BorderSide(
+            color: ColorUtil.hexToColor('#3a3a3c'),
+            width: 0.5,
+          ),
+        ),
+        arrowRightSize: 14,
+        arrowRightColor: ColorUtil.hexToColor('#969799'),
+        overlayColor: ColorUtil.hexToColor('#3a3a3c'),
       ),
     ),
   ],
