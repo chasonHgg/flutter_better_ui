@@ -41,7 +41,7 @@ class BetterButtonPage extends StatelessWidget {
                   BetterButton(text: 'info按钮'.tr, type: BetterButtonType.info),
                 ],
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 20.h),
               Text('朴素按钮'.tr, style: TextStyle(fontSize: 14.sp)),
               SizedBox(height: 4.h),
               Wrap(
@@ -70,7 +70,7 @@ class BetterButtonPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 20.h),
               Text('加载状态'.tr, style: TextStyle(fontSize: 14.sp)),
               SizedBox(height: 4.h),
               Wrap(
@@ -112,7 +112,7 @@ class BetterButtonPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 20.h),
               Text('渐变按钮'.tr, style: TextStyle(fontSize: 14.sp)),
               SizedBox(height: 4.h),
               Wrap(
@@ -138,7 +138,7 @@ class BetterButtonPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 20.h),
               Text('禁用状态'.tr, style: TextStyle(fontSize: 14.sp)),
               SizedBox(height: 4.h),
               Wrap(
@@ -152,7 +152,7 @@ class BetterButtonPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 20.h),
               Text('自定义内容'.tr, style: TextStyle(fontSize: 14.sp)),
               SizedBox(height: 4.h),
               BetterButton(

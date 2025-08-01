@@ -1,5 +1,6 @@
 import 'package:better_ui/theme/better_theme_extension.dart';
 import 'package:better_ui/theme/child_themes/better_cell_theme.dart';
+import 'package:better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 
 class BetterCell extends StatelessWidget {
@@ -61,7 +62,7 @@ class BetterCell extends StatelessWidget {
     Color finalBackgroundColor =
         backgroundColor ?? cellTheme.backgroundColor ?? Colors.white;
 
-    double finalHeight = height ?? cellTheme.height ?? 44;
+    double finalHeight = height ?? cellTheme.height ?? 44.bw;
 
     return ElevatedButton(
       style: ButtonStyle(

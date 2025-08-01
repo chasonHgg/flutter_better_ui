@@ -1,6 +1,7 @@
 import 'package:better_ui/animation/spinner/spinner.dart';
 import 'package:better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:better_ui/theme/better_theme_extension.dart';
+import 'package:better_ui/utils/better_screen_util.dart';
 import 'package:better_ui/utils/better_util.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ enum BetterButtonLoadingType { circular, spinner }
 
 enum BetterButtonType { defaultType, primary, success, warning, danger, info }
 
+// ignore: must_be_immutable
 class BetterButton extends StatelessWidget {
   final BetterButtonType? type;
   final VoidCallback? onClick;
@@ -16,15 +18,15 @@ class BetterButton extends StatelessWidget {
   final Color? overlayColor;
   final double? borderRadius;
   final bool loading;
-  final double? loadingSize;
+  double? loadingSize;
   final double? loadingStrokeWidth;
   final Widget? loadingWidget;
   final Color? loadingColor;
-  final double? loadingMarginRight;
+  double? loadingMarginRight;
   final Widget? prefix;
   final Widget? suffix;
   final double? width;
-  final double? height;
+  double? height;
   final BetterButtonLoadingType? loadingType;
   final String? text;
   final TextStyle? textStyle;
@@ -44,7 +46,7 @@ class BetterButton extends StatelessWidget {
   final Widget? child;
   final double? borderWidth;
 
-  const BetterButton({
+  BetterButton({
     super.key,
     this.type = BetterButtonType.defaultType,
     this.onClick,
@@ -53,15 +55,15 @@ class BetterButton extends StatelessWidget {
     this.overlayColor,
     this.borderRadius,
     this.loading = false,
-    this.loadingSize = 20,
+    this.loadingSize,
     this.loadingStrokeWidth = 1,
     this.loadingWidget,
     this.loadingColor,
-    this.loadingMarginRight = 8,
+    this.loadingMarginRight,
     this.prefix,
     this.suffix,
     this.width,
-    this.height = 44,
+    this.height,
     this.loadingType = BetterButtonLoadingType.circular,
     this.text,
     this.textStyle,
@@ -75,7 +77,11 @@ class BetterButton extends StatelessWidget {
     this.loadingText,
     this.child,
     this.borderWidth,
-  });
+  }) {
+    loadingSize = loadingSize?.bw ?? 20.bw;
+    height = height?.bw ?? 44.bw;
+    loadingMarginRight = loadingMarginRight?.bw ?? 8.bw;
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:better_ui/better_cell.dart';
+import 'package:better_ui/theme/themes/better_dark_theme.dart';
+import 'package:better_ui/theme/themes/better_light_theme.dart';
 import 'package:example/i18n/translations.dart';
-import 'package:example/themes/my_custom_dart_theme.dart';
-import 'package:example/themes/my_custom_light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -26,13 +26,13 @@ class Home extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                Get.changeTheme(myCustomDarkTheme);
+                Get.changeTheme(betterDarkTheme);
               },
               child: Text('切换黑暗主题'),
             ),
             ElevatedButton(
               onPressed: () {
-                Get.changeTheme(myCustomLightTheme);
+                Get.changeTheme(betterLightTheme);
               },
               child: Text('切换白色主题'),
             ),

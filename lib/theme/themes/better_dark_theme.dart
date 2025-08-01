@@ -1,6 +1,7 @@
 import 'package:better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:better_ui/theme/better_theme_extension.dart';
 import 'package:better_ui/theme/child_themes/better_cell_theme.dart';
+import 'package:better_ui/utils/better_screen_util.dart';
 import 'package:better_ui/utils/color_util.dart';
 import 'package:flutter/material.dart';
 
@@ -23,9 +24,9 @@ ThemeData betterDarkTheme = ThemeData(
       warningColor: ColorUtil.hexToColor('#f90'),
       dangerColor: ColorUtil.hexToColor('#ee0a24'),
       buttonTheme: BetterButtonTheme(
-        fontSize: 14,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        borderRadius: 6,
+        fontSize: 14.bsp,
+        padding: EdgeInsets.symmetric(horizontal: 16.bw),
+        borderRadius: 6.bw,
         mainAxisAlignment: MainAxisAlignment.center,
         defaultTextColor: Colors.white,
         defaultColor: ColorUtil.hexToColor('#1c1c1c'),
@@ -38,15 +39,15 @@ ThemeData betterDarkTheme = ThemeData(
         loadingColor: ColorUtil.hexToColor('#ffffff'),
       ),
       cellTheme: BetterCellTheme(
-        height: 44,
+        height: 44.bw,
         backgroundColor: ColorUtil.hexToColor('#141218'),
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 10.bw),
         titleTextStyle: TextStyle(
-          fontSize: 14,
+          fontSize: 14.bsp,
           color: ColorUtil.hexToColor('#ffffff'),
         ),
         valueTextStyle: TextStyle(
-          fontSize: 14,
+          fontSize: 14.bsp,
           color: ColorUtil.hexToColor('#969799'),
         ),
         border: Border(
@@ -55,7 +56,7 @@ ThemeData betterDarkTheme = ThemeData(
             width: 0.5,
           ),
         ),
-        arrowRightSize: 14,
+        arrowRightSize: 14.bw,
         arrowRightColor: ColorUtil.hexToColor('#969799'),
         overlayColor: ColorUtil.hexToColor('#3a3a3c'),
       ),
