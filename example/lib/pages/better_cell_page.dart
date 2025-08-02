@@ -1,5 +1,5 @@
+import 'package:better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:better_ui/better_cell.dart';
 
@@ -19,45 +19,45 @@ class BetterCellPage extends StatelessWidget {
       body: Column(
         children: [
           BetterCell(
-            height: 44.w,
+            height: 44.bw,
             titleText: '单元格'.tr,
             isShowBorder: true,
             isShowArrowRight: true,
           ),
           BetterCell(
-            height: 44.w,
+            height: 44.bw,
             titleText: '单元格'.tr,
             valueText: '内容'.tr,
             isShowBorder: true,
             isShowArrowRight: true,
           ),
           BetterCell(
-            height: 44.w,
+            height: 44.bw,
             titleText: '禁止点击'.tr,
             isShowBorder: true,
             isShowArrowRight: true,
             disabled: true,
           ),
           BetterCell(
-            height: 44.w,
+            height: 44.bw,
             titleText: '单元格'.tr,
             valueText: '内容'.tr,
             isShowBorder: true,
           ),
           BetterCell(
-            height: 44.w,
+            height: 44.bw,
             titleWidget: Row(
               children: [
-                Icon(Icons.person, size: 14.sp),
-                SizedBox(width: 4.w),
-                Text('自定义单元格'.tr, style: TextStyle(fontSize: 14.sp)),
+                Icon(Icons.person, size: 16.bsp),
+                SizedBox(width: 4.bw),
+                Text('自定义单元格'.tr, style: TextStyle(fontSize: 14.bsp)),
               ],
             ),
             valueWidget: Row(
               children: [
-                Icon(Icons.person, size: 14.sp),
-                SizedBox(width: 4.w),
-                Text('自定义单元格'.tr, style: TextStyle(fontSize: 14.sp)),
+                Icon(Icons.person, size: 16.bsp),
+                SizedBox(width: 4.bw),
+                Text('自定义单元格'.tr, style: TextStyle(fontSize: 14.bsp)),
               ],
             ),
           ),

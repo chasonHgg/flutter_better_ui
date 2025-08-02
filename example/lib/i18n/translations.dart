@@ -11,6 +11,6 @@ class I18nTranslations extends Translations {
 
   static void updateLocale(I18nLocale locale) {
     var localeSplit = locale.toString().split('_');
-    Get.updateLocale(Locale(localeSplit[0], localeSplit[1]));
+    Get.updateLocale(Locale(localeSplit[0].split('.')[1], localeSplit[1]));
   }
 }

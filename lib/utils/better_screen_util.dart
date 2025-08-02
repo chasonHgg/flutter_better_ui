@@ -1,44 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BetterScreenUtil {
+  static late double _screenWidth;
+  static late double _screenHeight;
+  static late double _designWidth;
+  static late double _designHeight;
+  static late bool _minTextAdapt;
+  static late bool _enableScaleWH;
+
+  /// 初始化（必须在 MaterialApp 之后调用）
   static void init({
     required BuildContext context,
     required double designWidth,
     required double designHeight,
+    bool minTextAdapt = true,
+    bool enableScaleWH = true,
   }) {
-    ScreenUtilInit(
-      designSize: Size(designWidth, designHeight),
-      minTextAdapt: true,
-      splitScreenMode: true,
-    );
-    ScreenUtil.init(context);
+    final mediaQuery = MediaQuery.of(context);
+    _screenWidth = mediaQuery.size.width;
+    _screenHeight = mediaQuery.size.height;
+    _designWidth = designWidth;
+    _designHeight = designHeight;
+    _minTextAdapt = minTextAdapt;
+    _enableScaleWH = enableScaleWH;
   }
 
-  // 宽度适配
-  static double setWidth(double width) {
-    return width.w;
+  /// 基于宽度的比例缩放
+  static double scaleWidth(double width) {
+    if (!_enableScaleWH) return width;
+    return (width * _screenWidth) / _designWidth;
   }
 
-  // 高度适配
-  static double setHeight(double height) {
-    return height.h;
+  /// 基于高度的比例缩放
+  static double scaleHeight(double height) {
+    if (!_enableScaleWH) return height;
+    return (height * _screenHeight) / _designHeight;
   }
 
-  // 字体适配（基于宽度或最小值）
-  static double setSp(double fontSize) {
-    return fontSize.sp;
+  /// 基于更小边的比例缩放（避免拉伸）
+  static double scaleRadius(double size) {
+    if (!_enableScaleWH) return size;
+    final scale = (_screenWidth / _designWidth < _screenHeight / _designHeight)
+        ? _screenWidth / _designWidth
+        : _screenHeight / _designHeight;
+    return size * scale;
+  }
+
+  /// 字体大小适配（可配置是否基于最小值）
+  static double scaleFont(double fontSize) {
+    if (_minTextAdapt) {
+      return scaleRadius(fontSize);
+    }
+    return scaleWidth(fontSize);
   }
 }
 
-/// 扩展方法，支持 `11.bw`、`11.bh`、`11.bsp`
-extension DoubleExtension on num {
-  /// 宽度适配（BetterScreenUtil.setWidth）
-  double get bw => BetterScreenUtil.setWidth(toDouble());
+/// 扩展方法（支持 `11.bw`、`11.bh`、`11.br`、`11.bsp`）
+extension BetterScreenUtilExtension on num {
+  /// 宽度适配（基于设计图宽度）
+  double get bw => BetterScreenUtil.scaleWidth(toDouble());
 
-  /// 高度适配（BetterScreenUtil.setHeight）
-  double get bh => BetterScreenUtil.setHeight(toDouble());
+  /// 高度适配（基于设计图高度）
+  double get bh => BetterScreenUtil.scaleHeight(toDouble());
 
-  /// 字体适配（BetterScreenUtil.setSp）
-  double get bsp => BetterScreenUtil.setSp(toDouble());
+  /// 更小边适配（避免拉伸）
+  double get br => BetterScreenUtil.scaleRadius(toDouble());
+
+  /// 字体适配（可配置是否基于最小值）
+  double get bsp => BetterScreenUtil.scaleFont(toDouble());
 }

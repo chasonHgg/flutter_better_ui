@@ -10,6 +10,10 @@ ThemeData betterDarkTheme = ThemeData(
   dividerColor: ColorUtil.hexToColor('#3a3a3c'),
   appBarTheme: ThemeData.dark().appBarTheme.copyWith(
     backgroundColor: ColorUtil.hexToColor('#141218'),
+    titleTextStyle: TextStyle(
+      color: ColorUtil.hexToColor('#ffffff'),
+      fontSize: 18.bsp,
+    ),
   ),
   textTheme: TextTheme(
     bodyLarge: TextStyle(color: ColorUtil.hexToColor('#ffffff')),
@@ -37,6 +41,7 @@ ThemeData betterDarkTheme = ThemeData(
         warningTextColor: ColorUtil.hexToColor('#ffffff'),
         dangerTextColor: ColorUtil.hexToColor('#ffffff'),
         loadingColor: ColorUtil.hexToColor('#ffffff'),
+        overlayColor: Colors.black.withAlpha(40),
       ),
       cellTheme: BetterCellTheme(
         height: 44.bw,

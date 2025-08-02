@@ -76,8 +76,7 @@ class BetterCell extends StatelessWidget {
               ? Colors.transparent
               : (overlayColor ?? cellTheme.overlayColor),
         ),
-        splashFactory:
-            disabled == true || disableSplash == true || onClick == null
+        splashFactory: disabled == true || disableSplash == true
             ? NoSplash.splashFactory
             : InkSparkle.splashFactory,
         shape: WidgetStateProperty.all(

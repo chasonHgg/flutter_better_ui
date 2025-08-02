@@ -10,6 +10,10 @@ ThemeData betterLightTheme = ThemeData(
   dividerColor: ColorUtil.hexToColor('#ebedf0'),
   appBarTheme: ThemeData.light().appBarTheme.copyWith(
     backgroundColor: ColorUtil.hexToColor('#ffffff'),
+    titleTextStyle: TextStyle(
+      color: ColorUtil.hexToColor('#323233'),
+      fontSize: 18.bsp,
+    ),
   ),
   scaffoldBackgroundColor: ColorUtil.hexToColor('#f7f8fa'),
   textTheme: TextTheme(
@@ -38,6 +42,7 @@ ThemeData betterLightTheme = ThemeData(
         warningTextColor: ColorUtil.hexToColor('#ffffff'),
         dangerTextColor: ColorUtil.hexToColor('#ffffff'),
         loadingColor: ColorUtil.hexToColor('#323233'),
+        overlayColor: Colors.black.withAlpha(20),
       ),
       cellTheme: BetterCellTheme(
         height: 44.bw,

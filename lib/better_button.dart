@@ -208,8 +208,8 @@ class BetterButton extends StatelessWidget {
         if (loadingType == BetterButtonLoadingType.circular) {
           children.add(
             SizedBox(
-              width: loadingSize ?? 20,
-              height: loadingSize ?? 20,
+              width: loadingSize,
+              height: loadingSize,
               child: CircularProgressIndicator(
                 strokeWidth: loadingStrokeWidth,
                 valueColor: AlwaysStoppedAnimation(finalLoadingColor),
@@ -277,7 +277,9 @@ class BetterButton extends StatelessWidget {
         backgroundColor: WidgetStateProperty.all(Colors.transparent),
         shadowColor: WidgetStateProperty.all(Colors.transparent),
         overlayColor: WidgetStateProperty.all(
-          overlayColor ?? Colors.black.withAlpha(20),
+          loading == true
+              ? Colors.transparent
+              : overlayColor ?? buttonTheme.overlayColor,
         ),
         splashFactory:
             disabled == true || disableSplash == true || loading == true

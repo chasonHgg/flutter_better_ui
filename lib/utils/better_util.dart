@@ -5,12 +5,16 @@ class BetterUtil {
   static void init(
     BuildContext context, {
     double designWidth = 375,
-    double designHeight = 1334,
+    double designHeight = 812,
+    bool? minTextAdapt,
+    bool? enableScaleWH,
   }) {
     BetterScreenUtil.init(
       context: context,
       designWidth: designWidth,
       designHeight: designHeight,
+      minTextAdapt: minTextAdapt ?? true,
+      enableScaleWH: enableScaleWH ?? true,
     );
   }
 

@@ -38,7 +38,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   better_ui:
     path: ../
-  flutter_screenutil: ^5.9.3
   get: ^4.7.2
 
 dev_dependencies:

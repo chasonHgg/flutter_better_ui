@@ -1,9 +1,9 @@
 import 'package:better_ui/better_cell.dart';
 import 'package:better_ui/theme/themes/better_dark_theme.dart';
 import 'package:better_ui/theme/themes/better_light_theme.dart';
+import 'package:better_ui/utils/better_screen_util.dart';
 import 'package:example/i18n/translations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 10.bw),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -48,10 +48,10 @@ class Home extends StatelessWidget {
               },
               child: Text('切换中文'),
             ),
-            Text("Flutter ${"移动端组件库".tr}", style: TextStyle(fontSize: 16.sp)),
-            SizedBox(height: 20.h),
-            Text("基础组件".tr, style: TextStyle(fontSize: 14.sp)),
-            SizedBox(height: 10.h),
+            Text("Flutter ${"移动端组件库".tr}", style: TextStyle(fontSize: 16.bsp)),
+            SizedBox(height: 20.bw),
+            Text("基础组件".tr, style: TextStyle(fontSize: 14.bsp)),
+            SizedBox(height: 10.bw),
             BetterCell(
               titleText: "按钮".tr,
               isShowArrowRight: true,
