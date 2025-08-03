@@ -98,11 +98,7 @@ class BetterToastPage extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onClick: () => {
-                  BetterToast.show(
-                    context,
-                    message: 'This is a toast',
-                    position: BetterToastPosition.bottom,
-                  ),
+                  BetterToast.show(context, message: 'This is a toast'),
                 },
               ),
               SizedBox(height: 20.bw),
@@ -130,8 +126,6 @@ class BetterToastPage extends StatelessWidget {
                 onClick: () => {
                   BetterToast.show(
                     context,
-                    width: 200.bw,
-                    height: 200.bw,
                     child: Image.asset(
                       'assets/images/cat.jpeg',
                       width: 200.bw,

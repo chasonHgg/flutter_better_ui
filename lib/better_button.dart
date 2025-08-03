@@ -310,16 +310,15 @@ class BetterButton extends StatelessWidget {
           gradient: gradient,
           borderRadius: BorderRadius.circular(finalBorderRadius),
         ),
-        child: IntrinsicWidth(
-          child: Row(
-            mainAxisAlignment:
-                mainAxisAlignment ??
-                Theme.of(context)
-                    .extension<BetterThemeExtension>()!
-                    .buttonTheme
-                    .mainAxisAlignment,
-            children: children,
-          ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment:
+              mainAxisAlignment ??
+              Theme.of(context)
+                  .extension<BetterThemeExtension>()!
+                  .buttonTheme
+                  .mainAxisAlignment,
+          children: children,
         ),
       ),
     );
