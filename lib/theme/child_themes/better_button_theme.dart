@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class BetterButtonTheme {
   final double fontSize;
   final EdgeInsetsGeometry padding;
-  final double borderRadius;
+  final double? borderRadius;
   final MainAxisAlignment mainAxisAlignment;
   final Color defaultTextColor;
   final Color defaultColor;
@@ -19,7 +19,7 @@ class BetterButtonTheme {
   const BetterButtonTheme({
     required this.fontSize,
     required this.padding,
-    this.borderRadius = 6,
+    this.borderRadius,
     this.mainAxisAlignment = MainAxisAlignment.center,
     required this.defaultTextColor,
     required this.defaultColor,

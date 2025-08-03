@@ -63,8 +63,16 @@ class Home extends StatelessWidget {
             BetterCell(
               titleText: "单元格".tr,
               isShowArrowRight: true,
+              isShowBorder: true,
               onClick: () {
                 Get.toNamed("/betterCell");
+              },
+            ),
+            BetterCell(
+              titleText: "轻提示".tr,
+              isShowArrowRight: true,
+              onClick: () {
+                Get.toNamed("/betterToast");
               },
             ),
           ],

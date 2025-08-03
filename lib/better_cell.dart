@@ -92,7 +92,7 @@ class BetterCell extends StatelessWidget {
       child: Container(
         height: finalHeight,
         decoration: BoxDecoration(
-          border: isShowBorder == true ? (border ?? cellTheme.border) : null,
+          border: isShowBorder == true ? border ?? cellTheme.border : null,
           borderRadius: borderRadius ?? cellTheme.borderRadius,
         ),
         child: Ink(

@@ -92,7 +92,7 @@ class BetterButton extends StatelessWidget {
     Color? finalBackgroundColor = color ?? defaultColor;
     Color finalBorderColor = borderColor ?? buttonTheme.borderColor;
     Color? finalTextColor = buttonTheme.defaultTextColor;
-    double finalBorderRadius = borderRadius ?? buttonTheme.borderRadius;
+    double finalBorderRadius = borderRadius ?? buttonTheme.borderRadius ?? 6.bw;
 
     Color finalLoadingColor = loadingColor ?? buttonTheme.loadingColor;
 

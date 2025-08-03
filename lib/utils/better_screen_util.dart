@@ -53,6 +53,12 @@ class BetterScreenUtil {
     }
     return scaleWidth(fontSize);
   }
+
+  //屏幕高度
+  static double get screenHeight => _screenHeight;
+
+  //屏幕宽度
+  static double get screenWidth => _screenWidth;
 }
 
 /// 扩展方法（支持 `11.bw`、`11.bh`、`11.br`、`11.bsp`）

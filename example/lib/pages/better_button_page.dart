@@ -17,8 +17,8 @@ class BetterButtonPage extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 10.bw),
+        child: Padding(
+          padding: EdgeInsets.all(16.bw),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
