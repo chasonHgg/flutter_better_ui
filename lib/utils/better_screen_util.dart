@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
 class BetterScreenUtil {
+  static late MediaQueryData _mediaQuery;
   static late double _screenWidth;
   static late double _screenHeight;
   static late double _designWidth;
   static late double _designHeight;
   static late bool _minTextAdapt;
   static late bool _enableScaleWH;
+  //顶部安全区域高度
+  static late double _safeAreaTopHeight;
+  //底部安全区域高度
+  static late double _safeAreaBottomHeight;
 
   /// 初始化（必须在 MaterialApp 之后调用）
   static void init({
@@ -16,13 +21,15 @@ class BetterScreenUtil {
     bool minTextAdapt = true,
     bool enableScaleWH = true,
   }) {
-    final mediaQuery = MediaQuery.of(context);
-    _screenWidth = mediaQuery.size.width;
-    _screenHeight = mediaQuery.size.height;
+    _mediaQuery = MediaQuery.of(context);
+    _screenWidth = _mediaQuery.size.width;
+    _screenHeight = _mediaQuery.size.height;
     _designWidth = designWidth;
     _designHeight = designHeight;
     _minTextAdapt = minTextAdapt;
     _enableScaleWH = enableScaleWH;
+    _safeAreaTopHeight = _mediaQuery.padding.top;
+    _safeAreaBottomHeight = _mediaQuery.padding.bottom;
   }
 
   /// 基于宽度的比例缩放
@@ -59,6 +66,12 @@ class BetterScreenUtil {
 
   //屏幕宽度
   static double get screenWidth => _screenWidth;
+
+  //顶部安全区域高度
+  static double get safeAreaTopHeight => _safeAreaTopHeight;
+
+  //底部安全区域高度
+  static double get safeAreaBottomHeight => _safeAreaBottomHeight;
 }
 
 /// 扩展方法（支持 `11.bw`、`11.bh`、`11.br`、`11.bsp`）

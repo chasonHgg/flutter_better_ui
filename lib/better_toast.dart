@@ -32,7 +32,7 @@ class BetterToast {
     Color? backgroundColor,
     EdgeInsets? padding,
     BorderRadius? borderRadius,
-    BetterToastPosition? position = BetterToastPosition.bottom,
+    BetterToastPosition position = BetterToastPosition.bottom,
     double? topOffset,
     double? bottomOffset,
     TextAlign? textAlign = TextAlign.center,
@@ -96,7 +96,7 @@ class BetterToast {
 
             // Toast内容
             Align(
-              alignment: _getAlignment(position!),
+              alignment: _getAlignment(position),
               child: SlideTransition(
                 position: offsetAnimation,
                 child: FadeTransition(

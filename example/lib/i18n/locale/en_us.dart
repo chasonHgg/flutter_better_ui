@@ -36,4 +36,10 @@ Map<String, String> enUS = {
   '失败提示': 'Error Toast',
   '失败文案': 'Error Message',
   '自定义图标': 'Custom Icon',
+  '弹出层': 'Popup',
+  '弹出位置': 'Popup Position',
+  '左侧弹出': 'Left Popup',
+  '右侧弹出': 'Right Popup',
+  '顶部弹出': 'Top Popup',
+  '底部弹出': 'Bottom Popup',
 };

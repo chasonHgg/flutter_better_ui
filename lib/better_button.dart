@@ -27,7 +27,7 @@ class BetterButton extends StatelessWidget {
   final Widget? suffix;
   final double? width;
   double? height;
-  final BetterButtonLoadingType? loadingType;
+  final BetterButtonLoadingType loadingType;
   final String? text;
   final TextStyle? textStyle;
   final EdgeInsetsGeometry? padding;
