@@ -110,6 +110,23 @@ class BetterPopupPage extends StatelessWidget {
                   ),
                 },
               ),
+              BetterButton(
+                text: '中间弹出'.tr,
+                onClick: () => {
+                  BetterPopup.show(
+                    context,
+                    position: BetterPopupPosition.center,
+                    child: SizedBox(
+                      child: Center(
+                        child: Text(
+                          "中间弹出".tr,
+                          style: TextStyle(fontSize: 14.bsp),
+                        ),
+                      ),
+                    ),
+                  ),
+                },
+              ),
             ],
           ),
         ),

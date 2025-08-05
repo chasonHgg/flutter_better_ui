@@ -148,9 +148,19 @@ class BetterPopup {
         ? BetterScreenUtil.screenWidth
         : BetterScreenUtil.screenWidth * 0.8;
 
-    height ??= position == BetterPopupPosition.top
-        ? 150.bw
-        : BetterScreenUtil.screenHeight;
+    if (height == null) {
+      if (position != BetterPopupPosition.center) {
+        height = position == BetterPopupPosition.top
+            ? 150.bw
+            : BetterScreenUtil.screenHeight;
+      } else {
+        height = 150.bw;
+      }
+    }
+
+    if (position == BetterPopupPosition.center) {
+      borderRadius ??= BorderRadius.circular(16.bw);
+    }
 
     final popupTheme = Theme.of(
       context,
@@ -161,6 +171,7 @@ class BetterPopup {
       BetterPopupPosition.top => const Offset(0, -1),
       BetterPopupPosition.left => const Offset(-1, 0),
       BetterPopupPosition.right => const Offset(1, 0),
+      BetterPopupPosition.center => const Offset(0, 0),
       _ => Offset.zero,
     };
 
@@ -196,6 +207,16 @@ class BetterPopup {
       ),
     );
 
+    Widget slideContent({required Animation<double> animation}) {
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: beginOffset,
+          end: Offset.zero,
+        ).animate(animation),
+        child: Material(color: Colors.transparent, child: content),
+      );
+    }
+
     showGeneralDialog(
       context: context,
       barrierLabel: "better_popup",
@@ -214,19 +235,16 @@ class BetterPopup {
             ),
 
             // 弹窗内容定位
-            Positioned(
-              top: position == BetterPopupPosition.top ? 0 : null,
-              bottom: position == BetterPopupPosition.bottom ? 0 : null,
-              left: position == BetterPopupPosition.left ? 0 : null,
-              right: position == BetterPopupPosition.right ? 0 : null,
-              child: SlideTransition(
-                position: Tween<Offset>(
-                  begin: beginOffset,
-                  end: Offset.zero,
-                ).animate(animation),
-                child: Material(color: Colors.transparent, child: content),
+            if (position != BetterPopupPosition.center)
+              Positioned(
+                top: position == BetterPopupPosition.top ? 0 : null,
+                bottom: position == BetterPopupPosition.bottom ? 0 : null,
+                left: position == BetterPopupPosition.left ? 0 : null,
+                right: position == BetterPopupPosition.right ? 0 : null,
+                child: slideContent(animation: animation),
               ),
-            ),
+            if (position == BetterPopupPosition.center)
+              Align(child: slideContent(animation: animation)),
           ],
         );
       },

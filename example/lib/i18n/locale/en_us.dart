@@ -42,4 +42,5 @@ Map<String, String> enUS = {
   '右侧弹出': 'Right Popup',
   '顶部弹出': 'Top Popup',
   '底部弹出': 'Bottom Popup',
+  '中间弹出': 'Center Popup',
 };
