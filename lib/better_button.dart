@@ -100,7 +100,7 @@ class BetterButton extends StatelessWidget {
 
     double finalBorderWidth = borderWidth ?? 1;
     if (borderWidth == null && BetterUtil.shouldUseHairlineBorder(context)) {
-      finalBorderWidth = 0.5;
+      finalBorderWidth = 1.bw;
     }
 
     //获取主题色

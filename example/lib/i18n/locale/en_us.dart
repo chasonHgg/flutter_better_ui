@@ -42,5 +42,10 @@ Map<String, String> enUS = {
   '右侧弹出': 'Right Popup',
   '顶部弹出': 'Top Popup',
   '底部弹出': 'Bottom Popup',
-  '中间弹出': 'Center Popup',
+  '居中弹出': 'Center Popup',
+  '关闭图标': 'Close Icon',
+  '图标位置': 'Icon Position',
+  '事件监听': 'Event Listener',
+  '关闭事件': 'Close Event',
+  '关闭了': 'Closed',
 };

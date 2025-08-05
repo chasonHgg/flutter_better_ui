@@ -21,6 +21,7 @@ class BetterPopup {
     Widget? closeIcon,
     EdgeInsets? padding,
     final List<BoxShadow>? boxShadow,
+    VoidCallback? onClose,
   }) {
     if (position == BetterPopupPosition.bottom) {
       _showBottomPopup(
@@ -37,6 +38,7 @@ class BetterPopup {
         closeIcon: closeIcon,
         padding: padding,
         boxShadow: boxShadow,
+        onClose: onClose,
       );
       return;
     }
@@ -55,6 +57,7 @@ class BetterPopup {
       closeIcon: closeIcon,
       padding: padding,
       boxShadow: boxShadow,
+      onClose: onClose,
     );
   }
 
@@ -72,6 +75,7 @@ class BetterPopup {
     Widget? closeIcon,
     EdgeInsets? padding,
     final List<BoxShadow>? boxShadow,
+    VoidCallback? onClose,
   }) {
     BetterPopupTheme popupTheme = Theme.of(
       context,
@@ -80,6 +84,8 @@ class BetterPopup {
       topLeft: Radius.circular(16.bw),
       topRight: Radius.circular(16.bw),
     );
+
+    width ??= BetterScreenUtil.screenWidth;
 
     List<Widget> children = [];
     if (child != null) {
@@ -112,17 +118,25 @@ class BetterPopup {
     showModalBottomSheet(
       context: context,
       isDismissible: isDismissible,
-      backgroundColor: backgroundColor ?? popupTheme.backgroundColor,
-      builder: (context) => Container(
-        width: width,
-        height: height,
-        padding: padding ?? popupTheme.padding,
-        decoration: BoxDecoration(
-          borderRadius: borderRadius,
-          boxShadow: boxShadow,
+      builder: (context) => PopScope(
+        canPop: true,
+        onPopInvokedWithResult: (didPop, result) {
+          if (didPop) {
+            onClose?.call();
+          }
+        },
+        child: Container(
+          width: width,
+          height: height,
+          padding: padding ?? popupTheme.padding,
+          decoration: BoxDecoration(
+            borderRadius: borderRadius,
+            boxShadow: boxShadow,
+            color: backgroundColor ?? popupTheme.backgroundColor,
+          ),
+          //关闭图标
+          child: Stack(children: children),
         ),
-        //关闭图标
-        child: Stack(children: children),
       ),
     );
   }
@@ -142,6 +156,7 @@ class BetterPopup {
     Widget? closeIcon,
     EdgeInsets? padding,
     final List<BoxShadow>? boxShadow,
+    VoidCallback? onClose,
   }) {
     // 计算默认尺寸
     width ??= position == BetterPopupPosition.top
@@ -224,28 +239,36 @@ class BetterPopup {
       barrierColor: Colors.black.withAlpha(128),
       pageBuilder: (_, __, ___) => const SizedBox(),
       transitionBuilder: (context, animation, _, child) {
-        return Stack(
-          children: [
-            // 半透明背景层
-            Positioned.fill(
-              child: GestureDetector(
-                onTap: isDismissible ? () => Navigator.pop(context) : null,
-                child: Container(color: Colors.transparent),
+        return PopScope(
+          canPop: true,
+          onPopInvokedWithResult: (didPop, result) {
+            if (didPop) {
+              onClose?.call();
+            }
+          },
+          child: Stack(
+            children: [
+              // 半透明背景层
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: isDismissible ? () => Navigator.pop(context) : null,
+                  child: Container(color: Colors.transparent),
+                ),
               ),
-            ),
 
-            // 弹窗内容定位
-            if (position != BetterPopupPosition.center)
-              Positioned(
-                top: position == BetterPopupPosition.top ? 0 : null,
-                bottom: position == BetterPopupPosition.bottom ? 0 : null,
-                left: position == BetterPopupPosition.left ? 0 : null,
-                right: position == BetterPopupPosition.right ? 0 : null,
-                child: slideContent(animation: animation),
-              ),
-            if (position == BetterPopupPosition.center)
-              Align(child: slideContent(animation: animation)),
-          ],
+              // 弹窗内容定位
+              if (position != BetterPopupPosition.center)
+                Positioned(
+                  top: position == BetterPopupPosition.top ? 0 : null,
+                  bottom: position == BetterPopupPosition.bottom ? 0 : null,
+                  left: position == BetterPopupPosition.left ? 0 : null,
+                  right: position == BetterPopupPosition.right ? 0 : null,
+                  child: slideContent(animation: animation),
+                ),
+              if (position == BetterPopupPosition.center)
+                Align(child: slideContent(animation: animation)),
+            ],
+          ),
         );
       },
     );

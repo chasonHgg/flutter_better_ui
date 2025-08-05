@@ -13,7 +13,7 @@ class BetterCellPage extends StatelessWidget {
         title: Text('单元格'.tr),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(0.5),
-          child: Container(color: Theme.of(context).dividerColor, height: 0.5),
+          child: Container(color: Theme.of(context).dividerColor, height: 1.bw),
         ),
       ),
       body: SingleChildScrollView(

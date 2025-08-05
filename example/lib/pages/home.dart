@@ -18,36 +18,41 @@ class Home extends StatelessWidget {
           preferredSize: Size.fromHeight(0.5),
           child: Container(color: Theme.of(context).dividerColor, height: 0.5),
         ),
+        //右边切换主题和语种
+        actions: [
+          //切换主题的图标
+          IconButton(
+            onPressed: () {
+              Get.changeTheme(
+                Theme.of(context).brightness == Brightness.dark
+                    ? betterLightTheme
+                    : betterDarkTheme,
+              );
+            },
+            //判断显示主题的图标
+            icon: Icon(
+              Theme.of(context).brightness == Brightness.dark
+                  ? Icons.light_mode
+                  : Icons.dark_mode,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              if (I18nTranslations.getLocale()?.languageCode == 'zh') {
+                I18nTranslations.updateLocale(I18nLocale.en_US);
+              } else {
+                I18nTranslations.updateLocale(I18nLocale.zh_CN);
+              }
+            },
+            icon: Icon(Icons.language),
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 10.bw),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Get.changeTheme(betterDarkTheme);
-              },
-              child: Text('切换黑暗主题'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Get.changeTheme(betterLightTheme);
-              },
-              child: Text('切换白色主题'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                I18nTranslations.updateLocale(I18nLocale.en_US);
-              },
-              child: Text('切换英文'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                I18nTranslations.updateLocale(I18nLocale.zh_CN);
-              },
-              child: Text('切换中文'),
-            ),
             Text("Flutter ${"移动端组件库".tr}", style: TextStyle(fontSize: 16.bsp)),
             SizedBox(height: 20.bw),
             Text("基础组件".tr, style: TextStyle(fontSize: 14.bsp)),

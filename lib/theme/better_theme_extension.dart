@@ -10,6 +10,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
   final Color successColor;
   final Color warningColor;
   final Color dangerColor;
+  final Color borderColor;
 
   //按钮主题
   final BetterButtonTheme buttonTheme;
@@ -24,6 +25,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     required this.successColor,
     required this.warningColor,
     required this.dangerColor,
+    required this.borderColor,
     required this.buttonTheme,
     required this.cellTheme,
     required this.popupTheme,
@@ -36,6 +38,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     Color? successColor,
     Color? warningColor,
     Color? dangerColor,
+    Color? borderColor,
     BetterButtonTheme? buttonTheme,
     BetterCellTheme? cellTheme,
     BetterPopupTheme? popupTheme,
@@ -46,6 +49,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       successColor: successColor ?? this.successColor,
       warningColor: warningColor ?? this.warningColor,
       dangerColor: dangerColor ?? this.dangerColor,
+      borderColor: borderColor ?? this.borderColor,
       buttonTheme: buttonTheme ?? this.buttonTheme,
       cellTheme: cellTheme ?? this.cellTheme,
       popupTheme: popupTheme ?? this.popupTheme,
@@ -69,6 +73,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       warningColor:
           Color.lerp(warningColor, other.warningColor, t) ?? warningColor,
       dangerColor: Color.lerp(dangerColor, other.dangerColor, t) ?? dangerColor,
+      borderColor: Color.lerp(borderColor, other.borderColor, t) ?? borderColor,
       buttonTheme: BetterButtonTheme.lerp(buttonTheme, other.buttonTheme, t),
       cellTheme: BetterCellTheme.lerp(cellTheme, other.cellTheme, t),
       popupTheme: BetterPopupTheme.lerp(popupTheme, other.popupTheme, t),

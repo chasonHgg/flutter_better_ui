@@ -12,6 +12,7 @@ ThemeData betterDarkTheme = ThemeData(
   dividerColor: ColorUtil.hexToColor('#3a3a3c'),
   appBarTheme: ThemeData.dark().appBarTheme.copyWith(
     backgroundColor: ColorUtil.hexToColor('#141218'),
+    centerTitle: true,
     titleTextStyle: TextStyle(
       color: ColorUtil.hexToColor('#ffffff'),
       fontSize: 18.bsp,
@@ -29,6 +30,7 @@ ThemeData betterDarkTheme = ThemeData(
       successColor: ColorUtil.hexToColor('#07c160'),
       warningColor: ColorUtil.hexToColor('#f90'),
       dangerColor: ColorUtil.hexToColor('#ee0a24'),
+      borderColor: ColorUtil.hexToColor('#3a3a3c'),
       buttonTheme: BetterButtonTheme(
         fontSize: 14.bsp,
         padding: EdgeInsets.symmetric(horizontal: 16.bw),
@@ -60,7 +62,7 @@ ThemeData betterDarkTheme = ThemeData(
         border: Border(
           bottom: BorderSide(
             color: ColorUtil.hexToColor('#3a3a3c'),
-            width: 0.5,
+            width: 1.bw,
           ),
         ),
         arrowRightSize: 14.bw,

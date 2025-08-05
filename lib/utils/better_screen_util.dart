@@ -35,13 +35,26 @@ class BetterScreenUtil {
   /// 基于宽度的比例缩放
   static double scaleWidth(double width) {
     if (!_enableScaleWH) return width;
+    if (width == 1) {
+      return handleOnePixel(width);
+    }
     return (width * _screenWidth) / _designWidth;
   }
 
   /// 基于高度的比例缩放
   static double scaleHeight(double height) {
     if (!_enableScaleWH) return height;
+    if (height == 1) {
+      return handleOnePixel(height);
+    }
     return (height * _screenHeight) / _designHeight;
+  }
+
+  //处理1px问题
+  static double handleOnePixel(double width) {
+    if (!_enableScaleWH) return width;
+    final physicalPixel = 1.0 / _mediaQuery.devicePixelRatio;
+    return physicalPixel.clamp(0.5, 2.0);
   }
 
   /// 基于更小边的比例缩放（避免拉伸）

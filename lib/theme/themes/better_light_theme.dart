@@ -12,6 +12,7 @@ ThemeData betterLightTheme = ThemeData(
   dividerColor: ColorUtil.hexToColor('#ebedf0'),
   appBarTheme: ThemeData.light().appBarTheme.copyWith(
     backgroundColor: ColorUtil.hexToColor('#ffffff'),
+    centerTitle: true,
     titleTextStyle: TextStyle(
       color: ColorUtil.hexToColor('#323233'),
       fontSize: 18.bsp,
@@ -30,6 +31,7 @@ ThemeData betterLightTheme = ThemeData(
       successColor: ColorUtil.hexToColor('#07c160'),
       warningColor: ColorUtil.hexToColor('#f90'),
       dangerColor: ColorUtil.hexToColor('#ee0a24'),
+      borderColor: ColorUtil.hexToColor('#ebedf0'),
       buttonTheme: BetterButtonTheme(
         fontSize: 14.bsp,
         padding: EdgeInsets.symmetric(horizontal: 16.bw),
@@ -61,7 +63,7 @@ ThemeData betterLightTheme = ThemeData(
         border: Border(
           bottom: BorderSide(
             color: ColorUtil.hexToColor('#ebedf0'),
-            width: 0.5,
+            width: 1.bw,
           ),
         ),
         arrowRightSize: 14.bw,
