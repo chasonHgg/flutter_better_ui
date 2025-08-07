@@ -12,14 +12,14 @@
 
 ## 🎥 预览
 
-[![Video](https://img.shields.io/badge/Better%20UI-Demo-blue?style=for-the-badge&logo=flutter)](https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8)
+<video src="https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8" style="width:100px;"></video>
 
 <div style="display: flex; gap: 10px; justify-content: space-between;">
-  <img src="https://github.com/user-attachments/assets/04390834-990c-4f22-8e6f-a0a459dc4019" width="300" alt="Better UI Preview 1">
+  <img src="https://github.com/user-attachments/assets/04390834-990c-4f22-8e6f-a0a459dc4019" width="100" alt="Better UI Preview 1">
 
-  <img src="https://github.com/user-attachments/assets/ffd34475-4c4d-46cb-ade2-f1379abc88a7" width="300" alt="Better UI Preview 2">
+  <img src="https://github.com/user-attachments/assets/ffd34475-4c4d-46cb-ade2-f1379abc88a7" width="100" alt="Better UI Preview 2">
 
-  <img src="https://github.com/user-attachments/assets/0689287c-94f8-4ade-8c3d-c8654f2f2ce3" width="300" alt="Better UI Preview 3">
+  <img src="https://github.com/user-attachments/assets/0689287c-94f8-4ade-8c3d-c8654f2f2ce3" width="100" alt="Better UI Preview 3">
 </div>
 
 ## 📦 组件列表
