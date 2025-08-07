@@ -1,6 +1,8 @@
 name: better_ui
-description: "A new Flutter package project."
-version: 0.0.1
+description: "A Flutter simple UI component library"
+version: 1.0.0
+repository: https://github.com/chasonHgg/better_ui.git
+resolution: workspace
 homepage:
 
 environment:
