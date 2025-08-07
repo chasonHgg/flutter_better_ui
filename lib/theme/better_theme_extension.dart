@@ -1,5 +1,6 @@
 import 'package:better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:better_ui/theme/child_themes/better_cell_theme.dart';
+import 'package:better_ui/theme/child_themes/better_picker_theme.dart';
 import 'package:better_ui/theme/child_themes/better_popup_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,8 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
   final BetterCellTheme cellTheme;
   //弹出窗主题
   final BetterPopupTheme popupTheme;
+  // 选择器主题
+  final BetterPickerTheme pickerTheme;
 
   const BetterThemeExtension({
     required this.primaryColor,
@@ -29,6 +32,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     required this.buttonTheme,
     required this.cellTheme,
     required this.popupTheme,
+    required this.pickerTheme,
   });
 
   @override
@@ -42,6 +46,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     BetterButtonTheme? buttonTheme,
     BetterCellTheme? cellTheme,
     BetterPopupTheme? popupTheme,
+    BetterPickerTheme? pickerTheme,
   }) {
     return BetterThemeExtension(
       primaryColor: primaryColor ?? this.primaryColor,
@@ -53,6 +58,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       buttonTheme: buttonTheme ?? this.buttonTheme,
       cellTheme: cellTheme ?? this.cellTheme,
       popupTheme: popupTheme ?? this.popupTheme,
+      pickerTheme: pickerTheme ?? this.pickerTheme,
     );
   }
 
@@ -77,6 +83,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       buttonTheme: BetterButtonTheme.lerp(buttonTheme, other.buttonTheme, t),
       cellTheme: BetterCellTheme.lerp(cellTheme, other.cellTheme, t),
       popupTheme: BetterPopupTheme.lerp(popupTheme, other.popupTheme, t),
+      pickerTheme: BetterPickerTheme.lerp(pickerTheme, other.pickerTheme, t),
     );
   }
 }

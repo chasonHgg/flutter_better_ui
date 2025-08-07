@@ -1,4 +1,6 @@
 import 'package:better_ui/better_cell.dart';
+import 'package:better_ui/better_picker.dart';
+import 'package:better_ui/better_picker_widget.dart';
 import 'package:better_ui/theme/themes/better_dark_theme.dart';
 import 'package:better_ui/theme/themes/better_light_theme.dart';
 import 'package:better_ui/utils/better_screen_util.dart';
@@ -38,11 +40,20 @@ class Home extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              if (I18nTranslations.getLocale()?.languageCode == 'zh') {
-                I18nTranslations.updateLocale(I18nLocale.en_US);
-              } else {
-                I18nTranslations.updateLocale(I18nLocale.zh_CN);
-              }
+              BetterPicker.show(
+                context,
+                onConfirm: (value) {
+                  if (value.first.value == 'zh') {
+                    I18nTranslations.updateLocale(I18nLocale.zh_CN);
+                  } else {
+                    I18nTranslations.updateLocale(I18nLocale.en_US);
+                  }
+                },
+                columns: [
+                  BetterPickerItem(text: '中文', value: 'zh'),
+                  BetterPickerItem(text: 'English', value: 'en'),
+                ],
+              );
             },
             icon: Icon(Icons.language),
           ),
@@ -86,6 +97,17 @@ class Home extends StatelessWidget {
               isShowArrowRight: true,
               onClick: () {
                 Get.toNamed("/betterPopup");
+              },
+            ),
+            SizedBox(height: 20.bw),
+            Text("表单组件".tr, style: TextStyle(fontSize: 14.bsp)),
+            SizedBox(height: 10.bw),
+            BetterCell(
+              titleText: "选择器".tr,
+              isShowArrowRight: true,
+              isShowBorder: true,
+              onClick: () {
+                Get.toNamed("/betterPicker");
               },
             ),
           ],

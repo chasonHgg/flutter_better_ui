@@ -1,6 +1,7 @@
 import 'package:better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:better_ui/theme/better_theme_extension.dart';
 import 'package:better_ui/theme/child_themes/better_cell_theme.dart';
+import 'package:better_ui/theme/child_themes/better_picker_theme.dart';
 import 'package:better_ui/theme/child_themes/better_popup_theme.dart';
 import 'package:better_ui/utils/better_screen_util.dart';
 import 'package:better_ui/utils/color_util.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 
 ThemeData betterLightTheme = ThemeData(
   brightness: Brightness.light,
-  primaryColor: ColorUtil.hexToColor('#323233'),
+  primaryColor: ColorUtil.hexToColor('#1989fa'),
   dividerColor: ColorUtil.hexToColor('#ebedf0'),
   appBarTheme: ThemeData.light().appBarTheme.copyWith(
     backgroundColor: ColorUtil.hexToColor('#ffffff'),
@@ -74,6 +75,14 @@ ThemeData betterLightTheme = ThemeData(
         backgroundColor: ColorUtil.hexToColor('#ffffff'),
         closeIconColor: ColorUtil.hexToColor('#323233'),
         closeIconSize: 22.bw,
+      ),
+      pickerTheme: BetterPickerTheme(
+        headerBackgroundColor: ColorUtil.hexToColor('#ffffff'),
+        cancelTextColor: ColorUtil.hexToColor('#969799'),
+        itemHeight: 44.bw,
+        backgroundColor: ColorUtil.hexToColor('#ffffff'),
+        overlayStartColor: ColorUtil.hexToColor('#ffffff'),
+        overlayEndColor: ColorUtil.hexToColor('#ffffff'),
       ),
     ),
   ],

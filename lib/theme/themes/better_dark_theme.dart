@@ -1,6 +1,7 @@
 import 'package:better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:better_ui/theme/better_theme_extension.dart';
 import 'package:better_ui/theme/child_themes/better_cell_theme.dart';
+import 'package:better_ui/theme/child_themes/better_picker_theme.dart';
 import 'package:better_ui/theme/child_themes/better_popup_theme.dart';
 import 'package:better_ui/utils/better_screen_util.dart';
 import 'package:better_ui/utils/color_util.dart';
@@ -73,6 +74,14 @@ ThemeData betterDarkTheme = ThemeData(
         backgroundColor: ColorUtil.hexToColor('#1c1c1e'),
         closeIconColor: ColorUtil.hexToColor('#ffffff'),
         closeIconSize: 22.bw,
+      ),
+      pickerTheme: BetterPickerTheme(
+        headerBackgroundColor: ColorUtil.hexToColor('#3a3a3c'),
+        cancelTextColor: ColorUtil.hexToColor('#ffffff'),
+        itemHeight: 44.bw,
+        backgroundColor: ColorUtil.hexToColor('#1c1c1e'),
+        overlayStartColor: ColorUtil.hexToColor('#1c1c1e'),
+        overlayEndColor: ColorUtil.hexToColor('#3a3a3c'),
       ),
     ),
   ],

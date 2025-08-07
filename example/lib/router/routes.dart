@@ -1,5 +1,6 @@
 import 'package:example/pages/better_button_page.dart';
 import 'package:example/pages/better_cell_page.dart';
+import 'package:example/pages/better_picker_page.dart';
 import 'package:example/pages/better_popup_page.dart';
 import 'package:example/pages/better_toast_page.dart';
 import 'package:example/pages/home.dart';
@@ -11,4 +12,5 @@ final routes = [
   GetPage(name: "/betterCell", page: () => const BetterCellPage()),
   GetPage(name: "/betterToast", page: () => const BetterToastPage()),
   GetPage(name: "/betterPopup", page: () => const BetterPopupPage()),
+  GetPage(name: "/betterPicker", page: () => const BetterPickerPage()),
 ];

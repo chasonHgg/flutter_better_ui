@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('zh', 'CN'),
       theme: currentTheme,
       getPages: routes,
+      defaultTransition: Transition.cupertino,
     );
   }
 }

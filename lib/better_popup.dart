@@ -22,6 +22,7 @@ class BetterPopup {
     EdgeInsets? padding,
     final List<BoxShadow>? boxShadow,
     VoidCallback? onClose,
+    bool? enableDrag,
   }) {
     if (position == BetterPopupPosition.bottom) {
       _showBottomPopup(
@@ -39,6 +40,7 @@ class BetterPopup {
         padding: padding,
         boxShadow: boxShadow,
         onClose: onClose,
+        enableDrag: enableDrag,
       );
       return;
     }
@@ -76,6 +78,7 @@ class BetterPopup {
     EdgeInsets? padding,
     final List<BoxShadow>? boxShadow,
     VoidCallback? onClose,
+    bool? enableDrag,
   }) {
     BetterPopupTheme popupTheme = Theme.of(
       context,
@@ -118,6 +121,7 @@ class BetterPopup {
     showModalBottomSheet(
       context: context,
       isDismissible: isDismissible,
+      enableDrag: enableDrag ?? true,
       builder: (context) => PopScope(
         canPop: true,
         onPopInvokedWithResult: (didPop, result) {
