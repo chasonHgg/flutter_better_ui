@@ -1,3 +1,8 @@
-## 0.0.1
+## 1.0.0
 
-* TODO: Describe initial release.
+* add BetterButton
+* add BetterCell
+* add BetterPicker
+* add BetterPopup
+* add BetterToast
+* add BetterTextButton
