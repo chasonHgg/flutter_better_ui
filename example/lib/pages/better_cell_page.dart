@@ -23,7 +23,7 @@ class BetterCellPage extends StatelessWidget {
             children: [
               BetterCell(
                 height: 44.bw,
-                titleText: '单元格'.tr,
+                titleText: '单元格1'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
               ),
