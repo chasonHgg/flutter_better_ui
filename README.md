@@ -14,7 +14,7 @@
 
 [![Video](https://img.shields.io/badge/Better%20UI-Demo-blue?style=for-the-badge&logo=flutter&logoWidth=30&labelWidth=100)](https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8)
 
-<div align="center">
+<div>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/1.gif" width="200" alt="preview1" />
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/2.gif" width="200" alt="preview2" />
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/3.gif" width="200" alt="preview3" />
