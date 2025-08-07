@@ -1,4 +1,4 @@
-import 'package:better_ui/utils/better_screen_util.dart';
+import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 
 enum BetterToastPosition { top, bottom, center }

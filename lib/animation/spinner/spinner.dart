@@ -1,4 +1,4 @@
-import 'package:better_ui/animation/spinner/spinner_painter.dart';
+import 'package:flutter_better_ui/animation/spinner/spinner_painter.dart';
 import 'package:flutter/material.dart';
 
 class Spinner extends StatefulWidget {

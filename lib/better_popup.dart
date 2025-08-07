@@ -1,6 +1,6 @@
-import 'package:better_ui/theme/better_theme_extension.dart';
-import 'package:better_ui/theme/child_themes/better_popup_theme.dart';
-import 'package:better_ui/utils/better_screen_util.dart';
+import 'package:flutter_better_ui/theme/better_theme_extension.dart';
+import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
+import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 
 enum BetterPopupPosition { top, bottom, left, right, center }

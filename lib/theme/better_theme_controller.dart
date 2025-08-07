@@ -1,4 +1,4 @@
-import 'package:better_ui/theme/themes/better_light_theme.dart';
+import 'package:flutter_better_ui/theme/themes/better_light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,6 +1,6 @@
-import 'package:better_ui/better_text_button.dart';
-import 'package:better_ui/theme/better_theme_extension.dart';
-import 'package:better_ui/utils/better_screen_util.dart';
+import 'package:flutter_better_ui/better_text_button.dart';
+import 'package:flutter_better_ui/theme/better_theme_extension.dart';
+import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
