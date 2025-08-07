@@ -206,8 +206,7 @@ class BetterPopupPage extends StatelessWidget {
           );
         },
         child: Container(
-          height: 74.bw,
-          padding: EdgeInsets.only(top: 10.bw),
+          padding: EdgeInsets.only(top: 10.bw, bottom: 10.bw),
           decoration: BoxDecoration(
             color: theme.popupTheme.backgroundColor,
             //右边框

@@ -6,6 +6,8 @@ import 'package:example/router/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+bool? isFirst = true;
+
 void main() async {
   runApp(const MyApp());
 }
@@ -15,16 +17,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //init Better UI,mast be first line
-    BetterUtil.init(context, designWidth: 375, designHeight: 812);
-    Get.changeTheme(
-      MediaQuery.of(context).platformBrightness == Brightness.dark
-          ? betterDarkTheme
-          : betterLightTheme,
-    );
+    if (isFirst == true) {
+      isFirst = false;
+      BetterUtil.init(context, designWidth: 375, designHeight: 812);
+      Get.changeTheme(
+        MediaQuery.of(context).platformBrightness == Brightness.dark
+            ? betterDarkTheme
+            : betterLightTheme,
+      );
+    }
     return GetMaterialApp(
       translations: I18nTranslations(),
-      locale: const Locale('en', 'US'),
-      fallbackLocale: const Locale('en', 'US'),
+      locale: const Locale('zh', 'CN'),
+      fallbackLocale: const Locale('zh', 'CN'),
       darkTheme: betterDarkTheme,
       theme: betterLightTheme,
       themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,

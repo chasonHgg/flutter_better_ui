@@ -10,6 +10,7 @@ class BetterPickerItem {
   final String text;
   final String value;
   final TextStyle? textStyle;
+  final bool? isSelected;
   final List<BetterPickerItem>? children;
 
   BetterPickerItem({
@@ -17,6 +18,7 @@ class BetterPickerItem {
     required this.value,
     this.textStyle,
     this.children,
+    this.isSelected,
   });
 }
 
@@ -38,7 +40,7 @@ class BetterPickerWidget extends StatefulWidget {
   final double? itemHeight;
 
   const BetterPickerWidget({
-    Key? key,
+    super.key,
     required this.columns,
     this.cancelText,
     this.confirmText,
@@ -54,7 +56,7 @@ class BetterPickerWidget extends StatefulWidget {
     this.diameterRatio,
     this.overlayWidget,
     this.itemHeight,
-  }) : super(key: key);
+  });
 
   @override
   State<BetterPickerWidget> createState() => _BetterPickerWidgetState();
@@ -62,13 +64,16 @@ class BetterPickerWidget extends StatefulWidget {
 
 class _BetterPickerWidgetState extends State<BetterPickerWidget> {
   BetterThemeExtension? theme;
+  bool isFirstRenderCascade = true;
   _BetterPickerType pickerType = _BetterPickerType.single;
   int level = 0;
   List<FixedExtentScrollController> controllers = [];
-  //最后显示的列
-  List<Widget> showColumns = [];
   //最后操作的列层级
   int lastOperateLevel = 0;
+  //默认选中的上一层的children
+  List<BetterPickerItem> setDefaultLastChildren = [];
+
+  final showColumnsNotifier = ValueNotifier<List<Widget>>([]);
 
   @override
   void initState() {
@@ -89,8 +94,11 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
     level = _getLevelCount(widget.columns, pickerType);
     //初始化控制器
     for (var i = 0; i < level; i++) {
-      controllers.add(FixedExtentScrollController(initialItem: 0));
+      final initIndex = _setDefaultSelected(i);
+      controllers.add(FixedExtentScrollController(initialItem: initIndex));
     }
+
+    initShowColumns();
   }
 
   @override
@@ -102,18 +110,17 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
   }
 
   void initShowColumns() {
+    final List<Widget> arr = [];
     //单列或者级联
     if (pickerType == _BetterPickerType.single) {
-      showColumns.add(
-        _renderPickerColumn(columns: widget.columns, controllerIndex: 0),
-      );
+      arr.add(_renderPickerColumn(columns: widget.columns, controllerIndex: 0));
     }
 
     //多列
     if (pickerType == _BetterPickerType.multi) {
       widget.columns.asMap().entries.forEach(
         (e) => {
-          showColumns.add(
+          arr.add(
             _renderPickerColumn(columns: e.value, controllerIndex: e.key),
           ),
         },
@@ -121,12 +128,39 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
     }
 
     if (pickerType == _BetterPickerType.cascade) {
-      showColumns = _renderCascadeColumns(
-        columns: widget.columns,
-        controllerIndex: 0,
+      arr.addAll(
+        _renderCascadeColumns(columns: widget.columns, controllerIndex: 0),
       );
     }
-    setState(() {});
+    showColumnsNotifier.value = arr;
+    isFirstRenderCascade = false;
+  }
+
+  //设置默认选项
+  int _setDefaultSelected(int levelIndex) {
+    int index = 0;
+    if (pickerType == _BetterPickerType.single) {
+      index = widget.columns.indexWhere((e) => e.isSelected == true);
+    }
+    if (pickerType == _BetterPickerType.multi) {
+      index = widget.columns[levelIndex].indexWhere(
+        (e) => e.isSelected == true,
+      );
+    }
+    if (pickerType == _BetterPickerType.cascade) {
+      if (levelIndex == 0) {
+        index = widget.columns.indexWhere((e) => e.isSelected == true);
+        if (index == -1) return 0;
+        setDefaultLastChildren = widget.columns[index].children;
+      } else {
+        index = setDefaultLastChildren.indexWhere((e) => e.isSelected == true);
+        if (index == -1) return 0;
+        if (setDefaultLastChildren[index].children != null) {
+          setDefaultLastChildren = setDefaultLastChildren[index].children!;
+        }
+      }
+    }
+    return index == -1 ? 0 : index;
   }
 
   void _handleScrollEnd(int controllerIndex) {
@@ -135,11 +169,11 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
     if (pickerType != _BetterPickerType.cascade) return;
     //最后一列不需要处理
     if (controllerIndex == controllers.length - 1) return;
-    showColumns = _renderCascadeColumns(
-      columns: widget.columns,
-      controllerIndex: 0,
+    final List<Widget> arr = [];
+    arr.addAll(
+      _renderCascadeColumns(columns: widget.columns, controllerIndex: 0),
     );
-    setState(() {});
+    showColumnsNotifier.value = arr;
   }
 
   List<BetterPickerItem> _getSelectedValues() {
@@ -171,10 +205,7 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (theme == null) {
-      theme = Theme.of(context).extension<BetterThemeExtension>()!;
-      initShowColumns();
-    }
+    theme ??= Theme.of(context).extension<BetterThemeExtension>()!;
 
     return SizedBox(
       height: 300.bw,
@@ -197,7 +228,12 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
               color: theme?.pickerTheme.backgroundColor,
               child: Stack(
                 children: [
-                  Row(children: showColumns),
+                  ValueListenableBuilder(
+                    valueListenable: showColumnsNotifier,
+                    builder: (context, value, child) {
+                      return Row(children: value);
+                    },
+                  ),
                   widget.overlayWidget ??
                       Positioned.fill(
                         child: IgnorePointer(
@@ -422,7 +458,7 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
       // 获取当前选中项的索引（如果没有客户端则默认为0）
       final selectedIndex = controllers[controllerIndex].hasClients
           ? controllers[controllerIndex].selectedItem
-          : 0;
+          : controllers[controllerIndex].initialItem;
 
       // 确保索引有效且有子项
       if (selectedIndex < columns.length &&
@@ -434,7 +470,7 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
           ),
         );
         // 重置下级列的位置（不包括当前列）
-        _resetSubsequentControllers();
+        if (!isFirstRenderCascade) _resetSubsequentControllers();
       }
     }
 

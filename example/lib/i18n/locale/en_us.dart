@@ -68,4 +68,5 @@ Map<String, String> enUS = {
   '鹿城区': 'Luchang',
   '瓯海区': 'Ouhai',
   '齿轮选择器': 'Gear Picker',
+  '默认选中': 'Default Selected',
 };

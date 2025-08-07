@@ -3,7 +3,6 @@ import 'package:flutter_better_ui/better_picker.dart';
 import 'package:flutter_better_ui/better_picker_widget.dart';
 import 'package:flutter_better_ui/better_toast.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -74,6 +73,42 @@ class BetterPickerPage extends StatelessWidget {
                       BetterPickerItem(text: '${'选项'.tr}3', value: '3'),
                       BetterPickerItem(text: '${'选项'.tr}4', value: '4'),
                       BetterPickerItem(text: '${'选项'.tr}5', value: '5'),
+                      BetterPickerItem(text: '${'选项'.tr}6', value: '6'),
+                      BetterPickerItem(text: '${'选项'.tr}7', value: '7'),
+                      BetterPickerItem(text: '${'选项'.tr}8', value: '8'),
+                      BetterPickerItem(text: '${'选项'.tr}9', value: '9'),
+                      BetterPickerItem(text: '${'选项'.tr}10', value: '10'),
+                    ],
+                  );
+                },
+              ),
+              BetterCell(
+                height: 44.bw,
+                titleText: '默认选中'.tr,
+                isShowBorder: true,
+                isShowArrowRight: true,
+                onClick: () {
+                  BetterPicker.show(
+                    context,
+                    title: '默认选中'.tr,
+                    diameterRatio: 2,
+                    onConfirm: (List<BetterPickerItem> selectedValues) {
+                      BetterToast.show(
+                        context,
+                        message: selectedValues.map((e) => e.value).join(','),
+                      );
+                      print(selectedValues.map((e) => e.value).join(','));
+                    },
+                    columns: [
+                      BetterPickerItem(text: '${'选项'.tr}1', value: '1'),
+                      BetterPickerItem(text: '${'选项'.tr}2', value: '2'),
+                      BetterPickerItem(text: '${'选项'.tr}3', value: '3'),
+                      BetterPickerItem(text: '${'选项'.tr}4', value: '4'),
+                      BetterPickerItem(
+                        text: '${'选项'.tr}5',
+                        value: '5',
+                        isSelected: true,
+                      ),
                       BetterPickerItem(text: '${'选项'.tr}6', value: '6'),
                       BetterPickerItem(text: '${'选项'.tr}7', value: '7'),
                       BetterPickerItem(text: '${'选项'.tr}8', value: '8'),
@@ -188,7 +223,7 @@ class BetterPickerPage extends StatelessWidget {
                             value: 'Xiamen',
                             children: [
                               BetterPickerItem(text: '思明区'.tr, value: 'Siming'),
-                              // BetterPickerItem(text: '湖里区'.tr, value: 'Huli'),
+                              BetterPickerItem(text: '湖里区'.tr, value: 'Huli'),
                             ],
                           ),
                         ],
