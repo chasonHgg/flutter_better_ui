@@ -10,6 +10,17 @@
 - ⚡ **高性能** - 优化的渲染性能
 - 🛠️ **易扩展** - 模块化设计，易于定制
 
+## 🎥 预览
+
+[![Video](https://img.shields.io/badge/Better%20UI-Demo-blue?style=for-the-badge&logo=flutter)](https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8)
+
+![Image](https://github.com/user-attachments/assets/04390834-990c-4f22-8e6f-a0a459dc4019)
+
+![Image](https://github.com/user-attachments/assets/ffd34475-4c4d-46cb-ade2-f1379abc88a7)
+
+![Image](https://github.com/user-attachments/assets/0689287c-94f8-4ade-8c3d-c8654f2f2ce3)
+
+
 ## 📦 组件列表
 
 ### 基础组件i
@@ -36,7 +47,7 @@
 
 ```yaml
 dependencies:
-  better_ui: ^1.0.0
+  better_ui: ^lastversion
 ```
 
 ## 📖 使用指南

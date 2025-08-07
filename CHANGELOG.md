@@ -6,3 +6,7 @@
 * add BetterPopup
 * add BetterToast
 * add BetterTextButton
+
+## 1.0.1
+
+* Fix picker issue, add default parameter values
