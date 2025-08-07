@@ -64,6 +64,7 @@ class Home extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Text("hello world"),
             Text("Flutter ${"移动端组件库".tr}", style: TextStyle(fontSize: 16.bsp)),
             SizedBox(height: 20.bw),
             Text("基础组件".tr, style: TextStyle(fontSize: 14.bsp)),
