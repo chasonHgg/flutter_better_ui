@@ -1,9 +1,9 @@
-import 'package:better_ui/better_cell.dart';
-import 'package:better_ui/better_picker.dart';
-import 'package:better_ui/better_picker_widget.dart';
-import 'package:better_ui/theme/themes/better_dark_theme.dart';
-import 'package:better_ui/theme/themes/better_light_theme.dart';
-import 'package:better_ui/utils/better_screen_util.dart';
+import 'package:flutter_better_ui/better_cell.dart';
+import 'package:flutter_better_ui/better_picker.dart';
+import 'package:flutter_better_ui/better_picker_widget.dart';
+import 'package:flutter_better_ui/theme/themes/better_dark_theme.dart';
+import 'package:flutter_better_ui/theme/themes/better_light_theme.dart';
+import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:example/i18n/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,9 +26,7 @@ class Home extends StatelessWidget {
           IconButton(
             onPressed: () {
               Get.changeTheme(
-                Theme.of(context).brightness == Brightness.dark
-                    ? betterLightTheme
-                    : betterDarkTheme,
+                Get.isDarkMode ? betterLightTheme : betterDarkTheme,
               );
             },
             //判断显示主题的图标

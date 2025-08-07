@@ -1,8 +1,8 @@
-import 'package:better_ui/better_cell.dart';
-import 'package:better_ui/better_popup.dart';
-import 'package:better_ui/better_toast.dart';
-import 'package:better_ui/theme/better_theme_extension.dart';
-import 'package:better_ui/utils/better_screen_util.dart';
+import 'package:flutter_better_ui/better_cell.dart';
+import 'package:flutter_better_ui/better_popup.dart';
+import 'package:flutter_better_ui/better_toast.dart';
+import 'package:flutter_better_ui/theme/better_theme_extension.dart';
+import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,7 +45,7 @@ class BetterPopupPage extends StatelessWidget {
                   renderPositionRowItem(
                     context: context,
                     title: '左侧弹出'.tr,
-                    width: 150.bw,
+                    width: 200.bw,
                     icon: CupertinoIcons.chevron_left,
                     position: BetterPopupPosition.left,
                     theme: theme,
@@ -53,7 +53,7 @@ class BetterPopupPage extends StatelessWidget {
                   renderPositionRowItem(
                     context: context,
                     title: '右侧弹出'.tr,
-                    width: 150.bw,
+                    width: 200.bw,
                     icon: CupertinoIcons.chevron_right,
                     position: BetterPopupPosition.right,
                     theme: theme,

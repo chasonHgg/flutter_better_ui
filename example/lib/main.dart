@@ -1,5 +1,6 @@
-import 'package:better_ui/theme/better_theme_controller.dart';
-import 'package:better_ui/utils/better_util.dart';
+import 'package:flutter_better_ui/theme/themes/better_dark_theme.dart';
+import 'package:flutter_better_ui/theme/themes/better_light_theme.dart';
+import 'package:flutter_better_ui/utils/better_util.dart';
 import 'package:example/i18n/translations.dart';
 import 'package:example/router/routes.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //init Better UI,mast be first line
     BetterUtil.init(context, designWidth: 375, designHeight: 812);
-    ThemeData currentTheme = Get.put(BetterThemeController()).currentTheme;
+    Get.changeTheme(
+      MediaQuery.of(context).platformBrightness == Brightness.dark
+          ? betterDarkTheme
+          : betterLightTheme,
+    );
     return GetMaterialApp(
       translations: I18nTranslations(),
       locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
-      theme: currentTheme,
+      darkTheme: betterDarkTheme,
+      theme: betterLightTheme,
+      themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       getPages: routes,
       defaultTransition: Transition.cupertino,
     );

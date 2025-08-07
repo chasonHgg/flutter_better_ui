@@ -1,8 +1,8 @@
-import 'package:better_ui/better_cell.dart';
-import 'package:better_ui/better_picker.dart';
-import 'package:better_ui/better_picker_widget.dart';
-import 'package:better_ui/better_toast.dart';
-import 'package:better_ui/utils/better_screen_util.dart';
+import 'package:flutter_better_ui/better_cell.dart';
+import 'package:flutter_better_ui/better_picker.dart';
+import 'package:flutter_better_ui/better_picker_widget.dart';
+import 'package:flutter_better_ui/better_toast.dart';
+import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

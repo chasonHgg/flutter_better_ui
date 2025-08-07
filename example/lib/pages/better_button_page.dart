@@ -1,6 +1,6 @@
-import 'package:better_ui/utils/better_screen_util.dart';
+import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
-import 'package:better_ui/better_button.dart';
+import 'package:flutter_better_ui/better_button.dart';
 import 'package:get/get.dart';
 
 class BetterButtonPage extends StatelessWidget {
