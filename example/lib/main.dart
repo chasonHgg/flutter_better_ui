@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
     ThemeData currentTheme = Get.put(BetterThemeController()).currentTheme;
     return GetMaterialApp(
       translations: I18nTranslations(),
-      locale: const Locale('zh', 'CN'),
-      fallbackLocale: const Locale('zh', 'CN'),
+      locale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('en', 'US'),
       theme: currentTheme,
       getPages: routes,
       defaultTransition: Transition.cupertino,
