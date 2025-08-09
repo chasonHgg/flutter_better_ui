@@ -6,13 +6,25 @@ import 'package:get/get.dart';
 
 enum _BetterPickerType { single, multi, cascade }
 
+/// An item displayed by `BetterPickerWidget`. For cascade pickers, provide
+/// nested [children]. Use [isSelected] to mark default selection.
 class BetterPickerItem {
+  /// Text displayed in the picker
   final String text;
+
+  /// Value associated with the item
   final String value;
+
+  /// Text style for the item
   final TextStyle? textStyle;
+
+  /// Whether the item is selected
   final bool? isSelected;
+
+  /// Nested children items for cascade pickers
   final List<BetterPickerItem>? children;
 
+  /// Creates a [BetterPickerItem].
   BetterPickerItem({
     required this.text,
     required this.value,
@@ -22,6 +34,8 @@ class BetterPickerItem {
   });
 }
 
+/// Core picker widget supporting single column, multiple columns, and
+/// cascade data structures.
 class BetterPickerWidget extends StatefulWidget {
   final dynamic columns;
   final String? cancelText;
@@ -39,6 +53,7 @@ class BetterPickerWidget extends StatefulWidget {
   final Widget? overlayWidget;
   final double? itemHeight;
 
+  /// Creates a [BetterPickerWidget].
   const BetterPickerWidget({
     super.key,
     required this.columns,

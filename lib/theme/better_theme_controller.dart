@@ -4,6 +4,7 @@ import 'package:flutter_better_ui/theme/theme_mode_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+/// Controller that manages the current theme and mode (light/dark/system).
 class BetterThemeController extends GetxController {
   final Rx<ThemeData> _currentTheme = betterLightTheme.obs;
   final Rx<BetterThemeMode> _themeMode = BetterThemeMode.system.obs;

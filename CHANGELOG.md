@@ -1,3 +1,8 @@
+## 1.0.2
+
+* Documentation updates and minor cleanup
+* No breaking changes
+
 ## 1.0.0
 
 * add BetterButton

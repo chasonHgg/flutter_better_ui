@@ -72,25 +72,57 @@ import 'package:flutter/material.dart';
 
 */
 
+/// Utility to display a modal picker with single/multi/cascade columns.
 class BetterPicker {
   static void show(
     BuildContext context, {
-    //可能是一维数组，也可能是二维数组
+
+    /// Columns of the picker
     required var columns,
+
+    /// Text for cancel button
     String? cancelText,
+
+    /// Text for confirm button
     String? confirmText,
+
+    /// Title of the picker
     String? title,
+
+    /// Title widget of the picker
     Widget? titleWidget,
+
+    /// Background color of the header
     Color? headerBackgroundColor,
+
+    /// Border radius of the picker
     BorderRadiusGeometry? borderRadius,
+
+    /// Text color of the cancel button
     Color? cancelTextColor,
+
+    /// Text color of the confirm button
     Color? confirmTextColor,
+
+    /// On cancel callback
     VoidCallback? onCancel,
+
+    /// On confirm callback
     Function(List<BetterPickerItem>)? onConfirm,
+
+    /// On change callback
     Function(List<BetterPickerItem>)? onChange,
+
+    /// On close callback
     VoidCallback? onClose,
+
+    /// Diameter ratio of the picker
     double? diameterRatio,
+
+    /// Item height of the picker
     double? itemHeight,
+
+    /// Overlay widget of the picker
     Widget? overlayWidget,
   }) {
     itemHeight ??=

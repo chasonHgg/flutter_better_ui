@@ -2,19 +2,31 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// Painter that draws multiple fading line segments in a circular layout.
 class SpinnerPainter extends CustomPainter {
+  /// Progress (0~1)
   final double progress;
+
+  /// Number of segments
   final int segmentCount;
+
+  /// Line color
   final Color color;
-  final double lineLength; // 线条长度（占半径的比例，0~1）
-  final double lineWidth; // 线条宽度（像素）
+
+  /// Line length (ratio of radius, 0~1)
+  final double lineLength;
+
+  /// Line width (pixels)
+  final double lineWidth;
 
   SpinnerPainter({
     required this.progress,
     this.segmentCount = 10,
     this.color = Colors.white,
-    this.lineLength = 0.4, // 默认长度=半径的40%
-    this.lineWidth = 2, // 默认宽度=2像素
+    //default length = 40% of radius
+    this.lineLength = 0.4,
+    //default width = 2 pixels
+    this.lineWidth = 2,
   });
 
   @override
@@ -37,7 +49,7 @@ class SpinnerPainter extends CustomPainter {
         center.dy + radius * sin(angle),
       );
       final end = Offset(
-        center.dx + radius * (1 - lineLength) * cos(angle), // 终点向内缩短
+        center.dx + radius * (1 - lineLength) * cos(angle),
         center.dy + radius * (1 - lineLength) * sin(angle),
       );
 

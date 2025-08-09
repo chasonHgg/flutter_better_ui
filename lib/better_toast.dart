@@ -1,8 +1,10 @@
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 
+/// Toast display position.
 enum BetterToastPosition { top, bottom, center }
 
+/// A simple toast helper with text, success/error, and loading variants.
 class BetterToast {
   //加载中
   static OverlayEntry? _currentLoadingEntry;
@@ -22,22 +24,54 @@ class BetterToast {
   //文字提示
   static void show(
     BuildContext context, {
+
+    /// Message of the toast
     String? message,
+
+    /// Child widget of the toast
     Widget? child,
+
+    /// Icon of the toast
     Widget? icon,
+
+    /// Fade duration of the toast
     Duration? fadeDuration,
+
+    /// Duration of the toast
     Duration? duration,
+
+    /// Font size of the toast
     double? fontSize,
     Color? textColor,
+
+    /// Background color of the toast
     Color? backgroundColor,
+
+    /// Padding of the toast
     EdgeInsets? padding,
+
+    /// Border radius of the toast
     BorderRadius? borderRadius,
+
+    /// Position of the toast
     BetterToastPosition position = BetterToastPosition.bottom,
+
+    /// Top offset of the toast
     double? topOffset,
+
+    /// Bottom offset of the toast
     double? bottomOffset,
+
+    /// Text alignment of the toast
     TextAlign? textAlign = TextAlign.center,
+
+    /// Whether to forbid click
     bool? forbidClick = false,
+
+    /// Width of the toast
     double? width,
+
+    /// Height of the toast
     double? height,
   }) {
     final overlay = Overlay.of(context);
@@ -191,11 +225,23 @@ class BetterToast {
   //成功提示
   static void showSuccess(
     BuildContext context, {
+
+    /// Message of the toast
     String? message,
+
+    /// Whether to forbid click
     bool forbidClick = false,
+
+    /// Size of the icon
     double? iconSize,
+
+    /// Color of the icon
     Color? iconColor,
+
+    /// Text color of the toast
     Color? textColor,
+
+    /// Font size of the toast
     double? fontSize,
   }) {
     show(
@@ -218,11 +264,23 @@ class BetterToast {
   //失败提示
   static void showError(
     BuildContext context, {
+
+    /// Message of the toast
     String? message,
+
+    /// Whether to forbid click
     bool forbidClick = false,
+
+    /// Size of the icon
     double? iconSize,
+
+    /// Color of the icon
     Color? iconColor,
+
+    /// Text color of the toast
     Color? textColor,
+
+    /// Font size of the toast
     double? fontSize,
   }) {
     show(
@@ -243,15 +301,35 @@ class BetterToast {
 
   static void showLoading(
     BuildContext context, {
+
+    /// Message of the toast
     String? message,
+
+    /// Whether to forbid click
     bool forbidClick = false,
+
+    /// Color of the barrier
     Color? barrierColor,
+
+    /// Size of the progress
     double? progressSize,
+
+    /// Color of the progress
     Color? progressColor = Colors.white,
+
+    /// Stroke width of the progress
     double? progressStrokeWidth = 2,
+
+    /// Border radius of the progress
     double? borderRadius,
+
+    /// Padding of the progress
     EdgeInsetsGeometry? padding,
+
+    /// Fade duration of the progress
     Duration? fadeDuration,
+
+    /// Text style of the progress
     TextStyle? textStyle,
   }) {
     // 已有的loading不重复显示

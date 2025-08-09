@@ -1,11 +1,18 @@
 import 'package:flutter_better_ui/animation/spinner/spinner_painter.dart';
 import 'package:flutter/material.dart';
 
+/// A custom rotating spinner used by `BetterButton` and other widgets.
 class Spinner extends StatefulWidget {
+  /// Size of the spinner
   final double? size;
+
+  /// Duration of one full rotation
   final Duration duration;
+
+  /// Color of the spinner
   final Color? color;
 
+  /// Creates a [Spinner].
   const Spinner({
     super.key,
     this.size,

@@ -3,25 +3,56 @@ import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 
+/// Popup display position.
 enum BetterPopupPosition { top, bottom, left, right, center }
 
+/// Utility to show popups from different edges or center with optional close
+/// button and custom content.
 class BetterPopup {
   static void show(
     BuildContext context, {
+
+    /// Position of the popup
     BetterPopupPosition position = BetterPopupPosition.bottom,
+
+    /// Background color of the popup
     Color? backgroundColor,
+
+    /// Width of the popup
     double? width,
+
+    /// Height of the popup
     double? height,
+
+    /// Child widget of the popup
     Widget? child,
+
+    /// Border radius of the popup
     BorderRadiusGeometry? borderRadius,
+
+    /// Whether to show close icon
     bool isShowCloseIcon = false,
+
+    /// Size of the close icon
     double? closeIconSize,
+
+    /// Color of the close icon
     Color? closeIconColor,
+
+    /// Whether the popup is dismissible
     bool isDismissible = true,
     Widget? closeIcon,
+
+    /// Padding of the popup
     EdgeInsets? padding,
+
+    /// Box shadow of the popup
     final List<BoxShadow>? boxShadow,
+
+    /// On close callback
     VoidCallback? onClose,
+
+    /// Whether to enable drag, only support bottom popup
     bool? enableDrag,
   }) {
     if (position == BetterPopupPosition.bottom) {

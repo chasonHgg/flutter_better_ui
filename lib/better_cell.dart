@@ -3,29 +3,68 @@ import 'package:flutter_better_ui/theme/child_themes/better_cell_theme.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 
+/// A configurable list cell commonly used in settings or forms.
 class BetterCell extends StatelessWidget {
+  /// Fixed height of the cell
   final double? height;
 
+  /// Border radius of the cell
   final BorderRadiusGeometry? borderRadius;
+
+  /// Background color of the cell
   final Color? backgroundColor;
+
+  /// Padding of the cell
   final EdgeInsetsGeometry? padding;
+
+  /// Title text of the cell
   final String? titleText;
+
+  /// Value text of the cell
   final String? valueText;
+
+  /// Title text style of the cell
   final TextStyle? titleTextStyle;
+
+  /// Value text style of the cell
   final TextStyle? valueTextStyle;
+
+  /// Border of the cell
   final BoxBorder? border;
+
+  /// Whether to show border
   final bool? isShowBorder;
+
+  /// Whether to show arrow right
   final bool? isShowArrowRight;
+
+  /// Margin left of the arrow right
   final double? arrowRightMarginLeft;
+
+  /// Size of the arrow right
   final double? arrowRightSize;
+
+  /// Color of the arrow right
   final Color? arrowRightColor;
+
   final Widget? titleWidget;
+
+  /// Value widget of the cell
   final Widget? valueWidget;
+
+  /// On click callback
   final VoidCallback? onClick;
+
+  /// Whether to disable the cell
   final bool? disabled;
+
+  /// Whether to disable splash
   final bool? disableSplash;
+
+  /// Overlay color of the cell
   final Color? overlayColor;
 
+  /// Creates a [BetterCell].
   const BetterCell({
     super.key,
     this.height,

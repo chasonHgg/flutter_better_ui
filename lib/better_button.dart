@@ -5,47 +5,103 @@ import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter_better_ui/utils/better_util.dart';
 import 'package:flutter/material.dart';
 
+/// Loading indicator type used by `BetterButton`.
 enum BetterButtonLoadingType { circular, spinner }
 
+/// Preset visual styles for `BetterButton`.
 enum BetterButtonType { defaultType, primary, success, warning, danger, info }
 
-// ignore: must_be_immutable
+/// A highly configurable button widget that supports theme colors, loading
+/// indicators, custom prefix/suffix, gradients and more.
 class BetterButton extends StatelessWidget {
+  /// The preset visual style to use. When null, falls back to theme defaults.
   final BetterButtonType? type;
+
+  /// Callback when the button is tapped.
   final VoidCallback? onClick;
+
+  /// Background color of the button. If null, a color is derived from [type].
   final Color? color;
+
+  /// Border color of the button.
   final Color? borderColor;
+
+  /// Overlay/splash color when pressed.
   final Color? overlayColor;
+
+  /// Corner radius of the button.
   final double? borderRadius;
+
+  /// Whether to show loading state.
   final bool loading;
-  double? loadingSize;
+
+  /// Size of the loading indicator.
+  final double? loadingSize;
+
+  /// Stroke width of the circular loading indicator.
   final double? loadingStrokeWidth;
+
+  /// Custom loading widget. If provided it replaces the built-in indicator.
   final Widget? loadingWidget;
+
+  /// Color of the loading indicator.
   final Color? loadingColor;
-  double? loadingMarginRight;
+
+  /// Spacing to the right of the loading indicator.
+  final double? loadingMarginRight;
+
+  /// Widget displayed before the text/child.
   final Widget? prefix;
+
+  /// Widget displayed after the text/child.
   final Widget? suffix;
+
+  /// Fixed width of the button.
   final double? width;
-  double? height;
+
+  /// Fixed height of the button.
+  final double? height;
+
+  /// Loading indicator type.
   final BetterButtonLoadingType loadingType;
+
+  /// Text content when [child] is not provided.
   final String? text;
+
+  /// Text style for [text].
   final TextStyle? textStyle;
+
+  /// Inner padding of the button.
   final EdgeInsetsGeometry? padding;
+
+  /// Background gradient of the button. Takes precedence over [color].
   final Gradient? gradient;
-  //是否为朴素按钮
+
+  /// Whether to render a plain (outlined) style button.
   final bool? plain;
+
+  /// MainAxisAlignment of the internal row.
   final MainAxisAlignment? mainAxisAlignment;
-  //是否关闭水波纹效果
+
+  /// Whether to disable splash effect.
   final bool? disableSplash;
-  //是否禁用按钮
+
+  /// Whether the button is disabled.
   final bool? disabled;
-  //loading的时候是否隐藏内容
+
+  /// Whether to hide the content when loading.
   final bool? hideContentWhenLoading;
-  //loading的时候显示的文本
+
+  /// Text displayed while loading when [hideContentWhenLoading] is false.
   final String? loadingText;
+
+  /// Custom child widget. If provided, [text] is ignored.
   final Widget? child;
+
+  /// Border width of the button.
   final double? borderWidth;
 
+  /// Creates a [BetterButton].
   BetterButton({
     super.key,
     this.type = BetterButtonType.defaultType,
@@ -77,14 +133,14 @@ class BetterButton extends StatelessWidget {
     this.loadingText,
     this.child,
     this.borderWidth,
-  }) {
-    loadingSize = loadingSize?.bw ?? 20.bw;
-    height = height?.bw ?? 44.bw;
-    loadingMarginRight = loadingMarginRight?.bw ?? 8.bw;
-  }
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Compute responsive sizes
+    final double computedLoadingSize = loadingSize?.bw ?? 20.bw;
+    final double computedHeight = height?.bw ?? 44.bw;
+    final double computedLoadingMarginRight = loadingMarginRight?.bw ?? 8.bw;
     BetterButtonTheme buttonTheme = Theme.of(
       context,
     ).extension<BetterThemeExtension>()!.buttonTheme;
@@ -297,7 +353,7 @@ class BetterButton extends StatelessWidget {
       onPressed: disabled == true ? null : onClick ?? () {},
       child: Ink(
         width: width,
-        height: height,
+        height: computedHeight,
         padding:
             padding ??
             Theme.of(

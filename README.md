@@ -1,18 +1,21 @@
 # Better UI
 
-一个现代化的Flutter UI组件库，提供美观、易用的UI组件，支持主题定制和响应式设计。持续开发维护中...
+[中文文档](README_ZH.md)
 
-## ✨ 特性
+A modern Flutter UI component library that provides beautiful and easy-to-use widgets, with theme customization and responsive design. Actively maintained.
 
-- 🎨 **现代化设计** - 采用Material Design 3设计语言
-- 🌙 **主题支持** - 支持亮色/暗色主题切换
-- 📱 **响应式** - 适配不同屏幕尺寸
-- ⚡ **高性能** - 优化的渲染性能
-- 🛠️ **易扩展** - 模块化设计，易于定制
+## ✨ Features
 
-## 🎥 预览
+- 🎨 **Modern design** - Built with Material Design 3
+- 🌙 **Theming** - Light/Dark theme switching
+- 📱 **Responsive** - Adapts to different screen sizes
+- ⚡ **High performance** - Optimized rendering
+- 🛠️ **Extensible** - Modular and easy to customize
 
-[![Video](https://img.shields.io/badge/Better%20UI-Demo-blue?style=for-the-badge&logo=flutter&logoWidth=30&labelWidth=100)](https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8)
+
+## 🎥 Preview
+
+[![Video](https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8?style=for-the-badge&logo=flutter&logoWidth=30&labelWidth=100)](https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8)
 
 <div>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/1.gif" width="200" alt="preview1" />
@@ -22,196 +25,196 @@
 
 
 
-## 📦 组件列表
+## 📦 Components
 
-### 基础组件i
-- **BetterButton** - 增强版按钮组件，支持多种样式和状态
-- **BetterTextButton** - 文本按钮组件
-- **BetterCell** - 列表单元格组件
+### Basic Components
+- **BetterButton** - Enhanced button with multiple styles and states
+- **BetterTextButton** - Text button
+- **BetterCell** - List cell item
 
-### 反馈组件
-- **BetterToast** - 轻提示组件，支持多种位置和样式
-- **BetterPopup** - 弹出层组件，支持多种弹出方式
+### Feedback Components
+- **BetterToast** - Lightweight toast with multiple positions and styles
+- **BetterPopup** - Popup layer with multiple presentation styles
 
-### 表单组件
-- **BetterPicker** - 选择器组件，支持单列、多列和级联选择
+### Form Components
+- **BetterPicker** - Picker supporting single, multiple, and cascading selections
 
-### 工具类
-- **BetterScreenUtil** - 屏幕适配工具
-- **ColorUtil** - 颜色处理工具
+### Utilities
+- **BetterScreenUtil** - Screen adaptation utilities
+- **ColorUtil** - Color utilities
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 安装
+### Installation
 
-在 `pubspec.yaml` 中添加依赖：
+Add the dependency in `pubspec.yaml`:
 
 ```yaml
 dependencies:
   better_ui: ^lastversion
 ```
 
-## 📖 使用指南
+## 📖 Usage Guide
 
-### BetterButton - 按钮组件
+### BetterButton - Button
 
 ```dart
-// 基础按钮
+// Basic button
 BetterButton(
-  text: "点击我",
+  text: "Click me",
   onClick: () {
-    print("按钮被点击");
+    print("Button clicked");
   },
 )
 
-// 主要按钮
+// Primary button
 BetterButton(
   type: BetterButtonType.primary,
-  text: "主要按钮",
+  text: "Primary Button",
   onClick: () {},
 )
 
-// 加载状态按钮
+// Loading state button
 BetterButton(
-  text: "加载中",
+  text: "Loading",
   loading: true,
   onClick: () {},
 )
 
-// 朴素按钮
+// Plain button
 BetterButton(
   type: BetterButtonType.primary,
   plain: true,
-  text: "朴素按钮",
+  text: "Plain Button",
   onClick: () {},
 )
 ```
 
-### BetterToast - 轻提示
+### BetterToast - Toast
 
 ```dart
-// 基础提示
+// Basic toast
 BetterToast.show(
   context,
-  message: "操作成功",
+  message: "Operation succeeded",
 );
 
-// 自定义样式
+// Custom style
 BetterToast.show(
   context,
-  message: "自定义提示",
+  message: "Custom toast",
   backgroundColor: Colors.blue,
   textColor: Colors.white,
   position: BetterToastPosition.center,
   duration: Duration(seconds: 3),
 );
 
-// 加载提示
+// Loading toast
 BetterToast.showLoading(context);
 BetterToast.hideLoading();
 ```
 
-### BetterPopup - 弹出层
+### BetterPopup - Popup
 
 ```dart
-// 底部弹出
+// Bottom popup
 BetterPopup.show(
   context,
   position: BetterPopupPosition.bottom,
   child: Container(
     height: 300,
-    child: Center(child: Text("底部弹出内容")),
+    child: Center(child: Text("Bottom popup content")),
   ),
 );
 
-// 居中弹出
+// Center popup
 BetterPopup.show(
   context,
   position: BetterPopupPosition.center,
   child: Container(
     width: 300,
     height: 200,
-    child: Center(child: Text("居中弹出内容")),
+    child: Center(child: Text("Centered popup content")),
   ),
 );
 ```
 
-### BetterPicker - 选择器
+### BetterPicker - Picker
 
 ```dart
-// 单列选择器
+// Single-column picker
 BetterPicker.show(
   context,
   columns: [
-    BetterPickerItem(text: '选项1', value: 'option1'),
-    BetterPickerItem(text: '选项2', value: 'option2'),
-    BetterPickerItem(text: '选项3', value: 'option3'),
+    BetterPickerItem(text: 'Option 1', value: 'option1'),
+    BetterPickerItem(text: 'Option 2', value: 'option2'),
+    BetterPickerItem(text: 'Option 3', value: 'option3'),
   ],
   onConfirm: (items) {
-    print("选择了: ${items.first.text}");
+    print("Selected: ${items.first.text}");
   },
 );
 
-// 多列选择器
+// Multi-column picker
 BetterPicker.show(
   context,
   columns: [
     [
-      BetterPickerItem(text: '周一', value: 'Monday'),
-      BetterPickerItem(text: '周二', value: 'Tuesday'),
-      BetterPickerItem(text: '周三', value: 'Wednesday'),
+      BetterPickerItem(text: 'Monday', value: 'Monday'),
+      BetterPickerItem(text: 'Tuesday', value: 'Tuesday'),
+      BetterPickerItem(text: 'Wednesday', value: 'Wednesday'),
     ],
     [
-      BetterPickerItem(text: '上午', value: 'Morning'),
-      BetterPickerItem(text: '下午', value: 'Afternoon'),
-      BetterPickerItem(text: '晚上', value: 'Evening'),
+      BetterPickerItem(text: 'Morning', value: 'Morning'),
+      BetterPickerItem(text: 'Afternoon', value: 'Afternoon'),
+      BetterPickerItem(text: 'Evening', value: 'Evening'),
     ],
   ],
   onConfirm: (items) {
-    print("选择了: ${items.map((item) => item.text).join(', ')}");
+    print("Selected: ${items.map((item) => item.text).join(', ')}");
   },
 );
 
-// 级联选择器
+// Cascading picker
 BetterPicker.show(
   context,
   columns: [
     BetterPickerItem(
-      text: '浙江',
+      text: 'Zhejiang',
       value: 'Zhejiang',
       children: [
         BetterPickerItem(
-          text: '杭州',
+          text: 'Hangzhou',
           value: 'Hangzhou',
           children: [
-            BetterPickerItem(text: '西湖区', value: 'Xihu'),
-            BetterPickerItem(text: '余杭区', value: 'Yuhang'),
+            BetterPickerItem(text: 'Xihu District', value: 'Xihu'),
+            BetterPickerItem(text: 'Yuhang District', value: 'Yuhang'),
           ],
         ),
         BetterPickerItem(
-          text: '温州',
+          text: 'Wenzhou',
           value: 'Wenzhou',
           children: [
-            BetterPickerItem(text: '鹿城区', value: 'Lucheng'),
-            BetterPickerItem(text: '瓯海区', value: 'Ouhai'),
+            BetterPickerItem(text: 'Lucheng District', value: 'Lucheng'),
+            BetterPickerItem(text: 'Ouhai District', value: 'Ouhai'),
           ],
         ),
       ],
     ),
   ],
   onConfirm: (items) {
-    print("选择了: ${items.map((item) => item.text).join(' - ')}");
+    print("Selected: ${items.map((item) => item.text).join(' - ')}");
   },
 );
 
 ```
 
-### BetterCell - 列表单元格
+### BetterCell - List Cell
 
 ```dart
 BetterCell(
     height: 44.bw,
-    titleText: '单元格'.tr,
+    titleText: 'Cell'.tr,
     isShowBorder: true,
     isShowArrowRight: true,
     onClick(){
@@ -220,65 +223,65 @@ BetterCell(
 ),
 ```
 
-## 📱 响应式设计
+## 📱 Responsive Design
 
-Better UI 内置响应式工具类：
+Better UI ships with built-in responsive utilities:
 
 ```dart
-// 使用响应式尺寸
+// Use responsive sizes
 Container(
   width: 100.bw,
   height: 50.bh,
   child: Text(
-    "响应式文本",
+    "Responsive text",
     style: TextStyle(fontSize: 16.bsp),
   ),
 )
 ```
 
-## 🔧 工具类
+## 🔧 Utilities
 
-### BetterScreenUtil - 屏幕适配
+### BetterScreenUtil - Screen Adaptation
 
 ```dart
-// 获取屏幕信息
+// Get screen information
 double screenWidth = BetterScreenUtil.screenWidth;
 double screenHeight = BetterScreenUtil.screenHeight;
 double statusBarHeight = BetterScreenUtil.statusBarHeight;
 
-// 响应式尺寸
+// Responsive sizes
 double responsiveWidth = 100.bw;
 double responsiveHeight = 50.bh;
 double responsiveFont = 16.bsp;
 ```
 
-### ColorUtil - 颜色工具
+### ColorUtil - Color Utilities
 
 ```dart
-// 颜色转换
+// Color conversion
 Color hexColor = ColorUtil.hexToColor("#FF0000");
 ```
 
-## 📋 示例项目
+## 📋 Example Project
 
-查看 `example/` 目录获取完整的使用示例：
+See the `example/` directory for full usage examples:
 
-- `better_button_page.dart` - 按钮组件示例
-- `better_toast_page.dart` - 轻提示示例
-- `better_popup_page.dart` - 弹出层示例
-- `better_picker_page.dart` - 选择器示例
-- `better_cell_page.dart` - 列表单元格示例
+- `better_button_page.dart` - Button examples
+- `better_toast_page.dart` - Toast examples
+- `better_popup_page.dart` - Popup examples
+- `better_picker_page.dart` - Picker examples
+- `better_cell_page.dart` - List cell examples
 
-## 🤝 贡献
+## 🤝 Contributing
 
-欢迎提交 Issue 和 Pull Request！
+Issues and Pull Requests are welcome!
 
-## 📄 许可证
+## 📄 License
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
-## 🔗 相关链接
+## 🔗 Links
 
-- [Flutter 官网](https://flutter.dev)
-- [Dart 官网](https://dart.dev)
+- [Flutter](https://flutter.dev)
+- [Dart](https://dart.dev)
 - [Material Design](https://material.io/design)

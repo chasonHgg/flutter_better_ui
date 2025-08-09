@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 
+/// A lightweight text-only button with subtle pressed color feedback.
 class BetterTextButton extends StatefulWidget {
+  /// Text of the button
   final String text;
-  final Color? color; // 默认文字颜色
-  final Color? activeColor; // 按下时的文字颜色
+
+  /// Default text color.
+  final Color? color;
+
+  /// Text color when pressed.
+  final Color? activeColor;
   final VoidCallback onPressed;
+
+  /// Text style of the button
   final TextStyle? textStyle;
 
+  /// Creates a [BetterTextButton].
   const BetterTextButton({
     super.key,
     required this.text,
