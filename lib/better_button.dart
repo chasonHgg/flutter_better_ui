@@ -13,6 +13,7 @@ enum BetterButtonType { defaultType, primary, success, warning, danger, info }
 
 /// A highly configurable button widget that supports theme colors, loading
 /// indicators, custom prefix/suffix, gradients and more.
+// ignore: must_be_immutable
 class BetterButton extends StatelessWidget {
   /// The preset visual style to use. When null, falls back to theme defaults.
   final BetterButtonType? type;
@@ -36,7 +37,7 @@ class BetterButton extends StatelessWidget {
   final bool loading;
 
   /// Size of the loading indicator.
-  final double? loadingSize;
+  double? loadingSize;
 
   /// Stroke width of the circular loading indicator.
   final double? loadingStrokeWidth;
@@ -48,7 +49,7 @@ class BetterButton extends StatelessWidget {
   final Color? loadingColor;
 
   /// Spacing to the right of the loading indicator.
-  final double? loadingMarginRight;
+  double? loadingMarginRight;
 
   /// Widget displayed before the text/child.
   final Widget? prefix;
@@ -60,7 +61,7 @@ class BetterButton extends StatelessWidget {
   final double? width;
 
   /// Fixed height of the button.
-  final double? height;
+  double? height;
 
   /// Loading indicator type.
   final BetterButtonLoadingType loadingType;
@@ -138,9 +139,9 @@ class BetterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Compute responsive sizes
-    final double computedLoadingSize = loadingSize?.bw ?? 20.bw;
-    final double computedHeight = height?.bw ?? 44.bw;
-    final double computedLoadingMarginRight = loadingMarginRight?.bw ?? 8.bw;
+    loadingSize ??= 20.bw;
+    loadingMarginRight ??= 8.bw;
+    height ??= 44.bw;
     BetterButtonTheme buttonTheme = Theme.of(
       context,
     ).extension<BetterThemeExtension>()!.buttonTheme;
@@ -353,7 +354,7 @@ class BetterButton extends StatelessWidget {
       onPressed: disabled == true ? null : onClick ?? () {},
       child: Ink(
         width: width,
-        height: computedHeight,
+        height: height,
         padding:
             padding ??
             Theme.of(
