@@ -12,7 +12,16 @@
 
 ## 🎥 预览
 
-[![Video](https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8?style=for-the-badge&logo=flutter&logoWidth=30&labelWidth=100)](https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8)
+<div>
+  <video src="readme_assets/demo.mp4" width="240" controls muted playsinline preload="none">
+    您的浏览器不支持视频标签。
+  </video> 
+</div>
+
+如无法直接播放，可点击下方链接查看或下载：
+
+- [预览视频1 (MP4)](https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8)
+
 
 <div>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/1.gif" width="200" alt="preview1" />
