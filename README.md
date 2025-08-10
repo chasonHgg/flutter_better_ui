@@ -1,6 +1,6 @@
 # Better UI
 
-[中文文档](README_ZH.md)
+[中文文档](https://github.com/chasonHgg/flutter_better_ui/blob/main/README_ZH.md)
 
 A modern Flutter UI component library that provides beautiful and easy-to-use widgets, with theme customization and responsive design. Actively maintained.
 
