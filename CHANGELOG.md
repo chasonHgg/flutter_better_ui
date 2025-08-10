@@ -1,3 +1,8 @@
+## 1.0.4
+
+* Modify the usage document
+* No breaking changes
+
 ## 1.0.3
 
 * Add BetterSwitch
