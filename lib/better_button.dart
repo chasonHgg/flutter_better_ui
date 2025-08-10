@@ -113,7 +113,7 @@ class BetterButton extends StatelessWidget {
     this.borderRadius,
     this.loading = false,
     this.loadingSize,
-    this.loadingStrokeWidth = 1,
+    this.loadingStrokeWidth,
     this.loadingWidget,
     this.loadingColor,
     this.loadingMarginRight,
@@ -268,7 +268,8 @@ class BetterButton extends StatelessWidget {
               width: loadingSize,
               height: loadingSize,
               child: CircularProgressIndicator(
-                strokeWidth: loadingStrokeWidth,
+                strokeWidth:
+                    loadingStrokeWidth ?? buttonTheme.loadingStrokeWidth ?? 1,
                 valueColor: AlwaysStoppedAnimation(finalLoadingColor),
               ),
             ),

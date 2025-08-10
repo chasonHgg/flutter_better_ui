@@ -108,6 +108,14 @@ class Home extends StatelessWidget {
                 Get.toNamed("/betterPicker");
               },
             ),
+            BetterCell(
+              titleText: "开关".tr,
+              isShowArrowRight: true,
+              isShowBorder: true,
+              onClick: () {
+                Get.toNamed("/betterSwitch");
+              },
+            ),
           ],
         ),
       ),

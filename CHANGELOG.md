@@ -1,3 +1,8 @@
+## 1.0.3
+
+* Add BetterSwitch
+* Fix the background color of the Better Cell theme
+
 ## 1.0.2
 
 * Documentation updates and minor cleanup

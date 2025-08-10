@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class BetterCellTheme {
-  final double? height;
   final BorderRadiusGeometry? borderRadius;
   final Color? backgroundColor;
   final EdgeInsetsGeometry? padding;
@@ -16,7 +15,6 @@ class BetterCellTheme {
   final Color? overlayColor;
 
   BetterCellTheme({
-    this.height,
     this.borderRadius,
     this.backgroundColor,
     this.padding,
@@ -30,7 +28,6 @@ class BetterCellTheme {
   });
 
   BetterCellTheme copyWith({
-    double? height,
     BorderRadiusGeometry? borderRadius,
     Color? backgroundColor,
     EdgeInsetsGeometry? padding,
@@ -43,7 +40,6 @@ class BetterCellTheme {
     Color? overlayColor,
   }) {
     return BetterCellTheme(
-      height: height ?? this.height,
       borderRadius: borderRadius ?? this.borderRadius,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       padding: padding ?? this.padding,
@@ -63,7 +59,6 @@ class BetterCellTheme {
     double t,
   ) {
     return BetterCellTheme(
-      height: lerpDouble(cellTheme.height, otherCellTheme.height, t),
       borderRadius: BorderRadiusGeometry.lerp(
         cellTheme.borderRadius,
         otherCellTheme.borderRadius,

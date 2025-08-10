@@ -2,6 +2,7 @@ import 'package:flutter_better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_cell_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_picker_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
+import 'package:flutter_better_ui/theme/child_themes/better_switch_theme.dart';
 import 'package:flutter/material.dart';
 
 // UI主题扩展
@@ -21,6 +22,8 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
   final BetterPopupTheme popupTheme;
   // 选择器主题
   final BetterPickerTheme pickerTheme;
+  // 开关主题
+  final BetterSwitchTheme switchTheme;
 
   const BetterThemeExtension({
     required this.primaryColor,
@@ -33,6 +36,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     required this.cellTheme,
     required this.popupTheme,
     required this.pickerTheme,
+    required this.switchTheme,
   });
 
   @override
@@ -47,6 +51,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     BetterCellTheme? cellTheme,
     BetterPopupTheme? popupTheme,
     BetterPickerTheme? pickerTheme,
+    BetterSwitchTheme? switchTheme,
   }) {
     return BetterThemeExtension(
       primaryColor: primaryColor ?? this.primaryColor,
@@ -59,6 +64,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       cellTheme: cellTheme ?? this.cellTheme,
       popupTheme: popupTheme ?? this.popupTheme,
       pickerTheme: pickerTheme ?? this.pickerTheme,
+      switchTheme: switchTheme ?? this.switchTheme,
     );
   }
 
@@ -84,6 +90,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       cellTheme: BetterCellTheme.lerp(cellTheme, other.cellTheme, t),
       popupTheme: BetterPopupTheme.lerp(popupTheme, other.popupTheme, t),
       pickerTheme: BetterPickerTheme.lerp(pickerTheme, other.pickerTheme, t),
+      switchTheme: BetterSwitchTheme.lerp(switchTheme, other.switchTheme, t),
     );
   }
 }

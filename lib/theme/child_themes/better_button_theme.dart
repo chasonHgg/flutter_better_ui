@@ -16,6 +16,7 @@ class BetterButtonTheme {
   final Color dangerTextColor;
   final Color loadingColor;
   final Color overlayColor;
+  final double? loadingStrokeWidth;
   const BetterButtonTheme({
     required this.fontSize,
     required this.padding,
@@ -31,6 +32,7 @@ class BetterButtonTheme {
     required this.dangerTextColor,
     required this.loadingColor,
     required this.overlayColor,
+    this.loadingStrokeWidth,
   });
 
   BetterButtonTheme copyWith({
@@ -48,6 +50,7 @@ class BetterButtonTheme {
     Color? dangerTextColor,
     Color? loadingColor,
     Color? overlayColor,
+    double? loadingStrokeWidth,
   }) {
     return BetterButtonTheme(
       fontSize: fontSize ?? this.fontSize,
@@ -64,6 +67,7 @@ class BetterButtonTheme {
       dangerTextColor: dangerTextColor ?? this.dangerTextColor,
       loadingColor: loadingColor ?? this.loadingColor,
       overlayColor: overlayColor ?? this.overlayColor,
+      loadingStrokeWidth: loadingStrokeWidth ?? this.loadingStrokeWidth,
     );
   }
 
@@ -160,6 +164,13 @@ class BetterButtonTheme {
             t,
           ) ??
           buttonTheme.overlayColor,
+      loadingStrokeWidth:
+          lerpDouble(
+            buttonTheme.loadingStrokeWidth,
+            otherButtonTheme.loadingStrokeWidth,
+            t,
+          ) ??
+          buttonTheme.loadingStrokeWidth,
     );
   }
 }

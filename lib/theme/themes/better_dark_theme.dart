@@ -3,6 +3,7 @@ import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_cell_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_picker_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
+import 'package:flutter_better_ui/theme/child_themes/better_switch_theme.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter_better_ui/utils/color_util.dart';
 import 'package:flutter/material.dart';
@@ -47,10 +48,10 @@ ThemeData betterDarkTheme = ThemeData(
         dangerTextColor: ColorUtil.hexToColor('#ffffff'),
         loadingColor: ColorUtil.hexToColor('#ffffff'),
         overlayColor: Colors.black.withAlpha(40),
+        loadingStrokeWidth: 1,
       ),
       cellTheme: BetterCellTheme(
-        height: 44.bw,
-        backgroundColor: ColorUtil.hexToColor('#141218'),
+        backgroundColor: ColorUtil.hexToColor('#1c1c1e'),
         padding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 10.bw),
         titleTextStyle: TextStyle(
           fontSize: 14.bsp,
@@ -82,6 +83,16 @@ ThemeData betterDarkTheme = ThemeData(
         backgroundColor: ColorUtil.hexToColor('#1c1c1e'),
         overlayStartColor: ColorUtil.hexToColor('#1c1c1e'),
         overlayEndColor: ColorUtil.hexToColor('#3a3a3c'),
+      ),
+      switchTheme: BetterSwitchTheme(
+        width: 50.bw,
+        height: 30.bw,
+        ballBackgroundColor: ColorUtil.hexToColor('#ffffff'),
+        inactiveBackgroundColor: ColorUtil.hexToColor('#787880').withAlpha(82),
+        activeBackgroundColor: ColorUtil.hexToColor('#1989fa'),
+        loadingSize: 14.bw,
+        loadingStrokeWidth: 1,
+        loadingColor: ColorUtil.hexToColor('#c8c9cc'),
       ),
     ),
   ],

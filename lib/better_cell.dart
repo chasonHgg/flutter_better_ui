@@ -1,6 +1,5 @@
 import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_cell_theme.dart';
-import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 
 /// A configurable list cell commonly used in settings or forms.
@@ -101,8 +100,6 @@ class BetterCell extends StatelessWidget {
     Color finalBackgroundColor =
         backgroundColor ?? cellTheme.backgroundColor ?? Colors.white;
 
-    double finalHeight = height ?? cellTheme.height ?? 44.bw;
-
     return ElevatedButton(
       style: ButtonStyle(
         padding: WidgetStateProperty.all(EdgeInsets.zero),
@@ -115,7 +112,10 @@ class BetterCell extends StatelessWidget {
               ? Colors.transparent
               : (overlayColor ?? cellTheme.overlayColor),
         ),
-        splashFactory: disabled == true || disableSplash == true
+        splashFactory:
+            disabled == true ||
+                disableSplash == true ||
+                isShowArrowRight == false
             ? NoSplash.splashFactory
             : InkSparkle.splashFactory,
         shape: WidgetStateProperty.all(
@@ -129,13 +129,11 @@ class BetterCell extends StatelessWidget {
       ),
       onPressed: disabled == true ? null : onClick ?? () {},
       child: Container(
-        height: finalHeight,
         decoration: BoxDecoration(
           border: isShowBorder == true ? border ?? cellTheme.border : null,
           borderRadius: borderRadius ?? cellTheme.borderRadius,
         ),
         child: Ink(
-          height: finalHeight,
           padding: padding ?? cellTheme.padding,
           decoration: BoxDecoration(
             color: finalBackgroundColor,

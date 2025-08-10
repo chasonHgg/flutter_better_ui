@@ -69,4 +69,11 @@ Map<String, String> enUS = {
   '瓯海区': 'Ouhai',
   '齿轮选择器': 'Gear Picker',
   '默认选中': 'Default Selected',
+  '开关': 'Switch',
+  '加载中': 'Loading',
+  '自定义大小': 'Custom Size',
+  '自定义按钮': 'Custom Button',
+  '异步控制': 'Async Control',
+  '是否切换开关': 'Whether to switch the switch',
+  '配合单元格使用': 'Use with cell',
 };
