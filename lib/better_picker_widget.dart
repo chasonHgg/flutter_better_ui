@@ -2,6 +2,7 @@ import 'package:flutter_better_ui/better_text_button.dart';
 import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_better_ui/utils/better_util.dart';
 import 'package:get/get.dart';
 
 enum _BetterPickerType { single, multi, cascade }
@@ -220,7 +221,7 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    theme ??= Theme.of(context).extension<BetterThemeExtension>()!;
+    theme ??= BetterUtil.getThemeExtension(context);
 
     return SizedBox(
       height: 300.bw,

@@ -1,6 +1,6 @@
-import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_cell_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_better_ui/utils/better_util.dart';
 
 /// A configurable list cell commonly used in settings or forms.
 class BetterCell extends StatelessWidget {
@@ -90,10 +90,9 @@ class BetterCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BetterCellTheme cellTheme = Theme.of(
+    BetterCellTheme cellTheme = BetterUtil.getThemeExtension(
       context,
-    ).extension<BetterThemeExtension>()!.cellTheme;
-
+    )!.cellTheme;
     TextStyle? finalTitleTextStyle = titleTextStyle ?? cellTheme.titleTextStyle;
     TextStyle? finalValueTextStyle = valueTextStyle ?? cellTheme.valueTextStyle;
 

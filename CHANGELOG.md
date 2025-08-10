@@ -1,3 +1,7 @@
+## 1.0.5
+
+* Fix theme errors
+
 ## 1.0.4
 
 * Modify the usage document

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_switch_theme.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
+import 'package:flutter_better_ui/utils/better_util.dart';
 
 class BetterSwitch extends StatefulWidget {
   /// Default value of the switch.
@@ -100,9 +100,9 @@ class _BetterSwitchState extends State<BetterSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    BetterSwitchTheme switchTheme = Theme.of(
+    BetterSwitchTheme switchTheme = BetterUtil.getThemeExtension(
       context,
-    ).extension<BetterThemeExtension>()!.switchTheme;
+    )!.switchTheme;
 
     final finalWidth = widget.width ?? switchTheme.width ?? 50.bw;
     final finalHeight = widget.height ?? switchTheme.height ?? 30.bw;

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter_better_ui/theme/better_theme_extension.dart';
+import 'package:flutter_better_ui/theme/themes/better_light_theme.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +20,13 @@ class BetterUtil {
       minTextAdapt: minTextAdapt ?? true,
       enableScaleWH: enableScaleWH ?? true,
     );
+  }
+
+  static BetterThemeExtension? getThemeExtension(BuildContext context) {
+    BetterThemeExtension? themeExtension = Theme.of(
+      context,
+    ).extension<BetterThemeExtension>();
+    return themeExtension ?? betterLightTheme.extension<BetterThemeExtension>();
   }
 
   static bool shouldUseHairlineBorder(BuildContext context) {

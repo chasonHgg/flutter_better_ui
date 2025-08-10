@@ -2,6 +2,7 @@ import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_better_ui/utils/better_util.dart';
 
 /// Popup display position.
 enum BetterPopupPosition { top, bottom, left, right, center }
@@ -111,9 +112,9 @@ class BetterPopup {
     VoidCallback? onClose,
     bool? enableDrag,
   }) {
-    BetterPopupTheme popupTheme = Theme.of(
+    BetterPopupTheme popupTheme = BetterUtil.getThemeExtension(
       context,
-    ).extension<BetterThemeExtension>()!.popupTheme;
+    )!.popupTheme;
     borderRadius ??= BorderRadius.only(
       topLeft: Radius.circular(16.bw),
       topRight: Radius.circular(16.bw),

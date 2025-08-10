@@ -142,9 +142,12 @@ class BetterButton extends StatelessWidget {
     loadingSize ??= 20.bw;
     loadingMarginRight ??= 8.bw;
     height ??= 44.bw;
-    BetterButtonTheme buttonTheme = Theme.of(
+
+    BetterThemeExtension themeExtension = BetterUtil.getThemeExtension(
       context,
-    ).extension<BetterThemeExtension>()!.buttonTheme;
+    )!;
+    BetterButtonTheme buttonTheme = themeExtension.buttonTheme;
+
     Color? defaultColor = buttonTheme.defaultColor;
     Color? finalBackgroundColor = color ?? defaultColor;
     Color finalBorderColor = borderColor ?? buttonTheme.borderColor;
@@ -161,21 +164,11 @@ class BetterButton extends StatelessWidget {
     }
 
     //获取主题色
-    Color primaryColor = Theme.of(
-      context,
-    ).extension<BetterThemeExtension>()!.primaryColor;
-    Color successColor = Theme.of(
-      context,
-    ).extension<BetterThemeExtension>()!.successColor;
-    Color warningColor = Theme.of(
-      context,
-    ).extension<BetterThemeExtension>()!.warningColor;
-    Color dangerColor = Theme.of(
-      context,
-    ).extension<BetterThemeExtension>()!.dangerColor;
-    Color infoColor = Theme.of(
-      context,
-    ).extension<BetterThemeExtension>()!.infoColor;
+    Color primaryColor = themeExtension.primaryColor;
+    Color successColor = themeExtension.successColor;
+    Color warningColor = themeExtension.warningColor;
+    Color dangerColor = themeExtension.dangerColor;
+    Color infoColor = themeExtension.infoColor;
 
     //获取按钮类型
     if (color == null) {
@@ -297,11 +290,7 @@ class BetterButton extends StatelessWidget {
       finalTextStyle = finalTextStyle.copyWith(color: finalTextColor);
     }
     if (finalTextStyle.fontSize == null) {
-      finalTextStyle = finalTextStyle.copyWith(
-        fontSize: Theme.of(
-          context,
-        ).extension<BetterThemeExtension>()!.buttonTheme.fontSize,
-      );
+      finalTextStyle = finalTextStyle.copyWith(fontSize: buttonTheme.fontSize);
     }
 
     //获取文本
@@ -356,11 +345,7 @@ class BetterButton extends StatelessWidget {
       child: Ink(
         width: width,
         height: height,
-        padding:
-            padding ??
-            Theme.of(
-              context,
-            ).extension<BetterThemeExtension>()!.buttonTheme.padding,
+        padding: padding ?? buttonTheme.padding,
         decoration: BoxDecoration(
           color: disabled == true
               ? finalBackgroundColor.withAlpha(128)
@@ -370,12 +355,7 @@ class BetterButton extends StatelessWidget {
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment:
-              mainAxisAlignment ??
-              Theme.of(context)
-                  .extension<BetterThemeExtension>()!
-                  .buttonTheme
-                  .mainAxisAlignment,
+          mainAxisAlignment: mainAxisAlignment ?? buttonTheme.mainAxisAlignment,
           children: children,
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter_better_ui/better_picker_widget.dart';
-import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_better_ui/utils/better_util.dart';
 
 /**
  * 
@@ -126,10 +126,7 @@ class BetterPicker {
     Widget? overlayWidget,
   }) {
     itemHeight ??=
-        Theme.of(
-          context,
-        ).extension<BetterThemeExtension>()?.pickerTheme.itemHeight ??
-        44.bw;
+        BetterUtil.getThemeExtension(context)?.pickerTheme.itemHeight ?? 44.bw;
 
     showModalBottomSheet(
       context: context,
