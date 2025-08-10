@@ -64,6 +64,27 @@ dependencies:
   better_ui: ^lastversion
 ```
 
+### Initialize
+
+```dart
+void main() async {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    //init Better UI,mast be first line
+     BetterUtil.init(context, designWidth: 375, designHeight: 812);
+    return MaterialApp(
+       body: HomePage();
+    );
+  }
+}
+
+```
+
 ## 📖 Usage Guide
 
 ### BetterButton - Button
