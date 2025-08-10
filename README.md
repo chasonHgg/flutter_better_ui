@@ -46,6 +46,8 @@ If it cannot be played directly, you can click on the link below to view or down
 
 ### Form Components
 - **BetterPicker** - Picker supporting single, multiple, and cascading selections
+- **BetterSwitch** - Customizable switch with loading state and async control
+
 
 ### Utilities
 - **BetterScreenUtil** - Screen adaptation utilities
@@ -231,19 +233,90 @@ BetterCell(
 ),
 ```
 
-## 📱 Responsive Design
-
-Better UI ships with built-in responsive utilities:
+### BetterSwitch - Switch
 
 ```dart
-// Use responsive sizes
-Container(
-  width: 100.bw,
-  height: 50.bh,
-  child: Text(
-    "Responsive text",
-    style: TextStyle(fontSize: 16.bsp),
+// Basic switch
+BetterSwitch(
+  defaultValue: false,
+  onChanged: (value) {
+    print("Switch value: $value");
+  },
+)
+
+// Loading state switch
+BetterSwitch(
+  loading: true,
+  onChanged: (value) {
+    print("Switch value: $value");
+  },
+)
+
+// Custom size and colors
+BetterSwitch(
+  width: 44.bw,
+  height: 26.bw,
+  defaultValue: true,
+  activeBackgroundColor: Colors.red,
+  inactiveBackgroundColor: Colors.grey,
+  onChanged: (value) {
+    print("Switch value: $value");
+  },
+)
+
+// Custom ball widget
+BetterSwitch(
+  width: 50.bw,
+  height: 30.bw,
+  ballWidget: Container(
+    width: 26.bw,
+    height: 26.bw,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      shape: BoxShape.circle,
+    ),
+    child: Icon(
+      Icons.check,
+      color: Theme.of(context).primaryColor,
+      size: 16.bw,
+    ),
   ),
+  onChanged: (value) {
+    print("Switch value: $value");
+  },
+)
+
+// Disabled switch
+BetterSwitch(
+  disabled: true,
+  onChanged: (value) {
+    print("Switch is disabled");
+  },
+)
+
+// Async control switch
+BetterSwitch(
+  onUpdateChange: () async {
+    // Show confirmation dialog
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Confirm'),
+        content: Text('Do you want to toggle the switch?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text('Confirm'),
+          ),
+        ],
+      ),
+    );
+    return result ?? false;
+  },
 )
 ```
 
@@ -278,6 +351,7 @@ See the `example/` directory for full usage examples:
 - `better_toast_page.dart` - Toast examples
 - `better_popup_page.dart` - Popup examples
 - `better_picker_page.dart` - Picker examples
+- `better_switch_page.dart` - Switch examples
 - `better_cell_page.dart` - List cell examples
 
 ## 🤝 Contributing

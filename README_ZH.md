@@ -44,6 +44,7 @@
 
 ### 表单组件
 - **BetterPicker** - 选择器组件，支持单列、多列和级联选择
+- **BetterSwitch** - 开关组件，支持自定义样式和异步控制
 
 ### 工具类
 - **BetterScreenUtil** - 屏幕适配工具
@@ -215,6 +216,122 @@ BetterPicker.show(
 
 ```
 
+### BetterSwitch - 开关组件
+
+```dart
+// 基础开关
+BetterSwitch(
+  onChanged: (value) {
+    print("开关状态: $value");
+  },
+),
+
+// 默认开启状态
+BetterSwitch(
+  defaultValue: true,
+  onChanged: (value) {
+    print("开关状态: $value");
+  },
+),
+
+// 加载状态
+BetterSwitch(
+  loading: true,
+  onChanged: (value) {
+    print("开关状态: $value");
+  },
+),
+
+// 自定义大小
+BetterSwitch(
+  width: 44.bw,
+  height: 26.bw,
+  onChanged: (value) {
+    print("开关状态: $value");
+  },
+),
+
+// 自定义颜色
+BetterSwitch(
+  defaultValue: true,
+  activeBackgroundColor: Colors.red,
+  inactiveBackgroundColor: Colors.grey,
+  ballBackgroundColor: Colors.white,
+  onChanged: (value) {
+    print("开关状态: $value");
+  },
+),
+
+// 自定义按钮
+BetterSwitch(
+  width: 50.bw,
+  height: 30.bw,
+  onChanged: (value) {
+    setState(() {
+      customBtnIsChecked = value;
+    });
+  },
+  ballWidget: Container(
+    width: 26.bw,
+    height: 26.bw,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      shape: BoxShape.circle,
+    ),
+    child: Icon(
+      customBtnIsChecked ? Icons.check : Icons.close,
+      color: Theme.of(context).primaryColor,
+      size: 16.bw,
+    ),
+  ),
+),
+
+// 禁用状态
+BetterSwitch(
+  disabled: true,
+  onChanged: (value) {
+    print("开关被禁用");
+  },
+),
+
+// 异步控制
+BetterSwitch(
+  onUpdateChange: () async {
+    // 显示确认对话框并等待用户选择
+    final result = await showCupertinoDialog<bool>(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: Text('确认'),
+        content: Text('是否切换开关？'),
+        actions: [
+          CupertinoDialogAction(
+            child: Text('取消'),
+            onPressed: () => Navigator.pop(context, false),
+          ),
+          CupertinoDialogAction(
+            child: Text('确定'),
+            onPressed: () => Navigator.pop(context, true),
+          ),
+        ],
+      ),
+    );
+    return result ?? false; // 返回用户选择结果
+  },
+),
+
+// 配合单元格使用
+BetterCell(
+  titleText: '开关设置',
+  valueWidget: BetterSwitch(
+    width: 44.bw,
+    height: 26.bw,
+    onChanged: (value) {
+      print("开关状态: $value");
+    },
+  ),
+),
+```
+
 ### BetterCell - 列表单元格
 
 ```dart
@@ -229,21 +346,6 @@ BetterCell(
 ),
 ```
 
-## 📱 响应式设计
-
-Better UI 内置响应式工具类：
-
-```dart
-// 使用响应式尺寸
-Container(
-  width: 100.bw,
-  height: 50.bh,
-  child: Text(
-    "响应式文本",
-    style: TextStyle(fontSize: 16.bsp),
-  ),
-)
-```
 
 ## 🔧 工具类
 
@@ -276,6 +378,7 @@ Color hexColor = ColorUtil.hexToColor("#FF0000");
 - `better_toast_page.dart` - 轻提示示例
 - `better_popup_page.dart` - 弹出层示例
 - `better_picker_page.dart` - 选择器示例
+- `better_switch_page.dart` - 开关组件示例
 - `better_cell_page.dart` - 列表单元格示例
 
 ## 🤝 贡献
