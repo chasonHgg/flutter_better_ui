@@ -7,25 +7,24 @@ import 'package:get/get.dart';
 
 enum _BetterPickerType { single, multi, cascade }
 
-/// An item displayed by `BetterPickerWidget`. For cascade pickers, provide
-/// nested [children]. Use [isSelected] to mark default selection.
+/// 一个由 `BetterPickerWidget` 显示的项。对于级联选择器，提供嵌套的 [children]。使用 [isSelected] 标记默认选择。
 class BetterPickerItem {
-  /// Text displayed in the picker
+  /// 选择器中显示的文本
   final String text;
 
-  /// Value associated with the item
+  /// 与项关联的值
   final String value;
 
-  /// Text style for the item
+  /// 项的文本样式
   final TextStyle? textStyle;
 
-  /// Whether the item is selected
+  /// 是否选中
   final bool? isSelected;
 
-  /// Nested children items for cascade pickers
+  /// 级联选择器的嵌套子项
   final List<BetterPickerItem>? children;
 
-  /// Creates a [BetterPickerItem].
+  /// 创建一个 [BetterPickerItem]。
   BetterPickerItem({
     required this.text,
     required this.value,
@@ -35,8 +34,7 @@ class BetterPickerItem {
   });
 }
 
-/// Core picker widget supporting single column, multiple columns, and
-/// cascade data structures.
+/// 支持单列、多列和级联数据结构的核心选择器组件。
 class BetterPickerWidget extends StatefulWidget {
   final dynamic columns;
   final String? cancelText;
@@ -54,7 +52,7 @@ class BetterPickerWidget extends StatefulWidget {
   final Widget? overlayWidget;
   final double? itemHeight;
 
-  /// Creates a [BetterPickerWidget].
+  /// 创建一个 [BetterPickerWidget]。
   const BetterPickerWidget({
     super.key,
     required this.columns,

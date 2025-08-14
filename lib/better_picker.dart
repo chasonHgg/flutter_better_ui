@@ -72,57 +72,57 @@ import 'package:flutter_better_ui/utils/better_util.dart';
 
 */
 
-/// Utility to display a modal picker with single/multi/cascade columns.
+/// 显示一个模态选择器，支持单列、多列和级联数据结构。
 class BetterPicker {
   static void show(
     BuildContext context, {
 
-    /// Columns of the picker
+    /// 选择器的列
     required var columns,
 
-    /// Text for cancel button
+    /// 取消按钮的文本
     String? cancelText,
 
-    /// Text for confirm button
+    /// 确认按钮的文本
     String? confirmText,
 
-    /// Title of the picker
+    /// 选择器的标题
     String? title,
 
-    /// Title widget of the picker
+    /// 选择器的标题组件
     Widget? titleWidget,
 
-    /// Background color of the header
+    /// 头部背景颜色
     Color? headerBackgroundColor,
 
-    /// Border radius of the picker
+    /// 选择器的圆角半径
     BorderRadiusGeometry? borderRadius,
 
-    /// Text color of the cancel button
+    /// 取消按钮的文本颜色
     Color? cancelTextColor,
 
-    /// Text color of the confirm button
+    /// 确认按钮的文本颜色
     Color? confirmTextColor,
 
-    /// On cancel callback
+    /// 取消回调
     VoidCallback? onCancel,
 
-    /// On confirm callback
+    /// 确认回调
     Function(List<BetterPickerItem>)? onConfirm,
 
-    /// On change callback
+    /// 改变回调
     Function(List<BetterPickerItem>)? onChange,
 
-    /// On close callback
+    /// 关闭回调
     VoidCallback? onClose,
 
-    /// Diameter ratio of the picker
+    /// 选择器的直径比例
     double? diameterRatio,
 
-    /// Item height of the picker
+    /// 选择器的高度
     double? itemHeight,
 
-    /// Overlay widget of the picker
+    /// 选择器的覆盖组件
     Widget? overlayWidget,
   }) {
     itemHeight ??=

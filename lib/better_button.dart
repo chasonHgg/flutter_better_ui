@@ -5,104 +5,103 @@ import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter_better_ui/utils/better_util.dart';
 import 'package:flutter/material.dart';
 
-/// Loading indicator type used by `BetterButton`.
+/// BetterButton 使用的加载指示器类型
 enum BetterButtonLoadingType { circular, spinner }
 
-/// Preset visual styles for `BetterButton`.
+/// BetterButton 的预设视觉样式
 enum BetterButtonType { defaultType, primary, success, warning, danger, info }
 
-/// A highly configurable button widget that supports theme colors, loading
-/// indicators, custom prefix/suffix, gradients and more.
+/// 一个高度可配置的按钮组件，支持主题颜色、加载指示器、自定义前缀/后缀、渐变等
 // ignore: must_be_immutable
 class BetterButton extends StatelessWidget {
-  /// The preset visual style to use. When null, falls back to theme defaults.
+  /// 要使用的预设视觉样式。当为 null 时，回退到主题默认值
   final BetterButtonType? type;
 
-  /// Callback when the button is tapped.
+  /// 按钮被点击时的回调函数
   final VoidCallback? onClick;
 
-  /// Background color of the button. If null, a color is derived from [type].
+  /// 按钮的背景颜色。如果为 null，则从 [type] 派生颜色
   final Color? color;
 
-  /// Border color of the button.
+  /// 按钮的边框颜色
   final Color? borderColor;
 
-  /// Overlay/splash color when pressed.
+  /// 按下时的覆盖/水波纹颜色
   final Color? overlayColor;
 
-  /// Corner radius of the button.
+  /// 按钮的圆角半径
   final double? borderRadius;
 
-  /// Whether to show loading state.
+  /// 是否显示加载状态
   final bool loading;
 
-  /// Size of the loading indicator.
+  /// 加载指示器的大小
   double? loadingSize;
 
-  /// Stroke width of the circular loading indicator.
+  /// 圆形加载指示器的描边宽度
   final double? loadingStrokeWidth;
 
-  /// Custom loading widget. If provided it replaces the built-in indicator.
+  /// 自定义加载组件。如果提供，将替换内置指示器
   final Widget? loadingWidget;
 
-  /// Color of the loading indicator.
+  /// 加载指示器的颜色
   final Color? loadingColor;
 
-  /// Spacing to the right of the loading indicator.
+  /// 加载指示器右侧的间距
   double? loadingMarginRight;
 
-  /// Widget displayed before the text/child.
+  /// 显示在文本/子组件之前的组件
   final Widget? prefix;
 
-  /// Widget displayed after the text/child.
+  /// 显示在文本/子组件之后的组件
   final Widget? suffix;
 
-  /// Fixed width of the button.
+  /// 按钮的固定宽度
   final double? width;
 
-  /// Fixed height of the button.
+  /// 按钮的固定高度
   double? height;
 
-  /// Loading indicator type.
+  /// 加载指示器类型
   final BetterButtonLoadingType loadingType;
 
-  /// Text content when [child] is not provided.
+  /// 当未提供 [child] 时的文本内容
   final String? text;
 
-  /// Text style for [text].
+  /// [text] 的文本样式
   final TextStyle? textStyle;
 
-  /// Inner padding of the button.
+  /// 按钮的内边距
   final EdgeInsetsGeometry? padding;
 
-  /// Background gradient of the button. Takes precedence over [color].
+  /// 按钮的背景渐变。优先于 [color]
   final Gradient? gradient;
 
-  /// Whether to render a plain (outlined) style button.
+  /// 是否渲染朴素（轮廓）样式的按钮
   final bool? plain;
 
-  /// MainAxisAlignment of the internal row.
+  /// 内部行的主轴对齐方式
   final MainAxisAlignment? mainAxisAlignment;
 
-  /// Whether to disable splash effect.
+  /// 是否禁用水波纹效果
   final bool? disableSplash;
 
-  /// Whether the button is disabled.
+  /// 按钮是否被禁用
   final bool? disabled;
 
-  /// Whether to hide the content when loading.
+  /// 加载时是否隐藏内容
   final bool? hideContentWhenLoading;
 
-  /// Text displayed while loading when [hideContentWhenLoading] is false.
+  /// 当 [hideContentWhenLoading] 为 false 时，加载期间显示的文本
   final String? loadingText;
 
-  /// Custom child widget. If provided, [text] is ignored.
+  /// 自定义子组件。如果提供，[text] 将被忽略
   final Widget? child;
 
-  /// Border width of the button.
+  /// 按钮的边框宽度
   final double? borderWidth;
 
-  /// Creates a [BetterButton].
+  /// 创建一个 [BetterButton]。
   BetterButton({
     super.key,
     this.type = BetterButtonType.defaultType,
@@ -138,7 +137,6 @@ class BetterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Compute responsive sizes
     loadingSize ??= 20.bw;
     loadingMarginRight ??= 8.bw;
     height ??= 44.bw;
@@ -163,14 +161,14 @@ class BetterButton extends StatelessWidget {
       finalBorderWidth = 1.bw;
     }
 
-    //获取主题色
+    // 获取主题色
     Color primaryColor = themeExtension.primaryColor;
     Color successColor = themeExtension.successColor;
     Color warningColor = themeExtension.warningColor;
     Color dangerColor = themeExtension.dangerColor;
     Color infoColor = themeExtension.infoColor;
 
-    //获取按钮类型
+    // 获取按钮类型
     if (color == null) {
       if (plain == null || plain == false) {
         if (type == BetterButtonType.defaultType) {
@@ -189,7 +187,7 @@ class BetterButton extends StatelessWidget {
       }
     }
 
-    //获取边框颜色
+    // 获取边框颜色
     if (borderColor == null) {
       if (plain != null && plain == true) {
         if (type == BetterButtonType.primary) {
@@ -249,7 +247,7 @@ class BetterButton extends StatelessWidget {
       }
     }
 
-    //获取按钮内容
+    // 获取按钮内容
     final children = <Widget>[];
     if (loading) {
       if (loadingWidget != null) {
@@ -271,7 +269,7 @@ class BetterButton extends StatelessWidget {
         if (loadingType == BetterButtonLoadingType.spinner) {
           children.add(Spinner(size: loadingSize, color: finalLoadingColor));
         }
-        //获取loading间距
+        // 获取loading间距
         if ((loadingMarginRight != null && loadingMarginRight! > 0) &&
             ((loading == false || hideContentWhenLoading == false) ||
                 (loading == true && loadingText != null))) {

@@ -11,23 +11,16 @@
 - 🛠️ **易扩展** - 模块化设计，易于定制
 
 ## 🎥 预览
-
 <div>
-  <video src="readme_assets/demo.mp4" width="240" controls muted playsinline preload="none">
-    您的浏览器不支持视频标签。
-  </video> 
+  <img src="readme_assets/1.gif" width="200"/>
+  <img src="readme_assets/2.gif" width="200"/>
+  <img src="readme_assets/3.gif" width="200"/>
+  <img src="readme_assets/4.gif" width="200"/>
+  <img src="readme_assets/5.gif" width="200"/>
+  <img src="readme_assets/6.gif" width="200"/>
+  <img src="readme_assets/7.gif" width="200"/>
 </div>
 
-如无法直接播放，可点击下方链接查看或下载：
-
-- [预览视频1 (MP4)](https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8)
-
-
-<div>
-  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/1.gif" width="200" alt="preview1" />
-  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/2.gif" width="200" alt="preview2" />
-  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/3.gif" width="200" alt="preview3" />
-</div>
 
 
 
@@ -45,6 +38,9 @@
 ### 表单组件
 - **BetterPicker** - 选择器组件，支持单列、多列和级联选择
 - **BetterSwitch** - 开关组件，支持自定义样式和异步控制
+
+### 反馈
+- **BetterSwipeCell** - Swipeable cell with left and right action buttons
 
 ### 工具类
 - **BetterScreenUtil** - 屏幕适配工具
@@ -367,6 +363,123 @@ BetterCell(
 ),
 ```
 
+### BetterSwipeCell - 滑动单元格
+
+```dart
+// Basic swipe cell with left and right actions
+BetterSwipeCell(
+  leftActions: [
+    BetterSwipeCellAction(
+      width: 60.bw,
+      onClick: (value) async {
+        return true;
+      },
+      child: Container(
+        color: Colors.blue,
+        height: 54.bw,
+        alignment: Alignment.center,
+        child: Text(
+          'Favorite',
+          style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+        ),
+      ),
+    ),
+  ],
+  rightActions: [
+    BetterSwipeCellAction(
+      width: 60.bw,
+      onClick: (value) async {
+        return true;
+      },
+      child: Container(
+        color: Colors.red,
+        height: 54.bw,
+        alignment: Alignment.center,
+        child: Text(
+          'Delete',
+          style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+        ),
+      ),
+    ),
+    BetterSwipeCellAction(
+      width: 60.bw,
+      onClick: (value) async {
+        return true;
+      },
+      child: Container(
+        color: Colors.blue,
+        height: 54.bw,
+        alignment: Alignment.center,
+        child: Text(
+          'Favorite',
+          style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+        ),
+      ),
+    ),
+  ],
+  child: BetterCell(
+    height: 54.bw,
+    titleText: 'Swipeable Cell',
+    valueText: 'Content',
+  ),
+)
+
+//async controll
+BetterSwipeCell(
+  rightActions: [
+    BetterSwipeCellAction(
+      width: 60.bw,
+      value: '收藏',
+      child: Container(
+        color: Colors.blue,
+        height: 54.bw,
+        alignment: Alignment.center,
+        child: Text(
+          '收藏'.tr,
+          style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+        ),
+      ),
+      onClick: (value) async {
+        final result = await showCupertinoDialog<bool>(
+          context: context,
+          builder: (context) => CupertinoAlertDialog(
+            title: Text('标题'.tr),
+            content: Text('是否收藏'.tr),
+            actions: [
+              CupertinoDialogAction(
+                child: Text(
+                  '取消'.tr,
+                  style: TextStyle(
+                    fontSize: 14.bsp,
+                    color: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.color,
+                  ),
+                ),
+                onPressed: () => Navigator.pop(context, false),
+              ),
+              CupertinoDialogAction(
+                child: Text(
+                  '确定'.tr,
+                  style: TextStyle(
+                    fontSize: 14.bsp,
+                    color: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.color,
+                  ),
+                ),
+                onPressed: () => Navigator.pop(context, true),
+              ),
+            ],
+          ),
+        );
+        return result ?? false; // 返回用户选择结果
+      },
+    ),
+  ],
+  child: BetterCell(height: 54.bw, titleText: '异步控制'.tr),
+);
+```
 
 ## 🔧 工具类
 
@@ -401,6 +514,7 @@ Color hexColor = ColorUtil.hexToColor("#FF0000");
 - `better_picker_page.dart` - 选择器示例
 - `better_switch_page.dart` - 开关组件示例
 - `better_cell_page.dart` - 列表单元格示例
+- `better_swipe_action.dart` - 滑动单元格按量
 
 ## 🤝 贡献
 

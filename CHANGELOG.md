@@ -1,3 +1,8 @@
+## 1.0.6
+
+* add BetterSwipeCell
+* Fix the height issue of BetterCell
+
 ## 1.0.5
 
 * Fix theme errors

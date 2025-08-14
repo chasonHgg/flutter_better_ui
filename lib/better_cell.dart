@@ -2,68 +2,68 @@ import 'package:flutter_better_ui/theme/child_themes/better_cell_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_better_ui/utils/better_util.dart';
 
-/// A configurable list cell commonly used in settings or forms.
+/// 一个可配置的列表单元格，常用于设置或表单中
 class BetterCell extends StatelessWidget {
-  /// Fixed height of the cell
+  /// 单元格的固定高度
   final double? height;
 
-  /// Border radius of the cell
+  /// 单元格的圆角半径
   final BorderRadiusGeometry? borderRadius;
 
-  /// Background color of the cell
+  /// 单元格的背景颜色
   final Color? backgroundColor;
 
-  /// Padding of the cell
+  /// 单元格的内边距
   final EdgeInsetsGeometry? padding;
 
-  /// Title text of the cell
+  /// 单元格的标题文本
   final String? titleText;
 
-  /// Value text of the cell
+  /// 单元格的值文本
   final String? valueText;
 
-  /// Title text style of the cell
+  /// 单元格的标题文本样式
   final TextStyle? titleTextStyle;
 
-  /// Value text style of the cell
+  /// 单元格的值文本样式
   final TextStyle? valueTextStyle;
 
-  /// Border of the cell
+  /// 单元格的边框
   final BoxBorder? border;
 
-  /// Whether to show border
+  /// 是否显示边框
   final bool? isShowBorder;
 
-  /// Whether to show arrow right
+  /// 是否显示右箭头
   final bool? isShowArrowRight;
 
-  /// Margin left of the arrow right
+  /// 右箭头的左边距
   final double? arrowRightMarginLeft;
 
-  /// Size of the arrow right
+  /// 右箭头的大小
   final double? arrowRightSize;
 
-  /// Color of the arrow right
+  /// 右箭头的颜色
   final Color? arrowRightColor;
 
   final Widget? titleWidget;
 
-  /// Value widget of the cell
+  /// 单元格的值组件
   final Widget? valueWidget;
 
-  /// On click callback
+  /// 点击回调函数
   final VoidCallback? onClick;
 
-  /// Whether to disable the cell
+  /// 是否禁用单元格
   final bool? disabled;
 
-  /// Whether to disable splash
+  /// 是否禁用水波纹效果
   final bool? disableSplash;
 
-  /// Overlay color of the cell
+  /// 单元格的覆盖颜色
   final Color? overlayColor;
 
-  /// Creates a [BetterCell].
+  /// 创建一个 [BetterCell]。
   const BetterCell({
     super.key,
     this.height,
@@ -128,6 +128,7 @@ class BetterCell extends StatelessWidget {
       ),
       onPressed: disabled == true ? null : onClick ?? () {},
       child: Container(
+        height: height,
         decoration: BoxDecoration(
           border: isShowBorder == true ? border ?? cellTheme.border : null,
           borderRadius: borderRadius ?? cellTheme.borderRadius,

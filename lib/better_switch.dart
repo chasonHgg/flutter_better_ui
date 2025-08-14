@@ -4,48 +4,48 @@ import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter_better_ui/utils/better_util.dart';
 
 class BetterSwitch extends StatefulWidget {
-  /// Default value of the switch.
+  /// 开关的默认值
   final bool defaultValue;
 
-  /// Callback when the switch is changed.
+  /// 开关状态改变时的回调函数
   final ValueChanged<bool>? onChanged;
 
-  /// Use onUpdating Change to asynchronously control switch status.
-  /// If onUpdating Change is used, onChange will be ignored
+  /// 使用 onUpdating Change 来异步控制开关状态
+  /// 如果使用了 onUpdateChange，onChange 将被忽略
   final Future<bool> Function()? onUpdateChange;
 
-  /// Whether the switch is loading.
+  /// 开关是否处于加载状态
   final bool? loading;
 
-  /// Fixed width of the switch.
+  /// 开关的固定宽度
   final double? width;
   final double? height;
 
-  /// Background color of the ball.
+  /// 开关圆球的背景颜色
   final Color? ballBackgroundColor;
 
-  /// Background color of the inactive state.
+  /// 非激活状态的背景颜色
   final Color? inactiveBackgroundColor;
 
-  /// Background color of the active state.
+  /// 激活状态的背景颜色
   final Color? activeBackgroundColor;
 
-  /// Padding of the switch.
+  /// 开关的内边距
   final EdgeInsetsGeometry? padding;
 
-  /// Size of the loading indicator.
+  /// 加载指示器的大小
   final double? loadingSize;
 
-  /// Stroke width of the loading indicator.
+  /// 加载指示器的描边宽度
   final double? loadingStrokeWidth;
 
-  /// Color of the loading indicator.
+  /// 加载指示器的颜色
   final Color? loadingColor;
 
-  /// Custom ball widget. If provided it replaces the built-in ball.
+  /// 自定义圆球组件。如果提供，将替换内置的圆球
   final Widget? ballWidget;
 
-  /// Whether the switch is disabled.
+  /// 开关是否被禁用
   final bool? disabled;
 
   const BetterSwitch({
@@ -82,6 +82,7 @@ class _BetterSwitchState extends State<BetterSwitch> {
 
   Future<void> _handleSwitchChange() async {
     if (widget.disabled == true) return;
+    if (widget.loading == true) return;
 
     if (widget.onUpdateChange != null) {
       final shouldUpdate = await widget.onUpdateChange!();

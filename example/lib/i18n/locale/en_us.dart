@@ -76,4 +76,9 @@ Map<String, String> enUS = {
   '异步控制': 'Async Control',
   '是否切换开关': 'Whether to switch the switch',
   '配合单元格使用': 'Use with cell',
+  '滑动单元格': 'Swipe Cell',
+  '反馈组件': 'Feedback Components',
+  '删除': 'Delete',
+  '收藏': 'Collect',
+  '是否收藏': 'Whether to collect',
 };

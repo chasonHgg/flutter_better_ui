@@ -4,56 +4,54 @@ import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_better_ui/utils/better_util.dart';
 
-/// Popup display position.
+/// 弹出层显示位置。
 enum BetterPopupPosition { top, bottom, left, right, center }
 
-/// Utility to show popups from different edges or center with optional close
-/// button and custom content.
+/// 显示一个弹出层，支持从不同边缘或中心显示，可选关闭按钮和自定义内容。
 class BetterPopup {
   static void show(
     BuildContext context, {
 
-    /// Position of the popup
+    /// 弹出层的位置
     BetterPopupPosition position = BetterPopupPosition.bottom,
 
-    /// Background color of the popup
+    /// 弹出层的背景颜色
     Color? backgroundColor,
 
-    /// Width of the popup
+    /// 弹出层的宽度
     double? width,
 
-    /// Height of the popup
+    /// 弹出层的高度
     double? height,
 
-    /// Child widget of the popup
+    /// 弹出层的子组件
     Widget? child,
 
-    /// Border radius of the popup
+    /// 弹出层的圆角半径
     BorderRadiusGeometry? borderRadius,
 
-    /// Whether to show close icon
+    /// 是否显示关闭图标
     bool isShowCloseIcon = false,
 
-    /// Size of the close icon
+    /// 关闭图标的大小
     double? closeIconSize,
 
-    /// Color of the close icon
+    /// 关闭图标的颜色
     Color? closeIconColor,
 
-    /// Whether the popup is dismissible
     bool isDismissible = true,
     Widget? closeIcon,
 
-    /// Padding of the popup
+    /// 弹出层的内边距
     EdgeInsets? padding,
 
-    /// Box shadow of the popup
+    /// 弹出层的阴影
     final List<BoxShadow>? boxShadow,
 
-    /// On close callback
+    /// 关闭回调
     VoidCallback? onClose,
 
-    /// Whether to enable drag, only support bottom popup
+    /// 是否启用拖拽，仅支持底部弹出
     bool? enableDrag,
   }) {
     if (position == BetterPopupPosition.bottom) {

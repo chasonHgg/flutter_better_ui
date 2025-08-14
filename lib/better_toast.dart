@@ -1,10 +1,10 @@
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 
-/// Toast display position.
+/// Toast 显示位置。
 enum BetterToastPosition { top, bottom, center }
 
-/// A simple toast helper with text, success/error, and loading variants.
+/// 一个简单的 Toast 帮助器，支持文本、成功/错误和加载变体。
 class BetterToast {
   //加载中
   static OverlayEntry? _currentLoadingEntry;
@@ -25,53 +25,53 @@ class BetterToast {
   static void show(
     BuildContext context, {
 
-    /// Message of the toast
+    /// Toast 的消息
     String? message,
 
-    /// Child widget of the toast
+    /// Toast 的子组件
     Widget? child,
 
-    /// Icon of the toast
+    /// Toast 的图标
     Widget? icon,
 
-    /// Fade duration of the toast
+    /// 动画持续时间
     Duration? fadeDuration,
 
-    /// Duration of the toast
+    /// Toast 的持续时间
     Duration? duration,
 
-    /// Font size of the toast
+    /// Toast 的字体大小
     double? fontSize,
     Color? textColor,
 
-    /// Background color of the toast
+    /// Toast 的背景颜色
     Color? backgroundColor,
 
-    /// Padding of the toast
+    /// Toast 的内边距
     EdgeInsets? padding,
 
-    /// Border radius of the toast
+    /// Toast 的圆角半径
     BorderRadius? borderRadius,
 
-    /// Position of the toast
+    /// Toast 的位置
     BetterToastPosition position = BetterToastPosition.bottom,
 
-    /// Top offset of the toast
+    /// 顶部偏移量
     double? topOffset,
 
-    /// Bottom offset of the toast
+    /// 底部偏移量
     double? bottomOffset,
 
-    /// Text alignment of the toast
+    /// 文本对齐方式
     TextAlign? textAlign = TextAlign.center,
 
-    /// Whether to forbid click
+    /// 是否禁止点击
     bool? forbidClick = false,
 
-    /// Width of the toast
+    /// Toast 的宽度
     double? width,
 
-    /// Height of the toast
+    /// Toast 的高度
     double? height,
   }) {
     final overlay = Overlay.of(context);

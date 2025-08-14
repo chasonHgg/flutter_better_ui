@@ -14,21 +14,14 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 
 
 ## 🎥 Preview
-
 <div>
-  <video src="readme_assets/demo.mp4" width="240" controls muted playsinline preload="none">
-   Your browser does not support video tags.
-  </video> 
-</div>
-
-If it cannot be played directly, you can click on the link below to view or download:
-
-- [Preview Video 1 (MP4)](https://github.com/user-attachments/assets/5221f499-c5eb-4e2b-a32c-c6a12e0cb5f8)
-
-<div>
-  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/1.gif" width="200" alt="preview1" />
-  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/2.gif" width="200" alt="preview2" />
-  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/3.gif" width="200" alt="preview3" />
+  <img src="readme_assets/1.gif" width="200"/>
+  <img src="readme_assets/2.gif" width="200"/>
+  <img src="readme_assets/3.gif" width="200"/>
+  <img src="readme_assets/4.gif" width="200"/>
+  <img src="readme_assets/5.gif" width="200"/>
+  <img src="readme_assets/6.gif" width="200"/>
+  <img src="readme_assets/7.gif" width="200"/>
 </div>
 
 
@@ -47,6 +40,10 @@ If it cannot be played directly, you can click on the link below to view or down
 ### Form Components
 - **BetterPicker** - Picker supporting single, multiple, and cascading selections
 - **BetterSwitch** - Customizable switch with loading state and async control
+
+### Feedback component
+- **BetterSwipeCell** - Swipeable cell with left and right action buttons
+
 
 
 ### Utilities
@@ -341,6 +338,126 @@ BetterSwitch(
 )
 ```
 
+### BetterSwipeCell - Swipeable Cell
+
+```dart
+// Basic swipe cell with left and right actions
+BetterSwipeCell(
+  leftActions: [
+    BetterSwipeCellAction(
+      width: 60.bw,
+      onClick: (value) async {
+        return true;
+      },
+      child: Container(
+        color: Colors.blue,
+        height: 54.bw,
+        alignment: Alignment.center,
+        child: Text(
+          'Favorite',
+          style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+        ),
+      ),
+    ),
+  ],
+  rightActions: [
+    BetterSwipeCellAction(
+      width: 60.bw,
+      onClick: (value) async {
+        return true;
+      },
+      child: Container(
+        color: Colors.red,
+        height: 54.bw,
+        alignment: Alignment.center,
+        child: Text(
+          'Delete',
+          style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+        ),
+      ),
+    ),
+    BetterSwipeCellAction(
+      width: 60.bw,
+      onClick: (value) async {
+        return true;
+      },
+      child: Container(
+        color: Colors.blue,
+        height: 54.bw,
+        alignment: Alignment.center,
+        child: Text(
+          'Favorite',
+          style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+        ),
+      ),
+    ),
+  ],
+  child: BetterCell(
+    height: 54.bw,
+    titleText: 'Swipeable Cell',
+    valueText: 'Content',
+  ),
+)
+
+//async controll
+BetterSwipeCell(
+  rightActions: [
+    BetterSwipeCellAction(
+      width: 60.bw,
+      value: '收藏',
+      child: Container(
+        color: Colors.blue,
+        height: 54.bw,
+        alignment: Alignment.center,
+        child: Text(
+          '收藏'.tr,
+          style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+        ),
+      ),
+      onClick: (value) async {
+        final result = await showCupertinoDialog<bool>(
+          context: context,
+          builder: (context) => CupertinoAlertDialog(
+            title: Text('标题'.tr),
+            content: Text('是否收藏'.tr),
+            actions: [
+              CupertinoDialogAction(
+                child: Text(
+                  '取消'.tr,
+                  style: TextStyle(
+                    fontSize: 14.bsp,
+                    color: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.color,
+                  ),
+                ),
+                onPressed: () => Navigator.pop(context, false),
+              ),
+              CupertinoDialogAction(
+                child: Text(
+                  '确定'.tr,
+                  style: TextStyle(
+                    fontSize: 14.bsp,
+                    color: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.color,
+                  ),
+                ),
+                onPressed: () => Navigator.pop(context, true),
+              ),
+            ],
+          ),
+        );
+        return result ?? false; // 返回用户选择结果
+      },
+    ),
+  ],
+  child: BetterCell(height: 54.bw, titleText: '异步控制'.tr),
+);
+```
+
+
+
 ## 🔧 Utilities
 
 ### BetterScreenUtil - Screen Adaptation
@@ -374,6 +491,7 @@ See the `example/` directory for full usage examples:
 - `better_picker_page.dart` - Picker examples
 - `better_switch_page.dart` - Switch examples
 - `better_cell_page.dart` - List cell examples
+- `better_swipe_action.dart` - Swipe cell examples
 
 ## 🤝 Contributing
 
