@@ -12,13 +12,13 @@
 
 ## 🎥 预览
 <div>
-  <img src="readme_assets/1.gif" width="200"/>
-  <img src="readme_assets/2.gif" width="200"/>
-  <img src="readme_assets/3.gif" width="200"/>
-  <img src="readme_assets/4.gif" width="200"/>
-  <img src="readme_assets/5.gif" width="200"/>
-  <img src="readme_assets/6.gif" width="200"/>
-  <img src="readme_assets/7.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/1.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/2.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/3.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/4.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/5.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/6.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/7.gif" width="200"/>
 </div>
 
 

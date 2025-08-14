@@ -1,3 +1,7 @@
+## 1.0.7
+
+* Update document content
+
 ## 1.0.6
 
 * add BetterSwipeCell
