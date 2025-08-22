@@ -101,6 +101,9 @@ class BetterButton extends StatelessWidget {
   /// 按钮的边框宽度
   final double? borderWidth;
 
+  /// 是否显示边框
+  final bool? isShowBorder;
+
   /// 创建一个 [BetterButton]。
   BetterButton({
     super.key,
@@ -133,6 +136,7 @@ class BetterButton extends StatelessWidget {
     this.loadingText,
     this.child,
     this.borderWidth,
+    this.isShowBorder = true,
   });
 
   @override
@@ -335,9 +339,11 @@ class BetterButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(finalBorderRadius),
           ),
         ),
-        side: WidgetStateProperty.all(
-          BorderSide(color: finalBorderColor, width: finalBorderWidth),
-        ),
+        side: isShowBorder == true
+            ? WidgetStateProperty.all(
+                BorderSide(color: finalBorderColor, width: finalBorderWidth),
+              )
+            : WidgetStateProperty.all(BorderSide.none),
       ),
       onPressed: disabled == true ? null : onClick ?? () {},
       child: Ink(

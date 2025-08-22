@@ -1,3 +1,7 @@
+## 1.0.8
+
+* BetterButton Add isShowBorder attribute
+
 ## 1.0.7
 
 * Update document content
