@@ -81,4 +81,5 @@ Map<String, String> enUS = {
   '删除': 'Delete',
   '收藏': 'Collect',
   '是否收藏': 'Whether to collect',
+  '宽度延伸': 'Width Stretch',
 };

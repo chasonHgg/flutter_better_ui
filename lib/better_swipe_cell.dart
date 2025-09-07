@@ -13,6 +13,7 @@ class BetterSwipeCellAction {
 
   /// 操作按钮的点击回调
   final Future<bool> Function(String? value)? onClick;
+
   BetterSwipeCellAction({
     required this.child,
     this.width,
@@ -36,12 +37,16 @@ class BetterSwipeCell extends StatefulWidget {
   /// 右侧操作按钮
   final List<BetterSwipeCellAction> rightActions;
 
+  /// 是否在滑动时拉伸操作按钮宽度
+  final bool isStretch;
+
   const BetterSwipeCell({
     super.key,
     required this.child,
     this.duration,
     this.leftActions = const [],
     this.rightActions = const [],
+    this.isStretch = false,
   });
 
   @override
@@ -88,67 +93,81 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
     return ClipRect(
       child: Stack(
         children: [
-          // 左侧操作按钮 - 现在会跟随滑动
+          // 左侧操作按钮的最终正确实现
           if (widget.leftActions.isNotEmpty)
             ValueListenableBuilder(
               valueListenable: _dragOffset,
               builder: (context, value, child) {
+                final progress = value / _maxLeftOffset;
                 return Positioned(
-                  left: -_maxLeftOffset + value,
+                  left: widget.isStretch
+                      ? 1 - progress.clamp(0, 1)
+                      : -_maxLeftOffset + value,
                   top: 0,
                   bottom: 0,
                   width: _maxLeftOffset,
-                  child: Container(
-                    color: Colors.transparent,
-                    child: Row(
-                      children: widget.leftActions
-                          .map(
-                            (e) => GestureDetector(
-                              onTap: () async {
-                                final result = await e.onClick?.call(e.value);
-                                if (result == true) {
-                                  _animateTo(0);
-                                  _isExpand = false;
-                                }
-                              },
-                              child: SizedBox(width: e.width, child: e.child),
-                            ),
-                          )
-                          .toList(),
-                    ),
+                  child: Row(
+                    children: widget.leftActions.map((e) {
+                      return GestureDetector(
+                        onTap: () async {
+                          final result = await e.onClick?.call(e.value);
+                          if (result == true) {
+                            _animateTo(0);
+                            _isExpand = false;
+                          }
+                        },
+                        child: SizedBox(
+                          width: widget.isStretch
+                              ? e.width! * progress.clamp(0, 1)
+                              : e.width,
+                          child: OverflowBox(
+                            maxWidth: e.width,
+                            alignment: Alignment.centerLeft,
+                            child: e.child,
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
                 );
               },
             ),
 
-          // 右侧操作按钮 - 现在会跟随滑动
+          // 右侧操作按钮
           if (widget.rightActions.isNotEmpty)
             ValueListenableBuilder(
               valueListenable: _dragOffset,
               builder: (context, value, child) {
+                final progress = (-value) / _maxRightOffset;
                 return Positioned(
-                  right: -_maxRightOffset - value,
+                  right: widget.isStretch
+                      ? -_maxRightOffset * (1 - progress.clamp(0, 1))
+                      : -_maxRightOffset - value,
                   top: 0,
                   bottom: 0,
                   width: _maxRightOffset,
-                  child: Container(
-                    color: Colors.transparent,
-                    child: Row(
-                      children: widget.rightActions
-                          .map(
-                            (e) => GestureDetector(
-                              onTap: () async {
-                                final result = await e.onClick?.call(e.value);
-                                if (result == true) {
-                                  _animateTo(0);
-                                  _isExpand = false;
-                                }
-                              },
-                              child: SizedBox(width: e.width, child: e.child),
-                            ),
-                          )
-                          .toList(),
-                    ),
+                  child: Row(
+                    children: widget.rightActions.map((e) {
+                      return GestureDetector(
+                        onTap: () async {
+                          final result = await e.onClick?.call(e.value);
+                          if (result == true) {
+                            _animateTo(0);
+                            _isExpand = false;
+                          }
+                        },
+                        child: SizedBox(
+                          width: widget.isStretch
+                              ? e.width! * progress.clamp(0, 1)
+                              : e.width,
+                          child: OverflowBox(
+                            maxWidth: e.width,
+                            alignment: Alignment.centerLeft,
+                            child: e.child,
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
                 );
               },
@@ -170,7 +189,6 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
             },
             onHorizontalDragEnd: (details) {
               // 根据滑动速度和位置决定是否完全展开或收起
-              //判断左滑还是右滑
               final isLeft = _dragOffset.value > 0;
               if (!_isExpand &&
                   _dragOffset.value.abs() >

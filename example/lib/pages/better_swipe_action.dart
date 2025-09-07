@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_better_ui/better_cell.dart';
 import 'package:flutter_better_ui/better_swipe_cell.dart';
+import 'package:flutter_better_ui/better_toast.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:get/get.dart';
 
@@ -24,13 +25,29 @@ class BetterSwipeAction extends StatelessWidget {
                 leftActions: [
                   BetterSwipeCellAction(
                     width: 60.bw,
-                    value: '收藏',
+                    value: "1",
                     onClick: (value) async {
+                      BetterToast.show(context, message: '删除'.tr);
+                      return true;
+                    },
+                    child: Container(
+                      color: Colors.red,
+                      alignment: Alignment.center,
+                      child: Text(
+                        '删除'.tr,
+                        style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+                      ),
+                    ),
+                  ),
+                  BetterSwipeCellAction(
+                    width: 60.bw,
+                    value: '2',
+                    onClick: (value) async {
+                      BetterToast.show(context, message: '收藏'.tr);
                       return true;
                     },
                     child: Container(
                       color: Colors.blue,
-                      height: 54.bw,
                       alignment: Alignment.center,
                       child: Text(
                         '收藏'.tr,
@@ -44,11 +61,11 @@ class BetterSwipeAction extends StatelessWidget {
                     width: 60.bw,
                     value: '删除',
                     onClick: (value) async {
+                      BetterToast.show(context, message: '删除');
                       return true;
                     },
                     child: Container(
                       color: Colors.red,
-                      height: 54.bw,
                       alignment: Alignment.center,
                       child: Text(
                         '删除'.tr,
@@ -60,12 +77,13 @@ class BetterSwipeAction extends StatelessWidget {
                     width: 60.bw,
                     value: '收藏',
                     onClick: (value) async {
+                      BetterToast.show(context, message: '收藏');
                       return true;
                     },
                     child: Container(
                       color: Colors.blue,
-                      height: 54.bw,
                       alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(horizontal: 10.bw),
                       child: Text(
                         '收藏'.tr,
                         style: TextStyle(color: Colors.white, fontSize: 14.bsp),
@@ -79,6 +97,88 @@ class BetterSwipeAction extends StatelessWidget {
                   valueText: '内容'.tr,
                 ),
               ),
+
+              SizedBox(height: 20.bw),
+              Text('宽度延伸'.tr, style: TextStyle(fontSize: 14.bsp)),
+              SizedBox(height: 10.bw),
+              BetterSwipeCell(
+                leftActions: [
+                  BetterSwipeCellAction(
+                    width: 60.bw,
+                    value: "1",
+                    onClick: (value) async {
+                      BetterToast.show(context, message: '删除'.tr);
+                      return true;
+                    },
+                    child: Container(
+                      color: Colors.red,
+                      alignment: Alignment.center,
+                      child: Text(
+                        '删除'.tr,
+                        style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+                      ),
+                    ),
+                  ),
+                  BetterSwipeCellAction(
+                    width: 60.bw,
+                    value: '2',
+                    onClick: (value) async {
+                      BetterToast.show(context, message: '收藏'.tr);
+                      return true;
+                    },
+                    child: Container(
+                      color: Colors.blue,
+                      alignment: Alignment.center,
+                      child: Text(
+                        '收藏'.tr,
+                        style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+                      ),
+                    ),
+                  ),
+                ],
+                rightActions: [
+                  BetterSwipeCellAction(
+                    width: 60.bw,
+                    value: '删除',
+                    onClick: (value) async {
+                      BetterToast.show(context, message: '删除');
+                      return true;
+                    },
+                    child: Container(
+                      color: Colors.red,
+                      alignment: Alignment.center,
+                      child: Text(
+                        '删除'.tr,
+                        style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+                      ),
+                    ),
+                  ),
+                  BetterSwipeCellAction(
+                    width: 60.bw,
+                    value: '收藏',
+                    onClick: (value) async {
+                      BetterToast.show(context, message: '收藏');
+                      return true;
+                    },
+                    child: Container(
+                      color: Colors.blue,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(horizontal: 10.bw),
+                      child: Text(
+                        '收藏'.tr,
+                        style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+                      ),
+                    ),
+                  ),
+                ],
+                isStretch: true,
+                child: BetterCell(
+                  height: 54.bw,
+                  titleText: '滑动单元格'.tr,
+                  valueText: '内容'.tr,
+                ),
+              ),
+
               SizedBox(height: 20.bw),
               Text('异步控制'.tr, style: TextStyle(fontSize: 14.bsp)),
               SizedBox(height: 10.bw),
@@ -89,7 +189,6 @@ class BetterSwipeAction extends StatelessWidget {
                     value: '收藏',
                     child: Container(
                       color: Colors.blue,
-                      height: 54.bw,
                       alignment: Alignment.center,
                       child: Text(
                         '收藏'.tr,

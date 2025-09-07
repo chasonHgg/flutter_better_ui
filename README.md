@@ -382,7 +382,6 @@ BetterSwipeCell(
       },
       child: Container(
         color: Colors.blue,
-        height: 54.bw,
         alignment: Alignment.center,
         child: Text(
           'Favorite',
@@ -391,6 +390,8 @@ BetterSwipeCell(
       ),
     ),
   ],
+  //enable width extension
+  //isStretch:true,
   child: BetterCell(
     height: 54.bw,
     titleText: 'Swipeable Cell',
@@ -406,7 +407,6 @@ BetterSwipeCell(
       value: '收藏',
       child: Container(
         color: Colors.blue,
-        height: 54.bw,
         alignment: Alignment.center,
         child: Text(
           '收藏'.tr,
@@ -447,7 +447,7 @@ BetterSwipeCell(
             ],
           ),
         );
-        return result ?? false; // 返回用户选择结果
+        return result ?? false;
       },
     ),
   ],
