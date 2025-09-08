@@ -22,6 +22,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/5.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/6.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/7.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/8.gif" width="200"/>
 </div>
 
 
@@ -36,9 +37,11 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 - **BetterToast** - Lightweight toast with multiple positions and styles
 - **BetterPopup** - Popup layer with multiple presentation styles
 
+
 ### Form Components
 - **BetterPicker** - Picker supporting single, multiple, and cascading selections
 - **BetterSwitch** - Customizable switch with loading state and async control
+- **BetterDatePicker** - Date picker with flexible column types and formatting options
 
 ### Feedback component
 - **BetterSwipeCell** - Swipeable cell with left and right action buttons
@@ -235,6 +238,7 @@ BetterPicker.show(
 );
 
 ```
+
 
 ### BetterCell - List Cell
 
@@ -456,6 +460,104 @@ BetterSwipeCell(
 ```
 
 
+### BetterDatePicker - Date Picker
+
+```dart
+// Basic date picker
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker with custom range
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  minDate: [2022, 1, 1],
+  maxDate: [2024, 12, 31],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker with custom formatting
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  formatter: (BetterDatePickerFormatterOption option) {
+    if (option.columnType == BetterDatePickerColumnType.year) {
+      return "${option.text}年";
+    }
+    if (option.columnType == BetterDatePickerColumnType.month) {
+      return "${option.text}月";
+    }
+    if (option.columnType == BetterDatePickerColumnType.day) {
+      return "${option.text}日";
+    }
+    return option.text;
+  },
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker with specific column types (year and month only)
+BetterDatePicker.show(
+  context,
+  title: "选择年月",
+  columnTypes: [
+    BetterDatePickerColumnType.year,
+    BetterDatePickerColumnType.month,
+  ],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected year-month: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker with default value
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  defaultValue: [2025, 9, 8],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker with filtering (e.g., only show months divisible by 6)
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  columnTypes: [
+    BetterDatePickerColumnType.year,
+    BetterDatePickerColumnType.month,
+  ],
+  filter: (BetterDatePickerFilterOption option) {
+    if (option.columnType == BetterDatePickerColumnType.month) {
+      return option.value % 6 == 0; // Only show months 6 and 12
+    }
+    return true;
+  },
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker without default today
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  isDefaultShowToday: false,
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+```
+
+
 
 ## 🔧 Utilities
 
@@ -491,6 +593,7 @@ See the `example/` directory for full usage examples:
 - `better_switch_page.dart` - Switch examples
 - `better_cell_page.dart` - List cell examples
 - `better_swipe_action.dart` - Swipe cell examples
+- `better_date_picker_page.dart` - Date picker examples
 
 ## 🤝 Contributing
 

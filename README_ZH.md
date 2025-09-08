@@ -19,6 +19,7 @@
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/5.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/6.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/7.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/8.gif" width="200"/>
 </div>
 
 
@@ -38,6 +39,7 @@
 ### 表单组件
 - **BetterPicker** - 选择器组件，支持单列、多列和级联选择
 - **BetterSwitch** - 开关组件，支持自定义样式和异步控制
+- **BetterDatePicker** - 日期选择器，具有灵活列类型和格式选项的日期选择器
 
 ### 反馈
 - **BetterSwipeCell** - Swipeable cell with left and right action buttons
@@ -479,6 +481,103 @@ BetterSwipeCell(
 );
 ```
 
+### BetterDatePicker - 日期选择器
+
+```dart
+// Basic date picker
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker with custom range
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  minDate: [2022, 1, 1],
+  maxDate: [2024, 12, 31],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker with custom formatting
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  formatter: (BetterDatePickerFormatterOption option) {
+    if (option.columnType == BetterDatePickerColumnType.year) {
+      return "${option.text}年";
+    }
+    if (option.columnType == BetterDatePickerColumnType.month) {
+      return "${option.text}月";
+    }
+    if (option.columnType == BetterDatePickerColumnType.day) {
+      return "${option.text}日";
+    }
+    return option.text;
+  },
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker with specific column types (year and month only)
+BetterDatePicker.show(
+  context,
+  title: "选择年月",
+  columnTypes: [
+    BetterDatePickerColumnType.year,
+    BetterDatePickerColumnType.month,
+  ],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected year-month: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker with default value
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  defaultValue: [2025, 9, 8],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker with filtering (e.g., only show months divisible by 6)
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  columnTypes: [
+    BetterDatePickerColumnType.year,
+    BetterDatePickerColumnType.month,
+  ],
+  filter: (BetterDatePickerFilterOption option) {
+    if (option.columnType == BetterDatePickerColumnType.month) {
+      return option.value % 6 == 0; // Only show months 6 and 12
+    }
+    return true;
+  },
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+
+// Date picker without default today
+BetterDatePicker.show(
+  context,
+  title: "选择日期",
+  isDefaultShowToday: false,
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+  },
+);
+```
+
 ## 🔧 工具类
 
 ### BetterScreenUtil - 屏幕适配
@@ -512,7 +611,8 @@ Color hexColor = ColorUtil.hexToColor("#FF0000");
 - `better_picker_page.dart` - 选择器示例
 - `better_switch_page.dart` - 开关组件示例
 - `better_cell_page.dart` - 列表单元格示例
-- `better_swipe_action.dart` - 滑动单元格按量
+- `better_swipe_action.dart` - 滑动单元格示例
+- `better_date_picker_page.dart` - 滑动单元格示例
 
 ## 🤝 贡献
 

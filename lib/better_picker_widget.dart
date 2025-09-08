@@ -47,7 +47,7 @@ class BetterPickerWidget extends StatefulWidget {
   final Color? confirmTextColor;
   final VoidCallback? onCancel;
   final Function(List<BetterPickerItem>)? onConfirm;
-  final Function(List<BetterPickerItem>)? onChange;
+  final Function(List<BetterPickerItem>, Function(dynamic columns))? onChange;
   final double? diameterRatio;
   final Widget? overlayWidget;
   final double? itemHeight;
@@ -112,7 +112,7 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
       controllers.add(FixedExtentScrollController(initialItem: initIndex));
     }
 
-    initShowColumns();
+    initShowColumns(widget.columns);
   }
 
   @override
@@ -120,10 +120,11 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
     for (var controller in controllers) {
       controller.dispose();
     }
+    showColumnsNotifier.dispose();
     super.dispose();
   }
 
-  void initShowColumns() {
+  void initShowColumns(dynamic columns) {
     final List<Widget> arr = [];
     //单列或者级联
     if (pickerType == _BetterPickerType.single) {
@@ -132,7 +133,7 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
 
     //多列
     if (pickerType == _BetterPickerType.multi) {
-      widget.columns.asMap().entries.forEach(
+      columns.asMap().entries.forEach(
         (e) => {
           arr.add(
             _renderPickerColumn(columns: e.value, controllerIndex: e.key),
@@ -422,7 +423,7 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
       child: NotificationListener<ScrollEndNotification>(
         onNotification: (notification) {
           _handleScrollEnd(controllerIndex);
-          widget.onChange?.call(_getSelectedValues());
+          widget.onChange?.call(_getSelectedValues(), initShowColumns);
           return false;
         },
         child: ListWheelScrollView.useDelegate(

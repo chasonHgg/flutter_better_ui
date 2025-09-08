@@ -111,7 +111,7 @@ class BetterPicker {
     Function(List<BetterPickerItem>)? onConfirm,
 
     /// 改变回调
-    Function(List<BetterPickerItem>)? onChange,
+    Function(List<BetterPickerItem>, Function(dynamic columns))? onChange,
 
     /// 关闭回调
     VoidCallback? onClose,

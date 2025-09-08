@@ -1,5 +1,6 @@
 import 'package:example/pages/better_button_page.dart';
 import 'package:example/pages/better_cell_page.dart';
+import 'package:example/pages/better_date_picker_page.dart';
 import 'package:example/pages/better_picker_page.dart';
 import 'package:example/pages/better_popup_page.dart';
 import 'package:example/pages/better_swipe_action.dart';
@@ -16,5 +17,6 @@ final routes = [
   GetPage(name: "/betterPopup", page: () => const BetterPopupPage()),
   GetPage(name: "/betterPicker", page: () => const BetterPickerPage()),
   GetPage(name: "/betterSwitch", page: () => const BetterSwitchPage()),
+  GetPage(name: "/betterDatePicker", page: () => const BetterDatePickerPage()),
   GetPage(name: "/betterSwipeAction", page: () => const BetterSwipeAction()),
 ];

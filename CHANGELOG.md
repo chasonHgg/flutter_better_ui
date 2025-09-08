@@ -1,5 +1,6 @@
 ## 1.0.9
 
+* Add BetterDatePicker
 * BetterSwipeCell Add isStretch attribute
 
 ## 1.0.8
