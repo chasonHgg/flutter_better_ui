@@ -356,7 +356,7 @@ BetterCell(
 ```dart
 BetterCell(
     height: 44.bw,
-    titleText: '单元格'.tr,
+    titleText: '单元格',
     isShowBorder: true,
     isShowArrowRight: true,
     onClick(){
@@ -435,7 +435,7 @@ BetterSwipeCell(
         color: Colors.blue,
         alignment: Alignment.center,
         child: Text(
-          '收藏'.tr,
+          '收藏',
           style: TextStyle(color: Colors.white, fontSize: 14.bsp),
         ),
       ),
@@ -443,12 +443,12 @@ BetterSwipeCell(
         final result = await showCupertinoDialog<bool>(
           context: context,
           builder: (context) => CupertinoAlertDialog(
-            title: Text('标题'.tr),
-            content: Text('是否收藏'.tr),
+            title: Text('标题'),
+            content: Text('是否收藏'),
             actions: [
               CupertinoDialogAction(
                 child: Text(
-                  '取消'.tr,
+                  '取消',
                   style: TextStyle(
                     fontSize: 14.bsp,
                     color: Theme.of(
@@ -460,7 +460,7 @@ BetterSwipeCell(
               ),
               CupertinoDialogAction(
                 child: Text(
-                  '确定'.tr,
+                  '确定',
                   style: TextStyle(
                     fontSize: 14.bsp,
                     color: Theme.of(
@@ -477,7 +477,7 @@ BetterSwipeCell(
       },
     ),
   ],
-  child: BetterCell(height: 54.bw, titleText: '异步控制'.tr),
+  child: BetterCell(height: 54.bw, titleText: '异步控制'),
 );
 ```
 
