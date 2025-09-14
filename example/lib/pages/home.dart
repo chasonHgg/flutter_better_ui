@@ -1,8 +1,6 @@
 import 'package:flutter_better_ui/better_cell.dart';
 import 'package:flutter_better_ui/better_picker.dart';
 import 'package:flutter_better_ui/better_picker_widget.dart';
-import 'package:flutter_better_ui/theme/themes/better_dark_theme.dart';
-import 'package:flutter_better_ui/theme/themes/better_light_theme.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:example/i18n/translations.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +23,8 @@ class Home extends StatelessWidget {
           //切换主题的图标
           IconButton(
             onPressed: () {
-              Get.changeTheme(
-                Get.isDarkMode ? betterLightTheme : betterDarkTheme,
+              Get.changeThemeMode(
+                Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
               );
             },
             //判断显示主题的图标
@@ -41,15 +39,18 @@ class Home extends StatelessWidget {
               BetterPicker.show(
                 context,
                 onConfirm: (value) {
-                  if (value.first.value == 'zh') {
-                    I18nTranslations.updateLocale(I18nLocale.zh_CN);
+                  if (value.first.value == I18nLocale.zhCN.name) {
+                    I18nTranslations.updateLocale(I18nLocale.zhCN);
                   } else {
-                    I18nTranslations.updateLocale(I18nLocale.en_US);
+                    I18nTranslations.updateLocale(I18nLocale.enUS);
                   }
                 },
                 columns: [
-                  BetterPickerItem(text: '中文', value: 'zh'),
-                  BetterPickerItem(text: 'English', value: 'en'),
+                  BetterPickerItem(text: '中文', value: I18nLocale.zhCN.name),
+                  BetterPickerItem(
+                    text: 'English',
+                    value: I18nLocale.enUS.name,
+                  ),
                 ],
               );
             },

@@ -327,7 +327,7 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
   }
 
   //计算层级深度
-  int _getLevelCount(var columns, _BetterPickerType pickerType) {
+  int _getLevelCount(List<dynamic> columns, _BetterPickerType pickerType) {
     if (pickerType == _BetterPickerType.single) {
       return 1;
     }

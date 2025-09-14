@@ -93,7 +93,7 @@ class BetterPopup {
     );
   }
 
-  static _showBottomPopup(
+  static void _showBottomPopup(
     BuildContext context, {
     Color? backgroundColor,
     double? height,

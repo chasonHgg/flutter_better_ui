@@ -33,7 +33,6 @@ class BetterPickerPage extends StatelessWidget {
                         context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
-                      print(selectedValues.map((e) => e.value).join(','));
                     },
                     columns: [
                       BetterPickerItem(text: '${'选项'.tr}1', value: '1'),
@@ -65,7 +64,6 @@ class BetterPickerPage extends StatelessWidget {
                         context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
-                      print(selectedValues.map((e) => e.value).join(','));
                     },
                     columns: [
                       BetterPickerItem(text: '${'选项'.tr}1', value: '1'),
@@ -97,7 +95,6 @@ class BetterPickerPage extends StatelessWidget {
                         context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
-                      print(selectedValues.map((e) => e.value).join(','));
                     },
                     columns: [
                       BetterPickerItem(text: '${'选项'.tr}1', value: '1'),
@@ -132,7 +129,6 @@ class BetterPickerPage extends StatelessWidget {
                         context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
-                      print(selectedValues.map((e) => e.value).join(','));
                     },
                     columns: [
                       [
@@ -172,7 +168,6 @@ class BetterPickerPage extends StatelessWidget {
                         context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
-                      print(selectedValues.map((e) => e.value).join(','));
                     },
                     columns: [
                       BetterPickerItem(

@@ -41,12 +41,12 @@ class BetterUtil {
     Function func, [
     Duration delay = const Duration(milliseconds: 500),
   ]) {
-    Timer? _timer;
+    Timer? timer;
     return () {
-      if (_timer?.isActive ?? false) {
-        _timer?.cancel();
+      if (timer?.isActive ?? false) {
+        timer?.cancel();
       }
-      _timer = Timer(delay, () {
+      timer = Timer(delay, () {
         func.call();
       });
     };
@@ -59,18 +59,18 @@ class BetterUtil {
     Function func, [
     Duration delay = const Duration(milliseconds: 200),
   ]) {
-    DateTime? _lastTime;
-    Timer? _timer;
+    DateTime? lastTime;
+    Timer? timer;
     return () {
       final now = DateTime.now();
-      if (_lastTime == null || now.difference(_lastTime!) > delay) {
-        _lastTime = now;
+      if (lastTime == null || now.difference(lastTime!) > delay) {
+        lastTime = now;
         func.call();
       } else {
-        _timer?.cancel();
-        _timer = Timer(delay - now.difference(_lastTime!), () {
+        timer?.cancel();
+        timer = Timer(delay - now.difference(lastTime!), () {
           func.call();
-          _lastTime = DateTime.now();
+          lastTime = DateTime.now();
         });
       }
     };
