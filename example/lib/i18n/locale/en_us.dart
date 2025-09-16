@@ -92,4 +92,9 @@ Map<String, String> enUS = {
   '格式化选项': 'Format options',
   '指定默认日期': 'Specify default date',
   '过滤选项': 'Filter options',
+  '时间选择': 'Time Picker',
+  '指定时间范围': 'Specify time range',
+  '选择类型(选择时)': 'Select type(select hour)',
+  '选择类型(选择时分)': 'Select type(select minute and second)',
+  '选择类型(选择秒)': 'Select type(select second)',
 };

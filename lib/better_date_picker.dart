@@ -79,6 +79,41 @@ class BetterDatePicker {
     return items;
   }
 
+  static List<BetterPickerItem> _generateItems(
+    int minValue,
+    int maxValue,
+    int currentValue,
+    BetterDatePickerColumnType columnType,
+    Function(BetterDatePickerFormatterOption)? formatter,
+    Function(BetterDatePickerFilterOption)? filter,
+  ) {
+    List<BetterPickerItem> items = [];
+    for (int value = minValue; value <= maxValue; value++) {
+      BetterPickerItem item = BetterPickerItem(
+        text:
+            formatter?.call(
+              BetterDatePickerFormatterOption(
+                columnType: columnType,
+                text: value < 10 ? "0$value" : value.toString(),
+              ),
+            ) ??
+            (value < 10 ? "0$value" : value.toString()),
+        value: value.toString(),
+        isSelected: value == currentValue,
+      );
+      if (filter != null) {
+        if (filter.call(
+          BetterDatePickerFilterOption(columnType: columnType, value: value),
+        )) {
+          items.add(item);
+        }
+      } else {
+        items.add(item);
+      }
+    }
+    return items;
+  }
+
   static void show(
     BuildContext context, {
     //标题
@@ -97,6 +132,9 @@ class BetterDatePicker {
 
     /// 头部背景颜色
     Color? headerBackgroundColor,
+
+    /// 选择器的背景颜色
+    Color? backgroundColor,
 
     /// 取消按钮的文本颜色
     Color? cancelTextColor,
@@ -219,58 +257,29 @@ class BetterDatePicker {
     List<List<BetterPickerItem>> columns = [];
     //年
     if (columnTypes.contains(BetterDatePickerColumnType.year)) {
-      List<BetterPickerItem> items = [];
-      for (int year = minYear; year <= maxYear; year++) {
-        BetterPickerItem item = BetterPickerItem(
-          text: year < 10 ? "0$year" : year.toString(),
-          value: year.toString(),
-          isSelected: year == currentYear,
-        );
-        if (filter != null) {
-          if (filter.call(
-            BetterDatePickerFilterOption(
-              columnType: BetterDatePickerColumnType.year,
-              value: year,
-            ),
-          )) {
-            items.add(item);
-          }
-        } else {
-          items.add(item);
-        }
-      }
-      columns.add(items);
+      columns.add(
+        _generateItems(
+          minYear,
+          maxYear,
+          currentYear,
+          BetterDatePickerColumnType.year,
+          formatter,
+          filter,
+        ),
+      );
     }
     //月份
     if (columnTypes.contains(BetterDatePickerColumnType.month)) {
-      List<BetterPickerItem> items = [];
-      for (int month = 1; month <= 12; month++) {
-        BetterPickerItem item = BetterPickerItem(
-          text:
-              formatter?.call(
-                BetterDatePickerFormatterOption(
-                  columnType: BetterDatePickerColumnType.month,
-                  text: month < 10 ? "0$month" : month.toString(),
-                ),
-              ) ??
-              (month < 10 ? "0$month" : month.toString()),
-          value: month.toString(),
-          isSelected: month == currentMonth,
-        );
-        if (filter != null) {
-          if (filter.call(
-            BetterDatePickerFilterOption(
-              columnType: BetterDatePickerColumnType.month,
-              value: month,
-            ),
-          )) {
-            items.add(item);
-          }
-        } else {
-          items.add(item);
-        }
-      }
-      columns.add(items);
+      columns.add(
+        _generateItems(
+          1,
+          12,
+          currentMonth,
+          BetterDatePickerColumnType.month,
+          formatter,
+          filter,
+        ),
+      );
     }
 
     if (columnTypes.contains(BetterDatePickerColumnType.day)) {
@@ -286,6 +295,7 @@ class BetterDatePicker {
       confirmText: confirmText,
       titleWidget: titleWidget,
       headerBackgroundColor: headerBackgroundColor,
+      backgroundColor: backgroundColor,
       borderRadius: borderRadius,
       cancelTextColor: cancelTextColor,
       confirmTextColor: confirmTextColor,

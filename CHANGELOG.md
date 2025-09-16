@@ -1,3 +1,7 @@
+## 1.0.10
+
+* Add BetterTimePicker
+
 ## 1.0.9
 
 * Add BetterDatePicker

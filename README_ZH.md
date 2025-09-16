@@ -20,6 +20,7 @@
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/6.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/7.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/8.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/9.gif" width="200"/>
 </div>
 
 
@@ -40,6 +41,7 @@
 - **BetterPicker** - 选择器组件，支持单列、多列和级联选择
 - **BetterSwitch** - 开关组件，支持自定义样式和异步控制
 - **BetterDatePicker** - 日期选择器，具有灵活列类型和格式选项的日期选择器
+- **BetterTimePicker** - 时间选择器，具有灵活列类型和格式选项的时间选择器
 
 ### 反馈
 - **BetterSwipeCell** - Swipeable cell with left and right action buttons
@@ -578,6 +580,103 @@ BetterDatePicker.show(
 );
 ```
 
+### BetterTimePicker - 时间选择器
+
+```dart
+// 基础时间选择器
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("选择的时间: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// 自定义时间范围的时间选择器
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  minDate: [10, 0, 0],
+  maxDate: [18, 59, 59],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("选择的时间: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// 自定义格式化的时间选择器
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  formatter: (BetterTimePickerFormatterOption option) {
+    if (option.columnType == BetterTimePickerColumnType.hour) {
+      return "${option.text}时";
+    }
+    if (option.columnType == BetterTimePickerColumnType.minute) {
+      return "${option.text}分";
+    }
+    if (option.columnType == BetterTimePickerColumnType.second) {
+      return "${option.text}秒";
+    }
+    return option.text;
+  },
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("选择的时间: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// 指定列类型的时间选择器（仅选择时分）
+BetterTimePicker.show(
+  context,
+  title: "选择时分",
+  columnTypes: [
+    BetterTimePickerColumnType.hour,
+    BetterTimePickerColumnType.minute,
+  ],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("选择的时分: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// 设置默认值的时间选择器
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  defaultValue: [14, 30, 0],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("选择的时间: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// 带过滤功能的时间选择器（例如：只显示能被5整除的分钟）
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  columnTypes: [
+    BetterTimePickerColumnType.hour,
+    BetterTimePickerColumnType.minute,
+  ],
+  filter: (BetterTimePickerFilterOption option) {
+    if (option.columnType == BetterTimePickerColumnType.minute) {
+      return option.value % 5 == 0; // 只显示分钟 0, 5, 10, 15 等
+    }
+    return true;
+  },
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("选择的时间: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// 不默认显示当前时间的时间选择器
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  isDefaultShowNow: false,
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("选择的时间: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+```
+
 ## 🔧 工具类
 
 ### BetterScreenUtil - 屏幕适配
@@ -611,8 +710,9 @@ Color hexColor = ColorUtil.hexToColor("#FF0000");
 - `better_picker_page.dart` - 选择器示例
 - `better_switch_page.dart` - 开关组件示例
 - `better_cell_page.dart` - 列表单元格示例
-- `better_swipe_action.dart` - 滑动单元格示例
-- `better_date_picker_page.dart` - 滑动单元格示例
+- `better_swipe_action_page.dart` - 滑动单元格示例
+- `better_date_picker_page.dart` - 日期选择器示例
+- `better_time_picker_page.dart` - 时间选择器示例
 
 ## 🤝 贡献
 

@@ -95,6 +95,9 @@ class BetterPicker {
     /// 头部背景颜色
     Color? headerBackgroundColor,
 
+    /// 选择器的背景颜色
+    Color? backgroundColor,
+
     /// 选择器的圆角半径
     BorderRadiusGeometry? borderRadius,
 
@@ -144,6 +147,7 @@ class BetterPicker {
           title: title,
           titleWidget: titleWidget,
           headerBackgroundColor: headerBackgroundColor,
+          backgroundColor: backgroundColor,
           borderRadius: borderRadius,
           cancelTextColor: cancelTextColor,
           confirmTextColor: confirmTextColor,

@@ -125,6 +125,14 @@ class Home extends StatelessWidget {
                 Get.toNamed("/betterDatePicker");
               },
             ),
+            BetterCell(
+              titleText: "时间选择".tr,
+              isShowArrowRight: true,
+              isShowBorder: true,
+              onClick: () {
+                Get.toNamed("/betterTimePicker");
+              },
+            ),
             SizedBox(height: 20.bw),
             Text("反馈组件".tr, style: TextStyle(fontSize: 14.bsp)),
             SizedBox(height: 10.bw),

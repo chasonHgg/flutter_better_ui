@@ -42,6 +42,7 @@ class BetterPickerWidget extends StatefulWidget {
   final String? title;
   final Widget? titleWidget;
   final Color? headerBackgroundColor;
+  final Color? backgroundColor;
   final BorderRadiusGeometry? borderRadius;
   final Color? cancelTextColor;
   final Color? confirmTextColor;
@@ -61,6 +62,7 @@ class BetterPickerWidget extends StatefulWidget {
     this.title,
     this.titleWidget,
     this.headerBackgroundColor,
+    this.backgroundColor,
     this.borderRadius,
     this.cancelTextColor,
     this.confirmTextColor,
@@ -240,7 +242,8 @@ class _BetterPickerWidgetState extends State<BetterPickerWidget> {
           ),
           Expanded(
             child: Container(
-              color: theme?.pickerTheme.backgroundColor,
+              color:
+                  widget.backgroundColor ?? theme?.pickerTheme.backgroundColor,
               child: Stack(
                 children: [
                   ValueListenableBuilder(

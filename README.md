@@ -23,6 +23,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/6.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/7.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/8.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/9.gif" width="200"/>
 </div>
 
 
@@ -42,6 +43,9 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 - **BetterPicker** - Picker supporting single, multiple, and cascading selections
 - **BetterSwitch** - Customizable switch with loading state and async control
 - **BetterDatePicker** - Date picker with flexible column types and formatting options
+- **BetterTimePicker** - Time picker with flexible column types and formatting options
+
+
 
 ### Feedback component
 - **BetterSwipeCell** - Swipeable cell with left and right action buttons
@@ -557,6 +561,103 @@ BetterDatePicker.show(
 );
 ```
 
+### BetterTimePicker - Time Picker
+
+```dart
+// Basic time picker
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected time: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// Time picker with custom range
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  minDate: [10, 0, 0],
+  maxDate: [18, 59, 59],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected time: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// Time picker with custom formatting
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  formatter: (BetterTimePickerFormatterOption option) {
+    if (option.columnType == BetterTimePickerColumnType.hour) {
+      return "${option.text}时";
+    }
+    if (option.columnType == BetterTimePickerColumnType.minute) {
+      return "${option.text}分";
+    }
+    if (option.columnType == BetterTimePickerColumnType.second) {
+      return "${option.text}秒";
+    }
+    return option.text;
+  },
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected time: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// Time picker with specific column types (hour and minute only)
+BetterTimePicker.show(
+  context,
+  title: "选择时分",
+  columnTypes: [
+    BetterTimePickerColumnType.hour,
+    BetterTimePickerColumnType.minute,
+  ],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected hour-minute: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// Time picker with default value
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  defaultValue: [14, 30, 0],
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected time: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// Time picker with filtering (e.g., only show minutes divisible by 5)
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  columnTypes: [
+    BetterTimePickerColumnType.hour,
+    BetterTimePickerColumnType.minute,
+  ],
+  filter: (BetterTimePickerFilterOption option) {
+    if (option.columnType == BetterTimePickerColumnType.minute) {
+      return option.value % 5 == 0; // Only show minutes 0, 5, 10, 15, etc.
+    }
+    return true;
+  },
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected time: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+
+// Time picker without default current time
+BetterTimePicker.show(
+  context,
+  title: "选择时间",
+  isDefaultShowNow: false,
+  onConfirm: (List<BetterPickerItem> selectedValues) {
+    print("Selected time: ${selectedValues.map((e) => e.value).join(':')}");
+  },
+);
+```
+
 
 
 ## 🔧 Utilities
@@ -592,8 +693,9 @@ See the `example/` directory for full usage examples:
 - `better_picker_page.dart` - Picker examples
 - `better_switch_page.dart` - Switch examples
 - `better_cell_page.dart` - List cell examples
-- `better_swipe_action.dart` - Swipe cell examples
+- `better_swipe_action_page.dart` - Swipe cell examples
 - `better_date_picker_page.dart` - Date picker examples
+- `better_time_picker_page.dart` - Time picker examples
 
 ## 🤝 Contributing
 
