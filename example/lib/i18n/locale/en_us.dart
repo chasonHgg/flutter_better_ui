@@ -97,4 +97,6 @@ Map<String, String> enUS = {
   '选择类型(选择时)': 'Select type(select hour)',
   '选择类型(选择时分)': 'Select type(select minute and second)',
   '选择类型(选择秒)': 'Select type(select second)',
+  '跑马灯': 'Marquee',
+  '展示组件': 'Display Components',
 };

@@ -20,11 +20,7 @@ class MyApp extends StatelessWidget {
     if (isFirst == true) {
       isFirst = false;
       BetterUtil.init(context, designWidth: 375, designHeight: 812);
-      Get.changeTheme(
-        MediaQuery.of(context).platformBrightness == Brightness.dark
-            ? betterDarkTheme
-            : betterLightTheme,
-      );
+      Get.changeThemeMode(ThemeMode.system);
     }
     return GetMaterialApp(
       translations: I18nTranslations(),

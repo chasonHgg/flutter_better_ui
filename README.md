@@ -683,6 +683,11 @@ double responsiveFont = 16.bsp;
 Color hexColor = ColorUtil.hexToColor("#FF0000");
 ```
 
+## Questions
+
+- Why is the click area of buttons in lists such as ListView very large？Please use its properties or components, such as Align
+
+
 ## 📋 Example Project
 
 See the `example/` directory for full usage examples:

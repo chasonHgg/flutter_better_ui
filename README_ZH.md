@@ -700,6 +700,10 @@ double responsiveFont = 16.bsp;
 Color hexColor = ColorUtil.hexToColor("#FF0000");
 ```
 
+## 问题
+
+- 为什么ListView等列表中按钮的点击区域很大? 请使用对其属性或组件,例如Align
+
 ## 📋 示例项目
 
 查看 `example/` 目录获取完整的使用示例：
