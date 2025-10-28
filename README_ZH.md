@@ -90,6 +90,7 @@ class MyApp extends StatelessWidget {
 // 基础按钮
 BetterButton(
   text: "点击我",
+  textStyle: TextStyle(color: Colors.red),
   onClick: () {
     print("按钮被点击");
   },
@@ -115,6 +116,18 @@ BetterButton(
   plain: true,
   text: "朴素按钮",
   onClick: () {},
+)
+
+//自定义按钮
+BetterButton(
+  backgroundColor: Colors.red,
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Icon(Icons.add, color: Colors.white),
+      Text('自定义内容'.tr, style: TextStyle(color: Colors.white)),
+    ],
+  ),
 )
 ```
 

@@ -14,13 +14,14 @@ class BetterMarqueePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 10.bw),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.bw),
-              child: Text('基础用法'.tr, style: TextStyle(fontSize: 14.bsp)),
+            Center(
+              child: Container(
+                width: 200.bw,
+                height: 44.bw,
+                color: Colors.red,
+                child: BetterMarquee(textList: ['你好', '我很好我很好', '他很好']),
+              ),
             ),
-            SizedBox(height: 10.bw),
-            BetterMarquee(),
           ],
         ),
       ),

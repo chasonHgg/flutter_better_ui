@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class BetterButtonTheme {
   final double fontSize;
   final EdgeInsetsGeometry padding;
-  final double? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
   final MainAxisAlignment mainAxisAlignment;
   final Color defaultTextColor;
-  final Color defaultColor;
+  final Color defaultBackgroundColor;
   final Color borderColor;
   final Color primaryTextColor;
   final Color infoTextColor;
@@ -23,7 +23,7 @@ class BetterButtonTheme {
     this.borderRadius,
     this.mainAxisAlignment = MainAxisAlignment.center,
     required this.defaultTextColor,
-    required this.defaultColor,
+    required this.defaultBackgroundColor,
     required this.borderColor,
     required this.primaryTextColor,
     required this.infoTextColor,
@@ -38,10 +38,10 @@ class BetterButtonTheme {
   BetterButtonTheme copyWith({
     double? fontSize,
     EdgeInsetsGeometry? padding,
-    double? borderRadius,
+    BorderRadiusGeometry? borderRadius,
     MainAxisAlignment? mainAxisAlignment,
     Color? defaultTextColor,
-    Color? defaultColor,
+    Color? defaultBackgroundColor,
     Color? borderColor,
     Color? primaryTextColor,
     Color? infoTextColor,
@@ -58,7 +58,8 @@ class BetterButtonTheme {
       borderRadius: borderRadius ?? this.borderRadius,
       mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
       defaultTextColor: defaultTextColor ?? this.defaultTextColor,
-      defaultColor: defaultColor ?? this.defaultColor,
+      defaultBackgroundColor:
+          defaultBackgroundColor ?? this.defaultBackgroundColor,
       borderColor: borderColor ?? this.borderColor,
       primaryTextColor: primaryTextColor ?? this.primaryTextColor,
       infoTextColor: infoTextColor ?? this.infoTextColor,
@@ -88,7 +89,7 @@ class BetterButtonTheme {
           ) ??
           buttonTheme.padding,
       borderRadius:
-          lerpDouble(
+          BorderRadiusGeometry.lerp(
             buttonTheme.borderRadius,
             otherButtonTheme.borderRadius,
             t,
@@ -101,13 +102,13 @@ class BetterButtonTheme {
             t,
           ) ??
           buttonTheme.defaultTextColor,
-      defaultColor:
+      defaultBackgroundColor:
           Color.lerp(
-            buttonTheme.defaultColor,
-            otherButtonTheme.defaultColor,
+            buttonTheme.defaultBackgroundColor,
+            otherButtonTheme.defaultBackgroundColor,
             t,
           ) ??
-          buttonTheme.defaultColor,
+          buttonTheme.defaultBackgroundColor,
       borderColor:
           Color.lerp(
             buttonTheme.borderColor,

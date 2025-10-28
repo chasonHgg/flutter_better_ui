@@ -1,11 +1,14 @@
 ## 1.0.10
 
 * Add BetterTimePicker
+* Optimize BetterButton
+* Optimize BetterPopup to not require fixed height for pop-up in the middle
 
 ## 1.0.9
 
 * Add BetterDatePicker
 * BetterSwipeCell Add isStretch attribute
+
 
 ## 1.0.8
 

@@ -102,7 +102,7 @@ class BetterToastPage extends StatelessWidget {
                 },
               ),
               SizedBox(height: 20.bw),
-              Text('自定义内容'.tr, style: TextStyle(fontSize: 14.bsp)),
+              Text('自定义'.tr, style: TextStyle(fontSize: 14.bsp)),
               SizedBox(height: 10.bw),
               BetterCell(
                 titleText: '自定义图标'.tr,
@@ -134,6 +134,16 @@ class BetterToastPage extends StatelessWidget {
                     position: BetterToastPosition.center,
                   ),
                 },
+              ),
+              BetterCell(
+                titleText: '自定义背景颜色'.tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () => BetterToast.show(
+                  context,
+                  backgroundColor: Colors.red,
+                  message: 'This is a toast',
+                ),
               ),
             ],
           ),

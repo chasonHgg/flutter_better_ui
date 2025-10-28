@@ -85,6 +85,7 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
   @override
   void dispose() {
     _controller.dispose();
+    _dragOffset.dispose();
     super.dispose();
   }
 

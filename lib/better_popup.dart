@@ -198,12 +198,9 @@ class BetterPopup {
         : BetterScreenUtil.screenWidth * 0.8;
 
     if (height == null) {
-      if (position != BetterPopupPosition.center) {
-        height = position == BetterPopupPosition.top
-            ? 150.bw
-            : BetterScreenUtil.screenHeight;
-      } else {
-        height = 150.bw;
+      if (position == BetterPopupPosition.left ||
+          position == BetterPopupPosition.right) {
+        height = BetterScreenUtil.screenHeight;
       }
     }
 

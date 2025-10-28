@@ -61,8 +61,6 @@ class BetterPopupPage extends StatelessWidget {
                   renderPositionRowItem(
                     context: context,
                     title: '居中弹出'.tr,
-                    width: 150.bw,
-                    height: 150.bw,
                     icon: Icons.center_focus_strong,
                     position: BetterPopupPosition.center,
                     theme: theme,
@@ -200,8 +198,12 @@ class BetterPopupPage extends StatelessWidget {
                 spreadRadius: 2.bw,
               ),
             ],
-            child: Center(
-              child: Text(title.tr, style: TextStyle(fontSize: 14.bsp)),
+            child: Padding(
+              padding: EdgeInsets.all(16.bw),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [Text(title.tr, style: TextStyle(fontSize: 14.bsp))],
+              ),
             ),
           );
         },

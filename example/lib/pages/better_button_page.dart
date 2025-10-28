@@ -135,7 +135,7 @@ class BetterButtonPage extends StatelessWidget {
                   BetterButton(
                     text: '自定义颜色'.tr,
                     borderColor: Colors.transparent,
-                    color: Colors.purple,
+                    backgroundColor: Colors.purple,
                     textStyle: TextStyle(color: Colors.white),
                   ),
                 ],
@@ -155,16 +155,37 @@ class BetterButtonPage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 20.bw),
+              Text('圆角按钮'.tr, style: TextStyle(fontSize: 14.bsp)),
+              SizedBox(height: 4.bw),
+              Wrap(
+                spacing: 6.bw,
+                runSpacing: 6.bw,
+                children: [
+                  BetterButton(
+                    text: '圆角按钮'.tr,
+                    type: BetterButtonType.success,
+                    borderRadius: BorderRadius.all(Radius.circular(999.bw)),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.bw),
               Text('自定义内容'.tr, style: TextStyle(fontSize: 14.bsp)),
               SizedBox(height: 4.bw),
-              BetterButton(
-                type: BetterButtonType.success,
-                child: Row(
-                  children: [
-                    Icon(Icons.add, color: Colors.white),
-                    Text('自定义内容'.tr, style: TextStyle(color: Colors.white)),
-                  ],
-                ),
+              Wrap(
+                spacing: 6.bw,
+                runSpacing: 6.bw,
+                children: [
+                  BetterButton(
+                    backgroundColor: Colors.red,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.add, color: Colors.white),
+                        Text('自定义内容'.tr, style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 20.bw),
               //屏幕宽度

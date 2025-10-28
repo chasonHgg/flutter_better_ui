@@ -96,6 +96,7 @@ class MyApp extends StatelessWidget {
 // Basic button
 BetterButton(
   text: "Click me",
+  textStyle: TextStyle(color: Colors.red),
   onClick: () {
     print("Button clicked");
   },
@@ -122,6 +123,19 @@ BetterButton(
   text: "Plain Button",
   onClick: () {},
 )
+
+//Customer button
+BetterButton(
+  backgroundColor: Colors.red,
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Icon(Icons.add, color: Colors.white),
+      Text('Customer', style: TextStyle(color: Colors.white)),
+    ],
+  ),
+)
+
 ```
 
 ### BetterToast - Toast

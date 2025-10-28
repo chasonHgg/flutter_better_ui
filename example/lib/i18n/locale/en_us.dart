@@ -99,4 +99,7 @@ Map<String, String> enUS = {
   '选择类型(选择秒)': 'Select type(select second)',
   '跑马灯': 'Marquee',
   '展示组件': 'Display Components',
+  '圆角按钮': 'Rounded Button',
+  '自定义': 'Custom',
+  '自定义背景颜色': 'Custom Background Color',
 };

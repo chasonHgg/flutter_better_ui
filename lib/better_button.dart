@@ -21,7 +21,7 @@ class BetterButton extends StatelessWidget {
   final VoidCallback? onClick;
 
   /// 按钮的背景颜色。如果为 null，则从 [type] 派生颜色
-  final Color? color;
+  final Color? backgroundColor;
 
   /// 按钮的边框颜色
   final Color? borderColor;
@@ -30,7 +30,7 @@ class BetterButton extends StatelessWidget {
   final Color? overlayColor;
 
   /// 按钮的圆角半径
-  final double? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
 
   /// 是否显示加载状态
   final bool loading;
@@ -80,9 +80,6 @@ class BetterButton extends StatelessWidget {
   /// 是否渲染朴素（轮廓）样式的按钮
   final bool? plain;
 
-  /// 内部行的主轴对齐方式
-  final MainAxisAlignment? mainAxisAlignment;
-
   /// 是否禁用水波纹效果
   final bool? disableSplash;
 
@@ -109,7 +106,7 @@ class BetterButton extends StatelessWidget {
     super.key,
     this.type = BetterButtonType.defaultType,
     this.onClick,
-    this.color,
+    this.backgroundColor,
     this.borderColor,
     this.overlayColor,
     this.borderRadius,
@@ -129,7 +126,6 @@ class BetterButton extends StatelessWidget {
     this.padding,
     this.plain = false,
     this.gradient,
-    this.mainAxisAlignment,
     this.disableSplash = false,
     this.disabled = false,
     this.hideContentWhenLoading = true,
@@ -143,20 +139,22 @@ class BetterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     loadingSize ??= 20.bw;
     loadingMarginRight ??= 8.bw;
-    height ??= 44.bw;
 
     BetterThemeExtension themeExtension = BetterUtil.getThemeExtension(
       context,
     )!;
     BetterButtonTheme buttonTheme = themeExtension.buttonTheme;
 
-    Color? defaultColor = buttonTheme.defaultColor;
-    Color? finalBackgroundColor = color ?? defaultColor;
+    Color? defaultColor = buttonTheme.defaultBackgroundColor;
+    Color? finalBackgroundColor = backgroundColor ?? defaultColor;
     Color finalBorderColor = borderColor ?? buttonTheme.borderColor;
     Color? finalTextColor = buttonTheme.defaultTextColor;
-    double finalBorderRadius = borderRadius ?? buttonTheme.borderRadius ?? 6.bw;
+    BorderRadiusGeometry finalBorderRadius =
+        borderRadius ??
+        buttonTheme.borderRadius ??
+        BorderRadius.all(Radius.circular(6.bw));
 
-    Color finalLoadingColor = loadingColor ?? buttonTheme.loadingColor;
+    Color finalLoadingColor = buttonTheme.loadingColor;
 
     TextStyle? finalTextStyle = textStyle ?? TextStyle();
 
@@ -173,7 +171,7 @@ class BetterButton extends StatelessWidget {
     Color infoColor = themeExtension.infoColor;
 
     // 获取按钮类型
-    if (color == null) {
+    if (backgroundColor == null) {
       if (plain == null || plain == false) {
         if (type == BetterButtonType.defaultType) {
           finalBackgroundColor = defaultColor;
@@ -251,6 +249,10 @@ class BetterButton extends StatelessWidget {
       }
     }
 
+    if (loadingColor != null) {
+      finalLoadingColor = loadingColor!;
+    }
+
     // 获取按钮内容
     final children = <Widget>[];
     if (loading) {
@@ -309,7 +311,13 @@ class BetterButton extends StatelessWidget {
 
     //获取loading文本
     if (loading == true && loadingText != null) {
-      children.add(Text(loadingText!, style: finalTextStyle));
+      children.add(
+        Text(
+          loadingText!,
+          style: finalTextStyle,
+          overflow: TextOverflow.ellipsis,
+        ),
+      );
     }
 
     //获取后缀
@@ -335,9 +343,7 @@ class BetterButton extends StatelessWidget {
             ? NoSplash.splashFactory
             : InkSparkle.splashFactory,
         shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(finalBorderRadius),
-          ),
+          RoundedRectangleBorder(borderRadius: finalBorderRadius),
         ),
         side: isShowBorder == true
             ? WidgetStateProperty.all(
@@ -355,13 +361,9 @@ class BetterButton extends StatelessWidget {
               ? finalBackgroundColor.withAlpha(128)
               : finalBackgroundColor,
           gradient: gradient,
-          borderRadius: BorderRadius.circular(finalBorderRadius),
+          borderRadius: finalBorderRadius,
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: mainAxisAlignment ?? buttonTheme.mainAxisAlignment,
-          children: children,
-        ),
+        child: Wrap(runAlignment: WrapAlignment.center, children: children),
       ),
     );
   }
