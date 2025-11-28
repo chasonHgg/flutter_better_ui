@@ -145,8 +145,16 @@ class Home extends StatelessWidget {
               },
             ),
             SizedBox(height: 20.bw),
-            // Text("展示组件".tr, style: TextStyle(fontSize: 14.bsp)),
-            // SizedBox(height: 10.bw),
+            Text("展示组件".tr, style: TextStyle(fontSize: 14.bsp)),
+            SizedBox(height: 10.bw),
+            BetterCell(
+              titleText: "轮播图".tr,
+              isShowArrowRight: true,
+              isShowBorder: true,
+              onClick: () {
+                Get.toNamed("/betterSwiper");
+              },
+            ),
             // BetterCell(
             //   titleText: "跑马灯".tr,
             //   isShowArrowRight: true,

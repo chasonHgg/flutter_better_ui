@@ -102,4 +102,5 @@ Map<String, String> enUS = {
   '圆角按钮': 'Rounded Button',
   '自定义': 'Custom',
   '自定义背景颜色': 'Custom Background Color',
+  '轮播': 'Swiper',
 };

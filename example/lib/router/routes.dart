@@ -5,6 +5,7 @@ import 'package:example/pages/better_marquee_page.dart';
 import 'package:example/pages/better_picker_page.dart';
 import 'package:example/pages/better_popup_page.dart';
 import 'package:example/pages/better_swipe_action_page.dart';
+import 'package:example/pages/better_swiper_page.dart';
 import 'package:example/pages/better_switch_page.dart';
 import 'package:example/pages/better_time_picker_page.dart';
 import 'package:example/pages/better_toast_page.dart';
@@ -26,4 +27,5 @@ final routes = [
   ),
   GetPage(name: "/betterTimePicker", page: () => const BetterTimePickerPage()),
   GetPage(name: "/betterMarquee", page: () => const BetterMarqueePage()),
+  GetPage(name: "/betterSwiper", page: () => const BetterSwiperPage()),
 ];

@@ -73,6 +73,7 @@ class BetterToast {
 
     /// Toast 的高度
     double? height,
+    VoidCallback? onHide,
   }) {
     final overlay = Overlay.of(context);
     final screenHeight = BetterScreenUtil.screenHeight;
@@ -213,6 +214,7 @@ class BetterToast {
         await fadeController.reverse();
       }
       overlayEntry.remove();
+      onHide?.call();
     }
 
     // 执行显示
@@ -243,6 +245,7 @@ class BetterToast {
 
     /// Font size of the toast
     double? fontSize,
+    VoidCallback? onHide,
   }) {
     show(
       context,
@@ -258,6 +261,7 @@ class BetterToast {
       ),
       textColor: textColor,
       fontSize: fontSize,
+      onHide: onHide,
     );
   }
 
@@ -282,6 +286,7 @@ class BetterToast {
 
     /// Font size of the toast
     double? fontSize,
+    VoidCallback? onHide,
   }) {
     show(
       context,
@@ -296,6 +301,7 @@ class BetterToast {
         size: iconSize ?? 40.bw,
       ),
       textColor: textColor,
+      onHide: onHide,
     );
   }
 

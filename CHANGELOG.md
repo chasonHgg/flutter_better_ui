@@ -1,3 +1,8 @@
+## 1.0.11
+
+* BetterToast add OnHide callback
+
+
 ## 1.0.10
 
 * Add BetterTimePicker
