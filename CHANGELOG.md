@@ -1,6 +1,7 @@
 ## 1.0.11
 
 * BetterToast add OnHide callback
+* Add BetterSwiper
 
 
 ## 1.0.10

@@ -103,4 +103,9 @@ Map<String, String> enUS = {
   '自定义': 'Custom',
   '自定义背景颜色': 'Custom Background Color',
   '轮播': 'Swiper',
+  '纵向滚动': 'Vertical Scroll',
+  '无限循环': 'Infinite Loop',
+  '手势滑动': 'Gesture Slide',
+  '自动播放': 'Auto Play',
+  '自定义指示器': 'Custom Indicator',
 };
