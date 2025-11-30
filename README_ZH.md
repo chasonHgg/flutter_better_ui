@@ -696,7 +696,7 @@ BetterTimePicker.show(
 );
 ```
 
-### BetterSwiper - 轮播
+### BetterSwiper
 
 ```dart
 PageController pageController = PageController();
