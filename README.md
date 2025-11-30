@@ -749,6 +749,7 @@ See the `example/` directory for full usage examples:
 - `better_date_picker_page.dart` - Date picker examples
 - `better_time_picker_page.dart` - Time picker examples
 - `better_swiper_page.dart` - swiper examples
+- `better_marquee_page.dart` - marquee examples
 
 ## 🤝 Contributing
 

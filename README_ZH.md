@@ -769,6 +769,7 @@ Color hexColor = ColorUtil.hexToColor("#FF0000");
 - `better_date_picker_page.dart` - 日期选择器示例
 - `better_time_picker_page.dart` - 时间选择器示例
 - `better_swiper_page.dart` - 轮播示例
+- `better_marquee_page.dart` - 跑马灯示例
 
 ## 🤝 贡献
 
