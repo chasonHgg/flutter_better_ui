@@ -24,6 +24,8 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/7.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/8.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/9.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/10.jpg" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/11.jpg" width="200"/>
 </div>
 
 
@@ -50,7 +52,9 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 ### Feedback component
 - **BetterSwipeCell** - Swipeable cell with left and right action buttons
 
-
+### Display component
+- **BetterSwiper** - Used to loop through a set of images or content
+- **BetterMarquee** - Used for looping and displaying a set of message notifications.
 
 ### Utilities
 - **BetterScreenUtil** - Screen adaptation utilities
@@ -64,7 +68,7 @@ Add the dependency in `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  better_ui: ^lastversion
+  flutter_better_ui: ^lastversion
 ```
 
 ### Initialize
@@ -672,7 +676,36 @@ BetterTimePicker.show(
 );
 ```
 
+### BetterSwiper - 轮播
 
+```dart
+PageController pageController = PageController();
+BetterSwiper(
+  controller: pageController,
+  height: 200.bw,
+  autoplay: true,
+  loop: true,
+  scrollDirection: Axis.horizontal,
+  children: [
+    Container(width: double.infinity, color: Colors.red),
+    Container(width: double.infinity, color: Colors.blue),
+    Container(width: double.infinity, color: Colors.green),
+  ],
+),
+```
+
+### BetterMarquee
+
+```dart
+BetterMarquee(
+  height: 40.bw,
+  leftWidget: Icon(
+    BetterIcon.volumeO,
+    size: 16.bsp,
+    color: ColorUtil.hexToColor("#ed6a0c"),
+  ),
+  textList: ["hello world"],
+),
 
 ## 🔧 Utilities
 
@@ -715,6 +748,7 @@ See the `example/` directory for full usage examples:
 - `better_swipe_action_page.dart` - Swipe cell examples
 - `better_date_picker_page.dart` - Date picker examples
 - `better_time_picker_page.dart` - Time picker examples
+- `better_swiper_page.dart` - swiper examples
 
 ## 🤝 Contributing
 

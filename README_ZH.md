@@ -21,6 +21,8 @@
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/7.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/8.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/9.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/10.jpg" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/11.jpg" width="200"/>
 </div>
 
 
@@ -43,8 +45,12 @@
 - **BetterDatePicker** - 日期选择器，具有灵活列类型和格式选项的日期选择器
 - **BetterTimePicker** - 时间选择器，具有灵活列类型和格式选项的时间选择器
 
-### 反馈
-- **BetterSwipeCell** - Swipeable cell with left and right action buttons
+### 反馈组件
+- **BetterSwipeCell** - 带有左右操作按钮的可滑动单元格
+
+### 展示组件
+- **BetterSwiper** - 用于循环播放一组图片或内容
+- **BetterMarquee** - 用于循环播放展示一组消息通知。
 
 ### 工具类
 - **BetterScreenUtil** - 屏幕适配工具
@@ -58,7 +64,7 @@
 
 ```yaml
 dependencies:
-  better_ui: ^lastversion
+  flutter_better_ui: ^lastversion
 ```
 
 ### 初始化
@@ -690,6 +696,38 @@ BetterTimePicker.show(
 );
 ```
 
+### BetterSwiper - 轮播
+
+```dart
+PageController pageController = PageController();
+BetterSwiper(
+  controller: pageController,
+  height: 200.bw,
+  autoplay: true,
+  loop: true,
+  scrollDirection: Axis.horizontal,
+  children: [
+    Container(width: double.infinity, color: Colors.red),
+    Container(width: double.infinity, color: Colors.blue),
+    Container(width: double.infinity, color: Colors.green),
+  ],
+),
+```
+
+### BetterMarquee
+
+```dart
+BetterMarquee(
+  height: 40.bw,
+  leftWidget: Icon(
+    BetterIcon.volumeO,
+    size: 16.bsp,
+    color: ColorUtil.hexToColor("#ed6a0c"),
+  ),
+  textList: ["hello world"],
+),
+```
+
 ## 🔧 工具类
 
 ### BetterScreenUtil - 屏幕适配
@@ -730,6 +768,7 @@ Color hexColor = ColorUtil.hexToColor("#FF0000");
 - `better_swipe_action_page.dart` - 滑动单元格示例
 - `better_date_picker_page.dart` - 日期选择器示例
 - `better_time_picker_page.dart` - 时间选择器示例
+- `better_swiper_page.dart` - 轮播示例
 
 ## 🤝 贡献
 

@@ -79,7 +79,9 @@ class _BetterSwiperState extends State<BetterSwiper> {
   @override
   void initState() {
     super.initState();
-    _currentPage = ValueNotifier(widget.initialIndex);
+    _currentPage = ValueNotifier(
+      widget.initialIndex.clamp(0, widget.children.length - 1),
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.loop == true) {

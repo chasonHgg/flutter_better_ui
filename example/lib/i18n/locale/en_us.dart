@@ -108,4 +108,7 @@ Map<String, String> enUS = {
   '手势滑动': 'Gesture Slide',
   '自动播放': 'Auto Play',
   '自定义指示器': 'Custom Indicator',
+  '通知栏模式': 'Notification Bar Mode',
+  '垂直滚动': 'Vertical Scroll',
+  '自定义样式': 'Custom Style',
 };

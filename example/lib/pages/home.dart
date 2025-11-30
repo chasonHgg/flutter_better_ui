@@ -155,14 +155,14 @@ class Home extends StatelessWidget {
                 Get.toNamed("/betterSwiper");
               },
             ),
-            // BetterCell(
-            //   titleText: "跑马灯".tr,
-            //   isShowArrowRight: true,
-            //   isShowBorder: true,
-            //   onClick: () {
-            //     Get.toNamed("/betterMarquee");
-            //   },
-            // ),
+            BetterCell(
+              titleText: "跑马灯".tr,
+              isShowArrowRight: true,
+              isShowBorder: true,
+              onClick: () {
+                Get.toNamed("/betterMarquee");
+              },
+            ),
           ],
         ),
       ),
