@@ -4,18 +4,41 @@ import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter_better_ui/utils/color_util.dart';
 
 class BetterMarquee extends StatefulWidget {
+  /// 文本列表
   final List<String> textList;
+
+  /// 文本样式
   final TextStyle? style;
+
+  /// 速度
   final double speed;
+
+  /// 宽度
   final double? width;
+
+  /// 高度
   final double height;
+
+  /// 背景颜色
   final Color? backgroundColor;
+
+  /// 文本颜色
   final Color? textColor;
   final Widget? leftWidget;
+
+  /// 右侧组件
   final Widget? rightWidget;
+
+  /// 内边距
   final EdgeInsetsGeometry? padding;
+
+  /// 分隔符
   final String? separtor;
+
+  /// 是否垂直滚动
   final bool isVertical;
+
+  /// 自动播放间隔
   final Duration? autoplayDuration;
 
   const BetterMarquee({
