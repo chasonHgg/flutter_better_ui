@@ -33,6 +33,7 @@ class BetterButtonPage extends StatelessWidget {
                     text: '主要按钮'.tr,
                     type: BetterButtonType.primary,
                     loadingText: "加载中...".tr,
+                    margin: EdgeInsets.only(bottom:20.bw),
                   ),
                   BetterButton(
                     text: '主要按钮'.tr,
@@ -124,18 +125,22 @@ class BetterButtonPage extends StatelessWidget {
                   BetterButton(
                     text: '主要按钮'.tr,
                     type: BetterButtonType.primary,
-                    gradient: LinearGradient(
+                    decoration: BoxDecoration(
+                       gradient: LinearGradient(
                       colors: [Colors.red[400]!, Colors.red[900]!],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       stops: [0.3, 0.7],
                       tileMode: TileMode.clamp,
                     ),
+                    ),
                   ),
                   BetterButton(
                     text: '自定义颜色'.tr,
-                    borderColor: Colors.transparent,
-                    backgroundColor: Colors.purple,
+                    decoration: BoxDecoration(
+                      color:Colors.purple
+                    ),
+
                     textStyle: TextStyle(color: Colors.white),
                   ),
                 ],
@@ -164,7 +169,9 @@ class BetterButtonPage extends StatelessWidget {
                   BetterButton(
                     text: '圆角按钮'.tr,
                     type: BetterButtonType.success,
-                    borderRadius: BorderRadius.all(Radius.circular(999.bw)),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(999.bw)),
+                    ),
                   ),
                 ],
               ),
@@ -176,7 +183,9 @@ class BetterButtonPage extends StatelessWidget {
                 runSpacing: 6.bw,
                 children: [
                   BetterButton(
-                    backgroundColor: Colors.red,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                    ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

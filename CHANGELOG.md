@@ -1,3 +1,7 @@
+## 1.0.12
+
+* Optimize the use of BetterButton
+
 ## 1.0.11
 
 * BetterToast add OnHide callback

@@ -126,7 +126,9 @@ BetterButton(
 
 //自定义按钮
 BetterButton(
-  backgroundColor: Colors.red,
+  decoration: BoxDecoration(
+    color: Colors.red,
+  ),
   child: Row(
     mainAxisSize: MainAxisSize.min,
     children: [

@@ -130,7 +130,9 @@ BetterButton(
 
 //Customer button
 BetterButton(
-  backgroundColor: Colors.red,
+  decoration: BoxDecoration(
+    color: Colors.red,
+  ),
   child: Row(
     mainAxisSize: MainAxisSize.min,
     children: [

@@ -17,20 +17,15 @@ class BetterButton extends StatelessWidget {
   /// 要使用的预设视觉样式。当为 null 时，回退到主题默认值
   final BetterButtonType? type;
 
+  /// 按钮的装饰
+  final BoxDecoration? decoration;
+
   /// 按钮被点击时的回调函数
   final VoidCallback? onClick;
-
-  /// 按钮的背景颜色。如果为 null，则从 [type] 派生颜色
-  final Color? backgroundColor;
-
-  /// 按钮的边框颜色
-  final Color? borderColor;
 
   /// 按下时的覆盖/水波纹颜色
   final Color? overlayColor;
 
-  /// 按钮的圆角半径
-  final BorderRadiusGeometry? borderRadius;
 
   /// 是否显示加载状态
   final bool loading;
@@ -74,8 +69,8 @@ class BetterButton extends StatelessWidget {
   /// 按钮的内边距
   final EdgeInsetsGeometry? padding;
 
-  /// 按钮的背景渐变。优先于 [color]
-  final Gradient? gradient;
+  /// 按钮的margin
+  final EdgeInsetsGeometry? margin;
 
   /// 是否渲染朴素（轮廓）样式的按钮
   final bool? plain;
@@ -95,21 +90,14 @@ class BetterButton extends StatelessWidget {
   /// 自定义子组件。如果提供，[text] 将被忽略
   final Widget? child;
 
-  /// 按钮的边框宽度
-  final double? borderWidth;
-
-  /// 是否显示边框
-  final bool? isShowBorder;
-
   /// 创建一个 [BetterButton]。
   BetterButton({
     super.key,
     this.type = BetterButtonType.defaultType,
+    this.decoration,
     this.onClick,
-    this.backgroundColor,
-    this.borderColor,
     this.overlayColor,
-    this.borderRadius,
+    this.margin,
     this.loading = false,
     this.loadingSize,
     this.loadingStrokeWidth,
@@ -125,14 +113,11 @@ class BetterButton extends StatelessWidget {
     this.textStyle,
     this.padding,
     this.plain = false,
-    this.gradient,
     this.disableSplash = false,
     this.disabled = false,
     this.hideContentWhenLoading = true,
     this.loadingText,
     this.child,
-    this.borderWidth,
-    this.isShowBorder = true,
   });
 
   @override
@@ -146,22 +131,17 @@ class BetterButton extends StatelessWidget {
     BetterButtonTheme buttonTheme = themeExtension.buttonTheme;
 
     Color? defaultColor = buttonTheme.defaultBackgroundColor;
-    Color? finalBackgroundColor = backgroundColor ?? defaultColor;
-    Color finalBorderColor = borderColor ?? buttonTheme.borderColor;
+    Color? finalBackgroundColor = defaultColor;
+    if (decoration != null && decoration!.color != null) {
+      finalBackgroundColor = decoration!.color!;
+    }
     Color? finalTextColor = buttonTheme.defaultTextColor;
-    BorderRadiusGeometry finalBorderRadius =
-        borderRadius ??
-        buttonTheme.borderRadius ??
-        BorderRadius.all(Radius.circular(6.bw));
+
 
     Color finalLoadingColor = buttonTheme.loadingColor;
 
     TextStyle? finalTextStyle = textStyle ?? TextStyle();
 
-    double finalBorderWidth = borderWidth ?? 1;
-    if (borderWidth == null && BetterUtil.shouldUseHairlineBorder(context)) {
-      finalBorderWidth = 1.bw;
-    }
 
     // 获取主题色
     Color primaryColor = themeExtension.primaryColor;
@@ -171,7 +151,7 @@ class BetterButton extends StatelessWidget {
     Color infoColor = themeExtension.infoColor;
 
     // 获取按钮类型
-    if (backgroundColor == null) {
+    if (decoration == null || decoration!.color == null) {
       if (plain == null || plain == false) {
         if (type == BetterButtonType.defaultType) {
           finalBackgroundColor = defaultColor;
@@ -185,30 +165,6 @@ class BetterButton extends StatelessWidget {
           finalBackgroundColor = dangerColor;
         } else if (type == BetterButtonType.info) {
           finalBackgroundColor = infoColor;
-        }
-      }
-    }
-
-    // 获取边框颜色
-    if (borderColor == null) {
-      if (plain != null && plain == true) {
-        if (type == BetterButtonType.primary) {
-          finalBorderColor = primaryColor;
-        } else if (type == BetterButtonType.success) {
-          finalBorderColor = successColor;
-        } else if (type == BetterButtonType.warning) {
-          finalBorderColor = warningColor;
-        } else if (type == BetterButtonType.danger) {
-          finalBorderColor = dangerColor;
-        } else if (type == BetterButtonType.info) {
-          finalBorderColor = infoColor;
-        }
-      }
-      if (plain == null || plain == false) {
-        if (type == BetterButtonType.defaultType) {
-          finalBorderColor = finalBorderColor;
-        } else {
-          finalBorderColor = Colors.transparent;
         }
       }
     }
@@ -326,6 +282,32 @@ class BetterButton extends StatelessWidget {
       children.add(suffix!);
     }
 
+    BoxDecoration finalDecoration = decoration ?? BoxDecoration();
+    //默认颜色
+    if(finalDecoration.color == null){
+      finalDecoration = finalDecoration.copyWith(
+        color: finalBackgroundColor,
+      );
+    }
+    //默认圆角
+    if(finalDecoration.borderRadius == null){
+      finalDecoration = finalDecoration.copyWith(
+        borderRadius: BorderRadius.all(Radius.circular(6.bw)),
+      );
+    }
+    //禁用按钮
+    if(disabled == true){
+      finalDecoration = finalDecoration.copyWith(
+        color: finalBackgroundColor.withAlpha(128),
+      );
+    }
+    //
+    if(plain==true && decoration?.border == null){
+      finalDecoration = finalDecoration.copyWith(
+        border: Border.all(width: 1.bw,color: finalTextStyle.color ?? finalBackgroundColor),
+      );
+    }
+
     return ElevatedButton(
       style: ButtonStyle(
         padding: WidgetStateProperty.all(EdgeInsets.zero),
@@ -342,27 +324,13 @@ class BetterButton extends StatelessWidget {
             disabled == true || disableSplash == true || loading == true
             ? NoSplash.splashFactory
             : InkSparkle.splashFactory,
-        shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(borderRadius: finalBorderRadius),
-        ),
-        side: isShowBorder == true
-            ? WidgetStateProperty.all(
-                BorderSide(color: finalBorderColor, width: finalBorderWidth),
-              )
-            : WidgetStateProperty.all(BorderSide.none),
       ),
       onPressed: disabled == true ? null : onClick ?? () {},
       child: Ink(
         width: width,
         height: height,
         padding: padding ?? buttonTheme.padding,
-        decoration: BoxDecoration(
-          color: disabled == true
-              ? finalBackgroundColor.withAlpha(128)
-              : finalBackgroundColor,
-          gradient: gradient,
-          borderRadius: finalBorderRadius,
-        ),
+        decoration:finalDecoration,
         child: Wrap(runAlignment: WrapAlignment.center, children: children),
       ),
     );
