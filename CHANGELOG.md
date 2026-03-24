@@ -1,3 +1,7 @@
+## 1.0.13
+
+* Fix the shadow issue of the button
+
 ## 1.0.12
 
 * Optimize the use of BetterButton

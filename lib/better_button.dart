@@ -324,6 +324,11 @@ class BetterButton extends StatelessWidget {
             disabled == true || disableSplash == true || loading == true
             ? NoSplash.splashFactory
             : InkSparkle.splashFactory,
+        shape: finalDecoration.borderRadius != null ? WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: finalDecoration.borderRadius!,
+          ),
+        ) : null,
       ),
       onPressed: disabled == true ? null : onClick ?? () {},
       child: Ink(
