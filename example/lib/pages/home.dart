@@ -60,110 +60,126 @@ class Home extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 10.bw),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text("Flutter ${"移动端组件库".tr}", style: TextStyle(fontSize: 16.bsp)),
-            SizedBox(height: 20.bw),
-            Text("基础组件".tr, style: TextStyle(fontSize: 14.bsp)),
-            SizedBox(height: 10.bw),
-            BetterCell(
-              titleText: "按钮".tr,
-              isShowArrowRight: true,
-              isShowBorder: true,
-              onClick: () {
-                Get.toNamed("/betterButton");
-              },
-            ),
-            BetterCell(
-              titleText: "单元格".tr,
-              isShowArrowRight: true,
-              isShowBorder: true,
-              onClick: () {
-                Get.toNamed("/betterCell");
-              },
-            ),
-            BetterCell(
-              titleText: "轻提示".tr,
-              isShowArrowRight: true,
-              isShowBorder: true,
-              onClick: () {
-                Get.toNamed("/betterToast");
-              },
-            ),
-            BetterCell(
-              titleText: "弹出层".tr,
-              isShowArrowRight: true,
-              onClick: () {
-                Get.toNamed("/betterPopup");
-              },
-            ),
-            SizedBox(height: 20.bw),
-            Text("表单组件".tr, style: TextStyle(fontSize: 14.bsp)),
-            SizedBox(height: 10.bw),
-            BetterCell(
-              titleText: "选择器".tr,
-              isShowArrowRight: true,
-              isShowBorder: true,
-              onClick: () {
-                Get.toNamed("/betterPicker");
-              },
-            ),
-            BetterCell(
-              titleText: "开关".tr,
-              isShowArrowRight: true,
-              isShowBorder: true,
-              onClick: () {
-                Get.toNamed("/betterSwitch");
-              },
-            ),
-            BetterCell(
-              titleText: "日期选择".tr,
-              isShowArrowRight: true,
-              isShowBorder: true,
-              onClick: () {
-                Get.toNamed("/betterDatePicker");
-              },
-            ),
-            BetterCell(
-              titleText: "时间选择".tr,
-              isShowArrowRight: true,
-              isShowBorder: true,
-              onClick: () {
-                Get.toNamed("/betterTimePicker");
-              },
-            ),
-            SizedBox(height: 20.bw),
-            Text("反馈组件".tr, style: TextStyle(fontSize: 14.bsp)),
-            SizedBox(height: 10.bw),
-            BetterCell(
-              titleText: "滑动单元格".tr,
-              isShowArrowRight: true,
-              isShowBorder: true,
-              onClick: () {
-                Get.toNamed("/betterSwipeAction");
-              },
-            ),
-            SizedBox(height: 20.bw),
-            Text("展示组件".tr, style: TextStyle(fontSize: 14.bsp)),
-            SizedBox(height: 10.bw),
-            BetterCell(
-              titleText: "轮播图".tr,
-              isShowArrowRight: true,
-              isShowBorder: true,
-              onClick: () {
-                Get.toNamed("/betterSwiper");
-              },
-            ),
-            BetterCell(
-              titleText: "跑马灯".tr,
-              isShowArrowRight: true,
-              isShowBorder: true,
-              onClick: () {
-                Get.toNamed("/betterMarquee");
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Flutter ${"移动端组件库".tr}",
+                style: TextStyle(fontSize: 16.bsp),
+              ),
+              SizedBox(height: 20.bw),
+              Text("基础组件".tr, style: TextStyle(fontSize: 14.bsp)),
+              SizedBox(height: 10.bw),
+              BetterCell(
+                titleText: "按钮".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterButton");
+                },
+              ),
+              BetterCell(
+                titleText: "单元格".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterCell");
+                },
+              ),
+              BetterCell(
+                titleText: "轻提示".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterToast");
+                },
+              ),
+              BetterCell(
+                titleText: "弹出层".tr,
+                isShowArrowRight: true,
+                onClick: () {
+                  Get.toNamed("/betterPopup");
+                },
+              ),
+              SizedBox(height: 20.bw),
+              Text("表单组件".tr, style: TextStyle(fontSize: 14.bsp)),
+              SizedBox(height: 10.bw),
+              BetterCell(
+                titleText: "选择器".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterPicker");
+                },
+              ),
+              BetterCell(
+                titleText: "开关".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterSwitch");
+                },
+              ),
+              BetterCell(
+                titleText: "日期选择".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterDatePicker");
+                },
+              ),
+              BetterCell(
+                titleText: "时间选择".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterTimePicker");
+                },
+              ),
+              SizedBox(height: 20.bw),
+              Text("反馈组件".tr, style: TextStyle(fontSize: 14.bsp)),
+              SizedBox(height: 10.bw),
+              BetterCell(
+                titleText: "滑动单元格".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterSwipeAction");
+                },
+              ),
+              SizedBox(height: 20.bw),
+              Text("展示组件".tr, style: TextStyle(fontSize: 14.bsp)),
+              SizedBox(height: 10.bw),
+              BetterCell(
+                titleText: "轮播图".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterSwiper");
+                },
+              ),
+              BetterCell(
+                titleText: "跑马灯".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterMarquee");
+                },
+              ),
+              SizedBox(height: 20.bw),
+              // Text("业务组件".tr, style: TextStyle(fontSize: 14.bsp)),
+              // SizedBox(height: 10.bw),
+              // BetterCell(
+              //   titleText: "索引栏".tr,
+              //   isShowArrowRight: true,
+              //   isShowBorder: true,
+              //   onClick: () {
+              //     Get.toNamed("/betterIndexBar");
+              //   },
+              // ),
+            ],
+          ),
         ),
       ),
     );

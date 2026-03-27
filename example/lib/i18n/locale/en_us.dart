@@ -112,4 +112,9 @@ Map<String, String> enUS = {
   '垂直滚动': 'Vertical Scroll',
   '自定义样式': 'Custom Style',
   '全局提示': 'Global Toast',
+  "轮播图": "Swiper",
+  "上一页": "Previous Page",
+  "下一页": "Next Page",
+  '索引栏': 'Index Bar',
+  '业务组件': 'Business Components',
 };
