@@ -6,9 +6,17 @@ enum BetterToastPosition { top, bottom, center }
 
 /// 一个简单的 Toast 帮助器，支持文本、成功/错误和加载变体。
 class BetterToast {
+  /// 是否启用全局 Toast 模式。
+  /// 启用后，同一时间只会显示一个普通 Toast，新 Toast 会替换旧 Toast。
+  static bool isGlobalToast = false;
+
   //加载中
   static OverlayEntry? _currentLoadingEntry;
   static AnimationController? _loadingAnimationController;
+  static OverlayEntry? _currentToastEntry;
+  static AnimationController? _currentToastAnimationController;
+  static AnimationController? _currentToastFadeController;
+  static int _toastSequence = 0;
 
   static Alignment _getAlignment(BetterToastPosition position) {
     switch (position) {
@@ -79,6 +87,7 @@ class BetterToast {
     final screenHeight = BetterScreenUtil.screenHeight;
     topOffset ??= screenHeight * 0.2;
     bottomOffset ??= screenHeight * 0.2;
+    final toastId = ++_toastSequence;
 
     // 动画控制器
     final animationController = AnimationController(
@@ -196,32 +205,112 @@ class BetterToast {
       },
     );
 
-    // 插入到Overlay
-    overlay.insert(overlayEntry);
+    Future<void> removeToast({
+      bool withAnimation = true,
+      bool triggerOnHide = true,
+    }) async {
+      if (_currentToastEntry == overlayEntry) {
+        _currentToastEntry = null;
+      }
+      if (_currentToastAnimationController == animationController) {
+        _currentToastAnimationController = null;
+      }
+      if (_currentToastFadeController == fadeController) {
+        _currentToastFadeController = null;
+      }
+
+      if (withAnimation) {
+        if (animationController.status != AnimationStatus.dismissed) {
+          await animationController.reverse();
+        }
+        if (forbidClick == true &&
+            fadeController.status != AnimationStatus.dismissed) {
+          await fadeController.reverse();
+        }
+      }
+
+      if (overlayEntry.mounted) {
+        overlayEntry.remove();
+      }
+      animationController.dispose();
+      fadeController.dispose();
+
+      if (triggerOnHide) {
+        onHide?.call();
+      }
+    }
+
+    Future<bool> hideCurrentToastImmediately() async {
+      final currentEntry = _currentToastEntry;
+      final currentAnimationController = _currentToastAnimationController;
+      final currentFadeController = _currentToastFadeController;
+      if (currentEntry == null || currentAnimationController == null) {
+        return false;
+      }
+
+      final isShowing =
+          currentAnimationController.status == AnimationStatus.forward ||
+          currentAnimationController.status == AnimationStatus.completed;
+
+      _currentToastEntry = null;
+      _currentToastAnimationController = null;
+      _currentToastFadeController = null;
+
+      if (!isShowing &&
+          currentAnimationController.status != AnimationStatus.dismissed) {
+        await currentAnimationController.reverse();
+      }
+      if (currentFadeController != null &&
+          !isShowing &&
+          currentFadeController.status != AnimationStatus.dismissed) {
+        await currentFadeController.reverse();
+      }
+      if (currentEntry.mounted) {
+        currentEntry.remove();
+      }
+      currentAnimationController.dispose();
+      currentFadeController?.dispose();
+      return isShowing;
+    }
 
     // 启动动画（先显示遮罩层）
-    void startAnimations() async {
+    Future<void> startAnimations() async {
       if (forbidClick == true) {
         await fadeController.forward();
       }
       await animationController.forward();
     }
 
-    // 隐藏动画（先隐藏Toast再隐藏遮罩）
-    Future<void> hideAnimations() async {
-      await animationController.reverse();
-      if (forbidClick == true) {
-        await fadeController.reverse();
+    Future<void> showToast() async {
+      var skipAnimation = false;
+      if (isGlobalToast) {
+        skipAnimation = await hideCurrentToastImmediately();
+        _currentToastEntry = overlayEntry;
+        _currentToastAnimationController = animationController;
+        _currentToastFadeController = fadeController;
       }
-      overlayEntry.remove();
-      onHide?.call();
+
+      // 插入到Overlay
+      overlay.insert(overlayEntry);
+      if (skipAnimation) {
+        if (forbidClick == true) {
+          fadeController.value = 1;
+        }
+        animationController.value = 1;
+        return;
+      }
+      await startAnimations();
     }
 
-    // 执行显示
-    startAnimations();
+    showToast();
 
     // 延迟隐藏
-    Future.delayed(duration ?? const Duration(seconds: 2), hideAnimations);
+    Future.delayed(duration ?? const Duration(seconds: 2), () async {
+      if (isGlobalToast && toastId != _toastSequence) {
+        return;
+      }
+      await removeToast();
+    });
   }
 
   //成功提示

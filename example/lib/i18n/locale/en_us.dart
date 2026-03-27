@@ -111,4 +111,5 @@ Map<String, String> enUS = {
   '通知栏模式': 'Notification Bar Mode',
   '垂直滚动': 'Vertical Scroll',
   '自定义样式': 'Custom Style',
+  '全局提示': 'Global Toast',
 };

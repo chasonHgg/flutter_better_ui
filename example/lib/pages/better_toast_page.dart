@@ -1,4 +1,5 @@
 import 'package:flutter_better_ui/better_cell.dart';
+import 'package:flutter_better_ui/better_switch.dart';
 import 'package:flutter_better_ui/better_toast.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,18 @@ class BetterToastPage extends StatelessWidget {
             children: [
               Text('基础用法'.tr, style: TextStyle(fontSize: 14.bsp)),
               SizedBox(height: 10.bw),
+              BetterCell(
+                titleText: '全局提示'.tr,
+                isShowBorder: true,
+                valueWidget: BetterSwitch(
+                  width: 44.bw,
+                  height: 26.bw,
+                  defaultValue: BetterToast.isGlobalToast,
+                  onChanged: (value) => {
+                    BetterToast.isGlobalToast = value,
+                  },
+                ),
+              ),
               BetterCell(
                 titleText: '文字提示'.tr,
                 isShowArrowRight: true,

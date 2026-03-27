@@ -1,3 +1,7 @@
+## 1.0.14
+
+* BetterToast add isGlobalToast property
+
 ## 1.0.13
 
 * Fix the shadow issue of the button
