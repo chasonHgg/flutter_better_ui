@@ -117,4 +117,5 @@ Map<String, String> enUS = {
   "下一页": "Next Page",
   '索引栏': 'Index Bar',
   '业务组件': 'Business Components',
+  '我是自定义内容': 'I am custom content',
 };

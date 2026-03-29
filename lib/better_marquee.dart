@@ -69,7 +69,7 @@ class _BetterMarqueeState extends State<BetterMarquee>
   double _textWidth = 0;
   double _parentWidth = 0;
 
-  ValueNotifier<double> _offset = ValueNotifier<double>(0);
+  final ValueNotifier<double> _offset = ValueNotifier<double>(0);
 
   String _fullText = "";
 
@@ -88,6 +88,7 @@ class _BetterMarqueeState extends State<BetterMarquee>
   void dispose() {
     // 确保控制器被正确释放
     _controller?.dispose();
+    _offset.dispose();
     super.dispose();
   }
 

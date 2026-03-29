@@ -168,16 +168,16 @@ class Home extends StatelessWidget {
                 },
               ),
               SizedBox(height: 20.bw),
-              // Text("业务组件".tr, style: TextStyle(fontSize: 14.bsp)),
-              // SizedBox(height: 10.bw),
-              // BetterCell(
-              //   titleText: "索引栏".tr,
-              //   isShowArrowRight: true,
-              //   isShowBorder: true,
-              //   onClick: () {
-              //     Get.toNamed("/betterIndexBar");
-              //   },
-              // ),
+              Text("业务组件".tr, style: TextStyle(fontSize: 14.bsp)),
+              SizedBox(height: 10.bw),
+              BetterCell(
+                titleText: "索引栏".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterIndexBar");
+                },
+              ),
             ],
           ),
         ),

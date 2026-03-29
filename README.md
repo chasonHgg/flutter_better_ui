@@ -26,6 +26,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/9.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/10.jpg" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/11.jpg" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/12.jpg" width="200"/>
 </div>
 
 
@@ -708,6 +709,93 @@ BetterMarquee(
   ),
   textList: ["hello world"],
 ),
+```
+
+### BetterIndexBar
+
+```dart
+List<String> azList = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z',
+];
+BetterIndexBar(
+  indexBarColor: ColorUtil.hexToColor("#323233"),
+  indexBarActiveColor: ColorUtil.hexToColor("#1989fa"),
+  headerSlivers: [
+    SliverToBoxAdapter(
+      child: Container(
+        height: 100.bw,
+        alignment: Alignment.center,
+        color:ColorUtil.hexToColor("#fff"),
+        child: Text("我是自定义内容"),
+      ),
+    ),
+  ],
+  items: [
+    for (var item in azList)
+      BetterIndexBarItem(
+        header: BetterIndexBarHeader(
+          anchor: item,
+          height: 32.bw,
+          titleWidget: Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.symmetric(horizontal: 16.bw),
+            decoration: BoxDecoration(
+              color:ColorUtil.hexToColor("#F7F8FA"),
+            ),
+            child: Text(
+              item,
+            ),
+          ),
+        ),
+        list: [
+          for (var i in List.generate(10, (index) => index))
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.bw),
+              child: Container(
+                height: 44.bw,
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border(
+                    bottom: i==9 ? BorderSide.none : BorderSide(
+                      color:ColorUtil.hexToColor("#E5E5E5"),
+                      width: 1.bw,
+                    ),
+                  ),
+                ),
+                child: Text("$item-text"),
+              ),
+            ),
+        ],
+      ),
+  ],
+)
+```
 
 ## 🔧 Utilities
 

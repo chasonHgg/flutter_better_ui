@@ -26,8 +26,16 @@ class MyApp extends StatelessWidget {
       translations: I18nTranslations(),
       locale: const Locale('zh', 'CN'),
       fallbackLocale: const Locale('zh', 'CN'),
-      darkTheme: betterDarkTheme,
-      theme: betterLightTheme,
+      darkTheme: betterDarkTheme.copyWith(
+        appBarTheme: betterDarkTheme.appBarTheme.copyWith(
+          scrolledUnderElevation: 0,
+        ),
+      ),
+      theme: betterLightTheme.copyWith(
+        appBarTheme: betterLightTheme.appBarTheme.copyWith(
+          scrolledUnderElevation: 0,
+        ),
+      ),
       themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       getPages: routes,
       defaultTransition: Transition.cupertino,

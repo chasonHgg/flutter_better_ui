@@ -1,5 +1,6 @@
 ## 1.0.14
 
+* Add BetterIndexBar
 * BetterToast add isGlobalToast property
 
 ## 1.0.13
