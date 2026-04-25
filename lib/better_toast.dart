@@ -1,3 +1,4 @@
+import 'package:flutter_better_ui/better_ui.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,16 @@ enum BetterToastPosition { top, bottom, center }
 class BetterToast {
   /// 是否启用全局 Toast 模式。
   /// 启用后，同一时间只会显示一个普通 Toast，新 Toast 会替换旧 Toast。
-  static bool isGlobalToast = false;
+  static bool _isGlobalToast = false;
+
+  static bool get isGlobalToast => _isGlobalToast;
+
+  static set isGlobalToast(bool value) {
+    if (_isGlobalToast == value) {
+      return;
+    }
+    _isGlobalToast = value;
+  }
 
   //加载中
   static OverlayEntry? _currentLoadingEntry;
@@ -16,7 +26,17 @@ class BetterToast {
   static OverlayEntry? _currentToastEntry;
   static AnimationController? _currentToastAnimationController;
   static AnimationController? _currentToastFadeController;
+  static Future<bool> Function()? _currentToastHider;
+  static final Set<Future<bool> Function()> _activeToastHiders = {};
   static int _toastSequence = 0;
+
+  static OverlayState? _getOverlay(BuildContext? context) {
+    final overlay = BetterUi.overlay;
+    if (overlay != null) {
+      return overlay;
+    }
+    return context == null ? null : Overlay.maybeOf(context, rootOverlay: true);
+  }
 
   static Alignment _getAlignment(BetterToastPosition position) {
     switch (position) {
@@ -29,9 +49,18 @@ class BetterToast {
     }
   }
 
+  static Future<bool> _hideActiveToasts() async {
+    var hasShowingToast = false;
+    final hiders = List<Future<bool> Function()>.of(_activeToastHiders);
+    for (final hider in hiders) {
+      hasShowingToast = await hider() || hasShowingToast;
+    }
+    return hasShowingToast;
+  }
+
   //文字提示
-  static void show(
-    BuildContext context, {
+  static void show({
+    BuildContext? context,
 
     /// Toast 的消息
     String? message,
@@ -83,11 +112,15 @@ class BetterToast {
     double? height,
     VoidCallback? onHide,
   }) {
-    final overlay = Overlay.of(context);
+    final overlay = _getOverlay(context);
+    if (overlay == null) {
+      return;
+    }
     final screenHeight = BetterScreenUtil.screenHeight;
     topOffset ??= screenHeight * 0.2;
     bottomOffset ??= screenHeight * 0.2;
     final toastId = ++_toastSequence;
+    final isGlobalToastWhenShown = isGlobalToast;
 
     // 动画控制器
     final animationController = AnimationController(
@@ -205,10 +238,18 @@ class BetterToast {
       },
     );
 
+    var isRemoved = false;
+    late Future<bool> Function() hideThisToastImmediately;
+
     Future<void> removeToast({
       bool withAnimation = true,
       bool triggerOnHide = true,
     }) async {
+      if (isRemoved) {
+        return;
+      }
+      isRemoved = true;
+
       if (_currentToastEntry == overlayEntry) {
         _currentToastEntry = null;
       }
@@ -218,6 +259,10 @@ class BetterToast {
       if (_currentToastFadeController == fadeController) {
         _currentToastFadeController = null;
       }
+      if (_currentToastHider == hideThisToastImmediately) {
+        _currentToastHider = null;
+      }
+      _activeToastHiders.remove(hideThisToastImmediately);
 
       if (withAnimation) {
         if (animationController.status != AnimationStatus.dismissed) {
@@ -240,55 +285,41 @@ class BetterToast {
       }
     }
 
-    Future<bool> hideCurrentToastImmediately() async {
-      final currentEntry = _currentToastEntry;
-      final currentAnimationController = _currentToastAnimationController;
-      final currentFadeController = _currentToastFadeController;
-      if (currentEntry == null || currentAnimationController == null) {
+    hideThisToastImmediately = () async {
+      if (isRemoved) {
         return false;
       }
 
       final isShowing =
-          currentAnimationController.status == AnimationStatus.forward ||
-          currentAnimationController.status == AnimationStatus.completed;
+          animationController.status == AnimationStatus.forward ||
+          animationController.status == AnimationStatus.completed;
 
-      _currentToastEntry = null;
-      _currentToastAnimationController = null;
-      _currentToastFadeController = null;
-
-      if (!isShowing &&
-          currentAnimationController.status != AnimationStatus.dismissed) {
-        await currentAnimationController.reverse();
-      }
-      if (currentFadeController != null &&
-          !isShowing &&
-          currentFadeController.status != AnimationStatus.dismissed) {
-        await currentFadeController.reverse();
-      }
-      if (currentEntry.mounted) {
-        currentEntry.remove();
-      }
-      currentAnimationController.dispose();
-      currentFadeController?.dispose();
+      await removeToast(withAnimation: !isShowing, triggerOnHide: false);
       return isShowing;
-    }
+    };
 
     // 启动动画（先显示遮罩层）
     Future<void> startAnimations() async {
-      if (forbidClick == true) {
-        await fadeController.forward();
+      try {
+        if (forbidClick == true) {
+          await fadeController.forward();
+        }
+        await animationController.forward();
+      } on TickerCanceled {
+        // Toast may be replaced before its entrance animation completes.
       }
-      await animationController.forward();
     }
 
     Future<void> showToast() async {
       var skipAnimation = false;
-      if (isGlobalToast) {
-        skipAnimation = await hideCurrentToastImmediately();
+      if (isGlobalToastWhenShown) {
+        skipAnimation = await _hideActiveToasts();
         _currentToastEntry = overlayEntry;
         _currentToastAnimationController = animationController;
         _currentToastFadeController = fadeController;
+        _currentToastHider = hideThisToastImmediately;
       }
+      _activeToastHiders.add(hideThisToastImmediately);
 
       // 插入到Overlay
       overlay.insert(overlayEntry);
@@ -306,7 +337,7 @@ class BetterToast {
 
     // 延迟隐藏
     Future.delayed(duration ?? const Duration(seconds: 2), () async {
-      if (isGlobalToast && toastId != _toastSequence) {
+      if (isGlobalToastWhenShown && toastId != _toastSequence) {
         return;
       }
       await removeToast();
@@ -314,8 +345,8 @@ class BetterToast {
   }
 
   //成功提示
-  static void showSuccess(
-    BuildContext context, {
+  static void showSuccess({
+    BuildContext? context,
 
     /// Message of the toast
     String? message,
@@ -337,7 +368,7 @@ class BetterToast {
     VoidCallback? onHide,
   }) {
     show(
-      context,
+      context: context,
       message: message,
       position: BetterToastPosition.center,
       forbidClick: forbidClick,
@@ -355,8 +386,8 @@ class BetterToast {
   }
 
   //失败提示
-  static void showError(
-    BuildContext context, {
+  static void showError({
+    BuildContext? context,
 
     /// Message of the toast
     String? message,
@@ -378,7 +409,7 @@ class BetterToast {
     VoidCallback? onHide,
   }) {
     show(
-      context,
+      context: context,
       message: message,
       position: BetterToastPosition.center,
       forbidClick: forbidClick,
@@ -394,8 +425,8 @@ class BetterToast {
     );
   }
 
-  static void showLoading(
-    BuildContext context, {
+  static void showLoading({
+    BuildContext? context,
 
     /// Message of the toast
     String? message,
@@ -434,7 +465,10 @@ class BetterToast {
     progressSize ??= 25.bw;
     barrierColor ??= Colors.black.withAlpha(178);
 
-    final overlay = Overlay.of(context);
+    final overlay = _getOverlay(context);
+    if (overlay == null) {
+      return;
+    }
     _loadingAnimationController = AnimationController(
       duration: fadeDuration ?? const Duration(milliseconds: 250),
       vsync: overlay,

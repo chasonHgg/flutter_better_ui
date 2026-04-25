@@ -26,11 +26,9 @@ class BetterPickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterPicker.show(
-                    context,
                     title: '标题'.tr,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -56,12 +54,10 @@ class BetterPickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterPicker.show(
-                    context,
                     title: '标题'.tr,
                     diameterRatio: 2,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -87,12 +83,10 @@ class BetterPickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterPicker.show(
-                    context,
                     title: '默认选中'.tr,
                     diameterRatio: 2,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -122,11 +116,9 @@ class BetterPickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterPicker.show(
-                    context,
                     title: '标题'.tr,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -161,11 +153,9 @@ class BetterPickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterPicker.show(
-                    context,
                     title: '标题'.tr,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },

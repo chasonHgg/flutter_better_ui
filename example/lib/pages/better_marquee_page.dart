@@ -13,7 +13,9 @@ class BetterMarqueePage extends StatefulWidget {
 }
 
 class _BetterMarqueePageState extends State<BetterMarqueePage> {
-  List<String> textList = ['start hello world hello world hello world hello world1212121212121212121212 end'];
+  List<String> textList = [
+    'start hello world hello world hello world hello world1212121212121212121212 end',
+  ];
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter_better_ui/better_picker_widget.dart';
+import 'package:flutter_better_ui/better_ui.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_better_ui/utils/better_util.dart';
@@ -75,7 +76,8 @@ import 'package:flutter_better_ui/utils/better_util.dart';
 /// 显示一个模态选择器，支持单列、多列和级联数据结构。
 class BetterPicker {
   static void show(
-    BuildContext context, {
+   {
+     BuildContext? context, 
 
     /// 选择器的列
     required var columns,
@@ -128,11 +130,16 @@ class BetterPicker {
     /// 选择器的覆盖组件
     Widget? overlayWidget,
   }) {
+    final pickerContext = context ?? BetterUi.currentContext;
+    if (pickerContext == null) {
+      return;
+    }
     itemHeight ??=
-        BetterUtil.getThemeExtension(context)?.pickerTheme.itemHeight ?? 44.bw;
+        BetterUtil.getThemeExtension(pickerContext)?.pickerTheme.itemHeight ??
+        44.bw;
 
     showModalBottomSheet(
-      context: context,
+      context: pickerContext,
       backgroundColor: Colors.white,
       enableDrag: false,
       builder: (context) => PopScope(

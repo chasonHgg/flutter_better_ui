@@ -33,7 +33,7 @@ class BetterButtonPage extends StatelessWidget {
                     text: '主要按钮'.tr,
                     type: BetterButtonType.primary,
                     loadingText: "加载中...".tr,
-                    margin: EdgeInsets.only(bottom:20.bw),
+                    margin: EdgeInsets.only(bottom: 20.bw),
                   ),
                   BetterButton(
                     text: '主要按钮'.tr,
@@ -126,20 +126,18 @@ class BetterButtonPage extends StatelessWidget {
                     text: '主要按钮'.tr,
                     type: BetterButtonType.primary,
                     decoration: BoxDecoration(
-                       gradient: LinearGradient(
-                      colors: [Colors.red[400]!, Colors.red[900]!],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      stops: [0.3, 0.7],
-                      tileMode: TileMode.clamp,
-                    ),
+                      gradient: LinearGradient(
+                        colors: [Colors.red[400]!, Colors.red[900]!],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        stops: [0.3, 0.7],
+                        tileMode: TileMode.clamp,
+                      ),
                     ),
                   ),
                   BetterButton(
                     text: '自定义颜色'.tr,
-                    decoration: BoxDecoration(
-                      color:Colors.purple
-                    ),
+                    decoration: BoxDecoration(color: Colors.purple),
 
                     textStyle: TextStyle(color: Colors.white),
                   ),
@@ -183,9 +181,7 @@ class BetterButtonPage extends StatelessWidget {
                 runSpacing: 6.bw,
                 children: [
                   BetterButton(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                    ),
+                    decoration: BoxDecoration(color: Colors.red),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

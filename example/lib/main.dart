@@ -1,6 +1,6 @@
 import 'package:flutter_better_ui/theme/themes/better_dark_theme.dart';
 import 'package:flutter_better_ui/theme/themes/better_light_theme.dart';
-import 'package:flutter_better_ui/utils/better_util.dart';
+import 'package:flutter_better_ui/better_ui.dart';
 import 'package:example/i18n/translations.dart';
 import 'package:example/router/routes.dart';
 import 'package:flutter/material.dart';
@@ -9,20 +9,19 @@ import 'package:get/get.dart';
 bool? isFirst = true;
 
 void main() async {
-  runApp(const MyApp());
+  runApp(BetterUi(designWidth: 375, designHeight: 812, child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    //init Better UI,mast be first line
     if (isFirst == true) {
       isFirst = false;
-      BetterUtil.init(context, designWidth: 375, designHeight: 812);
       Get.changeThemeMode(ThemeMode.system);
     }
     return GetMaterialApp(
+      navigatorKey: BetterUi.navigatorKey,
       translations: I18nTranslations(),
       locale: const Locale('zh', 'CN'),
       fallbackLocale: const Locale('zh', 'CN'),

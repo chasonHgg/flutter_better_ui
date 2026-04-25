@@ -27,38 +27,34 @@ class BetterToastPage extends StatelessWidget {
                   width: 44.bw,
                   height: 26.bw,
                   defaultValue: BetterToast.isGlobalToast,
-                  onChanged: (value) => {
-                    BetterToast.isGlobalToast = value,
-                  },
+                  onChanged: (value) => {BetterToast.isGlobalToast = value},
                 ),
               ),
               BetterCell(
                 titleText: '文字提示'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () =>
-                    BetterToast.show(context, message: 'This is a toast'),
+                onClick: () => BetterToast.show(message: 'This is a toast'),
               ),
               BetterCell(
                 titleText: '成功提示'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () =>
-                    BetterToast.showSuccess(context, message: '成功文案'.tr),
+                onClick: () => BetterToast.showSuccess(message: '成功文案'.tr),
               ),
               BetterCell(
                 titleText: '失败提示'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onClick: () =>
-                    BetterToast.showError(context, message: '失败文案'.tr),
+                    BetterToast.showError(context: context, message: '失败文案'.tr),
               ),
               BetterCell(
                 titleText: '加载提示'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onClick: () => {
-                  BetterToast.showLoading(context, forbidClick: true),
+                  BetterToast.showLoading(forbidClick: true),
                   Future.delayed(Duration(seconds: 2), () {
                     BetterToast.hideLoading();
                   }),
@@ -69,11 +65,7 @@ class BetterToastPage extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onClick: () => {
-                  BetterToast.showLoading(
-                    context,
-                    forbidClick: true,
-                    message: '加载中...',
-                  ),
+                  BetterToast.showLoading(forbidClick: true, message: '加载中...'),
                   Future.delayed(Duration(seconds: 2), () {
                     BetterToast.hideLoading();
                   }),
@@ -88,7 +80,6 @@ class BetterToastPage extends StatelessWidget {
                 isShowBorder: true,
                 onClick: () => {
                   BetterToast.show(
-                    context,
                     message: 'This is a toast',
                     position: BetterToastPosition.top,
                   ),
@@ -100,7 +91,6 @@ class BetterToastPage extends StatelessWidget {
                 isShowBorder: true,
                 onClick: () => {
                   BetterToast.show(
-                    context,
                     message: 'This is a toast',
                     position: BetterToastPosition.center,
                   ),
@@ -110,9 +100,7 @@ class BetterToastPage extends StatelessWidget {
                 titleText: '底部位置'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () => {
-                  BetterToast.show(context, message: 'This is a toast'),
-                },
+                onClick: () => {BetterToast.show(message: 'This is a toast')},
               ),
               SizedBox(height: 20.bw),
               Text('自定义'.tr, style: TextStyle(fontSize: 14.bsp)),
@@ -123,7 +111,6 @@ class BetterToastPage extends StatelessWidget {
                 isShowBorder: true,
                 onClick: () => {
                   BetterToast.show(
-                    context,
                     message: '自定义图标'.tr,
                     width: 120.bw,
                     height: 120.bw,
@@ -138,7 +125,6 @@ class BetterToastPage extends StatelessWidget {
                 isShowBorder: true,
                 onClick: () => {
                   BetterToast.show(
-                    context,
                     child: Image.asset(
                       'assets/images/cat.jpeg',
                       width: 200.bw,
@@ -153,7 +139,6 @@ class BetterToastPage extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onClick: () => BetterToast.show(
-                  context,
                   backgroundColor: Colors.red,
                   message: 'This is a toast',
                 ),

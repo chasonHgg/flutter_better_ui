@@ -58,7 +58,8 @@ class BetterTimePicker {
   }
 
   static void show(
-    BuildContext context, {
+   {
+    BuildContext? context,
     //标题
     String? title,
 
@@ -222,7 +223,7 @@ class BetterTimePicker {
     }
 
     BetterPicker.show(
-      context,
+      context:context,
       columns: columns,
       title: title,
       cancelText: cancelText,

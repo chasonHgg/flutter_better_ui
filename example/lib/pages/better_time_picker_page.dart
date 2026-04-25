@@ -26,11 +26,9 @@ class BetterTimePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterTimePicker.show(
-                    context,
                     title: '时间选择'.tr,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -44,12 +42,10 @@ class BetterTimePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterTimePicker.show(
-                    context,
                     title: '时间选择'.tr,
                     isDefaultShowNow: false,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -63,14 +59,12 @@ class BetterTimePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterTimePicker.show(
-                    context,
                     title: '时间选择'.tr,
                     isDefaultShowNow: false,
                     minDate: [10, 0, 0],
                     maxDate: [11, 59, 59],
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -84,7 +78,6 @@ class BetterTimePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterTimePicker.show(
-                    context,
                     title: '时间选择'.tr,
                     formatter: (BetterTimePickerFormatterOption option) {
                       if (option.columnType ==
@@ -103,7 +96,6 @@ class BetterTimePickerPage extends StatelessWidget {
                     },
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -117,7 +109,6 @@ class BetterTimePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterTimePicker.show(
-                    context,
                     title: '时间选择'.tr,
                     columnTypes: [
                       BetterTimePickerColumnType.hour,
@@ -135,7 +126,6 @@ class BetterTimePickerPage extends StatelessWidget {
                     },
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -149,12 +139,10 @@ class BetterTimePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterTimePicker.show(
-                    context,
                     title: '时间选择'.tr,
                     defaultValue: [10, 30, 0],
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -171,12 +159,10 @@ class BetterTimePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterTimePicker.show(
-                    context,
                     title: '时间选择'.tr,
                     columnTypes: [BetterTimePickerColumnType.hour],
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -190,7 +176,6 @@ class BetterTimePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterTimePicker.show(
-                    context,
                     title: '时间选择'.tr,
                     columnTypes: [
                       BetterTimePickerColumnType.hour,
@@ -198,7 +183,6 @@ class BetterTimePickerPage extends StatelessWidget {
                     ],
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -212,12 +196,10 @@ class BetterTimePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterTimePicker.show(
-                    context,
                     title: '时间选择'.tr,
                     columnTypes: [BetterTimePickerColumnType.second],
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },

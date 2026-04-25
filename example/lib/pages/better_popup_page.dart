@@ -76,7 +76,6 @@ class BetterPopupPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterPopup.show(
-                    context,
                     height: 200.bw,
                     child: Center(
                       child: Text(
@@ -94,7 +93,6 @@ class BetterPopupPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterPopup.show(
-                    context,
                     height: 200.bw,
                     closeIcon: Positioned(
                       right: 16.bw,
@@ -121,7 +119,6 @@ class BetterPopupPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterPopup.show(
-                    context,
                     height: 200.bw,
                     closeIcon: Positioned(
                       left: 16.bw,
@@ -152,7 +149,6 @@ class BetterPopupPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterPopup.show(
-                    context,
                     height: 200.bw,
                     child: Center(
                       child: Text(
@@ -162,7 +158,7 @@ class BetterPopupPage extends StatelessWidget {
                     ),
                     isShowCloseIcon: true,
                     onClose: () {
-                      BetterToast.show(context, message: '关闭了');
+                      BetterToast.show(context: context, message: '关闭了');
                     },
                   );
                 },
@@ -187,7 +183,6 @@ class BetterPopupPage extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           BetterPopup.show(
-            context,
             position: position,
             width: width,
             height: height,

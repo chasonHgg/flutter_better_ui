@@ -27,7 +27,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                     width: 60.bw,
                     value: "1",
                     onClick: (value) async {
-                      BetterToast.show(context, message: '删除'.tr);
+                      BetterToast.show(context: context, message: '删除'.tr);
                       return true;
                     },
                     child: Container(
@@ -43,7 +43,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                     width: 60.bw,
                     value: '2',
                     onClick: (value) async {
-                      BetterToast.show(context, message: '收藏'.tr);
+                      BetterToast.show(context: context, message: '收藏'.tr);
                       return true;
                     },
                     child: Container(
@@ -61,7 +61,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                     width: 60.bw,
                     value: '删除',
                     onClick: (value) async {
-                      BetterToast.show(context, message: '删除');
+                      BetterToast.show(context: context, message: '删除');
                       return true;
                     },
                     child: Container(
@@ -77,7 +77,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                     width: 60.bw,
                     value: '收藏',
                     onClick: (value) async {
-                      BetterToast.show(context, message: '收藏');
+                      BetterToast.show(context: context, message: '收藏');
                       return true;
                     },
                     child: Container(
@@ -107,7 +107,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                     width: 60.bw,
                     value: "1",
                     onClick: (value) async {
-                      BetterToast.show(context, message: '删除'.tr);
+                      BetterToast.show(context: context, message: '删除'.tr);
                       return true;
                     },
                     child: Container(
@@ -123,7 +123,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                     width: 60.bw,
                     value: '2',
                     onClick: (value) async {
-                      BetterToast.show(context, message: '收藏'.tr);
+                      BetterToast.show(context: context, message: '收藏'.tr);
                       return true;
                     },
                     child: Container(
@@ -141,7 +141,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                     width: 60.bw,
                     value: '删除',
                     onClick: (value) async {
-                      BetterToast.show(context, message: '删除');
+                      BetterToast.show(context: context, message: '删除');
                       return true;
                     },
                     child: Container(
@@ -157,7 +157,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                     width: 60.bw,
                     value: '收藏',
                     onClick: (value) async {
-                      BetterToast.show(context, message: '收藏');
+                      BetterToast.show(context: context, message: '收藏');
                       return true;
                     },
                     child: Container(

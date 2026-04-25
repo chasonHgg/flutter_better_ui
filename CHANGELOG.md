@@ -1,3 +1,11 @@
+## 2.0.0
+
+* Breaking change: initialize Better UI with `BetterUi` as the app wrapper instead of calling `BetterUtil.init` manually.
+* Add `BetterUi.navigatorKey` and global context/overlay support for route-based popups, pickers, and toast.
+* Update `BetterToast` APIs to support global usage without passing a `BuildContext`, including text, success, error, and loading toast variants.
+* Update `BetterPicker`, `BetterPopup`, `BetterDatePicker`, and `BetterTimePicker` to use an optional named `context` parameter and fall back to `BetterUi.currentContext`.
+* Update the example app and documentation to show `MaterialApp` configured with `navigatorKey: BetterUi.navigatorKey`.
+
 ## 1.0.14
 
 * Add BetterIndexBar

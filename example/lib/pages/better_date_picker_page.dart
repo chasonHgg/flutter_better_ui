@@ -26,11 +26,9 @@ class BetterDatePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterDatePicker.show(
-                    context,
                     title: '日期选择'.tr,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -44,12 +42,10 @@ class BetterDatePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterDatePicker.show(
-                    context,
                     title: '日期选择'.tr,
                     isDefaultShowToday: false,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -63,13 +59,11 @@ class BetterDatePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterDatePicker.show(
-                    context,
                     title: '日期选择'.tr,
                     minDate: [2022, 1, 1],
                     maxDate: [2024, 12, 31],
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -83,7 +77,6 @@ class BetterDatePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterDatePicker.show(
-                    context,
                     title: '日期选择'.tr,
                     formatter: (BetterDatePickerFormatterOption option) {
                       if (option.columnType ==
@@ -101,7 +94,6 @@ class BetterDatePickerPage extends StatelessWidget {
                     },
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -115,7 +107,6 @@ class BetterDatePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterDatePicker.show(
-                    context,
                     title: '日期选择'.tr,
                     columnTypes: [
                       BetterDatePickerColumnType.year,
@@ -133,7 +124,6 @@ class BetterDatePickerPage extends StatelessWidget {
                     },
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -147,12 +137,10 @@ class BetterDatePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterDatePicker.show(
-                    context,
                     title: '日期选择'.tr,
                     defaultValue: [2025, 9, 8],
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -169,12 +157,10 @@ class BetterDatePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterDatePicker.show(
-                    context,
                     title: '日期选择'.tr,
                     columnTypes: [BetterDatePickerColumnType.year],
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -188,7 +174,6 @@ class BetterDatePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterDatePicker.show(
-                    context,
                     title: '日期选择'.tr,
                     columnTypes: [
                       BetterDatePickerColumnType.month,
@@ -196,7 +181,6 @@ class BetterDatePickerPage extends StatelessWidget {
                     ],
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },
@@ -210,7 +194,6 @@ class BetterDatePickerPage extends StatelessWidget {
                 isShowArrowRight: true,
                 onClick: () {
                   BetterDatePicker.show(
-                    context,
                     title: '日期选择'.tr,
                     columnTypes: [
                       BetterDatePickerColumnType.year,
@@ -218,7 +201,6 @@ class BetterDatePickerPage extends StatelessWidget {
                     ],
                     onConfirm: (List<BetterPickerItem> selectedValues) {
                       BetterToast.show(
-                        context,
                         message: selectedValues.map((e) => e.value).join(','),
                       );
                     },

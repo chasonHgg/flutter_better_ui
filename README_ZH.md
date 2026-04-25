@@ -72,17 +72,17 @@ dependencies:
 
 ```dart
 void main() async {
-  runApp(const MyApp());
+  runApp(BetterUi(designWidth: 375, designHeight: 812, child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    //init Better UI,mast be first line
-     BetterUtil.init(context, designWidth: 375, designHeight: 812);
     return MaterialApp(
-       body: HomePage();
+      //必须指定
+      navigatorKey: BetterUi.navigatorKey,
+      home: HomePage();
     );
   }
 }
@@ -145,13 +145,11 @@ BetterButton(
 ```dart
 // 基础提示
 BetterToast.show(
-  context,
   message: "操作成功",
 );
 
 // 自定义样式
 BetterToast.show(
-  context,
   message: "自定义提示",
   backgroundColor: Colors.blue,
   textColor: Colors.white,
@@ -160,7 +158,7 @@ BetterToast.show(
 );
 
 // 加载提示
-BetterToast.showLoading(context);
+BetterToast.showLoading();
 BetterToast.hideLoading();
 ```
 
@@ -169,7 +167,6 @@ BetterToast.hideLoading();
 ```dart
 // 底部弹出
 BetterPopup.show(
-  context,
   position: BetterPopupPosition.bottom,
   child: Container(
     height: 300,
@@ -179,7 +176,6 @@ BetterPopup.show(
 
 // 居中弹出
 BetterPopup.show(
-  context,
   position: BetterPopupPosition.center,
   child: Container(
     width: 300,
@@ -194,7 +190,6 @@ BetterPopup.show(
 ```dart
 // 单列选择器
 BetterPicker.show(
-  context,
   columns: [
     BetterPickerItem(text: '选项1', value: 'option1'),
     BetterPickerItem(text: '选项2', value: 'option2'),
@@ -207,7 +202,6 @@ BetterPicker.show(
 
 // 多列选择器
 BetterPicker.show(
-  context,
   columns: [
     [
       BetterPickerItem(text: '周一', value: 'Monday'),
@@ -227,7 +221,6 @@ BetterPicker.show(
 
 // 级联选择器
 BetterPicker.show(
-  context,
   columns: [
     BetterPickerItem(
       text: '浙江',
@@ -510,7 +503,6 @@ BetterSwipeCell(
 ```dart
 // Basic date picker
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   onConfirm: (List<BetterPickerItem> selectedValues) {
     print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
@@ -519,7 +511,6 @@ BetterDatePicker.show(
 
 // Date picker with custom range
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   minDate: [2022, 1, 1],
   maxDate: [2024, 12, 31],
@@ -530,7 +521,6 @@ BetterDatePicker.show(
 
 // Date picker with custom formatting
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   formatter: (BetterDatePickerFormatterOption option) {
     if (option.columnType == BetterDatePickerColumnType.year) {
@@ -551,7 +541,6 @@ BetterDatePicker.show(
 
 // Date picker with specific column types (year and month only)
 BetterDatePicker.show(
-  context,
   title: "选择年月",
   columnTypes: [
     BetterDatePickerColumnType.year,
@@ -564,7 +553,6 @@ BetterDatePicker.show(
 
 // Date picker with default value
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   defaultValue: [2025, 9, 8],
   onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -574,7 +562,6 @@ BetterDatePicker.show(
 
 // Date picker with filtering (e.g., only show months divisible by 6)
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   columnTypes: [
     BetterDatePickerColumnType.year,
@@ -593,7 +580,6 @@ BetterDatePicker.show(
 
 // Date picker without default today
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   isDefaultShowToday: false,
   onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -607,7 +593,6 @@ BetterDatePicker.show(
 ```dart
 // 基础时间选择器
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   onConfirm: (List<BetterPickerItem> selectedValues) {
     print("选择的时间: ${selectedValues.map((e) => e.value).join(':')}");
@@ -616,7 +601,6 @@ BetterTimePicker.show(
 
 // 自定义时间范围的时间选择器
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   minDate: [10, 0, 0],
   maxDate: [18, 59, 59],
@@ -627,7 +611,6 @@ BetterTimePicker.show(
 
 // 自定义格式化的时间选择器
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   formatter: (BetterTimePickerFormatterOption option) {
     if (option.columnType == BetterTimePickerColumnType.hour) {
@@ -648,7 +631,6 @@ BetterTimePicker.show(
 
 // 指定列类型的时间选择器（仅选择时分）
 BetterTimePicker.show(
-  context,
   title: "选择时分",
   columnTypes: [
     BetterTimePickerColumnType.hour,
@@ -661,7 +643,6 @@ BetterTimePicker.show(
 
 // 设置默认值的时间选择器
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   defaultValue: [14, 30, 0],
   onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -671,7 +652,6 @@ BetterTimePicker.show(
 
 // 带过滤功能的时间选择器（例如：只显示能被5整除的分钟）
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   columnTypes: [
     BetterTimePickerColumnType.hour,
@@ -690,7 +670,6 @@ BetterTimePicker.show(
 
 // 不默认显示当前时间的时间选择器
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   isDefaultShowNow: false,
   onConfirm: (List<BetterPickerItem> selectedValues) {

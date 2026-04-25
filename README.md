@@ -76,17 +76,16 @@ dependencies:
 
 ```dart
 void main() async {
-  runApp(const MyApp());
+  runApp(BetterUi(designWidth: 375, designHeight: 812, child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    //init Better UI,mast be first line
-     BetterUtil.init(context, designWidth: 375, designHeight: 812);
     return MaterialApp(
-       body: HomePage();
+       navigatorKey: BetterUi.navigatorKey,
+       home: HomePage();
     );
   }
 }
@@ -150,13 +149,11 @@ BetterButton(
 ```dart
 // Basic toast
 BetterToast.show(
-  context,
   message: "Operation succeeded",
 );
 
 // Custom style
 BetterToast.show(
-  context,
   message: "Custom toast",
   backgroundColor: Colors.blue,
   textColor: Colors.white,
@@ -165,7 +162,7 @@ BetterToast.show(
 );
 
 // Loading toast
-BetterToast.showLoading(context);
+BetterToast.showLoading();
 BetterToast.hideLoading();
 ```
 
@@ -174,7 +171,6 @@ BetterToast.hideLoading();
 ```dart
 // Bottom popup
 BetterPopup.show(
-  context,
   position: BetterPopupPosition.bottom,
   child: Container(
     height: 300,
@@ -184,7 +180,6 @@ BetterPopup.show(
 
 // Center popup
 BetterPopup.show(
-  context,
   position: BetterPopupPosition.center,
   child: Container(
     width: 300,
@@ -199,7 +194,6 @@ BetterPopup.show(
 ```dart
 // Single-column picker
 BetterPicker.show(
-  context,
   columns: [
     BetterPickerItem(text: 'Option 1', value: 'option1'),
     BetterPickerItem(text: 'Option 2', value: 'option2'),
@@ -212,7 +206,6 @@ BetterPicker.show(
 
 // Multi-column picker
 BetterPicker.show(
-  context,
   columns: [
     [
       BetterPickerItem(text: 'Monday', value: 'Monday'),
@@ -232,7 +225,6 @@ BetterPicker.show(
 
 // Cascading picker
 BetterPicker.show(
-  context,
   columns: [
     BetterPickerItem(
       text: 'Zhejiang',
@@ -344,17 +336,17 @@ BetterSwitch(
 BetterSwitch(
   onUpdateChange: () async {
     // Show confirmation dialog
-    final result = await showDialog<bool>(
+    final result = await showCupertinoDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (context) => CupertinoAlertDialog(
         title: Text('Confirm'),
         content: Text('Do you want to toggle the switch?'),
         actions: [
-          TextButton(
+          CupertinoDialogAction(
             onPressed: () => Navigator.pop(context, false),
             child: Text('Cancel'),
           ),
-          TextButton(
+          CupertinoDialogAction(
             onPressed: () => Navigator.pop(context, true),
             child: Text('Confirm'),
           ),
@@ -490,7 +482,6 @@ BetterSwipeCell(
 ```dart
 // Basic date picker
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   onConfirm: (List<BetterPickerItem> selectedValues) {
     print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
@@ -499,7 +490,6 @@ BetterDatePicker.show(
 
 // Date picker with custom range
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   minDate: [2022, 1, 1],
   maxDate: [2024, 12, 31],
@@ -510,7 +500,6 @@ BetterDatePicker.show(
 
 // Date picker with custom formatting
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   formatter: (BetterDatePickerFormatterOption option) {
     if (option.columnType == BetterDatePickerColumnType.year) {
@@ -531,7 +520,6 @@ BetterDatePicker.show(
 
 // Date picker with specific column types (year and month only)
 BetterDatePicker.show(
-  context,
   title: "选择年月",
   columnTypes: [
     BetterDatePickerColumnType.year,
@@ -544,7 +532,6 @@ BetterDatePicker.show(
 
 // Date picker with default value
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   defaultValue: [2025, 9, 8],
   onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -554,7 +541,6 @@ BetterDatePicker.show(
 
 // Date picker with filtering (e.g., only show months divisible by 6)
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   columnTypes: [
     BetterDatePickerColumnType.year,
@@ -573,7 +559,6 @@ BetterDatePicker.show(
 
 // Date picker without default today
 BetterDatePicker.show(
-  context,
   title: "选择日期",
   isDefaultShowToday: false,
   onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -587,7 +572,6 @@ BetterDatePicker.show(
 ```dart
 // Basic time picker
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   onConfirm: (List<BetterPickerItem> selectedValues) {
     print("Selected time: ${selectedValues.map((e) => e.value).join(':')}");
@@ -596,7 +580,6 @@ BetterTimePicker.show(
 
 // Time picker with custom range
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   minDate: [10, 0, 0],
   maxDate: [18, 59, 59],
@@ -607,7 +590,6 @@ BetterTimePicker.show(
 
 // Time picker with custom formatting
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   formatter: (BetterTimePickerFormatterOption option) {
     if (option.columnType == BetterTimePickerColumnType.hour) {
@@ -628,7 +610,6 @@ BetterTimePicker.show(
 
 // Time picker with specific column types (hour and minute only)
 BetterTimePicker.show(
-  context,
   title: "选择时分",
   columnTypes: [
     BetterTimePickerColumnType.hour,
@@ -641,7 +622,6 @@ BetterTimePicker.show(
 
 // Time picker with default value
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   defaultValue: [14, 30, 0],
   onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -651,7 +631,6 @@ BetterTimePicker.show(
 
 // Time picker with filtering (e.g., only show minutes divisible by 5)
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   columnTypes: [
     BetterTimePickerColumnType.hour,
@@ -670,7 +649,6 @@ BetterTimePicker.show(
 
 // Time picker without default current time
 BetterTimePicker.show(
-  context,
   title: "选择时间",
   isDefaultShowNow: false,
   onConfirm: (List<BetterPickerItem> selectedValues) {

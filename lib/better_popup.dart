@@ -1,3 +1,4 @@
+import 'package:flutter_better_ui/better_ui.dart';
 import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
@@ -10,7 +11,8 @@ enum BetterPopupPosition { top, bottom, left, right, center }
 /// 显示一个弹出层，支持从不同边缘或中心显示，可选关闭按钮和自定义内容。
 class BetterPopup {
   static void show(
-    BuildContext context, {
+     {
+      BuildContext? context,
 
     /// 弹出层的位置
     BetterPopupPosition position = BetterPopupPosition.bottom,
@@ -54,9 +56,13 @@ class BetterPopup {
     /// 是否启用拖拽，仅支持底部弹出
     bool? enableDrag,
   }) {
+    final popupContext = context ?? BetterUi.currentContext;
+    if (popupContext == null) {
+      return;
+    }
     if (position == BetterPopupPosition.bottom) {
       _showBottomPopup(
-        context,
+        popupContext,
         backgroundColor: backgroundColor,
         height: height,
         width: width,
@@ -75,7 +81,7 @@ class BetterPopup {
       return;
     }
     _showPopup(
-      context,
+      popupContext,
       position: position,
       backgroundColor: backgroundColor,
       height: height,

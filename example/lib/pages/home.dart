@@ -37,7 +37,6 @@ class Home extends StatelessWidget {
           IconButton(
             onPressed: () {
               BetterPicker.show(
-                context,
                 onConfirm: (value) {
                   if (value.first.value == I18nLocale.zhCN.name) {
                     I18nTranslations.updateLocale(I18nLocale.zhCN);

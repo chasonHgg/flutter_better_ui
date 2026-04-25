@@ -114,8 +114,8 @@ class BetterDatePicker {
     return items;
   }
 
-  static void show(
-    BuildContext context, {
+  static void show({
+    BuildContext? context,
     //标题
     String? title,
 
@@ -289,7 +289,7 @@ class BetterDatePicker {
     }
 
     BetterPicker.show(
-      context,
+      context:context,
       title: title,
       cancelText: cancelText,
       confirmText: confirmText,

@@ -75,7 +75,7 @@ class _BetterSwitchPageState extends State<BetterSwitchPage> {
               BetterSwitch(
                 disabled: true,
                 onChanged: (value) {
-                  BetterToast.showError(context, message: '禁用按钮');
+                  BetterToast.showError(context: context, message: '禁用按钮');
                 },
               ),
               SizedBox(height: 20.bw),
