@@ -1,3 +1,8 @@
+## 2.0.1
+
+* Add `BetterButton` content alignment controls with `alignment`, `runAlignment`, and `crossAxisAlignment`.
+* Fix `BetterButton` custom `child` visibility when `loading` and `hideContentWhenLoading` are enabled.
+
 ## 2.0.0
 
 * Breaking change: initialize Better UI with `BetterUi` as the app wrapper instead of calling `BetterUtil.init` manually.

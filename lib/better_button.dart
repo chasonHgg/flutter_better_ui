@@ -26,7 +26,6 @@ class BetterButton extends StatelessWidget {
   /// 按下时的覆盖/水波纹颜色
   final Color? overlayColor;
 
-
   /// 是否显示加载状态
   final bool loading;
 
@@ -90,6 +89,12 @@ class BetterButton extends StatelessWidget {
   /// 自定义子组件。如果提供，[text] 将被忽略
   final Widget? child;
 
+  final WrapAlignment runAlignment;
+
+  final WrapCrossAlignment crossAxisAlignment;
+
+  final WrapAlignment alignment;
+
   /// 创建一个 [BetterButton]。
   BetterButton({
     super.key,
@@ -118,6 +123,9 @@ class BetterButton extends StatelessWidget {
     this.hideContentWhenLoading = true,
     this.loadingText,
     this.child,
+    this.runAlignment = WrapAlignment.center,
+    this.crossAxisAlignment = WrapCrossAlignment.center,
+    this.alignment=WrapAlignment.center
   });
 
   @override
@@ -137,11 +145,9 @@ class BetterButton extends StatelessWidget {
     }
     Color? finalTextColor = buttonTheme.defaultTextColor;
 
-
     Color finalLoadingColor = buttonTheme.loadingColor;
 
     TextStyle? finalTextStyle = textStyle ?? TextStyle();
-
 
     // 获取主题色
     Color primaryColor = themeExtension.primaryColor;
@@ -261,7 +267,8 @@ class BetterButton extends StatelessWidget {
       children.add(Text(text!, style: finalTextStyle));
     }
     //获取自定义内容
-    if (child != null) {
+    if (child != null && (loading == false ||
+            (loading == true && hideContentWhenLoading == false))) {
       children.add(child!);
     }
 
@@ -284,27 +291,28 @@ class BetterButton extends StatelessWidget {
 
     BoxDecoration finalDecoration = decoration ?? BoxDecoration();
     //默认颜色
-    if(finalDecoration.color == null){
-      finalDecoration = finalDecoration.copyWith(
-        color: finalBackgroundColor,
-      );
+    if (finalDecoration.color == null) {
+      finalDecoration = finalDecoration.copyWith(color: finalBackgroundColor);
     }
     //默认圆角
-    if(finalDecoration.borderRadius == null){
+    if (finalDecoration.borderRadius == null) {
       finalDecoration = finalDecoration.copyWith(
         borderRadius: BorderRadius.all(Radius.circular(6.bw)),
       );
     }
     //禁用按钮
-    if(disabled == true){
+    if (disabled == true) {
       finalDecoration = finalDecoration.copyWith(
         color: finalBackgroundColor.withAlpha(128),
       );
     }
     //
-    if(plain==true && decoration?.border == null){
+    if (plain == true && decoration?.border == null) {
       finalDecoration = finalDecoration.copyWith(
-        border: Border.all(width: 1.bw,color: finalTextStyle.color ?? finalBackgroundColor),
+        border: Border.all(
+          width: 1.bw,
+          color: finalTextStyle.color ?? finalBackgroundColor,
+        ),
       );
     }
 
@@ -324,19 +332,26 @@ class BetterButton extends StatelessWidget {
             disabled == true || disableSplash == true || loading == true
             ? NoSplash.splashFactory
             : InkSparkle.splashFactory,
-        shape: finalDecoration.borderRadius != null ? WidgetStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: finalDecoration.borderRadius!,
-          ),
-        ) : null,
+        shape: finalDecoration.borderRadius != null
+            ? WidgetStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: finalDecoration.borderRadius!,
+                ),
+              )
+            : null,
       ),
       onPressed: disabled == true ? null : onClick ?? () {},
       child: Ink(
         width: width,
         height: height,
         padding: padding ?? buttonTheme.padding,
-        decoration:finalDecoration,
-        child: Wrap(runAlignment: WrapAlignment.center, children: children),
+        decoration: finalDecoration,
+        child: Wrap(
+          runAlignment: runAlignment,
+          crossAxisAlignment: crossAxisAlignment,
+          alignment: alignment,
+          children: children,
+        ),
       ),
     );
   }
