@@ -31,11 +31,14 @@ class BetterToast {
   static int _toastSequence = 0;
 
   static OverlayState? _getOverlay(BuildContext? context) {
-    final overlay = BetterUi.overlay;
-    if (overlay != null) {
-      return overlay;
+    if (context != null) {
+      final overlay = Overlay.maybeOf(context, rootOverlay: true);
+      if (overlay != null) {
+        return overlay;
+      }
     }
-    return context == null ? null : Overlay.maybeOf(context, rootOverlay: true);
+
+    return BetterUi.overlay;
   }
 
   static Alignment _getAlignment(BetterToastPosition position) {
