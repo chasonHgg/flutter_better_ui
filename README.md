@@ -27,6 +27,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/10.jpg" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/11.jpg" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/12.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/13.gif" width="200"/>
 </div>
 
 
@@ -56,6 +57,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 ### Display component
 - **BetterSwiper** - Used to loop through a set of images or content
 - **BetterMarquee** - Used for looping and displaying a set of message notifications.
+- **BetterCollapse** - Collapse panel for showing and hiding grouped content
 
 ### Utilities
 - **BetterScreenUtil** - Screen adaptation utilities
@@ -675,6 +677,96 @@ BetterSwiper(
 ),
 ```
 
+### BetterCollapse - Collapse Panel
+
+```dart
+// Basic collapse
+BetterCollapse(
+  children: [
+    BetterCollapseItem(
+      title: Text('Title 1'),
+      children: [
+        Text('Content 1'),
+        Text('Content 2'),
+      ],
+    ),
+    BetterCollapseItem(
+      title: Text('Title 2'),
+      children: [
+        Text('Content 3'),
+      ],
+    ),
+  ],
+)
+
+// Accordion mode: opening one panel closes the previous one
+BetterCollapse(
+  accordion: true,
+  children: [
+    BetterCollapseItem(
+      title: Text('Title 1'),
+      children: [Text('Content 1')],
+    ),
+    BetterCollapseItem(
+      title: Text('Title 2'),
+      children: [Text('Content 2')],
+    ),
+  ],
+)
+
+// Custom title area, colors, ripple, and icon colors
+BetterCollapse(
+  minTitleHeight: 0,
+  titleMinVerticalPadding: 0,
+  titlePadding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 12.bw),
+  background: Colors.white,
+  collapsedBackground: Colors.white,
+  iconColor: Colors.blue,
+  collapsedIconColor: Colors.grey,
+  splashColor: Colors.blue.withAlpha(20),
+  contentPadding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 12.bw),
+  showDivider: true,
+  children: [
+    BetterCollapseItem(
+      title: Text('Custom title'),
+      children: [Text('Custom content')],
+    ),
+  ],
+)
+```
+
+#### BetterCollapse Theme
+
+```dart
+ThemeData(
+  extensions: [
+    BetterThemeExtension(
+      // ...other theme fields
+      collapseTheme: BetterCollapseTheme(
+        backgroundColor: Colors.white,
+        collapsedBackground: Colors.white,
+        iconColor: Colors.blue,
+        collapsedIconColor: Colors.grey,
+        splashColor: Colors.blue.withAlpha(20),
+      ),
+    ),
+  ],
+)
+```
+
+| Property | Description |
+| --- | --- |
+| `accordion` | Whether only one panel can be expanded at the same time |
+| `titlePadding` | Padding of the title area |
+| `minTitleHeight` | Minimum height of the title area |
+| `titleMinVerticalPadding` | Removes or customizes the internal vertical padding of the title ListTile |
+| `background` | Background color when expanded |
+| `collapsedBackground` | Background color when collapsed |
+| `iconColor` | Arrow icon color when expanded |
+| `collapsedIconColor` | Arrow icon color when collapsed |
+| `splashColor` | Ripple color when tapping the title area |
+| `contentPadding` | Padding of the expanded content |
+
 ### BetterMarquee
 
 ```dart
@@ -818,6 +910,7 @@ See the `example/` directory for full usage examples:
 - `better_time_picker_page.dart` - Time picker examples
 - `better_swiper_page.dart` - swiper examples
 - `better_marquee_page.dart` - marquee examples
+- `better_collapse_page.dart` - collapse examples
 
 ## 🤝 Contributing
 

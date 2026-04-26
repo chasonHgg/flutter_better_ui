@@ -24,6 +24,7 @@
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/10.jpg" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/11.jpg" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/12.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/13.gif" width="200"/>
 </div>
 
 
@@ -52,6 +53,7 @@
 ### 展示组件
 - **BetterSwiper** - 用于循环播放一组图片或内容
 - **BetterMarquee** - 用于循环播放展示一组消息通知。
+- **BetterCollapse** - 折叠面板组件，用于展示和隐藏分组内容
 
 ### 工具类
 - **BetterScreenUtil** - 屏幕适配工具
@@ -696,6 +698,96 @@ BetterSwiper(
 ),
 ```
 
+### BetterCollapse - 折叠面板
+
+```dart
+// 基础折叠面板
+BetterCollapse(
+  children: [
+    BetterCollapseItem(
+      title: Text('标题 1'),
+      children: [
+        Text('内容 1'),
+        Text('内容 2'),
+      ],
+    ),
+    BetterCollapseItem(
+      title: Text('标题 2'),
+      children: [
+        Text('内容 3'),
+      ],
+    ),
+  ],
+)
+
+// 手风琴模式：打开一个面板时关闭上一个面板
+BetterCollapse(
+  accordion: true,
+  children: [
+    BetterCollapseItem(
+      title: Text('标题 1'),
+      children: [Text('内容 1')],
+    ),
+    BetterCollapseItem(
+      title: Text('标题 2'),
+      children: [Text('内容 2')],
+    ),
+  ],
+)
+
+// 自定义标题区域、背景、水波纹和箭头颜色
+BetterCollapse(
+  minTitleHeight: 0,
+  titleMinVerticalPadding: 0,
+  titlePadding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 12.bw),
+  background: Colors.white,
+  collapsedBackground: Colors.white,
+  iconColor: Colors.blue,
+  collapsedIconColor: Colors.grey,
+  splashColor: Colors.blue.withAlpha(20),
+  contentPadding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 12.bw),
+  showDivider: true,
+  children: [
+    BetterCollapseItem(
+      title: Text('自定义标题'),
+      children: [Text('自定义内容')],
+    ),
+  ],
+)
+```
+
+#### BetterCollapse 主题配置
+
+```dart
+ThemeData(
+  extensions: [
+    BetterThemeExtension(
+      // ...其它主题字段
+      collapseTheme: BetterCollapseTheme(
+        backgroundColor: Colors.white,
+        collapsedBackground: Colors.white,
+        iconColor: Colors.blue,
+        collapsedIconColor: Colors.grey,
+        splashColor: Colors.blue.withAlpha(20),
+      ),
+    ),
+  ],
+)
+```
+
+| 属性 | 说明 |
+| --- | --- |
+| `accordion` | 是否同一时间只允许展开一个面板 |
+| `titlePadding` | 标题区域内边距 |
+| `minTitleHeight` | 标题区域最小高度 |
+| `titleMinVerticalPadding` | 去除或自定义标题内部 ListTile 的垂直内边距 |
+| `background` | 展开状态背景色 |
+| `collapsedBackground` | 未展开状态背景色 |
+| `iconColor` | 展开状态箭头颜色 |
+| `collapsedIconColor` | 未展开状态箭头颜色 |
+| `splashColor` | 点击标题区域时的水波纹颜色 |
+| `contentPadding` | 展开内容区域内边距 |
+
 ### BetterMarquee - 跑马灯
 
 ```dart
@@ -838,6 +930,7 @@ Color hexColor = ColorUtil.hexToColor("#FF0000");
 - `better_time_picker_page.dart` - 时间选择器示例
 - `better_swiper_page.dart` - 轮播示例
 - `better_marquee_page.dart` - 跑马灯示例
+- `better_collapse_page.dart` - 折叠面板示例
 
 ## 🤝 贡献
 

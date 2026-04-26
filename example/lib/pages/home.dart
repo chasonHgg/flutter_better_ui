@@ -166,6 +166,14 @@ class Home extends StatelessWidget {
                   Get.toNamed("/betterMarquee");
                 },
               ),
+              BetterCell(
+                titleText: "折叠面板".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onClick: () {
+                  Get.toNamed("/betterCollapse");
+                },
+              ),
               SizedBox(height: 20.bw),
               Text("业务组件".tr, style: TextStyle(fontSize: 14.bsp)),
               SizedBox(height: 10.bw),

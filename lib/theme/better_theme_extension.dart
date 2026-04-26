@@ -1,5 +1,6 @@
 import 'package:flutter_better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_cell_theme.dart';
+import 'package:flutter_better_ui/theme/child_themes/better_collapse_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_picker_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_switch_theme.dart';
@@ -24,6 +25,8 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
   final BetterPickerTheme pickerTheme;
   // 开关主题
   final BetterSwitchTheme switchTheme;
+  //折叠面板主题
+  final BetterCollapseTheme collapseTheme;
 
   const BetterThemeExtension({
     required this.primaryColor,
@@ -37,6 +40,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     required this.popupTheme,
     required this.pickerTheme,
     required this.switchTheme,
+    required this.collapseTheme,
   });
 
   @override
@@ -52,6 +56,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     BetterPopupTheme? popupTheme,
     BetterPickerTheme? pickerTheme,
     BetterSwitchTheme? switchTheme,
+    BetterCollapseTheme? collapseTheme,
   }) {
     return BetterThemeExtension(
       primaryColor: primaryColor ?? this.primaryColor,
@@ -65,6 +70,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       popupTheme: popupTheme ?? this.popupTheme,
       pickerTheme: pickerTheme ?? this.pickerTheme,
       switchTheme: switchTheme ?? this.switchTheme,
+      collapseTheme:collapseTheme??this.collapseTheme
     );
   }
 
@@ -91,6 +97,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       popupTheme: BetterPopupTheme.lerp(popupTheme, other.popupTheme, t),
       pickerTheme: BetterPickerTheme.lerp(pickerTheme, other.pickerTheme, t),
       switchTheme: BetterSwitchTheme.lerp(switchTheme, other.switchTheme, t),
+      collapseTheme: BetterCollapseTheme.lerp(collapseTheme, other.collapseTheme, t),
     );
   }
 }

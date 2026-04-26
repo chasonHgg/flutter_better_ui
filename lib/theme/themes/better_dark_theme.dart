@@ -1,6 +1,7 @@
 import 'package:flutter_better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_cell_theme.dart';
+import 'package:flutter_better_ui/theme/child_themes/better_collapse_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_picker_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_switch_theme.dart';
@@ -93,6 +94,13 @@ ThemeData betterDarkTheme = ThemeData(
         loadingSize: 14.bw,
         loadingStrokeWidth: 1,
         loadingColor: ColorUtil.hexToColor('#c8c9cc'),
+      ),
+      collapseTheme: BetterCollapseTheme(
+        backgroundColor: ColorUtil.hexToColor("#1c1c1e"),
+        collapsedBackground: ColorUtil.hexToColor("#1c1c1e"),
+        iconColor: ColorUtil.hexToColor('#969799'),
+        collapsedIconColor: ColorUtil.hexToColor('#969799'),
+        splashColor: Colors.white.withAlpha(24),
       ),
     ),
   ],

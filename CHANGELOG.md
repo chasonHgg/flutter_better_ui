@@ -1,3 +1,9 @@
+## 2.0.2
+
+* Add `BetterCollapse` theme support for background, collapsed background, arrow icon colors, and ripple color.
+* Add `BetterCollapse` accordion mode with `accordion`.
+* Add `BetterCollapse` title spacing controls with `minTitleHeight` and `titleMinVerticalPadding`.
+
 ## 2.0.1
 
 * Add `BetterButton` content alignment controls with `alignment`, `runAlignment`, and `crossAxisAlignment`.
