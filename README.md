@@ -682,37 +682,83 @@ BetterSwiper(
 ```dart
 // Basic collapse
 BetterCollapse(
+  children: BetterCollapseItem(
+    title: Text('Title'),
+    children: [
+      Text('Content 1'),
+      Text('Content 2'),
+    ],
+  ),
+)
+
+// Multiple panels
+Column(
   children: [
-    BetterCollapseItem(
-      title: Text('Title 1'),
-      children: [
-        Text('Content 1'),
-        Text('Content 2'),
-      ],
+    BetterCollapse(
+      children: BetterCollapseItem(
+        title: Text('Title 1'),
+        children: [Text('Content 1')],
+      ),
     ),
-    BetterCollapseItem(
-      title: Text('Title 2'),
-      children: [
-        Text('Content 3'),
-      ],
+    BetterCollapse(
+      children: BetterCollapseItem(
+        title: Text('Title 2'),
+        children: [Text('Content 2')],
+      ),
     ),
   ],
 )
 
-// Accordion mode: opening one panel closes the previous one
-BetterCollapse(
-  accordion: true,
-  children: [
-    BetterCollapseItem(
-      title: Text('Title 1'),
-      children: [Text('Content 1')],
-    ),
-    BetterCollapseItem(
-      title: Text('Title 2'),
-      children: [Text('Content 2')],
-    ),
-  ],
-)
+// Control expand and collapse from outside
+class CollapseDemo extends StatefulWidget {
+  const CollapseDemo({super.key});
+
+  @override
+  State<CollapseDemo> createState() => _CollapseDemoState();
+}
+
+class _CollapseDemoState extends State<CollapseDemo> {
+  late final ExpansibleController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = ExpansibleController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            ElevatedButton(
+              onPressed: _controller.expand,
+              child: Text('Expand'),
+            ),
+            ElevatedButton(
+              onPressed: _controller.collapse,
+              child: Text('Collapse'),
+            ),
+          ],
+        ),
+        BetterCollapse(
+          expansibleController: _controller,
+          children: BetterCollapseItem(
+            title: Text('Title'),
+            children: [Text('Content')],
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 // Custom title area, colors, ripple, and icon colors
 BetterCollapse(
@@ -726,12 +772,10 @@ BetterCollapse(
   splashColor: Colors.blue.withAlpha(20),
   contentPadding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 12.bw),
   showDivider: true,
-  children: [
-    BetterCollapseItem(
-      title: Text('Custom title'),
-      children: [Text('Custom content')],
-    ),
-  ],
+  children: BetterCollapseItem(
+    title: Text('Custom title'),
+    children: [Text('Custom content')],
+  ),
 )
 ```
 
@@ -756,7 +800,7 @@ ThemeData(
 
 | Property | Description |
 | --- | --- |
-| `accordion` | Whether only one panel can be expanded at the same time |
+| `expansibleController` | Controls the panel from outside, such as expand and collapse |
 | `titlePadding` | Padding of the title area |
 | `minTitleHeight` | Minimum height of the title area |
 | `titleMinVerticalPadding` | Removes or customizes the internal vertical padding of the title ListTile |

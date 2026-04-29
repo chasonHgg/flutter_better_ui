@@ -703,37 +703,83 @@ BetterSwiper(
 ```dart
 // 基础折叠面板
 BetterCollapse(
+  children: BetterCollapseItem(
+    title: Text('标题'),
+    children: [
+      Text('内容 1'),
+      Text('内容 2'),
+    ],
+  ),
+)
+
+// 多个折叠面板
+Column(
   children: [
-    BetterCollapseItem(
-      title: Text('标题 1'),
-      children: [
-        Text('内容 1'),
-        Text('内容 2'),
-      ],
+    BetterCollapse(
+      children: BetterCollapseItem(
+        title: Text('标题 1'),
+        children: [Text('内容 1')],
+      ),
     ),
-    BetterCollapseItem(
-      title: Text('标题 2'),
-      children: [
-        Text('内容 3'),
-      ],
+    BetterCollapse(
+      children: BetterCollapseItem(
+        title: Text('标题 2'),
+        children: [Text('内容 2')],
+      ),
     ),
   ],
 )
 
-// 手风琴模式：打开一个面板时关闭上一个面板
-BetterCollapse(
-  accordion: true,
-  children: [
-    BetterCollapseItem(
-      title: Text('标题 1'),
-      children: [Text('内容 1')],
-    ),
-    BetterCollapseItem(
-      title: Text('标题 2'),
-      children: [Text('内容 2')],
-    ),
-  ],
-)
+// 外部控制展开和收起
+class CollapseDemo extends StatefulWidget {
+  const CollapseDemo({super.key});
+
+  @override
+  State<CollapseDemo> createState() => _CollapseDemoState();
+}
+
+class _CollapseDemoState extends State<CollapseDemo> {
+  late final ExpansibleController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = ExpansibleController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            ElevatedButton(
+              onPressed: _controller.expand,
+              child: Text('展开'),
+            ),
+            ElevatedButton(
+              onPressed: _controller.collapse,
+              child: Text('收起'),
+            ),
+          ],
+        ),
+        BetterCollapse(
+          expansibleController: _controller,
+          children: BetterCollapseItem(
+            title: Text('标题'),
+            children: [Text('内容')],
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 // 自定义标题区域、背景、水波纹和箭头颜色
 BetterCollapse(
@@ -747,12 +793,10 @@ BetterCollapse(
   splashColor: Colors.blue.withAlpha(20),
   contentPadding: EdgeInsets.symmetric(horizontal: 16.bw, vertical: 12.bw),
   showDivider: true,
-  children: [
-    BetterCollapseItem(
-      title: Text('自定义标题'),
-      children: [Text('自定义内容')],
-    ),
-  ],
+  children: BetterCollapseItem(
+    title: Text('自定义标题'),
+    children: [Text('自定义内容')],
+  ),
 )
 ```
 
@@ -777,7 +821,7 @@ ThemeData(
 
 | 属性 | 说明 |
 | --- | --- |
-| `accordion` | 是否同一时间只允许展开一个面板 |
+| `expansibleController` | 从外部控制面板，例如展开和收起 |
 | `titlePadding` | 标题区域内边距 |
 | `minTitleHeight` | 标题区域最小高度 |
 | `titleMinVerticalPadding` | 去除或自定义标题内部 ListTile 的垂直内边距 |

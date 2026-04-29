@@ -1,3 +1,9 @@
+## 2.0.4
+
+* Update `BetterCollapse` to render a single `BetterCollapseItem` so it can be composed inside page-level scroll views more easily.
+* Add `expansibleController` support for controlling `BetterCollapse` expand and collapse from outside.
+* Update `BetterCollapse` examples in README and README_ZH.
+
 ## 2.0.2
 
 * Add `BetterCollapse` theme support for background, collapsed background, arrow icon colors, and ripple color.
