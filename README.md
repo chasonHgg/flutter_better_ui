@@ -62,6 +62,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 ### Utilities
 - **BetterScreenUtil** - Screen adaptation utilities
 - **ColorUtil** - Color utilities
+- **BetterAssets** - Generates Dart asset constant classes from image folders
 
 ## 🚀 Quick Start
 
@@ -810,6 +811,25 @@ ThemeData(
 | `collapsedIconColor` | Arrow icon color when collapsed |
 | `splashColor` | Ripple color when tapping the title area |
 | `contentPadding` | Padding of the expanded content |
+
+### BetterAssets - Asset Constants Generator
+
+`BetterAssets` scans an image directory and generates a Dart class with static asset path constants.
+
+```dart
+import 'package:flutter_better_ui/utils/better_assets.dart';
+
+void main() async {
+  await BetterAssets.generate(
+    projectPath: '.', // Optional. Defaults to the nearest directory with pubspec.yaml.
+    imagePath: 'assets/images',
+    codePath: 'lib/app_res',
+    codeName: 'app_image',
+    className: 'AppImages',
+  );
+}
+```
+
 
 ### BetterMarquee
 

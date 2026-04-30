@@ -1,3 +1,8 @@
+## 2.0.5
+
+* Add `BetterAssets` for generating Dart asset constant classes from image directories.
+* Add test usage for `BetterAssets.generate`, including temporary project setup and generated output assertions.
+
 ## 2.0.4
 
 * Update `BetterCollapse` to render a single `BetterCollapseItem` so it can be composed inside page-level scroll views more easily.
