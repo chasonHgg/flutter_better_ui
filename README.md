@@ -812,24 +812,6 @@ ThemeData(
 | `splashColor` | Ripple color when tapping the title area |
 | `contentPadding` | Padding of the expanded content |
 
-### BetterAssets - Asset Constants Generator
-
-`BetterAssets` scans an image directory and generates a Dart class with static asset path constants.
-
-```dart
-import 'package:flutter_better_ui/utils/better_assets.dart';
-
-void main() async {
-  await BetterAssets.generate(
-    projectPath: '.', // Optional. Defaults to the nearest directory with pubspec.yaml.
-    imagePath: 'assets/images',
-    codePath: 'lib/app_res',
-    codeName: 'app_image',
-    className: 'AppImages',
-  );
-}
-```
-
 
 ### BetterMarquee
 
@@ -952,6 +934,27 @@ double responsiveFont = 16.bsp;
 ```dart
 // Color conversion
 Color hexColor = ColorUtil.hexToColor("#FF0000");
+```
+
+
+### BetterAssets - Asset Constants Generator
+
+`BetterAssets` scans an directory and generates a Dart class with static asset path constants.
+
+```dart
+import 'package:flutter_better_ui/utils/better_assets.dart';
+
+void main() async {
+  test('RefreshImages', () async {
+    await BetterAssets.generate(
+      projectPath: '.', // 可选，默认向上查找最近的 pubspec.yaml 所在目录
+      imagePath: 'assets/images',
+      codePath: 'lib/app_res',
+      codeName: 'app_image',
+      className: 'AppImages',
+    );
+  }
+}
 ```
 
 ## Questions

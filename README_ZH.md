@@ -833,23 +833,6 @@ ThemeData(
 | `splashColor` | 点击标题区域时的水波纹颜色 |
 | `contentPadding` | 展开内容区域内边距 |
 
-### BetterAssets - 资源常量生成工具
-
-`BetterAssets` 会扫描图片目录，并生成一个包含静态资源路径常量的 Dart 类。
-
-```dart
-import 'package:flutter_better_ui/utils/better_assets.dart';
-
-void main() async {
-  await BetterAssets.generate(
-    projectPath: '.', // 可选，默认向上查找最近的 pubspec.yaml 所在目录
-    imagePath: 'assets/images',
-    codePath: 'lib/app_res',
-    codeName: 'app_image',
-    className: 'AppImages',
-  );
-}
-```
 
 ### BetterMarquee - 跑马灯
 
@@ -972,6 +955,27 @@ double responsiveFont = 16.bsp;
 ```dart
 // 颜色转换
 Color hexColor = ColorUtil.hexToColor("#FF0000");
+```
+
+
+### BetterAssets - 资源常量生成工具
+
+`BetterAssets` 会扫描目录，并生成一个包含静态资源路径常量的 Dart 类。
+
+```dart
+import 'package:flutter_better_ui/utils/better_assets.dart';
+
+void main() async {
+  test('RefreshImages', () async {
+    await BetterAssets.generate(
+      projectPath: '.', // 可选，默认向上查找最近的 pubspec.yaml 所在目录
+      imagePath: 'assets/images',
+      codePath: 'lib/app_res',
+      codeName: 'app_image',
+      className: 'AppImages',
+    );
+  }
+}
 ```
 
 ## 问题
