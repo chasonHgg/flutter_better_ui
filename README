@@ -1,5 +1,0 @@
-# Better UI
-
-See `README.md` for the English guide and `README_ZH.md` for the Chinese guide.
-
-Version 2.0.5 adds `BetterAssets`, a small utility for generating Dart asset constant classes from image directories. The `test/better_ui_test.dart` file includes a runnable example that creates a temporary project, calls `BetterAssets.generate`, and verifies the generated constants.

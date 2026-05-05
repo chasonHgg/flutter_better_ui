@@ -1,3 +1,8 @@
+## 2.0.6
+
+* Fix global `BetterToast` replacement so the new toast is inserted before existing toast instances are dismissed.
+* Update toast dismissal tracking to avoid stale delayed callbacks hiding newer global toast instances.
+
 ## 2.0.5
 
 * Add `BetterAssets` for generating Dart asset constant classes from image directories.

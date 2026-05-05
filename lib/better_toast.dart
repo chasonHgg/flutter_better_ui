@@ -28,7 +28,6 @@ class BetterToast {
   static AnimationController? _currentToastFadeController;
   static Future<bool> Function()? _currentToastHider;
   static final Set<Future<bool> Function()> _activeToastHiders = {};
-  static int _toastSequence = 0;
 
   static OverlayState? _getOverlay(BuildContext? context) {
     if (context != null) {
@@ -50,15 +49,6 @@ class BetterToast {
       default:
         return Alignment.center;
     }
-  }
-
-  static Future<bool> _hideActiveToasts() async {
-    var hasShowingToast = false;
-    final hiders = List<Future<bool> Function()>.of(_activeToastHiders);
-    for (final hider in hiders) {
-      hasShowingToast = await hider() || hasShowingToast;
-    }
-    return hasShowingToast;
   }
 
   //文字提示
@@ -122,7 +112,6 @@ class BetterToast {
     final screenHeight = BetterScreenUtil.screenHeight;
     topOffset ??= screenHeight * 0.2;
     bottomOffset ??= screenHeight * 0.2;
-    final toastId = ++_toastSequence;
     final isGlobalToastWhenShown = isGlobalToast;
 
     // 动画控制器
@@ -314,18 +303,26 @@ class BetterToast {
     }
 
     Future<void> showToast() async {
-      var skipAnimation = false;
+      final previousHiders = isGlobalToastWhenShown
+          ? List<Future<bool> Function()>.of(_activeToastHiders)
+          : const <Future<bool> Function()>[];
+
+      _activeToastHiders.add(hideThisToastImmediately);
+
       if (isGlobalToastWhenShown) {
-        skipAnimation = await _hideActiveToasts();
         _currentToastEntry = overlayEntry;
         _currentToastAnimationController = animationController;
         _currentToastFadeController = fadeController;
         _currentToastHider = hideThisToastImmediately;
       }
-      _activeToastHiders.add(hideThisToastImmediately);
 
       // 插入到Overlay
       overlay.insert(overlayEntry);
+      var skipAnimation = false;
+      for (final hider in previousHiders) {
+        skipAnimation = await hider() || skipAnimation;
+      }
+
       if (skipAnimation) {
         if (forbidClick == true) {
           fadeController.value = 1;
@@ -340,9 +337,6 @@ class BetterToast {
 
     // 延迟隐藏
     Future.delayed(duration ?? const Duration(seconds: 2), () async {
-      if (isGlobalToastWhenShown && toastId != _toastSequence) {
-        return;
-      }
       await removeToast();
     });
   }
