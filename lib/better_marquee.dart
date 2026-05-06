@@ -95,12 +95,21 @@ class _BetterMarqueeState extends State<BetterMarquee>
   @override
   void didUpdateWidget(covariant BetterMarquee oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // 当文本列表改变时
-    if (!widget.isVertical && _fullText != _getText(oldWidget.textList)) {
-      _fullText = _getText(widget.textList);
-      // 标记为需要重新布局和启动动画
+
+    if (widget.isVertical != oldWidget.isVertical) {
+      _fullText = widget.isVertical ? "" : _getText(widget.textList);
       _needsLayout = true;
-      // 立即停止当前动画
+      _stopAnimation();
+      return;
+    }
+
+    if (!widget.isVertical &&
+        (_fullText != _getText(widget.textList) ||
+            widget.separtor != oldWidget.separtor ||
+            widget.speed != oldWidget.speed ||
+            widget.style != oldWidget.style)) {
+      _fullText = _getText(widget.textList);
+      _needsLayout = true;
       _stopAnimation();
     }
   }

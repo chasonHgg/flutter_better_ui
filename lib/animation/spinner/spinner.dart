@@ -35,6 +35,18 @@ class _SpinnerState extends State<Spinner> with SingleTickerProviderStateMixin {
   }
 
   @override
+  void didUpdateWidget(covariant Spinner oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.duration != widget.duration) {
+      _controller.duration = widget.duration;
+      if (!_controller.isAnimating) {
+        _controller.repeat();
+      }
+    }
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();

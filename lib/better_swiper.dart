@@ -79,29 +79,10 @@ class _BetterSwiperState extends State<BetterSwiper> {
   @override
   void initState() {
     super.initState();
-    _currentPage = ValueNotifier(
-      widget.initialIndex.clamp(0, widget.children.length - 1),
-    );
+    _currentPage = ValueNotifier(_clampLogicalPage(widget.initialIndex));
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (widget.loop == true) {
-        if (widget.initialIndex + 1 > widget.children.length) {
-          widget.controller.jumpToPage(widget.children.length);
-          _currentPage.value = widget.children.length - 1;
-        } else {
-          widget.controller.jumpToPage(widget.initialIndex + 1);
-          _currentPage.value = widget.initialIndex;
-        }
-      } else {
-        if (widget.initialIndex + 1 > widget.children.length) {
-          widget.controller.jumpToPage(widget.children.length - 1);
-          _currentPage.value = widget.children.length - 1;
-          _isNext = false;
-        } else {
-          widget.controller.jumpToPage(widget.initialIndex);
-          _currentPage.value = widget.initialIndex;
-        }
-      }
+      _jumpToLogicalPage(widget.initialIndex);
     });
     _startAutoPlay();
   }
@@ -114,18 +95,30 @@ class _BetterSwiperState extends State<BetterSwiper> {
     super.dispose();
   }
 
-  // 添加 didUpdateWidget 方法
   @override
   void didUpdateWidget(covariant BetterSwiper oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // 检查 autoplay 属性是否发生了变化
-    if (widget.autoplay != oldWidget.autoplay) {
+    if (widget.children.length != oldWidget.children.length) {
+      final currentPage = _clampLogicalPage(_currentPage.value);
+      _currentPage.value = currentPage;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _jumpToLogicalPage(currentPage);
+      });
+    }
+
+    if (widget.initialIndex != oldWidget.initialIndex ||
+        widget.loop != oldWidget.loop) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _jumpToLogicalPage(widget.initialIndex);
+      });
+    }
+
+    if (widget.autoplay != oldWidget.autoplay ||
+        widget.autoplayDuration != oldWidget.autoplayDuration) {
       if (widget.autoplay == true) {
-        // 如果新值是 true，启动自动播放
         _startAutoPlay();
       } else {
-        // 如果新值是 false，停止自动播放
         _timer?.cancel();
       }
     }
@@ -133,6 +126,11 @@ class _BetterSwiperState extends State<BetterSwiper> {
 
   /// 启动自动轮播（仅在手指离开/手势取消时调用）
   void _startAutoPlay() {
+    if (widget.autoplay != true || widget.children.isEmpty) {
+      _timer?.cancel();
+      return;
+    }
+
     // 先取消已有定时器，避免重复创建
     if (_timer?.isActive ?? false) {
       _timer?.cancel();
@@ -152,6 +150,23 @@ class _BetterSwiperState extends State<BetterSwiper> {
         }
       }
     });
+  }
+
+  void _jumpToLogicalPage(int logicalPage) {
+    if (!mounted || widget.children.isEmpty || !widget.controller.hasClients) {
+      return;
+    }
+
+    final targetPage = _clampLogicalPage(logicalPage);
+    final pageIndex = widget.loop == true ? targetPage + 1 : targetPage;
+    widget.controller.jumpToPage(pageIndex);
+    _currentPage.value = targetPage;
+    _isNext = targetPage < widget.children.length - 1;
+  }
+
+  int _clampLogicalPage(int logicalPage) {
+    if (widget.children.isEmpty) return 0;
+    return logicalPage.clamp(0, widget.children.length - 1);
   }
 
   //暂停自动轮播（仅在手指按下时调用）
@@ -242,6 +257,10 @@ class _BetterSwiperState extends State<BetterSwiper> {
   }
 
   Widget getPageView() {
+    if (widget.children.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
     if (widget.lazyRender == true) {
       return PageView.builder(
         scrollDirection: widget.scrollDirection,

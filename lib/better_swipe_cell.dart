@@ -74,6 +74,29 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
       parent: _controller,
       curve: Curves.easeOutQuart,
     );
+    _updateActionMetrics();
+  }
+
+  @override
+  void didUpdateWidget(covariant BetterSwipeCell oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.duration != widget.duration) {
+      _controller.duration = widget.duration ?? Duration(milliseconds: 400);
+    }
+
+    _updateActionMetrics();
+
+    final maxOffset = _dragOffset.value > 0 ? _maxLeftOffset : _maxRightOffset;
+    if (_dragOffset.value.abs() > maxOffset) {
+      _dragOffset.value = _dragOffset.value.clamp(
+        -_maxRightOffset,
+        _maxLeftOffset,
+      );
+    }
+  }
+
+  void _updateActionMetrics() {
     _maxLeftOffset = widget.leftActions.isNotEmpty
         ? _calculateActionsWidth(widget.leftActions)
         : 0;

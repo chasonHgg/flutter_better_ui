@@ -100,6 +100,17 @@ class _BetterSwitchState extends State<BetterSwitch> {
   }
 
   @override
+  void didUpdateWidget(covariant BetterSwitch oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.defaultValue != widget.defaultValue) {
+      setState(() {
+        _value = widget.defaultValue;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     BetterSwitchTheme switchTheme = BetterUtil.getThemeExtension(
       context,

@@ -1,3 +1,8 @@
+## 2.0.7
+
+* Fix state synchronization when `BetterSwitch.defaultValue` changes after parent rebuilds.
+* Optimize update handling for `BetterSwiper`, `BetterSwipeCell`, `BetterMarquee`, and `Spinner` when related widget parameters change.
+
 ## 2.0.6
 
 * Fix global `BetterToast` replacement so the new toast is inserted before existing toast instances are dismissed.
