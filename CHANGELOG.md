@@ -1,3 +1,7 @@
+## 2.0.8
+
+* Add `maximumSize`, `minimumSize`, and `fixedSize` support for `BetterButton`.
+
 ## 2.0.7
 
 * Fix state synchronization when `BetterSwitch.defaultValue` changes after parent rebuilds.

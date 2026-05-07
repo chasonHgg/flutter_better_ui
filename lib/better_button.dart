@@ -95,6 +95,10 @@ class BetterButton extends StatelessWidget {
 
   final WrapAlignment alignment;
 
+  final WidgetStateProperty<Size?>? maximumSize;
+  final WidgetStateProperty<Size?>? minimumSize;
+  final WidgetStateProperty<Size?>? fixedSize;
+
   /// 创建一个 [BetterButton]。
   BetterButton({
     super.key,
@@ -125,7 +129,10 @@ class BetterButton extends StatelessWidget {
     this.child,
     this.runAlignment = WrapAlignment.center,
     this.crossAxisAlignment = WrapCrossAlignment.center,
-    this.alignment=WrapAlignment.center
+    this.alignment = WrapAlignment.center,
+    this.maximumSize,
+    this.minimumSize,
+    this.fixedSize,
   });
 
   @override
@@ -267,7 +274,8 @@ class BetterButton extends StatelessWidget {
       children.add(Text(text!, style: finalTextStyle));
     }
     //获取自定义内容
-    if (child != null && (loading == false ||
+    if (child != null &&
+        (loading == false ||
             (loading == true && hideContentWhenLoading == false))) {
       children.add(child!);
     }
@@ -319,10 +327,12 @@ class BetterButton extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
         padding: WidgetStateProperty.all(EdgeInsets.zero),
-        minimumSize: WidgetStateProperty.all(Size.zero),
+        minimumSize: minimumSize,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         backgroundColor: WidgetStateProperty.all(Colors.transparent),
         shadowColor: WidgetStateProperty.all(Colors.transparent),
+        maximumSize: maximumSize,
+        fixedSize: fixedSize,
         overlayColor: WidgetStateProperty.all(
           loading == true
               ? Colors.transparent
