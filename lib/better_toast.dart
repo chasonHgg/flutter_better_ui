@@ -336,7 +336,7 @@ class BetterToast {
     showToast();
 
     // 延迟隐藏
-    Future.delayed(duration ?? const Duration(seconds: 2), () async {
+    Future.delayed(duration ?? const Duration(seconds: 1), () async {
       await removeToast();
     });
   }

@@ -1,16 +1,67 @@
-# example
+# Better UI Example
 
-A new Flutter project.
+Example app for `flutter_better_ui`.
 
-## Getting Started
+## Run
 
-This project is a starting point for a Flutter application.
+```bash
+flutter pub get
+flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Basic Usage
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The example app wraps `MaterialApp` with `BetterUi` and assigns `BetterUi.navigatorKey` so toast, popup, and picker widgets can use the global overlay.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```dart
+void main() {
+  runApp(
+    BetterUi(
+      designWidth: 375,
+      designHeight: 812,
+      child: const MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      navigatorKey: BetterUi.navigatorKey,
+      home: const Home(),
+    );
+  }
+}
+```
+
+## BetterSlideAction
+
+```dart
+BetterSlideAction(
+  color: Theme.of(context).primaryColor,
+  onCompleted: () {
+    BetterToast.showSuccess(message: 'Completed');
+  },
+  knobChild: const Icon(Icons.chevron_right),
+  children: const Text(
+    'Slide right to complete',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+
+BetterSlideAction(
+  reverse: true,
+  color: Colors.orange,
+  onCompleted: () {
+    BetterToast.showSuccess(message: 'Completed');
+  },
+  knobChild: const Icon(Icons.chevron_left),
+  children: const Text(
+    'Slide left to complete',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+```

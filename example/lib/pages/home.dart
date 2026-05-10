@@ -147,6 +147,13 @@ class Home extends StatelessWidget {
                   Get.toNamed("/betterSwipeAction");
                 },
               ),
+              BetterCell(
+                titleText: "滑动按钮".tr,
+                isShowArrowRight: true,
+                onClick: () {
+                  Get.toNamed("/betterSlideAction");
+                },
+              ),
               SizedBox(height: 20.bw),
               Text("展示组件".tr, style: TextStyle(fontSize: 14.bsp)),
               SizedBox(height: 10.bw),

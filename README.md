@@ -28,6 +28,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/11.jpg" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/12.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/13.png" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/14.png" width="200"/>
 </div>
 
 
@@ -53,6 +54,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 
 ### Feedback component
 - **BetterSwipeCell** - Swipeable cell with left and right action buttons
+- **BetterSlideAction** - Slide-to-complete action button with reverse direction and reset controller
 
 ### Display component
 - **BetterSwiper** - Used to loop through a set of images or content
@@ -477,6 +479,80 @@ BetterSwipeCell(
   ],
   child: BetterCell(height: 54.bw, titleText: '异步控制'),
 );
+```
+
+### BetterSlideAction - Slide Action Button
+
+```dart
+// Basic slide action
+BetterSlideAction(
+  color: Theme.of(context).primaryColor,
+  onCompleted: () {
+    BetterToast.showSuccess(message: 'Completed');
+  },
+  knobChild: Icon(Icons.chevron_right),
+  children: Text(
+    'Slide right to complete',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+
+// Reverse direction, slide from right to left
+BetterSlideAction(
+  reverse: true,
+  color: Colors.orange,
+  onCompleted: () {
+    BetterToast.showSuccess(message: 'Completed');
+  },
+  knobChild: Icon(Icons.chevron_left),
+  children: Text(
+    'Slide left to complete',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+
+// Custom style and auto reset
+BetterSlideAction(
+  resetAfterCompleted: true,
+  height: 58.bw,
+  knobSize: 46.bw,
+  boxDecoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(12.bw),
+    gradient: LinearGradient(
+      colors: [Color(0xFFFF8A00), Color(0xFFFF4D4F)],
+    ),
+  ),
+  onCompleted: () {
+    BetterToast.showSuccess(message: 'Completed');
+  },
+  knobChild: Icon(Icons.lock_open),
+  children: Text(
+    'Slide to unlock',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+
+// Reset with controller
+final controller = BetterSlideActionController();
+
+BetterSlideAction(
+  controller: controller,
+  color: Colors.blue,
+  onCompleted: () {
+    BetterToast.showSuccess(message: 'Completed');
+  },
+  knobChild: Icon(Icons.check),
+  children: Text(
+    'Manual reset',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+
+BetterButton(
+  type: BetterButtonType.primary,
+  text: 'Reset',
+  onClick: controller.reset,
+)
 ```
 
 

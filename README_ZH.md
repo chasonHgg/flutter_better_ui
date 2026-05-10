@@ -25,6 +25,7 @@
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/11.jpg" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/12.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/13.png" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/14.png" width="200"/>
 </div>
 
 
@@ -49,6 +50,7 @@
 
 ### 反馈组件
 - **BetterSwipeCell** - 带有左右操作按钮的可滑动单元格
+- **BetterSlideAction** - 滑动完成按钮，支持反向滑动和控制器复位
 
 ### 展示组件
 - **BetterSwiper** - 用于循环播放一组图片或内容
@@ -499,6 +501,80 @@ BetterSwipeCell(
   ],
   child: BetterCell(height: 54.bw, titleText: '异步控制'),
 );
+```
+
+### BetterSlideAction - 滑动按钮
+
+```dart
+// 基础用法
+BetterSlideAction(
+  color: Theme.of(context).primaryColor,
+  onCompleted: () {
+    BetterToast.showSuccess(message: '完成');
+  },
+  knobChild: Icon(Icons.chevron_right),
+  children: Text(
+    '向右滑动完成',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+
+// 反向滑动，从右向左滑动完成
+BetterSlideAction(
+  reverse: true,
+  color: Colors.orange,
+  onCompleted: () {
+    BetterToast.showSuccess(message: '完成');
+  },
+  knobChild: Icon(Icons.chevron_left),
+  children: Text(
+    '向左滑动完成',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+
+// 自定义样式并完成后自动复位
+BetterSlideAction(
+  resetAfterCompleted: true,
+  height: 58.bw,
+  knobSize: 46.bw,
+  boxDecoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(12.bw),
+    gradient: LinearGradient(
+      colors: [Color(0xFFFF8A00), Color(0xFFFF4D4F)],
+    ),
+  ),
+  onCompleted: () {
+    BetterToast.showSuccess(message: '完成');
+  },
+  knobChild: Icon(Icons.lock_open),
+  children: Text(
+    '滑动解锁',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+
+// 使用控制器手动复位
+final controller = BetterSlideActionController();
+
+BetterSlideAction(
+  controller: controller,
+  color: Colors.blue,
+  onCompleted: () {
+    BetterToast.showSuccess(message: '完成');
+  },
+  knobChild: Icon(Icons.check),
+  children: Text(
+    '可手动复位',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+
+BetterButton(
+  type: BetterButtonType.primary,
+  text: '重置',
+  onClick: controller.reset,
+)
 ```
 
 ### BetterDatePicker - 日期选择器

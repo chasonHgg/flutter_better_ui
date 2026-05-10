@@ -6,6 +6,7 @@ import 'package:example/pages/better_index_bar_page.dart';
 import 'package:example/pages/better_marquee_page.dart';
 import 'package:example/pages/better_picker_page.dart';
 import 'package:example/pages/better_popup_page.dart';
+import 'package:example/pages/better_slide_action_page.dart';
 import 'package:example/pages/better_swipe_action_page.dart';
 import 'package:example/pages/better_swiper_page.dart';
 import 'package:example/pages/better_switch_page.dart';
@@ -26,6 +27,10 @@ final routes = [
   GetPage(
     name: "/betterSwipeAction",
     page: () => const BetterSwipeActionPage(),
+  ),
+  GetPage(
+    name: "/betterSlideAction",
+    page: () => const BetterSlideActionPage(),
   ),
   GetPage(name: "/betterTimePicker", page: () => const BetterTimePickerPage()),
   GetPage(name: "/betterMarquee", page: () => const BetterMarqueePage()),

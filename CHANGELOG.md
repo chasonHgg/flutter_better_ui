@@ -1,4 +1,11 @@
 
+## 2.0.9
+
+* Add `BetterSlideAction`, a slide-to-complete action button with controller reset support.
+* Add reverse sliding with `reverse`, from right to left when enabled.
+* Add `color`, `boxDecoration`, custom knob/content, disabled state, and auto-reset examples for `BetterSlideAction`.
+* Add `BetterSlideAction` example page, route, home entry, and i18n labels.
+
 ## 2.0.7
 
 * Fix state synchronization when `BetterSwitch.defaultValue` changes after parent rebuilds.
