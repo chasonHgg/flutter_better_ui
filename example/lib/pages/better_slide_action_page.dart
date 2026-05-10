@@ -92,8 +92,10 @@ class _BetterSlideActionPageState extends State<BetterSlideActionPage> {
               BetterSlideAction(
                 height: 58.bw,
                 knobSize: 46.bw,
+                leftPadding: 10.bw,
+                rightPadding: 10.bw,
                 boxDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.bw),
+                  borderRadius: BorderRadius.circular(30.bw),
                   gradient: const LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,

@@ -23,7 +23,7 @@ class BetterSlideAction extends StatefulWidget {
   final double? width;
   final double? height;
   final double? knobSize;
-  final double? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
   final bool resetAfterCompleted;
   final Widget? knobChild;
   final Widget? children;
@@ -31,6 +31,8 @@ class BetterSlideAction extends StatefulWidget {
   final bool reverse;
   final Color? color;
   final BoxDecoration? boxDecoration;
+  final double? leftPadding;
+  final double? rightPadding;
 
   const BetterSlideAction({
     super.key,
@@ -47,6 +49,8 @@ class BetterSlideAction extends StatefulWidget {
     this.reverse = false,
     this.boxDecoration,
     this.color,
+    this.leftPadding,
+    this.rightPadding,
   });
 
   @override
@@ -61,7 +65,8 @@ class _BetterSlideActionState extends State<BetterSlideAction> {
 
   double get _height => widget.height ?? 50.bw;
   double get _knobSize => widget.knobSize ?? 34.bw;
-  double get _radius => widget.borderRadius ?? _height / 2;
+  BorderRadiusGeometry get _radius =>
+      widget.borderRadius ?? BorderRadius.circular(_height / 2);
 
   @override
   void initState() {
@@ -79,11 +84,11 @@ class _BetterSlideActionState extends State<BetterSlideAction> {
     }
   }
 
-  double _getMaxOffset(double horizontalPadding) {
+  double _getMaxOffset(double leftPadding, double rightPadding) {
     final box = _buttonKey.currentContext?.findRenderObject() as RenderBox?;
     final width = box?.size.width ?? 0;
 
-    return (width - _knobSize - horizontalPadding * 2).clamp(
+    return (width - _knobSize - leftPadding - rightPadding).clamp(
       0.0,
       double.infinity,
     );
@@ -136,9 +141,13 @@ class _BetterSlideActionState extends State<BetterSlideAction> {
   @override
   Widget build(BuildContext context) {
     final width = widget.width ?? double.infinity;
-    final horizontalPadding = 6.bw;
-    final innerHeight = _height - horizontalPadding * 2;
-    final knobTop = ((innerHeight - _knobSize) / 2).clamp(0.0, double.infinity);
+
+    final leftPadding = widget.leftPadding ?? 6.bw;
+    final rightPadding = widget.rightPadding ?? 6.bw;
+
+    final innerHeight = _height;
+    final maxKnobTop = (innerHeight - _knobSize).clamp(0.0, double.infinity);
+    final knobTop = ((_height - _knobSize) / 2).clamp(0.0, maxKnobTop);
 
     return SizedBox(
       key: _buttonKey,
@@ -147,19 +156,19 @@ class _BetterSlideActionState extends State<BetterSlideAction> {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onHorizontalDragUpdate: (details) {
-          _updateDrag(details.delta.dx, _getMaxOffset(horizontalPadding));
+          _updateDrag(
+            details.delta.dx,
+            _getMaxOffset(leftPadding, rightPadding),
+          );
         },
         onHorizontalDragEnd: (_) {
-          _handleDragEnd(_getMaxOffset(horizontalPadding));
+          _handleDragEnd(_getMaxOffset(leftPadding, rightPadding));
         },
         child: Container(
-          padding: EdgeInsets.all(horizontalPadding),
+          padding: EdgeInsets.only(left: leftPadding, right: rightPadding),
           decoration:
               widget.boxDecoration ??
-              BoxDecoration(
-                color: widget.color,
-                borderRadius: BorderRadius.circular(_radius),
-              ),
+              BoxDecoration(color: widget.color, borderRadius: _radius),
           child: Stack(
             alignment: Alignment.center,
             children: [
