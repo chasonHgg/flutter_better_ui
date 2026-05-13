@@ -149,6 +149,64 @@ class BetterToast {
       CurvedAnimation(parent: animationController, curve: Curves.easeIn),
     );
 
+    Widget buildToastContent() {
+      return Align(
+        alignment: _getAlignment(position),
+        child: SlideTransition(
+          position: offsetAnimation,
+          child: FadeTransition(
+            opacity: toastOpacityAnimation,
+            child: Material(
+              color: Colors.transparent,
+              child:
+                  child ??
+                  Container(
+                    width: width,
+                    height: height,
+                    margin: EdgeInsets.only(
+                      top: position == BetterToastPosition.top
+                          ? (topOffset ?? 0)
+                          : 0,
+                      bottom: position == BetterToastPosition.bottom
+                          ? (bottomOffset ?? 0)
+                          : 0,
+                    ),
+                    constraints: BoxConstraints(
+                      maxWidth: width ?? BetterScreenUtil.screenWidth * 0.8,
+                    ),
+                    padding:
+                        padding ??
+                        EdgeInsets.symmetric(horizontal: 12.bw, vertical: 8.bw),
+                    decoration: BoxDecoration(
+                      color: backgroundColor ?? Colors.black.withAlpha(178),
+                      borderRadius: borderRadius ?? BorderRadius.circular(8.bw),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        if (icon != null) icon,
+                        if (icon != null && message != null)
+                          SizedBox(height: 8.bw),
+                        if (message != null)
+                          Text(
+                            message,
+                            textAlign: textAlign,
+                            style: TextStyle(
+                              color: textColor ?? Colors.white,
+                              fontSize: fontSize ?? 14.bsp,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+            ),
+          ),
+        ),
+      );
+    }
+
     // 创建OverlayEntry
     final overlayEntry = OverlayEntry(
       builder: (context) {
@@ -164,66 +222,9 @@ class BetterToast {
               ),
 
             // Toast内容
-            Align(
-              alignment: _getAlignment(position),
-              child: SlideTransition(
-                position: offsetAnimation,
-                child: FadeTransition(
-                  opacity: toastOpacityAnimation,
-                  child: Material(
-                    color: Colors.transparent,
-                    child:
-                        child ??
-                        Container(
-                          width: width,
-                          height: height,
-                          margin: EdgeInsets.only(
-                            top: position == BetterToastPosition.top
-                                ? (topOffset ?? 0)
-                                : 0,
-                            bottom: position == BetterToastPosition.bottom
-                                ? (bottomOffset ?? 0)
-                                : 0,
-                          ),
-                          constraints: BoxConstraints(
-                            maxWidth:
-                                width ?? BetterScreenUtil.screenWidth * 0.8,
-                          ),
-                          padding:
-                              padding ??
-                              EdgeInsets.symmetric(
-                                horizontal: 12.bw,
-                                vertical: 8.bw,
-                              ),
-                          decoration: BoxDecoration(
-                            color:
-                                backgroundColor ?? Colors.black.withAlpha(178),
-                            borderRadius:
-                                borderRadius ?? BorderRadius.circular(8.bw),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              if (icon != null) icon,
-                              if (icon != null && message != null)
-                                SizedBox(height: 8.bw),
-                              if (message != null)
-                                Text(
-                                  message,
-                                  textAlign: textAlign,
-                                  style: TextStyle(
-                                    color: textColor ?? Colors.white,
-                                    fontSize: fontSize ?? 14.bsp,
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                  ),
-                ),
-              ),
+            IgnorePointer(
+              ignoring: forbidClick != true,
+              child: buildToastContent(),
             ),
           ],
         );
