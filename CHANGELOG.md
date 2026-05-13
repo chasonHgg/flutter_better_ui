@@ -1,4 +1,8 @@
 
+## 2.0.10
+
+* Fix `BetterToast` in global toast mode so normal toast overlays no longer intercept taps on underlying widgets when `forbidClick` is disabled.
+
 ## 2.0.9
 
 * Add `BetterSlideAction`, a slide-to-complete action button with controller reset support.
