@@ -17,6 +17,8 @@ class BetterPopup {
     /// 弹出层的位置
     BetterPopupPosition position = BetterPopupPosition.bottom,
 
+    bool isScrollControlled=false,
+
     /// 弹出层的背景颜色
     Color? backgroundColor,
 
@@ -64,6 +66,7 @@ class BetterPopup {
       _showBottomPopup(
         popupContext,
         backgroundColor: backgroundColor,
+        isScrollControlled:isScrollControlled,
         height: height,
         width: width,
         child: child,
@@ -102,6 +105,7 @@ class BetterPopup {
   static void _showBottomPopup(
     BuildContext context, {
     Color? backgroundColor,
+    bool  isScrollControlled=false,
     double? height,
     double? width,
     Widget? child,
@@ -157,6 +161,7 @@ class BetterPopup {
     showModalBottomSheet(
       context: context,
       isDismissible: isDismissible,
+      isScrollControlled: isScrollControlled,
       enableDrag: enableDrag ?? true,
       builder: (context) => PopScope(
         canPop: true,
