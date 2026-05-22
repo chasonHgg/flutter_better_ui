@@ -97,7 +97,6 @@ class BetterButton extends StatelessWidget {
 
   final WrapAlignment alignment;
 
-
   /// 创建一个 [BetterButton]。
   BetterButton({
     super.key,
@@ -321,41 +320,45 @@ class BetterButton extends StatelessWidget {
       );
     }
 
-    return ElevatedButton(
-      style: ButtonStyle(
-        padding: WidgetStateProperty.all(EdgeInsets.zero),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        backgroundColor: WidgetStateProperty.all(Colors.transparent),
-        shadowColor: WidgetStateProperty.all(Colors.transparent),
-        overlayColor: WidgetStateProperty.all(
-          loading == true
-              ? Colors.transparent
-              : overlayColor ?? buttonTheme.overlayColor,
+    return SizedBox(
+      width: width,
+      height: height,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          padding: WidgetStateProperty.all(EdgeInsets.zero),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          backgroundColor: WidgetStateProperty.all(Colors.transparent),
+          shadowColor: WidgetStateProperty.all(Colors.transparent),
+          overlayColor: WidgetStateProperty.all(
+            loading == true
+                ? Colors.transparent
+                : overlayColor ?? buttonTheme.overlayColor,
+          ),
+          splashFactory:
+              disabled == true || disableSplash == true || loading == true
+              ? NoSplash.splashFactory
+              : InkSparkle.splashFactory,
+          shape: finalDecoration.borderRadius != null
+              ? WidgetStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: finalDecoration.borderRadius!,
+                  ),
+                )
+              : null,
         ),
-        splashFactory:
-            disabled == true || disableSplash == true || loading == true
-            ? NoSplash.splashFactory
-            : InkSparkle.splashFactory,
-        shape: finalDecoration.borderRadius != null
-            ? WidgetStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: finalDecoration.borderRadius!,
-                ),
-              )
-            : null,
-      ),
-      onPressed: disabled == true ? null : onTap ?? () {},
-      onLongPress: disabled == true ? null : onLongPress ?? () {},
-      child: Ink(
-        width: width,
-        height: height,
-        padding: padding ?? buttonTheme.padding,
-        decoration: finalDecoration,
-        child: Wrap(
-          runAlignment: runAlignment,
-          crossAxisAlignment: crossAxisAlignment,
-          alignment: alignment,
-          children: children,
+        onPressed: disabled == true ? null : onTap ?? () {},
+        onLongPress: disabled == true ? null : onLongPress ?? () {},
+        child: Ink(
+          width: width,
+          height: height,
+          padding: padding ?? buttonTheme.padding,
+          decoration: finalDecoration,
+          child: Wrap(
+            runAlignment: runAlignment,
+            crossAxisAlignment: crossAxisAlignment,
+            alignment: alignment,
+            children: children,
+          ),
         ),
       ),
     );
