@@ -12,13 +12,13 @@ class BetterSwipeCellAction {
   final String? value;
 
   /// 操作按钮的点击回调
-  final Future<bool> Function(String? value)? onClick;
+  final Future<bool> Function(String? value)? onTap;
 
   BetterSwipeCellAction({
     required this.child,
     this.width,
     this.value,
-    this.onClick,
+    this.onTap,
   }) {
     width ??= 80.bw;
   }
@@ -134,7 +134,7 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
                     children: widget.leftActions.map((e) {
                       return GestureDetector(
                         onTap: () async {
-                          final result = await e.onClick?.call(e.value);
+                          final result = await e.onTap?.call(e.value);
                           if (result == true) {
                             _animateTo(0);
                             _isExpand = false;
@@ -174,7 +174,7 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
                     children: widget.rightActions.map((e) {
                       return GestureDetector(
                         onTap: () async {
-                          final result = await e.onClick?.call(e.value);
+                          final result = await e.onTap?.call(e.value);
                           if (result == true) {
                             _animateTo(0);
                             _isExpand = false;

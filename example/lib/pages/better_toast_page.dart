@@ -34,26 +34,26 @@ class BetterToastPage extends StatelessWidget {
                 titleText: '文字提示'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () => BetterToast.show(message: 'This is a toast'),
+                onTap: () => BetterToast.show(message: 'This is a toast'),
               ),
               BetterCell(
                 titleText: '成功提示'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () => BetterToast.showSuccess(message: '成功文案'.tr),
+                onTap: () => BetterToast.showSuccess(message: '成功文案'.tr),
               ),
               BetterCell(
                 titleText: '失败提示'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () =>
+                onTap: () =>
                     BetterToast.showError(context: context, message: '失败文案'.tr),
               ),
               BetterCell(
                 titleText: '加载提示'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () => {
+                onTap: () => {
                   BetterToast.showLoading(forbidClick: true),
                   Future.delayed(Duration(seconds: 2), () {
                     BetterToast.hideLoading();
@@ -64,7 +64,7 @@ class BetterToastPage extends StatelessWidget {
                 titleText: '文字加载提示'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () => {
+                onTap: () => {
                   BetterToast.showLoading(forbidClick: true, message: '加载中...'),
                   Future.delayed(Duration(seconds: 2), () {
                     BetterToast.hideLoading();
@@ -78,7 +78,7 @@ class BetterToastPage extends StatelessWidget {
                 titleText: '顶部位置'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () => {
+                onTap: () => {
                   BetterToast.show(
                     message: 'This is a toast',
                     position: BetterToastPosition.top,
@@ -89,7 +89,7 @@ class BetterToastPage extends StatelessWidget {
                 titleText: '中间位置'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () => {
+                onTap: () => {
                   BetterToast.show(
                     message: 'This is a toast',
                     position: BetterToastPosition.center,
@@ -100,7 +100,7 @@ class BetterToastPage extends StatelessWidget {
                 titleText: '底部位置'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () => {BetterToast.show(message: 'This is a toast')},
+                onTap: () => {BetterToast.show(message: 'This is a toast')},
               ),
               SizedBox(height: 20.bw),
               Text('自定义'.tr, style: TextStyle(fontSize: 14.bsp)),
@@ -109,7 +109,7 @@ class BetterToastPage extends StatelessWidget {
                 titleText: '自定义图标'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () => {
+                onTap: () => {
                   BetterToast.show(
                     message: '自定义图标'.tr,
                     width: 120.bw,
@@ -123,7 +123,7 @@ class BetterToastPage extends StatelessWidget {
                 titleText: '自定义内容'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () => {
+                onTap: () => {
                   BetterToast.show(
                     child: Image.asset(
                       'assets/images/cat.jpeg',
@@ -138,7 +138,7 @@ class BetterToastPage extends StatelessWidget {
                 titleText: '自定义背景颜色'.tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () => BetterToast.show(
+                onTap: () => BetterToast.show(
                   backgroundColor: Colors.red,
                   message: 'This is a toast',
                 ),

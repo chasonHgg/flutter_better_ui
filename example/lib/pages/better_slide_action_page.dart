@@ -137,7 +137,7 @@ class _BetterSlideActionPageState extends State<BetterSlideActionPage> {
               SizedBox(height: 10.bw),
               BetterButton(
                 type: BetterButtonType.primary,
-                onClick: _controller.reset,
+                onTap: _controller.reset,
                 child: Text('重置'.tr, style: TextStyle(color: Colors.white)),
               ),
               SizedBox(height: 20.bw),

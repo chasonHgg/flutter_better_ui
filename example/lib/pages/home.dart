@@ -74,7 +74,7 @@ class Home extends StatelessWidget {
                 titleText: "按钮".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterButton");
                 },
               ),
@@ -82,7 +82,7 @@ class Home extends StatelessWidget {
                 titleText: "单元格".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterCell");
                 },
               ),
@@ -90,14 +90,14 @@ class Home extends StatelessWidget {
                 titleText: "轻提示".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterToast");
                 },
               ),
               BetterCell(
                 titleText: "弹出层".tr,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterPopup");
                 },
               ),
@@ -108,7 +108,7 @@ class Home extends StatelessWidget {
                 titleText: "选择器".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterPicker");
                 },
               ),
@@ -116,7 +116,7 @@ class Home extends StatelessWidget {
                 titleText: "开关".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterSwitch");
                 },
               ),
@@ -124,7 +124,7 @@ class Home extends StatelessWidget {
                 titleText: "日期选择".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterDatePicker");
                 },
               ),
@@ -132,7 +132,7 @@ class Home extends StatelessWidget {
                 titleText: "时间选择".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterTimePicker");
                 },
               ),
@@ -143,14 +143,14 @@ class Home extends StatelessWidget {
                 titleText: "滑动单元格".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterSwipeAction");
                 },
               ),
               BetterCell(
                 titleText: "滑动按钮".tr,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterSlideAction");
                 },
               ),
@@ -161,7 +161,7 @@ class Home extends StatelessWidget {
                 titleText: "轮播图".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterSwiper");
                 },
               ),
@@ -169,7 +169,7 @@ class Home extends StatelessWidget {
                 titleText: "跑马灯".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterMarquee");
                 },
               ),
@@ -177,7 +177,7 @@ class Home extends StatelessWidget {
                 titleText: "折叠面板".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterCollapse");
                 },
               ),
@@ -188,7 +188,7 @@ class Home extends StatelessWidget {
                 titleText: "索引栏".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
-                onClick: () {
+                onTap: () {
                   Get.toNamed("/betterIndexBar");
                 },
               ),

@@ -21,7 +21,9 @@ class BetterButton extends StatelessWidget {
   final BoxDecoration? decoration;
 
   /// 按钮被点击时的回调函数
-  final VoidCallback? onClick;
+  final VoidCallback? onTap;
+
+  final VoidCallback? onLongPress;
 
   /// 按下时的覆盖/水波纹颜色
   final Color? overlayColor;
@@ -101,7 +103,8 @@ class BetterButton extends StatelessWidget {
     super.key,
     this.type = BetterButtonType.defaultType,
     this.decoration,
-    this.onClick,
+    this.onTap,
+    this.onLongPress,
     this.overlayColor,
     this.margin,
     this.loading = false,
@@ -341,7 +344,8 @@ class BetterButton extends StatelessWidget {
               )
             : null,
       ),
-      onPressed: disabled == true ? null : onClick ?? () {},
+      onPressed: disabled == true ? null : onTap ?? () {},
+      onLongPress: disabled == true ? null : onLongPress ?? () {},
       child: Ink(
         width: width,
         height: height,

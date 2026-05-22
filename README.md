@@ -106,7 +106,7 @@ class MyApp extends StatelessWidget {
 BetterButton(
   text: "Click me",
   textStyle: TextStyle(color: Colors.red),
-  onClick: () {
+  onTap: () {
     print("Button clicked");
   },
 )
@@ -115,14 +115,14 @@ BetterButton(
 BetterButton(
   type: BetterButtonType.primary,
   text: "Primary Button",
-  onClick: () {},
+  onTap: () {},
 )
 
 // Loading state button
 BetterButton(
   text: "Loading",
   loading: true,
-  onClick: () {},
+  onTap: () {},
 )
 
 // Plain button
@@ -130,7 +130,7 @@ BetterButton(
   type: BetterButtonType.primary,
   plain: true,
   text: "Plain Button",
-  onClick: () {},
+  onTap: () {},
 )
 
 //Customer button
@@ -270,7 +270,7 @@ BetterCell(
     titleText: 'Cell',
     isShowBorder: true,
     isShowArrowRight: true,
-    onClick(){
+    onTap(){
         print("on click")
     }
 ),
@@ -371,7 +371,7 @@ BetterSwipeCell(
   leftActions: [
     BetterSwipeCellAction(
       width: 60.bw,
-      onClick: (value) async {
+      onTap: (value) async {
         return true;
       },
       child: Container(
@@ -388,7 +388,7 @@ BetterSwipeCell(
   rightActions: [
     BetterSwipeCellAction(
       width: 60.bw,
-      onClick: (value) async {
+      onTap: (value) async {
         return true;
       },
       child: Container(
@@ -403,7 +403,7 @@ BetterSwipeCell(
     ),
     BetterSwipeCellAction(
       width: 60.bw,
-      onClick: (value) async {
+      onTap: (value) async {
         return true;
       },
       child: Container(
@@ -439,7 +439,7 @@ BetterSwipeCell(
           style: TextStyle(color: Colors.white, fontSize: 14.bsp),
         ),
       ),
-      onClick: (value) async {
+      onTap: (value) async {
         final result = await showCupertinoDialog<bool>(
           context: context,
           builder: (context) => CupertinoAlertDialog(
@@ -551,7 +551,7 @@ BetterSlideAction(
 BetterButton(
   type: BetterButtonType.primary,
   text: 'Reset',
-  onClick: controller.reset,
+  onTap: controller.reset,
 )
 ```
 

@@ -24,7 +24,7 @@ class BetterTimePickerPage extends StatelessWidget {
                 titleText: '基础用法'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterTimePicker.show(
                     title: '时间选择'.tr,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -40,7 +40,7 @@ class BetterTimePickerPage extends StatelessWidget {
                 titleText: '不默认显示当天时间'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterTimePicker.show(
                     title: '时间选择'.tr,
                     isDefaultShowNow: false,
@@ -57,7 +57,7 @@ class BetterTimePickerPage extends StatelessWidget {
                 titleText: '指定时间范围'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterTimePicker.show(
                     title: '时间选择'.tr,
                     isDefaultShowNow: false,
@@ -76,7 +76,7 @@ class BetterTimePickerPage extends StatelessWidget {
                 titleText: '格式化选项'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterTimePicker.show(
                     title: '时间选择'.tr,
                     formatter: (BetterTimePickerFormatterOption option) {
@@ -107,7 +107,7 @@ class BetterTimePickerPage extends StatelessWidget {
                 titleText: '过滤选项'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterTimePicker.show(
                     title: '时间选择'.tr,
                     columnTypes: [
@@ -137,7 +137,7 @@ class BetterTimePickerPage extends StatelessWidget {
                 titleText: '指定默认日期'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterTimePicker.show(
                     title: '时间选择'.tr,
                     defaultValue: [10, 30, 0],
@@ -157,7 +157,7 @@ class BetterTimePickerPage extends StatelessWidget {
                 titleText: '选择类型(选择时)'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterTimePicker.show(
                     title: '时间选择'.tr,
                     columnTypes: [BetterTimePickerColumnType.hour],
@@ -174,7 +174,7 @@ class BetterTimePickerPage extends StatelessWidget {
                 titleText: '选择类型(选择时分)'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterTimePicker.show(
                     title: '时间选择'.tr,
                     columnTypes: [
@@ -194,7 +194,7 @@ class BetterTimePickerPage extends StatelessWidget {
                 titleText: '选择类型(选择秒)'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterTimePicker.show(
                     title: '时间选择'.tr,
                     columnTypes: [BetterTimePickerColumnType.second],

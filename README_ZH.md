@@ -103,7 +103,7 @@ class MyApp extends StatelessWidget {
 BetterButton(
   text: "点击我",
   textStyle: TextStyle(color: Colors.red),
-  onClick: () {
+  onTap: () {
     print("按钮被点击");
   },
 )
@@ -112,14 +112,14 @@ BetterButton(
 BetterButton(
   type: BetterButtonType.primary,
   text: "主要按钮",
-  onClick: () {},
+  onTap: () {},
 )
 
 // 加载状态按钮
 BetterButton(
   text: "加载中",
   loading: true,
-  onClick: () {},
+  onTap: () {},
 )
 
 // 朴素按钮
@@ -127,7 +127,7 @@ BetterButton(
   type: BetterButtonType.primary,
   plain: true,
   text: "朴素按钮",
-  onClick: () {},
+  onTap: () {},
 )
 
 //自定义按钮
@@ -381,7 +381,7 @@ BetterCell(
     titleText: '单元格',
     isShowBorder: true,
     isShowArrowRight: true,
-    onClick(){
+    onTap(){
         print("on click")
     }
 ),
@@ -395,7 +395,7 @@ BetterSwipeCell(
   leftActions: [
     BetterSwipeCellAction(
       width: 60.bw,
-      onClick: (value) async {
+      onTap: (value) async {
         return true;
       },
       child: Container(
@@ -411,7 +411,7 @@ BetterSwipeCell(
   rightActions: [
     BetterSwipeCellAction(
       width: 60.bw,
-      onClick: (value) async {
+      onTap: (value) async {
         return true;
       },
       child: Container(
@@ -425,7 +425,7 @@ BetterSwipeCell(
     ),
     BetterSwipeCellAction(
       width: 60.bw,
-      onClick: (value) async {
+      onTap: (value) async {
         return true;
       },
       child: Container(
@@ -461,7 +461,7 @@ BetterSwipeCell(
           style: TextStyle(color: Colors.white, fontSize: 14.bsp),
         ),
       ),
-      onClick: (value) async {
+      onTap: (value) async {
         final result = await showCupertinoDialog<bool>(
           context: context,
           builder: (context) => CupertinoAlertDialog(
@@ -573,7 +573,7 @@ BetterSlideAction(
 BetterButton(
   type: BetterButtonType.primary,
   text: '重置',
-  onClick: controller.reset,
+  onTap: controller.reset,
 )
 ```
 

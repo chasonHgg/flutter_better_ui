@@ -118,7 +118,7 @@ class _BetterSwiperPageState extends State<BetterSwiperPage> {
                   SizedBox(height: 10.bw),
                   BetterButton(
                     text: '上一页'.tr,
-                    onClick: () {
+                    onTap: () {
                       pageController.previousPage(
                         duration: Duration(milliseconds: 300),
                         curve: Curves.easeInOut,
@@ -128,7 +128,7 @@ class _BetterSwiperPageState extends State<BetterSwiperPage> {
                   SizedBox(height: 10.bw),
                   BetterButton(
                     text: '下一页'.tr,
-                    onClick: () {
+                    onTap: () {
                       pageController.nextPage(
                         duration: Duration(milliseconds: 300),
                         curve: Curves.easeInOut,

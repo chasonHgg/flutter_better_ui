@@ -24,7 +24,7 @@ class BetterDatePickerPage extends StatelessWidget {
                 titleText: '基础用法'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterDatePicker.show(
                     title: '日期选择'.tr,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -40,7 +40,7 @@ class BetterDatePickerPage extends StatelessWidget {
                 titleText: '不默认显示当天时间'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterDatePicker.show(
                     title: '日期选择'.tr,
                     isDefaultShowToday: false,
@@ -57,7 +57,7 @@ class BetterDatePickerPage extends StatelessWidget {
                 titleText: '指定日期范围'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterDatePicker.show(
                     title: '日期选择'.tr,
                     minDate: [2022, 1, 1],
@@ -75,7 +75,7 @@ class BetterDatePickerPage extends StatelessWidget {
                 titleText: '格式化选项'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterDatePicker.show(
                     title: '日期选择'.tr,
                     formatter: (BetterDatePickerFormatterOption option) {
@@ -105,7 +105,7 @@ class BetterDatePickerPage extends StatelessWidget {
                 titleText: '过滤选项'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterDatePicker.show(
                     title: '日期选择'.tr,
                     columnTypes: [
@@ -135,7 +135,7 @@ class BetterDatePickerPage extends StatelessWidget {
                 titleText: '指定默认日期'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterDatePicker.show(
                     title: '日期选择'.tr,
                     defaultValue: [2025, 9, 8],
@@ -155,7 +155,7 @@ class BetterDatePickerPage extends StatelessWidget {
                 titleText: '选择类型(选择年)'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterDatePicker.show(
                     title: '日期选择'.tr,
                     columnTypes: [BetterDatePickerColumnType.year],
@@ -172,7 +172,7 @@ class BetterDatePickerPage extends StatelessWidget {
                 titleText: '选择类型(选择月日)'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterDatePicker.show(
                     title: '日期选择'.tr,
                     columnTypes: [
@@ -192,7 +192,7 @@ class BetterDatePickerPage extends StatelessWidget {
                 titleText: '选择类型(选择年月)'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterDatePicker.show(
                     title: '日期选择'.tr,
                     columnTypes: [

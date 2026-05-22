@@ -26,7 +26,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                   BetterSwipeCellAction(
                     width: 60.bw,
                     value: "1",
-                    onClick: (value) async {
+                    onTap: (value) async {
                       BetterToast.show(context: context, message: '删除'.tr);
                       return true;
                     },
@@ -42,7 +42,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                   BetterSwipeCellAction(
                     width: 60.bw,
                     value: '2',
-                    onClick: (value) async {
+                    onTap: (value) async {
                       BetterToast.show(context: context, message: '收藏'.tr);
                       return true;
                     },
@@ -60,7 +60,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                   BetterSwipeCellAction(
                     width: 60.bw,
                     value: '删除',
-                    onClick: (value) async {
+                    onTap: (value) async {
                       BetterToast.show(context: context, message: '删除');
                       return true;
                     },
@@ -76,7 +76,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                   BetterSwipeCellAction(
                     width: 60.bw,
                     value: '收藏',
-                    onClick: (value) async {
+                    onTap: (value) async {
                       BetterToast.show(context: context, message: '收藏');
                       return true;
                     },
@@ -106,7 +106,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                   BetterSwipeCellAction(
                     width: 60.bw,
                     value: "1",
-                    onClick: (value) async {
+                    onTap: (value) async {
                       BetterToast.show(context: context, message: '删除'.tr);
                       return true;
                     },
@@ -122,7 +122,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                   BetterSwipeCellAction(
                     width: 60.bw,
                     value: '2',
-                    onClick: (value) async {
+                    onTap: (value) async {
                       BetterToast.show(context: context, message: '收藏'.tr);
                       return true;
                     },
@@ -140,7 +140,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                   BetterSwipeCellAction(
                     width: 60.bw,
                     value: '删除',
-                    onClick: (value) async {
+                    onTap: (value) async {
                       BetterToast.show(context: context, message: '删除');
                       return true;
                     },
@@ -156,7 +156,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                   BetterSwipeCellAction(
                     width: 60.bw,
                     value: '收藏',
-                    onClick: (value) async {
+                    onTap: (value) async {
                       BetterToast.show(context: context, message: '收藏');
                       return true;
                     },
@@ -195,7 +195,7 @@ class BetterSwipeActionPage extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 14.bsp),
                       ),
                     ),
-                    onClick: (value) async {
+                    onTap: (value) async {
                       final result = await showCupertinoDialog<bool>(
                         context: context,
                         builder: (context) => CupertinoAlertDialog(

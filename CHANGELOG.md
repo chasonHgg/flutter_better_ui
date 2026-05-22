@@ -1,4 +1,10 @@
 
+## 2.0.12
+
+* Rename `BetterButton`, `BetterCell`, and `BetterSwipeCellAction` click callbacks from `onClick` to `onTap`.
+* Add `onLongPress` support to `BetterButton`.
+* Update examples and documentation to use the new tap callback APIs.
+
 ## 2.0.10
 
 * Fix `BetterToast` in global toast mode so normal toast overlays no longer intercept taps on underlying widgets when `forbidClick` is disabled.

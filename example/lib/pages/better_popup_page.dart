@@ -74,7 +74,7 @@ class BetterPopupPage extends StatelessWidget {
                 titleText: '关闭图标'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterPopup.show(
                     height: 200.bw,
                     child: Center(
@@ -91,7 +91,7 @@ class BetterPopupPage extends StatelessWidget {
                 titleText: '自定义图标'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterPopup.show(
                     height: 200.bw,
                     closeIcon: Positioned(
@@ -117,7 +117,7 @@ class BetterPopupPage extends StatelessWidget {
               BetterCell(
                 titleText: '图标位置'.tr,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterPopup.show(
                     height: 200.bw,
                     closeIcon: Positioned(
@@ -147,7 +147,7 @@ class BetterPopupPage extends StatelessWidget {
                 titleText: '关闭事件'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterPopup.show(
                     height: 200.bw,
                     child: Center(

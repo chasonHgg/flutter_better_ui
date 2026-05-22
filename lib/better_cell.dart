@@ -52,7 +52,7 @@ class BetterCell extends StatelessWidget {
   final Widget? valueWidget;
 
   /// 点击回调函数
-  final VoidCallback? onClick;
+  final VoidCallback? onTap;
 
   /// 是否禁用单元格
   final bool? disabled;
@@ -82,7 +82,7 @@ class BetterCell extends StatelessWidget {
     this.arrowRightColor,
     this.titleWidget,
     this.valueWidget,
-    this.onClick,
+    this.onTap,
     this.disabled = false,
     this.disableSplash = false,
     this.overlayColor,
@@ -126,7 +126,7 @@ class BetterCell extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: disabled == true ? null : onClick ?? () {},
+      onPressed: disabled == true ? null : onTap ?? () {},
       child: Container(
         height: height,
         decoration: BoxDecoration(

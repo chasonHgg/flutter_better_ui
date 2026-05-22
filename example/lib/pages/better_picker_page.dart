@@ -24,7 +24,7 @@ class BetterPickerPage extends StatelessWidget {
                 titleText: '基础用法'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterPicker.show(
                     title: '标题'.tr,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -52,7 +52,7 @@ class BetterPickerPage extends StatelessWidget {
                 titleText: '齿轮选择器'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterPicker.show(
                     title: '标题'.tr,
                     diameterRatio: 2,
@@ -81,7 +81,7 @@ class BetterPickerPage extends StatelessWidget {
                 titleText: '默认选中'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterPicker.show(
                     title: '默认选中'.tr,
                     diameterRatio: 2,
@@ -114,7 +114,7 @@ class BetterPickerPage extends StatelessWidget {
                 titleText: '多列选择'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterPicker.show(
                     title: '标题'.tr,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -151,7 +151,7 @@ class BetterPickerPage extends StatelessWidget {
                 titleText: '级联选择'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,
-                onClick: () {
+                onTap: () {
                   BetterPicker.show(
                     title: '标题'.tr,
                     onConfirm: (List<BetterPickerItem> selectedValues) {
