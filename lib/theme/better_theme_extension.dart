@@ -1,6 +1,7 @@
 import 'package:flutter_better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_cell_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_collapse_theme.dart';
+import 'package:flutter_better_ui/theme/child_themes/better_dialog_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_picker_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_switch_theme.dart';
@@ -27,6 +28,8 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
   final BetterSwitchTheme switchTheme;
   //折叠面板主题
   final BetterCollapseTheme collapseTheme;
+  //弹出框主题
+  final BetterDialogTheme dialogTheme;
 
   const BetterThemeExtension({
     required this.primaryColor,
@@ -41,6 +44,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     required this.pickerTheme,
     required this.switchTheme,
     required this.collapseTheme,
+    required this.dialogTheme
   });
 
   @override
@@ -57,6 +61,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     BetterPickerTheme? pickerTheme,
     BetterSwitchTheme? switchTheme,
     BetterCollapseTheme? collapseTheme,
+    BetterDialogTheme? dialogTheme
   }) {
     return BetterThemeExtension(
       primaryColor: primaryColor ?? this.primaryColor,
@@ -70,7 +75,8 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       popupTheme: popupTheme ?? this.popupTheme,
       pickerTheme: pickerTheme ?? this.pickerTheme,
       switchTheme: switchTheme ?? this.switchTheme,
-      collapseTheme:collapseTheme??this.collapseTheme
+      collapseTheme:collapseTheme??this.collapseTheme,
+      dialogTheme: dialogTheme??this.dialogTheme
     );
   }
 
@@ -98,6 +104,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       pickerTheme: BetterPickerTheme.lerp(pickerTheme, other.pickerTheme, t),
       switchTheme: BetterSwitchTheme.lerp(switchTheme, other.switchTheme, t),
       collapseTheme: BetterCollapseTheme.lerp(collapseTheme, other.collapseTheme, t),
+      dialogTheme: BetterDialogTheme.lerp(dialogTheme, other.dialogTheme, t)
     );
   }
 }

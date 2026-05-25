@@ -2,6 +2,7 @@ import 'package:flutter_better_ui/theme/child_themes/better_button_theme.dart';
 import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_cell_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_collapse_theme.dart';
+import 'package:flutter_better_ui/theme/child_themes/better_dialog_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_picker_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_switch_theme.dart';
@@ -101,6 +102,13 @@ ThemeData betterDarkTheme = ThemeData(
         iconColor: ColorUtil.hexToColor('#969799'),
         collapsedIconColor: ColorUtil.hexToColor('#969799'),
         splashColor: Colors.white.withAlpha(24),
+      ),
+      dialogTheme: BetterDialogTheme(
+        bgColor: ColorUtil.hexToColor("#1c1c1e"),
+        titleColor: ColorUtil.hexToColor("#f5f5f5"),
+        contentColor: ColorUtil.hexToColor("#c8c9cc"),
+        cancelButtonColor: ColorUtil.hexToColor("#f5f5f5"),
+        confirmButtonColor: ColorUtil.hexToColor("#1989fa"),
       ),
     ),
   ],

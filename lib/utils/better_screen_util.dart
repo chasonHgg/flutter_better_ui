@@ -54,7 +54,7 @@ class BetterScreenUtil {
   static double handleOnePixel(double width) {
     if (!_enableScaleWH) return width;
     final physicalPixel = 1.0 / _mediaQuery.devicePixelRatio;
-    return physicalPixel.clamp(0.5, 2.0);
+    return physicalPixel;
   }
 
   /// 基于更小边的比例缩放（避免拉伸）

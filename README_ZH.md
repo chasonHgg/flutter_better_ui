@@ -26,6 +26,7 @@
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/12.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/13.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/14.png" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/15.png" width="200"/>
 </div>
 
 
@@ -41,6 +42,7 @@
 ### 反馈组件
 - **BetterToast** - 轻提示组件，支持多种位置和样式
 - **BetterPopup** - 弹出层组件，支持多种弹出方式
+- **BetterDialog** - 弹出框组件，支持提示、确认和主题定制
 
 ### 表单组件
 - **BetterPicker** - 选择器组件，支持单列、多列和级联选择
@@ -186,6 +188,52 @@ BetterPopup.show(
     width: 300,
     height: 200,
     child: Center(child: Text("居中弹出内容")),
+  ),
+);
+```
+
+### BetterDialog - 弹出框
+
+```dart
+// 提示弹窗
+BetterDialog.showDialog(
+  title: "提示弹窗",
+  content: "这是提示弹窗内容",
+);
+
+// 无标题提示弹窗
+BetterDialog.showDialog(
+  content: "这是无标题提示弹窗内容",
+);
+
+// 确认弹窗
+BetterDialog.showDialog(
+  title: "确认",
+  content: "确定要继续吗？",
+  showCancelButton: true,
+  onConfirm: () {
+    print("点击确认");
+  },
+  onCancel: () {
+    print("点击取消");
+  },
+);
+
+// 自定义底部内容
+BetterDialog.showDialog(
+  title: "自定义按钮",
+  content: "使用自定义按钮区域",
+  buttomWidget: Padding(
+    padding: EdgeInsets.only(bottom: 10, left: 16, right: 16),
+    child: BetterButton(
+      width: double.infinity,
+      text: "确认",
+      textStyle: TextStyle(color: Colors.white),
+      decoration: BoxDecoration(color: Colors.red),
+      onTap: () {
+        Navigator.of(context).pop();
+      },
+    ),
   ),
 );
 ```
@@ -1065,6 +1113,7 @@ void main() async {
 - `better_button_page.dart` - 按钮组件示例
 - `better_toast_page.dart` - 轻提示示例
 - `better_popup_page.dart` - 弹出层示例
+- `better_dialog_page.dart` - 弹出框示例
 - `better_picker_page.dart` - 选择器示例
 - `better_switch_page.dart` - 开关组件示例
 - `better_cell_page.dart` - 列表单元格示例

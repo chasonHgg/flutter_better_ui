@@ -154,6 +154,14 @@ class Home extends StatelessWidget {
                   Get.toNamed("/betterSlideAction");
                 },
               ),
+               BetterCell(
+                titleText: "弹出框".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onTap: () {
+                  Get.toNamed("/betterDialog");
+                },
+              ),
               SizedBox(height: 20.bw),
               Text("展示组件".tr, style: TextStyle(fontSize: 14.bsp)),
               SizedBox(height: 10.bw),

@@ -158,7 +158,7 @@ class BetterPopupPage extends StatelessWidget {
                     ),
                     isShowCloseIcon: true,
                     onClose: () {
-                      BetterToast.show(context: context, message: '关闭了');
+                      BetterToast.show(context: context, message: '关闭了'.tr);
                     },
                   );
                 },

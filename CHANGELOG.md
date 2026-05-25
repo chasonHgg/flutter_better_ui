@@ -1,4 +1,8 @@
 
+## 2.0.14
+
+* Add `BetterDialog` for alert and confirmation dialogs with optional title, content, cancel/confirm buttons, callbacks, disabled button states, custom bottom content, and global context fallback.
+
 ## 2.0.12
 
 * Rename `BetterButton`, `BetterCell`, and `BetterSwipeCellAction` click callbacks from `onClick` to `onTap`.

@@ -29,6 +29,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/12.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/13.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/14.png" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/15.png" width="200"/>
 </div>
 
 
@@ -42,6 +43,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 ### Feedback Components
 - **BetterToast** - Lightweight toast with multiple positions and styles
 - **BetterPopup** - Popup layer with multiple presentation styles
+- **BetterDialog** - Alert and confirmation dialog with theme customization
 
 
 ### Form Components
@@ -190,6 +192,52 @@ BetterPopup.show(
     width: 300,
     height: 200,
     child: Center(child: Text("Centered popup content")),
+  ),
+);
+```
+
+### BetterDialog - Dialog
+
+```dart
+// Alert dialog
+BetterDialog.showDialog(
+  title: "Alert Dialog",
+  content: "This is an alert dialog",
+);
+
+// Alert dialog without title
+BetterDialog.showDialog(
+  content: "This is an alert dialog without title",
+);
+
+// Confirmation dialog
+BetterDialog.showDialog(
+  title: "Confirm",
+  content: "Are you sure you want to continue?",
+  showCancelButton: true,
+  onConfirm: () {
+    print("Confirmed");
+  },
+  onCancel: () {
+    print("Cancelled");
+  },
+);
+
+// Custom bottom content
+BetterDialog.showDialog(
+  title: "Custom Action",
+  content: "Use a custom button area",
+  buttomWidget: Padding(
+    padding: EdgeInsets.only(bottom: 10, left: 16, right: 16),
+    child: BetterButton(
+      width: double.infinity,
+      text: "Confirm",
+      textStyle: TextStyle(color: Colors.white),
+      decoration: BoxDecoration(color: Colors.red),
+      onTap: () {
+        Navigator.of(context).pop();
+      },
+    ),
   ),
 );
 ```
@@ -1045,6 +1093,7 @@ See the `example/` directory for full usage examples:
 - `better_button_page.dart` - Button examples
 - `better_toast_page.dart` - Toast examples
 - `better_popup_page.dart` - Popup examples
+- `better_dialog_page.dart` - Dialog examples
 - `better_picker_page.dart` - Picker examples
 - `better_switch_page.dart` - Switch examples
 - `better_cell_page.dart` - List cell examples
