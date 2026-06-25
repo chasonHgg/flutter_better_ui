@@ -54,7 +54,7 @@ class BetterToastPage extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () => {
-                  BetterToast.showLoading(forbidClick: true),
+                  BetterToast.showLoading(),
                   Future.delayed(Duration(seconds: 2), () {
                     BetterToast.hideLoading();
                   }),
@@ -65,7 +65,7 @@ class BetterToastPage extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () => {
-                  BetterToast.showLoading(forbidClick: true, message: '加载中...'),
+                  BetterToast.showLoading(message: '加载中...'),
                   Future.delayed(Duration(seconds: 2), () {
                     BetterToast.hideLoading();
                   }),

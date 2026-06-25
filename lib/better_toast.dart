@@ -337,7 +337,7 @@ class BetterToast {
     showToast();
 
     // 延迟隐藏
-    Future.delayed(duration ?? const Duration(seconds: 1), () async {
+    Future.delayed(duration ?? const Duration(milliseconds: 1000), () async {
       await removeToast();
     });
   }
@@ -430,7 +430,7 @@ class BetterToast {
     String? message,
 
     /// Whether to forbid click
-    bool forbidClick = false,
+    bool forbidClick = true,
 
     /// Color of the barrier
     Color? barrierColor,

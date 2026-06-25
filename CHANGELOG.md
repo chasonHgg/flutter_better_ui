@@ -1,4 +1,7 @@
 
+## 2.0.15
+* Change `BetterToast.showLoading` to block clicks by default.
+
 ## 2.0.14
 
 * Add `BetterDialog` for alert and confirmation dialogs with optional title, content, cancel/confirm buttons, callbacks, disabled button states, custom bottom content, and global context fallback.
