@@ -1,5 +1,11 @@
 
+## 2.0.16
+
+* Fix `BetterSwipeCell` calling its animation controller after disposal when an asynchronous action completes.
+* Prevent animation listener accumulation in `BetterSwipeCell`.
+
 ## 2.0.15
+
 * Change `BetterToast.showLoading` to block clicks by default.
 
 ## 2.0.14

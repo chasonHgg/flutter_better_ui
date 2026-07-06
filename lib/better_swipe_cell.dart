@@ -60,6 +60,7 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
   double _maxRightOffset = 0;
   late AnimationController _controller;
   late CurvedAnimation _curvedAnimation;
+  Animation<double>? _offsetAnimation;
 
   bool _isExpand = false;
 
@@ -74,6 +75,7 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
       parent: _controller,
       curve: Curves.easeOutQuart,
     );
+    _controller.addListener(_handleAnimationTick);
     _updateActionMetrics();
   }
 
@@ -107,6 +109,8 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
 
   @override
   void dispose() {
+    _controller.removeListener(_handleAnimationTick);
+    _curvedAnimation.dispose();
     _controller.dispose();
     _dragOffset.dispose();
     super.dispose();
@@ -135,7 +139,7 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
                       return GestureDetector(
                         onTap: () async {
                           final result = await e.onTap?.call(e.value);
-                          if (result == true) {
+                          if (result == true && mounted) {
                             _animateTo(0);
                             _isExpand = false;
                           }
@@ -175,7 +179,7 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
                       return GestureDetector(
                         onTap: () async {
                           final result = await e.onTap?.call(e.value);
-                          if (result == true) {
+                          if (result == true && mounted) {
                             _animateTo(0);
                             _isExpand = false;
                           }
@@ -244,15 +248,22 @@ class _BetterSwipeCellState extends State<BetterSwipeCell>
     return actions.fold(0, (sum, action) => sum + action.width!);
   }
 
+  void _handleAnimationTick() {
+    final animation = _offsetAnimation;
+    if (animation != null) {
+      _dragOffset.value = animation.value;
+    }
+  }
+
   void _animateTo(double target) {
-    final animation = Tween<double>(
+    if (!mounted) {
+      return;
+    }
+
+    _offsetAnimation = Tween<double>(
       begin: _dragOffset.value,
       end: target,
     ).animate(_curvedAnimation);
-
-    animation.addListener(() {
-      _dragOffset.value = animation.value;
-    });
 
     _controller.reset();
     _controller.forward();
