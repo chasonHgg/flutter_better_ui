@@ -27,6 +27,7 @@
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/13.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/14.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/15.png" width="200"/>
+    <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/16.png" width="200"/>
 </div>
 
 
@@ -58,6 +59,7 @@
 - **BetterSwiper** - 用于循环播放一组图片或内容
 - **BetterMarquee** - 用于循环播放展示一组消息通知。
 - **BetterCollapse** - 折叠面板组件，用于展示和隐藏分组内容
+- **BetterSkeletonizer** - 骨架屏组件，可根据子组件布局自动绘制占位内容
 
 ### 工具类
 - **BetterScreenUtil** - 屏幕适配工具
@@ -957,6 +959,66 @@ ThemeData(
 | `splashColor` | 点击标题区域时的水波纹颜色 |
 | `contentPadding` | 展开内容区域内边距 |
 
+
+### BetterSkeletonizer - 骨架屏
+
+`BetterSkeletonizer` 会保留原有子组件布局，并在 `enabled` 为 true 时把绘制替换成骨架占位。它可以包裹普通组件，也可以包裹滚动列表，并保留 Flutter 原生懒加载逻辑。
+
+```dart
+BetterSkeletonizer(
+  enabled: loading,
+  child: ListView.builder(
+    itemCount: 20,
+    itemBuilder: (context, index) {
+      return ListTile(
+        leading: CircleAvatar(
+          backgroundImage: AssetImage('assets/avatar.png'),
+        ),
+        title: Text('标题 $index'),
+        subtitle: Text('骨架屏会保留原有布局。'),
+      );
+    },
+  ),
+)
+```
+
+接口请求完成后，将 `enabled` 设为 `false`，即可恢复原组件绘制：
+
+```dart
+setState(() {
+  loading = false;
+});
+```
+
+#### 自定义颜色和动画
+
+```dart
+BetterSkeletonizer(
+  enabled: loading,
+  lightBaseColor: Color(0xFFD9DDE3),
+  darkBaseColor: Color(0xFF4B5563),
+  fadeDuration: Duration(milliseconds: 900),
+  minOpacity: 0.65,
+  maxOpacity: 1,
+  child: content,
+)
+```
+
+#### BetterSkeletonizer 属性
+
+| 属性 | 说明 |
+| --- | --- |
+| `enabled` | 是否显示骨架占位 |
+| `child` | 原始内容，仍会参与布局和滚动 |
+| `baseColor` | 强制指定骨架颜色，会覆盖亮色/暗色默认色 |
+| `lightBaseColor` | 亮色模式骨架颜色，`baseColor` 为空时生效 |
+| `darkBaseColor` | 暗色模式骨架颜色，`baseColor` 为空时生效 |
+| `fadeDuration` | 透明度循环动画周期 |
+| `minOpacity` | 透明度循环动画最小透明度 |
+| `maxOpacity` | 透明度循环动画最大透明度 |
+| `textBorderRadius` | 文本骨架条的圆角 |
+| `defaultBorderRadius` | 通用骨架占位的默认圆角 |
+| `ignorePointers` | 骨架开启时是否忽略子组件手势，默认 `false`，列表可继续滚动 |
 
 ### BetterMarquee - 跑马灯
 

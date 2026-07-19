@@ -30,6 +30,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/13.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/14.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/15.png" width="200"/>
+    <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/16.png" width="200"/>
 </div>
 
 
@@ -62,6 +63,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 - **BetterSwiper** - Used to loop through a set of images or content
 - **BetterMarquee** - Used for looping and displaying a set of message notifications.
 - **BetterCollapse** - Collapse panel for showing and hiding grouped content
+- **BetterSkeletonizer** - Skeleton loading wrapper that automatically renders placeholders from child layout
 
 ### Utilities
 - **BetterScreenUtil** - Screen adaptation utilities
@@ -936,6 +938,66 @@ ThemeData(
 | `splashColor` | Ripple color when tapping the title area |
 | `contentPadding` | Padding of the expanded content |
 
+
+### BetterSkeletonizer - Skeleton Loading
+
+`BetterSkeletonizer` keeps the original child layout and replaces painting with skeleton placeholders while `enabled` is true. It works with normal widgets and scrollable lists, and preserves Flutter's native lazy loading behavior.
+
+```dart
+BetterSkeletonizer(
+  enabled: loading,
+  child: ListView.builder(
+    itemCount: 20,
+    itemBuilder: (context, index) {
+      return ListTile(
+        leading: CircleAvatar(
+          backgroundImage: AssetImage('assets/avatar.png'),
+        ),
+        title: Text('Title $index'),
+        subtitle: Text('Skeleton keeps the original layout.'),
+      );
+    },
+  ),
+)
+```
+
+When the request finishes, set `enabled` to `false` and the original child rendering is restored:
+
+```dart
+setState(() {
+  loading = false;
+});
+```
+
+#### Custom color and animation
+
+```dart
+BetterSkeletonizer(
+  enabled: loading,
+  lightBaseColor: Color(0xFFD9DDE3),
+  darkBaseColor: Color(0xFF4B5563),
+  fadeDuration: Duration(milliseconds: 900),
+  minOpacity: 0.65,
+  maxOpacity: 1,
+  child: content,
+)
+```
+
+#### BetterSkeletonizer properties
+
+| Property | Description |
+| --- | --- |
+| `enabled` | Whether to show skeleton placeholders |
+| `child` | Original content. It still participates in layout and scrolling |
+| `baseColor` | Overrides the skeleton color for all theme modes |
+| `lightBaseColor` | Skeleton color in light mode when `baseColor` is null |
+| `darkBaseColor` | Skeleton color in dark mode when `baseColor` is null |
+| `fadeDuration` | Duration of the pulsing opacity animation |
+| `minOpacity` | Minimum opacity of the pulsing animation |
+| `maxOpacity` | Maximum opacity of the pulsing animation |
+| `textBorderRadius` | Border radius used for text placeholder lines |
+| `defaultBorderRadius` | Default border radius used for general placeholders |
+| `ignorePointers` | Whether to ignore child gestures while skeletons are enabled. Defaults to `false` so lists can keep scrolling |
 
 ### BetterMarquee
 

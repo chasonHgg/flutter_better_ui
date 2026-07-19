@@ -68,7 +68,7 @@ class BetterSkeletonizer extends StatefulWidget {
     required this.enabled,
     required this.child,
     this.baseColor,
-    this.lightBaseColor = const Color(0xFFE5E7EB),
+    this.lightBaseColor = const Color(0xFFD9DDE3),
     this.darkBaseColor = const Color(0xFF4B5563),
     this.fadeDuration = const Duration(milliseconds: 900),
     this.minOpacity = 0.65,
