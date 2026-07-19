@@ -1,16 +1,19 @@
 # Better UI
 
-一个现代化的Flutter UI组件库，提供美观、易用的UI组件，支持主题定制和响应式设计。持续开发维护中...
+[English](https://github.com/chasonHgg/flutter_better_ui/blob/main/README.md)
+
+一个现代化的 Flutter UI 组件库，提供美观、易用的 UI 组件，支持主题定制和响应式设计。持续开发维护中。
 
 ## ✨ 特性
 
-- 🎨 **现代化设计** - 采用Material Design 3设计语言
+- 🎨 **现代化设计** - 采用 Material Design 3 设计语言
 - 🌙 **主题支持** - 支持亮色/暗色主题切换
 - 📱 **响应式** - 适配不同屏幕尺寸
 - ⚡ **高性能** - 优化的渲染性能
 - 🛠️ **易扩展** - 模块化设计，易于定制
 
 ## 🎥 预览
+
 <div>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/1.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/2.gif" width="200"/>
@@ -27,41 +30,44 @@
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/13.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/14.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/15.png" width="200"/>
-    <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/16.png" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/16.png" width="200"/>
 </div>
-
-
-
 
 ## 📦 组件列表
 
 ### 基础组件
+
 - **BetterButton** - 增强版按钮组件，支持多种样式和状态
 - **BetterTextButton** - 文本按钮组件
 - **BetterCell** - 列表单元格组件
 
 ### 反馈组件
+
 - **BetterToast** - 轻提示组件，支持多种位置和样式
 - **BetterPopup** - 弹出层组件，支持多种弹出方式
 - **BetterDialog** - 弹出框组件，支持提示、确认和主题定制
 
 ### 表单组件
+
 - **BetterPicker** - 选择器组件，支持单列、多列和级联选择
 - **BetterSwitch** - 开关组件，支持自定义样式和异步控制
-- **BetterDatePicker** - 日期选择器，具有灵活列类型和格式选项的日期选择器
-- **BetterTimePicker** - 时间选择器，具有灵活列类型和格式选项的时间选择器
+- **BetterDatePicker** - 日期选择器，支持灵活的列类型和格式选项
+- **BetterTimePicker** - 时间选择器，支持灵活的列类型和格式选项
 
-### 反馈组件
+### 操作组件
+
 - **BetterSwipeCell** - 带有左右操作按钮的可滑动单元格
 - **BetterSlideAction** - 滑动完成按钮，支持反向滑动和控制器复位
 
 ### 展示组件
+
 - **BetterSwiper** - 用于循环播放一组图片或内容
-- **BetterMarquee** - 用于循环播放展示一组消息通知。
+- **BetterMarquee** - 用于循环播放展示一组消息通知
 - **BetterCollapse** - 折叠面板组件，用于展示和隐藏分组内容
 - **BetterSkeletonizer** - 骨架屏组件，可根据子组件布局自动绘制占位内容
 
 ### 工具类
+
 - **BetterScreenUtil** - 屏幕适配工具
 - **ColorUtil** - 颜色处理工具
 - **BetterAssets** - 根据图片目录生成 Dart 资源常量类
@@ -74,7 +80,7 @@
 
 ```yaml
 dependencies:
-  flutter_better_ui: ^lastversion
+  flutter_better_ui: ^2.0.17
 ```
 
 ### 初始化
@@ -89,13 +95,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //必须指定
+      // 必须指定
       navigatorKey: BetterUi.navigatorKey,
-      home: HomePage();
+      home: HomePage(),
     );
   }
 }
-
 ```
 
 ## 📖 使用指南
@@ -134,7 +139,7 @@ BetterButton(
   onTap: () {},
 )
 
-//自定义按钮
+// 自定义按钮
 BetterButton(
   decoration: BoxDecoration(
     color: Colors.red,
@@ -427,20 +432,20 @@ BetterCell(
 
 ```dart
 BetterCell(
-    height: 44.bw,
-    titleText: '单元格',
-    isShowBorder: true,
-    isShowArrowRight: true,
-    onTap(){
-        print("on click")
-    }
+  height: 44.bw,
+  titleText: '单元格',
+  isShowBorder: true,
+  isShowArrowRight: true,
+  onTap: () {
+    print("点击单元格");
+  },
 ),
 ```
 
 ### BetterSwipeCell - 滑动单元格
 
 ```dart
-// Basic swipe cell with left and right actions
+// 左右滑动操作
 BetterSwipeCell(
   leftActions: [
     BetterSwipeCellAction(
@@ -452,7 +457,7 @@ BetterSwipeCell(
         color: Colors.blue,
         alignment: Alignment.center,
         child: Text(
-          'Favorite',
+          '收藏',
           style: TextStyle(color: Colors.white, fontSize: 14.bsp),
         ),
       ),
@@ -468,7 +473,7 @@ BetterSwipeCell(
         color: Colors.red,
         alignment: Alignment.center,
         child: Text(
-          'Delete',
+          '删除',
           style: TextStyle(color: Colors.white, fontSize: 14.bsp),
         ),
       ),
@@ -482,22 +487,22 @@ BetterSwipeCell(
         color: Colors.blue,
         alignment: Alignment.center,
         child: Text(
-          'Favorite',
+          '收藏',
           style: TextStyle(color: Colors.white, fontSize: 14.bsp),
         ),
       ),
     ),
   ],
-  //是否开启宽度延伸
-  //isStretch:true,
+  // 是否开启宽度延伸
+  // isStretch: true,
   child: BetterCell(
     height: 54.bw,
-    titleText: 'Swipeable Cell',
-    valueText: 'Content',
+    titleText: '滑动单元格',
+    valueText: '内容',
   ),
 )
 
-//async controll
+// 异步控制
 BetterSwipeCell(
   rightActions: [
     BetterSwipeCellAction(
@@ -630,25 +635,25 @@ BetterButton(
 ### BetterDatePicker - 日期选择器
 
 ```dart
-// Basic date picker
+// 基础日期选择器
 BetterDatePicker.show(
   title: "选择日期",
   onConfirm: (List<BetterPickerItem> selectedValues) {
-    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+    print("选择的日期: ${selectedValues.map((e) => e.value).join('-')}");
   },
 );
 
-// Date picker with custom range
+// 自定义日期范围
 BetterDatePicker.show(
   title: "选择日期",
   minDate: [2022, 1, 1],
   maxDate: [2024, 12, 31],
   onConfirm: (List<BetterPickerItem> selectedValues) {
-    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+    print("选择的日期: ${selectedValues.map((e) => e.value).join('-')}");
   },
 );
 
-// Date picker with custom formatting
+// 自定义格式化
 BetterDatePicker.show(
   title: "选择日期",
   formatter: (BetterDatePickerFormatterOption option) {
@@ -664,11 +669,11 @@ BetterDatePicker.show(
     return option.text;
   },
   onConfirm: (List<BetterPickerItem> selectedValues) {
-    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+    print("选择的日期: ${selectedValues.map((e) => e.value).join('-')}");
   },
 );
 
-// Date picker with specific column types (year and month only)
+// 指定列类型（仅选择年月）
 BetterDatePicker.show(
   title: "选择年月",
   columnTypes: [
@@ -676,20 +681,20 @@ BetterDatePicker.show(
     BetterDatePickerColumnType.month,
   ],
   onConfirm: (List<BetterPickerItem> selectedValues) {
-    print("Selected year-month: ${selectedValues.map((e) => e.value).join('-')}");
+    print("选择的年月: ${selectedValues.map((e) => e.value).join('-')}");
   },
 );
 
-// Date picker with default value
+// 设置默认值
 BetterDatePicker.show(
   title: "选择日期",
   defaultValue: [2025, 9, 8],
   onConfirm: (List<BetterPickerItem> selectedValues) {
-    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+    print("选择的日期: ${selectedValues.map((e) => e.value).join('-')}");
   },
 );
 
-// Date picker with filtering (e.g., only show months divisible by 6)
+// 过滤选项（例如：只显示能被 6 整除的月份）
 BetterDatePicker.show(
   title: "选择日期",
   columnTypes: [
@@ -698,21 +703,21 @@ BetterDatePicker.show(
   ],
   filter: (BetterDatePickerFilterOption option) {
     if (option.columnType == BetterDatePickerColumnType.month) {
-      return option.value % 6 == 0; // Only show months 6 and 12
+      return option.value % 6 == 0; // 只显示 6 月和 12 月
     }
     return true;
   },
   onConfirm: (List<BetterPickerItem> selectedValues) {
-    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+    print("选择的日期: ${selectedValues.map((e) => e.value).join('-')}");
   },
 );
 
-// Date picker without default today
+// 不默认显示今天
 BetterDatePicker.show(
   title: "选择日期",
   isDefaultShowToday: false,
   onConfirm: (List<BetterPickerItem> selectedValues) {
-    print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
+    print("选择的日期: ${selectedValues.map((e) => e.value).join('-')}");
   },
 );
 ```
@@ -1164,9 +1169,11 @@ void main() async {
 }
 ```
 
-## 问题
+## ❓ 常见问题
 
-- 为什么ListView等列表中按钮的点击区域很大? 请使用对其属性或组件,例如Align
+- **为什么 `ListView` 等列表中的按钮点击区域很大？**
+
+  可以使用 `Align` 等布局组件包裹按钮，或显式设置按钮的宽度、高度和内边距。
 
 ## 📋 示例项目
 
@@ -1180,11 +1187,13 @@ void main() async {
 - `better_switch_page.dart` - 开关组件示例
 - `better_cell_page.dart` - 列表单元格示例
 - `better_swipe_action_page.dart` - 滑动单元格示例
+- `better_slide_action_page.dart` - 滑动按钮示例
 - `better_date_picker_page.dart` - 日期选择器示例
 - `better_time_picker_page.dart` - 时间选择器示例
 - `better_swiper_page.dart` - 轮播示例
 - `better_marquee_page.dart` - 跑马灯示例
 - `better_collapse_page.dart` - 折叠面板示例
+- `better_skeleton_page.dart` - 骨架屏示例
 
 ## 🤝 贡献
 

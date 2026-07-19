@@ -136,4 +136,19 @@ Map<String, String> enUS = {
   '业务组件': 'Business Components',
   '我是自定义内容': 'I am custom content',
   '折叠面板': 'Collapse',
+  '骨架屏': 'Skeleton',
+  '完成请求': 'Finish request',
+  '重新加载': 'Reload',
+  'Better UI 骨架屏示例': 'Better UI Skeleton Demo',
+  '自动读取组件尺寸、圆角和形状，进入屏幕后才参与绘制。':
+      'Automatically reads widget size, radius, and shape, then paints only after entering the viewport.',
+  '列表保持 Flutter 原生懒加载逻辑，滚动时才构建可见区域内容。':
+      'The list keeps Flutter native lazy loading and builds visible content only while scrolling.',
+  '组件库': 'Component Library',
+  '加载态': 'Loading State',
+  '2 分钟前': '2 min ago',
+  '赞': 'Like',
+  '评论': 'Comment',
+  '浏览': 'Views',
+  '转化': 'Conversion',
 };

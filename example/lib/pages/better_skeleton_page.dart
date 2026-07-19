@@ -18,11 +18,12 @@ class _BetterSkeletonPageState extends State<BetterSkeletonPage> {
   final List<_ArticleDemoItem> items = List.generate(
     10,
     (index) => _ArticleDemoItem(
-      title: 'Better UI 骨架屏示例 ${index + 1}',
-      subtitle: index.isEven
+      index: index + 1,
+      titleKey: 'Better UI 骨架屏示例',
+      subtitleKey: index.isEven
           ? '自动读取组件尺寸、圆角和形状，进入屏幕后才参与绘制。'
           : '列表保持 Flutter 原生懒加载逻辑，滚动时才构建可见区域内容。',
-      tag: index.isEven ? '组件库' : '加载态',
+      tagKey: index.isEven ? '组件库' : '加载态',
       color: Colors.primaries[index % Colors.primaries.length],
     ),
   );
@@ -43,7 +44,7 @@ class _BetterSkeletonPageState extends State<BetterSkeletonPage> {
             padding: EdgeInsets.fromLTRB(16.bw, 14.bw, 16.bw, 10.bw),
             child: Row(
               children: [
-                Text('Loading', style: TextStyle(fontSize: 14.bsp)),
+                Text('加载状态'.tr, style: TextStyle(fontSize: 14.bsp)),
                 SizedBox(width: 10.bw),
                 BetterSwitch(
                   width: 44.bw,
@@ -273,7 +274,7 @@ class _ProfileUpdateCard extends StatelessWidget {
                     ),
                     SizedBox(height: 4.bw),
                     Text(
-                      '2 分钟前 · ${item.tag}',
+                      '${'2 分钟前'.tr} · ${item.tag}',
                       style: TextStyle(fontSize: 12.bsp),
                     ),
                   ],
@@ -427,7 +428,7 @@ class _MetricTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: TextStyle(fontSize: 12.bsp)),
+          Text(label.tr, style: TextStyle(fontSize: 12.bsp)),
           SizedBox(height: 8.bw),
           Text(
             value,
@@ -452,22 +453,30 @@ class _SmallAction extends StatelessWidget {
       children: [
         Icon(icon, size: 16.bsp),
         SizedBox(width: 4.bw),
-        Text(text, style: TextStyle(fontSize: 12.bsp)),
+        Text(text.tr, style: TextStyle(fontSize: 12.bsp)),
       ],
     );
   }
 }
 
 class _ArticleDemoItem {
-  final String title;
-  final String subtitle;
-  final String tag;
+  final int index;
+  final String titleKey;
+  final String subtitleKey;
+  final String tagKey;
   final Color color;
 
   const _ArticleDemoItem({
-    required this.title,
-    required this.subtitle,
-    required this.tag,
+    required this.index,
+    required this.titleKey,
+    required this.subtitleKey,
+    required this.tagKey,
     required this.color,
   });
+
+  String get title => '${titleKey.tr} $index';
+
+  String get subtitle => subtitleKey.tr;
+
+  String get tag => tagKey.tr;
 }

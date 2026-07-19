@@ -6,14 +6,14 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 
 ## ✨ Features
 
-- 🎨 **Modern design** - Built with Material Design 3
+- 🎨 **Modern design** - Built on Material Design 3
 - 🌙 **Theming** - Light/Dark theme switching
 - 📱 **Responsive** - Adapts to different screen sizes
 - ⚡ **High performance** - Optimized rendering
 - 🛠️ **Extensible** - Modular and easy to customize
 
-
 ## 🎥 Preview
+
 <div>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/1.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/2.gif" width="200"/>
@@ -30,42 +30,44 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/13.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/14.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/15.png" width="200"/>
-    <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/16.png" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/16.png" width="200"/>
 </div>
-
 
 ## 📦 Components
 
 ### Basic Components
+
 - **BetterButton** - Enhanced button with multiple styles and states
 - **BetterTextButton** - Text button
 - **BetterCell** - List cell item
 
 ### Feedback Components
+
 - **BetterToast** - Lightweight toast with multiple positions and styles
 - **BetterPopup** - Popup layer with multiple presentation styles
 - **BetterDialog** - Alert and confirmation dialog with theme customization
 
-
 ### Form Components
+
 - **BetterPicker** - Picker supporting single, multiple, and cascading selections
 - **BetterSwitch** - Customizable switch with loading state and async control
 - **BetterDatePicker** - Date picker with flexible column types and formatting options
 - **BetterTimePicker** - Time picker with flexible column types and formatting options
 
+### Action Components
 
-
-### Feedback component
 - **BetterSwipeCell** - Swipeable cell with left and right action buttons
 - **BetterSlideAction** - Slide-to-complete action button with reverse direction and reset controller
 
-### Display component
+### Display Components
+
 - **BetterSwiper** - Used to loop through a set of images or content
-- **BetterMarquee** - Used for looping and displaying a set of message notifications.
+- **BetterMarquee** - Used for looping and displaying a set of message notifications
 - **BetterCollapse** - Collapse panel for showing and hiding grouped content
 - **BetterSkeletonizer** - Skeleton loading wrapper that automatically renders placeholders from child layout
 
 ### Utilities
+
 - **BetterScreenUtil** - Screen adaptation utilities
 - **ColorUtil** - Color utilities
 - **BetterAssets** - Generates Dart asset constant classes from image folders
@@ -78,7 +80,7 @@ Add the dependency in `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_better_ui: ^lastversion
+  flutter_better_ui: ^2.0.17
 ```
 
 ### Initialize
@@ -93,12 +95,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       navigatorKey: BetterUi.navigatorKey,
-       home: HomePage();
+      navigatorKey: BetterUi.navigatorKey,
+      home: HomePage(),
     );
   }
 }
-
 ```
 
 ## 📖 Usage Guide
@@ -137,7 +138,7 @@ BetterButton(
   onTap: () {},
 )
 
-//Customer button
+// Custom button
 BetterButton(
   decoration: BoxDecoration(
     color: Colors.red,
@@ -146,11 +147,10 @@ BetterButton(
     mainAxisSize: MainAxisSize.min,
     children: [
       Icon(Icons.add, color: Colors.white),
-      Text('Customer', style: TextStyle(color: Colors.white)),
+      Text('Custom', style: TextStyle(color: Colors.white)),
     ],
   ),
 )
-
 ```
 
 ### BetterToast - Toast
@@ -466,8 +466,8 @@ BetterSwipeCell(
       ),
     ),
   ],
-  //enable width extension
-  //isStretch:true,
+  // Enable width extension
+  // isStretch: true,
   child: BetterCell(
     height: 54.bw,
     titleText: 'Swipeable Cell',
@@ -475,17 +475,17 @@ BetterSwipeCell(
   ),
 )
 
-//async controll
+// Async control
 BetterSwipeCell(
   rightActions: [
     BetterSwipeCellAction(
       width: 60.bw,
-      value: '收藏',
+      value: 'favorite',
       child: Container(
         color: Colors.blue,
         alignment: Alignment.center,
         child: Text(
-          '收藏',
+          'Favorite',
           style: TextStyle(color: Colors.white, fontSize: 14.bsp),
         ),
       ),
@@ -493,12 +493,12 @@ BetterSwipeCell(
         final result = await showCupertinoDialog<bool>(
           context: context,
           builder: (context) => CupertinoAlertDialog(
-            title: Text('标题'),
-            content: Text('是否收藏'),
+            title: Text('Confirm'),
+            content: Text('Add this item to favorites?'),
             actions: [
               CupertinoDialogAction(
                 child: Text(
-                  '取消',
+                  'Cancel',
                   style: TextStyle(
                     fontSize: 14.bsp,
                     color: Theme.of(
@@ -510,7 +510,7 @@ BetterSwipeCell(
               ),
               CupertinoDialogAction(
                 child: Text(
-                  '确定',
+                  'Confirm',
                   style: TextStyle(
                     fontSize: 14.bsp,
                     color: Theme.of(
@@ -527,7 +527,7 @@ BetterSwipeCell(
       },
     ),
   ],
-  child: BetterCell(height: 54.bw, titleText: '异步控制'),
+  child: BetterCell(height: 54.bw, titleText: 'Async control'),
 );
 ```
 
@@ -611,7 +611,7 @@ BetterButton(
 ```dart
 // Basic date picker
 BetterDatePicker.show(
-  title: "选择日期",
+  title: "Select date",
   onConfirm: (List<BetterPickerItem> selectedValues) {
     print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
   },
@@ -619,7 +619,7 @@ BetterDatePicker.show(
 
 // Date picker with custom range
 BetterDatePicker.show(
-  title: "选择日期",
+  title: "Select date",
   minDate: [2022, 1, 1],
   maxDate: [2024, 12, 31],
   onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -629,16 +629,16 @@ BetterDatePicker.show(
 
 // Date picker with custom formatting
 BetterDatePicker.show(
-  title: "选择日期",
+  title: "Select date",
   formatter: (BetterDatePickerFormatterOption option) {
     if (option.columnType == BetterDatePickerColumnType.year) {
-      return "${option.text}年";
+      return "${option.text} year";
     }
     if (option.columnType == BetterDatePickerColumnType.month) {
-      return "${option.text}月";
+      return "${option.text} month";
     }
     if (option.columnType == BetterDatePickerColumnType.day) {
-      return "${option.text}日";
+      return "${option.text} day";
     }
     return option.text;
   },
@@ -649,7 +649,7 @@ BetterDatePicker.show(
 
 // Date picker with specific column types (year and month only)
 BetterDatePicker.show(
-  title: "选择年月",
+  title: "Select year and month",
   columnTypes: [
     BetterDatePickerColumnType.year,
     BetterDatePickerColumnType.month,
@@ -661,7 +661,7 @@ BetterDatePicker.show(
 
 // Date picker with default value
 BetterDatePicker.show(
-  title: "选择日期",
+  title: "Select date",
   defaultValue: [2025, 9, 8],
   onConfirm: (List<BetterPickerItem> selectedValues) {
     print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
@@ -670,7 +670,7 @@ BetterDatePicker.show(
 
 // Date picker with filtering (e.g., only show months divisible by 6)
 BetterDatePicker.show(
-  title: "选择日期",
+  title: "Select date",
   columnTypes: [
     BetterDatePickerColumnType.year,
     BetterDatePickerColumnType.month,
@@ -688,7 +688,7 @@ BetterDatePicker.show(
 
 // Date picker without default today
 BetterDatePicker.show(
-  title: "选择日期",
+  title: "Select date",
   isDefaultShowToday: false,
   onConfirm: (List<BetterPickerItem> selectedValues) {
     print("Selected date: ${selectedValues.map((e) => e.value).join('-')}");
@@ -701,7 +701,7 @@ BetterDatePicker.show(
 ```dart
 // Basic time picker
 BetterTimePicker.show(
-  title: "选择时间",
+  title: "Select time",
   onConfirm: (List<BetterPickerItem> selectedValues) {
     print("Selected time: ${selectedValues.map((e) => e.value).join(':')}");
   },
@@ -709,7 +709,7 @@ BetterTimePicker.show(
 
 // Time picker with custom range
 BetterTimePicker.show(
-  title: "选择时间",
+  title: "Select time",
   minDate: [10, 0, 0],
   maxDate: [18, 59, 59],
   onConfirm: (List<BetterPickerItem> selectedValues) {
@@ -719,16 +719,16 @@ BetterTimePicker.show(
 
 // Time picker with custom formatting
 BetterTimePicker.show(
-  title: "选择时间",
+  title: "Select time",
   formatter: (BetterTimePickerFormatterOption option) {
     if (option.columnType == BetterTimePickerColumnType.hour) {
-      return "${option.text}时";
+      return "${option.text} hour";
     }
     if (option.columnType == BetterTimePickerColumnType.minute) {
-      return "${option.text}分";
+      return "${option.text} minute";
     }
     if (option.columnType == BetterTimePickerColumnType.second) {
-      return "${option.text}秒";
+      return "${option.text} second";
     }
     return option.text;
   },
@@ -739,7 +739,7 @@ BetterTimePicker.show(
 
 // Time picker with specific column types (hour and minute only)
 BetterTimePicker.show(
-  title: "选择时分",
+  title: "Select hour and minute",
   columnTypes: [
     BetterTimePickerColumnType.hour,
     BetterTimePickerColumnType.minute,
@@ -751,7 +751,7 @@ BetterTimePicker.show(
 
 // Time picker with default value
 BetterTimePicker.show(
-  title: "选择时间",
+  title: "Select time",
   defaultValue: [14, 30, 0],
   onConfirm: (List<BetterPickerItem> selectedValues) {
     print("Selected time: ${selectedValues.map((e) => e.value).join(':')}");
@@ -760,7 +760,7 @@ BetterTimePicker.show(
 
 // Time picker with filtering (e.g., only show minutes divisible by 5)
 BetterTimePicker.show(
-  title: "选择时间",
+  title: "Select time",
   columnTypes: [
     BetterTimePickerColumnType.hour,
     BetterTimePickerColumnType.minute,
@@ -778,7 +778,7 @@ BetterTimePicker.show(
 
 // Time picker without default current time
 BetterTimePicker.show(
-  title: "选择时间",
+  title: "Select time",
   isDefaultShowNow: false,
   onConfirm: (List<BetterPickerItem> selectedValues) {
     print("Selected time: ${selectedValues.map((e) => e.value).join(':')}");
@@ -1052,8 +1052,8 @@ BetterIndexBar(
       child: Container(
         height: 100.bw,
         alignment: Alignment.center,
-        color:ColorUtil.hexToColor("#fff"),
-        child: Text("我是自定义内容"),
+        color: ColorUtil.hexToColor("#fff"),
+        child: Text("Custom content"),
       ),
     ),
   ],
@@ -1125,7 +1125,7 @@ Color hexColor = ColorUtil.hexToColor("#FF0000");
 
 ### BetterAssets - Asset Constants Generator
 
-`BetterAssets` scans an directory and generates a Dart class with static asset path constants.
+`BetterAssets` scans a directory and generates a Dart class with static asset path constants.
 
 ```dart
 import 'package:flutter_better_ui/utils/better_assets.dart';
@@ -1133,7 +1133,7 @@ import 'package:flutter_better_ui/utils/better_assets.dart';
 void main() async {
   test('RefreshImages', () async {
     await BetterAssets.generate(
-      projectPath: '.', // 可选，默认向上查找最近的 pubspec.yaml 所在目录
+      projectPath: '.', // Optional. Defaults to the nearest parent directory with pubspec.yaml.
       imagePath: 'assets/images',
       codePath: 'lib/app_res',
       codeName: 'app_image',
@@ -1143,10 +1143,11 @@ void main() async {
 }
 ```
 
-## Questions
+## ❓ FAQ
 
-- Why is the click area of buttons in lists such as ListView very large？Please use its properties or components, such as Align
+- **Why is the click area of a button inside a `ListView` too large?**
 
+  Wrap the button with layout widgets such as `Align`, or configure its width, height, and padding explicitly.
 
 ## 📋 Example Project
 
@@ -1160,11 +1161,13 @@ See the `example/` directory for full usage examples:
 - `better_switch_page.dart` - Switch examples
 - `better_cell_page.dart` - List cell examples
 - `better_swipe_action_page.dart` - Swipe cell examples
+- `better_slide_action_page.dart` - Slide action examples
 - `better_date_picker_page.dart` - Date picker examples
 - `better_time_picker_page.dart` - Time picker examples
-- `better_swiper_page.dart` - swiper examples
-- `better_marquee_page.dart` - marquee examples
-- `better_collapse_page.dart` - collapse examples
+- `better_swiper_page.dart` - Swiper examples
+- `better_marquee_page.dart` - Marquee examples
+- `better_collapse_page.dart` - Collapse examples
+- `better_skeleton_page.dart` - Skeleton loading examples
 
 ## 🤝 Contributing
 
