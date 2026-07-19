@@ -154,7 +154,7 @@ class Home extends StatelessWidget {
                   Get.toNamed("/betterSlideAction");
                 },
               ),
-               BetterCell(
+              BetterCell(
                 titleText: "弹出框".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
@@ -187,6 +187,14 @@ class Home extends StatelessWidget {
                 isShowBorder: true,
                 onTap: () {
                   Get.toNamed("/betterCollapse");
+                },
+              ),
+              BetterCell(
+                titleText: "骨架屏".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onTap: () {
+                  Get.toNamed("/betterSkeleton");
                 },
               ),
               SizedBox(height: 20.bw),

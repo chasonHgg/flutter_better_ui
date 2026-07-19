@@ -7,6 +7,7 @@ import 'package:example/pages/better_index_bar_page.dart';
 import 'package:example/pages/better_marquee_page.dart';
 import 'package:example/pages/better_picker_page.dart';
 import 'package:example/pages/better_popup_page.dart';
+import 'package:example/pages/better_skeleton_page.dart';
 import 'package:example/pages/better_slide_action_page.dart';
 import 'package:example/pages/better_swipe_action_page.dart';
 import 'package:example/pages/better_swiper_page.dart';
@@ -39,4 +40,5 @@ final routes = [
   GetPage(name: "/betterIndexBar", page: () => const BetterIndexBarPage()),
   GetPage(name: "/betterCollapse", page: () => const BetterCollapsePage()),
   GetPage(name: "/betterDialog", page: () => const BetterDialogPage()),
+  GetPage(name: "/betterSkeleton", page: () => const BetterSkeletonPage()),
 ];

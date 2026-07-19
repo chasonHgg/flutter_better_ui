@@ -1,4 +1,14 @@
 
+## Unreleased
+
+* Add `BetterSkeletonizer`, a skeleton loading wrapper that keeps the original child layout and replaces painting with gray placeholder shapes while loading.
+* Support automatic skeleton generation from child render objects, including text, images, rounded containers, circular avatars, clipped shapes, and decorated boxes.
+* Preserve Flutter native lazy loading for scrollable lists, so skeletons are generated only for built and visible list items.
+* Add pulsing opacity animation for skeleton placeholders with configurable `fadeDuration`, `minOpacity`, and `maxOpacity`.
+* Add light and dark theme defaults for skeleton colors, with `baseColor`, `lightBaseColor`, and `darkBaseColor` customization.
+* Keep scroll gestures available by default while skeletons are enabled, with optional `ignorePointers` support.
+* Add `BetterSkeletonPage` example with mixed list layouts to demonstrate skeleton rendering, scrolling, theme switching, and loading-state toggling.
+
 ## 2.0.17
 
 * Add `BetterIndexBar.onChanged` to listen for active index changes from scrolling or touching the index bar.

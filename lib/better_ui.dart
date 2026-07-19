@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_better_ui/utils/better_util.dart';
 
+export 'better_skeleton.dart';
+
 class BetterUi extends StatefulWidget {
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
