@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_better_ui/better_index_bar.dart';
+import 'package:flutter_better_ui/better_toast.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter_better_ui/utils/color_util.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,19 @@ class BetterIndexBarPage extends StatefulWidget {
 }
 
 class _BetterIndexBarPageState extends State<BetterIndexBarPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    BetterToast.isGlobalToast=true;
+  }
+
+  @override
+  void dispose() {
+     BetterToast.isGlobalToast=false;
+    super.dispose();
+  }
+
   List<String> azList = [
     'A',
     'B',
@@ -53,6 +67,9 @@ class _BetterIndexBarPageState extends State<BetterIndexBarPage> {
             ? ColorUtil.hexToColor("#fff")
             : ColorUtil.hexToColor("#323233"),
         indexBarActiveColor: ColorUtil.hexToColor("#1989fa"),
+        onChanged:(int index){
+          BetterToast.show(message: "$index");
+        },
         headerSlivers: [
           SliverToBoxAdapter(
             child: Container(

@@ -1,4 +1,11 @@
 
+## 2.0.17
+
+* Add `BetterIndexBar.onChanged` to listen for active index changes from scrolling or touching the index bar.
+* Fix `BetterToast` in global toast mode so rapid repeated calls update the existing toast content instead of recreating the overlay, preventing flicker.
+* Fix `BetterToast` global toast auto-dismiss timing during rapid updates so the latest toast can disappear normally after updates stop.
+* Guard toast animation controllers from being used after disposal when toast instances are replaced or removed asynchronously.
+
 ## 2.0.16
 
 * Fix `BetterSwipeCell` calling its animation controller after disposal when an asynchronous action completes.

@@ -1,9 +1,272 @@
+import 'dart:async';
+
 import 'package:flutter_better_ui/better_ui.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 
 /// Toast 显示位置。
 enum BetterToastPosition { top, bottom, center }
+
+class _BetterToastData {
+  final String? message;
+  final Widget? child;
+  final Widget? icon;
+  final double? fontSize;
+  final Color? textColor;
+  final Color? backgroundColor;
+  final EdgeInsets? padding;
+  final BorderRadius? borderRadius;
+  final BetterToastPosition position;
+  final double? topOffset;
+  final double? bottomOffset;
+  final TextAlign? textAlign;
+  final bool? forbidClick;
+  final double? width;
+  final double? height;
+
+  const _BetterToastData({
+    required this.message,
+    required this.child,
+    required this.icon,
+    required this.fontSize,
+    required this.textColor,
+    required this.backgroundColor,
+    required this.padding,
+    required this.borderRadius,
+    required this.position,
+    required this.topOffset,
+    required this.bottomOffset,
+    required this.textAlign,
+    required this.forbidClick,
+    required this.width,
+    required this.height,
+  });
+}
+
+class _BetterToastHandle {
+  final OverlayState overlay;
+  final AnimationController animationController;
+  final AnimationController fadeController;
+  final ValueNotifier<_BetterToastData> dataNotifier;
+  final VoidCallback onRemove;
+  Duration autoHideDuration;
+  OverlayEntry? overlayEntry;
+  Timer? autoHideTimer;
+  VoidCallback? onHide;
+  bool isRemoved = false;
+  bool isDisposed = false;
+
+  _BetterToastHandle({
+    required this.overlay,
+    required _BetterToastData data,
+    required Duration fadeDuration,
+    required Duration duration,
+    required this.onRemove,
+    this.onHide,
+  }) : animationController = AnimationController(
+         vsync: overlay,
+         duration: fadeDuration,
+       ),
+       fadeController = AnimationController(
+         vsync: overlay,
+         duration: const Duration(milliseconds: 150),
+       ),
+       autoHideDuration = duration,
+       dataNotifier = ValueNotifier<_BetterToastData>(data);
+
+  bool get isActive => !isRemoved && !isDisposed;
+
+  void show() {
+    final fadeAnimation = CurvedAnimation(
+      parent: fadeController,
+      curve: Curves.easeInOut,
+    );
+    final offsetAnimation =
+        Tween<Offset>(
+          begin: dataNotifier.value.position == BetterToastPosition.center
+              ? Offset.zero
+              : Offset(
+                  0,
+                  dataNotifier.value.position == BetterToastPosition.bottom
+                      ? 0.1
+                      : -0.1,
+                ),
+          end: Offset.zero,
+        ).animate(
+          CurvedAnimation(
+            parent: animationController,
+            curve: Curves.easeOutQuad,
+          ),
+        );
+    final toastOpacityAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: animationController, curve: Curves.easeIn),
+    );
+
+    overlayEntry = OverlayEntry(
+      builder: (context) {
+        return ValueListenableBuilder<_BetterToastData>(
+          valueListenable: dataNotifier,
+          builder: (context, data, child) {
+            return Stack(
+              children: [
+                if (data.forbidClick == true)
+                  Positioned.fill(
+                    child: FadeTransition(
+                      opacity: fadeAnimation,
+                      child: Container(color: Colors.transparent),
+                    ),
+                  ),
+                IgnorePointer(
+                  ignoring: data.forbidClick != true,
+                  child: Align(
+                    alignment: BetterToast._getAlignment(data.position),
+                    child: SlideTransition(
+                      position: offsetAnimation,
+                      child: FadeTransition(
+                        opacity: toastOpacityAnimation,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: _buildContent(data),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+
+    overlay.insert(overlayEntry!);
+    _startAnimations();
+  }
+
+  void update({
+    required _BetterToastData data,
+    required Duration duration,
+    VoidCallback? onHide,
+  }) {
+    if (!isActive) {
+      return;
+    }
+    this.onHide = onHide;
+    autoHideDuration = duration;
+    dataNotifier.value = data;
+    _scheduleAutoHide();
+  }
+
+  Future<void> remove({
+    bool withAnimation = true,
+    bool triggerOnHide = true,
+  }) async {
+    if (isRemoved) {
+      return;
+    }
+    isRemoved = true;
+    autoHideTimer?.cancel();
+    autoHideTimer = null;
+    onRemove();
+
+    if (withAnimation && !isDisposed) {
+      try {
+        if (animationController.status != AnimationStatus.dismissed) {
+          await animationController.reverse();
+        }
+        if (dataNotifier.value.forbidClick == true &&
+            fadeController.status != AnimationStatus.dismissed) {
+          await fadeController.reverse();
+        }
+      } on TickerCanceled {
+        // Toast may be removed while its exit animation is running.
+      }
+    }
+
+    overlayEntry?.remove();
+    overlayEntry = null;
+
+    if (!isDisposed) {
+      animationController.dispose();
+      fadeController.dispose();
+      dataNotifier.dispose();
+      isDisposed = true;
+    }
+
+    if (triggerOnHide) {
+      onHide?.call();
+    }
+  }
+
+  void _startAnimations() {
+    () async {
+      try {
+        if (dataNotifier.value.forbidClick == true) {
+          await fadeController.forward();
+        }
+        await animationController.forward();
+      } on TickerCanceled {
+        // Toast may be removed before its entrance animation completes.
+      }
+      _scheduleAutoHide();
+    }();
+  }
+
+  void _scheduleAutoHide() {
+    if (!isActive) {
+      return;
+    }
+    autoHideTimer?.cancel();
+    autoHideTimer = Timer(autoHideDuration, () {
+      remove();
+    });
+  }
+
+  Widget _buildContent(_BetterToastData data) {
+    return data.child ??
+        Container(
+          width: data.width,
+          height: data.height,
+          margin: EdgeInsets.only(
+            top: data.position == BetterToastPosition.top
+                ? (data.topOffset ?? 0)
+                : 0,
+            bottom: data.position == BetterToastPosition.bottom
+                ? (data.bottomOffset ?? 0)
+                : 0,
+          ),
+          constraints: BoxConstraints(
+            maxWidth: data.width ?? BetterScreenUtil.screenWidth * 0.8,
+          ),
+          padding:
+              data.padding ??
+              EdgeInsets.symmetric(horizontal: 12.bw, vertical: 8.bw),
+          decoration: BoxDecoration(
+            color: data.backgroundColor ?? Colors.black.withAlpha(178),
+            borderRadius: data.borderRadius ?? BorderRadius.circular(8.bw),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (data.icon != null) data.icon!,
+              if (data.icon != null && data.message != null)
+                SizedBox(height: 8.bw),
+              if (data.message != null)
+                Text(
+                  data.message!,
+                  textAlign: data.textAlign,
+                  style: TextStyle(
+                    color: data.textColor ?? Colors.white,
+                    fontSize: data.fontSize ?? 14.bsp,
+                  ),
+                ),
+            ],
+          ),
+        );
+  }
+}
 
 /// 一个简单的 Toast 帮助器，支持文本、成功/错误和加载变体。
 class BetterToast {
@@ -23,11 +286,8 @@ class BetterToast {
   //加载中
   static OverlayEntry? _currentLoadingEntry;
   static AnimationController? _loadingAnimationController;
-  static OverlayEntry? _currentToastEntry;
-  static AnimationController? _currentToastAnimationController;
-  static AnimationController? _currentToastFadeController;
+  static _BetterToastHandle? _currentToastHandle;
   static Future<bool> Function()? _currentToastHider;
-  static final Set<Future<bool> Function()> _activeToastHiders = {};
 
   static OverlayState? _getOverlay(BuildContext? context) {
     if (context != null) {
@@ -112,6 +372,54 @@ class BetterToast {
     final screenHeight = BetterScreenUtil.screenHeight;
     topOffset ??= screenHeight * 0.2;
     bottomOffset ??= screenHeight * 0.2;
+    final toastData = _BetterToastData(
+      message: message,
+      child: child,
+      icon: icon,
+      fontSize: fontSize,
+      textColor: textColor,
+      backgroundColor: backgroundColor,
+      padding: padding,
+      borderRadius: borderRadius,
+      position: position,
+      topOffset: topOffset,
+      bottomOffset: bottomOffset,
+      textAlign: textAlign,
+      forbidClick: forbidClick,
+      width: width,
+      height: height,
+    );
+
+    if (isGlobalToast) {
+      final toastDuration = duration ?? const Duration(milliseconds: 1000);
+      final currentToastHandle = _currentToastHandle;
+      if (currentToastHandle != null && currentToastHandle.isActive) {
+        currentToastHandle.update(
+          data: toastData,
+          duration: toastDuration,
+          onHide: onHide,
+        );
+        return;
+      }
+
+      late _BetterToastHandle toastHandle;
+      toastHandle = _BetterToastHandle(
+        overlay: overlay,
+        data: toastData,
+        fadeDuration: fadeDuration ?? const Duration(milliseconds: 250),
+        duration: toastDuration,
+        onHide: onHide,
+        onRemove: () {
+          if (_currentToastHandle == toastHandle) {
+            _currentToastHandle = null;
+          }
+        },
+      );
+      _currentToastHandle = toastHandle;
+      toastHandle.show();
+      return;
+    }
+
     final isGlobalToastWhenShown = isGlobalToast;
 
     // 动画控制器
@@ -232,6 +540,8 @@ class BetterToast {
     );
 
     var isRemoved = false;
+    var isDisposed = false;
+    Timer? autoHideTimer;
     late Future<bool> Function() hideThisToastImmediately;
 
     Future<void> removeToast({
@@ -242,36 +552,35 @@ class BetterToast {
         return;
       }
       isRemoved = true;
+      autoHideTimer?.cancel();
+      autoHideTimer = null;
 
-      if (_currentToastEntry == overlayEntry) {
-        _currentToastEntry = null;
-      }
-      if (_currentToastAnimationController == animationController) {
-        _currentToastAnimationController = null;
-      }
-      if (_currentToastFadeController == fadeController) {
-        _currentToastFadeController = null;
-      }
       if (_currentToastHider == hideThisToastImmediately) {
         _currentToastHider = null;
       }
-      _activeToastHiders.remove(hideThisToastImmediately);
 
-      if (withAnimation) {
-        if (animationController.status != AnimationStatus.dismissed) {
-          await animationController.reverse();
-        }
-        if (forbidClick == true &&
-            fadeController.status != AnimationStatus.dismissed) {
-          await fadeController.reverse();
+      if (withAnimation && !isDisposed) {
+        try {
+          if (animationController.status != AnimationStatus.dismissed) {
+            await animationController.reverse();
+          }
+          if (forbidClick == true &&
+              fadeController.status != AnimationStatus.dismissed) {
+            await fadeController.reverse();
+          }
+        } on TickerCanceled {
+          // Toast may be replaced while its exit animation is running.
         }
       }
 
       if (overlayEntry.mounted) {
         overlayEntry.remove();
       }
-      animationController.dispose();
-      fadeController.dispose();
+      if (!isDisposed) {
+        animationController.dispose();
+        fadeController.dispose();
+        isDisposed = true;
+      }
 
       if (triggerOnHide) {
         onHide?.call();
@@ -287,9 +596,18 @@ class BetterToast {
           animationController.status == AnimationStatus.forward ||
           animationController.status == AnimationStatus.completed;
 
-      await removeToast(withAnimation: !isShowing, triggerOnHide: false);
+      await removeToast(withAnimation: false, triggerOnHide: false);
       return isShowing;
     };
+
+    void scheduleAutoHide() {
+      if (isRemoved || isDisposed) {
+        return;
+      }
+      autoHideTimer = Timer(duration ?? const Duration(milliseconds: 1000), () {
+        removeToast();
+      });
+    }
 
     // 启动动画（先显示遮罩层）
     Future<void> startAnimations() async {
@@ -304,24 +622,18 @@ class BetterToast {
     }
 
     Future<void> showToast() async {
-      final previousHiders = isGlobalToastWhenShown
-          ? List<Future<bool> Function()>.of(_activeToastHiders)
-          : const <Future<bool> Function()>[];
-
-      _activeToastHiders.add(hideThisToastImmediately);
+      final previousHider = isGlobalToastWhenShown ? _currentToastHider : null;
 
       if (isGlobalToastWhenShown) {
-        _currentToastEntry = overlayEntry;
-        _currentToastAnimationController = animationController;
-        _currentToastFadeController = fadeController;
         _currentToastHider = hideThisToastImmediately;
       }
 
       // 插入到Overlay
       overlay.insert(overlayEntry);
-      var skipAnimation = false;
-      for (final hider in previousHiders) {
-        skipAnimation = await hider() || skipAnimation;
+      final skipAnimation = await previousHider?.call() ?? false;
+
+      if (isRemoved || isDisposed) {
+        return;
       }
 
       if (skipAnimation) {
@@ -329,17 +641,15 @@ class BetterToast {
           fadeController.value = 1;
         }
         animationController.value = 1;
+        scheduleAutoHide();
         return;
       }
       await startAnimations();
+
+      scheduleAutoHide();
     }
 
     showToast();
-
-    // 延迟隐藏
-    Future.delayed(duration ?? const Duration(milliseconds: 1000), () async {
-      await removeToast();
-    });
   }
 
   //成功提示

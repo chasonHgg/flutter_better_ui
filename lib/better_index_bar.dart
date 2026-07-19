@@ -77,6 +77,7 @@ class BetterIndexBar extends StatefulWidget {
   final Color? indexBarActiveColor;
   final double? indexBarFontSize;
   final double? indexBarSpacing;
+  final ValueChanged<int>? onChanged;
   const BetterIndexBar({
     super.key,
     required this.items,
@@ -85,6 +86,7 @@ class BetterIndexBar extends StatefulWidget {
     this.indexBarActiveColor,
     this.indexBarFontSize,
     this.indexBarSpacing,
+    this.onChanged,
   });
 
   @override
@@ -134,10 +136,15 @@ class _BetterIndexBarState extends State<BetterIndexBar> {
     return List<GlobalKey>.generate(count, (_) => GlobalKey());
   }
 
-  void _scrollToIndex(int index) {
-    if (index < 0 || index >= widget.items.length) return;
+  void _setCurrentIndex(int index) {
     if (_lastTouchedIndex.value == index) return;
     _lastTouchedIndex.value = index;
+    widget.onChanged?.call(index);
+  }
+
+  void _scrollToIndex(int index) {
+    if (index < 0 || index >= widget.items.length) return;
+    _setCurrentIndex(index);
 
     final targetContext = _headerKeys[index].currentContext;
     if (targetContext != null) {
@@ -206,7 +213,7 @@ class _BetterIndexBarState extends State<BetterIndexBar> {
     }
 
     if (_lastTouchedIndex.value != currentIndex) {
-      _lastTouchedIndex.value = currentIndex;
+      _setCurrentIndex(currentIndex);
     }
   }
 
