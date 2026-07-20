@@ -4,6 +4,7 @@ import 'package:example/pages/better_collapse_page.dart';
 import 'package:example/pages/better_date_picker_page.dart';
 import 'package:example/pages/better_dialog_page.dart';
 import 'package:example/pages/better_index_bar_page.dart';
+import 'package:example/pages/better_image_preview_page.dart';
 import 'package:example/pages/better_marquee_page.dart';
 import 'package:example/pages/better_picker_page.dart';
 import 'package:example/pages/better_popup_page.dart';
@@ -37,6 +38,10 @@ final routes = [
   GetPage(name: "/betterTimePicker", page: () => const BetterTimePickerPage()),
   GetPage(name: "/betterMarquee", page: () => const BetterMarqueePage()),
   GetPage(name: "/betterSwiper", page: () => const BetterSwiperPage()),
+  GetPage(
+    name: "/betterImagePreview",
+    page: () => const BetterImagePreviewPage(),
+  ),
   GetPage(name: "/betterIndexBar", page: () => const BetterIndexBarPage()),
   GetPage(name: "/betterCollapse", page: () => const BetterCollapsePage()),
   GetPage(name: "/betterDialog", page: () => const BetterDialogPage()),

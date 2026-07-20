@@ -174,6 +174,14 @@ class Home extends StatelessWidget {
                 },
               ),
               BetterCell(
+                titleText: "图片预览".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onTap: () {
+                  Get.toNamed("/betterImagePreview");
+                },
+              ),
+              BetterCell(
                 titleText: "跑马灯".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,

@@ -62,6 +62,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 ### Display Components
 
 - **BetterSwiper** - Used to loop through a set of images or content
+- **BetterImagePreview** - Full-screen image preview with paging, gesture zoom, and customizable states
 - **BetterMarquee** - Used for looping and displaying a set of message notifications
 - **BetterCollapse** - Collapse panel for showing and hiding grouped content
 - **BetterSkeletonizer** - Skeleton loading wrapper that automatically renders placeholders from child layout
@@ -80,7 +81,7 @@ Add the dependency in `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_better_ui: ^2.0.17
+  flutter_better_ui: ^2.0.18
 ```
 
 ### Initialize
@@ -804,6 +805,118 @@ BetterSwiper(
 ),
 ```
 
+### BetterImagePreview - Image Preview
+
+`BetterImagePreview` builds pages on demand with `PageView.builder` and precaches the images adjacent to the current page. Values beginning with `http://` or `https://` are loaded as network images; other values are treated as Flutter asset paths.
+
+```dart
+// Basic usage; images is required.
+await BetterImagePreview.show(
+  context: context, // Optional; defaults to BetterUi.currentContext.
+  images: const [
+    'assets/images/cat.jpeg',
+    'https://example.com/image-1.jpg',
+    'https://example.com/image-2.jpg',
+  ],
+  startPosition: 0,
+  onChange: (index) {
+    print('Current image: $index');
+  },
+  onClose: (index) {
+    print('Closed at image: $index');
+  },
+);
+```
+
+Vertical paging and zoom controls:
+
+```dart
+BetterImagePreview.show(
+  images: images,
+  vertical: true,     // Swipe vertically; defaults to false.
+  doubleScale: false, // Disable double-tap zoom; pinch zoom remains enabled.
+  closeOnTap: false,
+  closeable: true,
+);
+```
+
+After zooming, pan the image to an edge and keep dragging to switch to the previous or next page. Edge handoff works in both horizontal and vertical modes.
+
+Custom page index:
+
+```dart
+BetterImagePreview.show(
+  images: images,
+  indexBuilder: (context, index, total) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12.bw, vertical: 5.bw),
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(14.bw),
+      ),
+      child: Text(
+        '${index + 1} / $total',
+        style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+      ),
+    );
+  },
+);
+```
+
+Custom image appearance, loading, and error states:
+
+The component shows a white loading indicator and a failure icon by default. Passing the corresponding builder replaces that default state. `imageBuilder` wraps the built-in image, so keep its `child` in the returned widget tree.
+
+```dart
+BetterImagePreview.show(
+  images: images,
+  imageBuilder: (context, image, index, child) {
+    // Keep child in the tree to display the image and its loading/error states.
+    return Padding(
+      padding: EdgeInsets.all(20.bw),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12.bw),
+        child: child,
+      ),
+    );
+  },
+  loadingBuilder: (context, image, index) {
+    return Center(
+      child: CircularProgressIndicator(strokeWidth: 2.bw),
+    );
+  },
+  errorBuilder: (context, image, index) {
+    return Center(
+      child: Icon(Icons.broken_image_outlined, size: 40.bw),
+    );
+  },
+);
+```
+
+Main parameters:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `context` | `BuildContext?` | `BetterUi.currentContext` | Route context |
+| `images` | `List<String>` | Required | Non-empty network image URLs or asset paths |
+| `startPosition` | `int` | `0` | Initial image index, clamped to the valid range |
+| `loop` | `bool` | `true` | Enables circular paging |
+| `vertical` | `bool` | `false` | Uses vertical instead of horizontal paging |
+| `doubleScale` | `bool` | `true` | Enables double-tap zoom and reset |
+| `minScale` / `maxScale` | `double` | `1` / `4` | Minimum and maximum zoom scales |
+| `showIndex` | `bool` | `true` | Shows the page index |
+| `closeable` | `bool` | `false` | Shows the close button |
+| `closeOnTap` | `bool` | `true` | Closes when the image is tapped |
+| `closePosition` | `BetterImagePreviewClosePosition` | `topRight` | Close button position |
+| `backgroundColor` | `Color` | `Colors.black` | Preview background color |
+| `transitionDuration` | `Duration` | `250ms` | Fade-in and fade-out duration |
+| `onChange` / `onClose` | `ValueChanged<int>?` | `null` | Image change and preview close callbacks with the image index |
+| `indexBuilder` | `Widget Function(...)` | `null` | Custom page index; the default is used when omitted |
+| `imageBuilder` | `Widget Function(...)` | `null` | Wraps the built-in image widget |
+| `loadingBuilder` / `errorBuilder` | `Widget Function(...)` | `null` | Custom loading and failure states |
+
+The close button semantics use Flutter's `MaterialLocalizations`, so no specific localization package is required.
+
 ### BetterCollapse - Collapse Panel
 
 ```dart
@@ -1165,6 +1278,7 @@ See the `example/` directory for full usage examples:
 - `better_date_picker_page.dart` - Date picker examples
 - `better_time_picker_page.dart` - Time picker examples
 - `better_swiper_page.dart` - Swiper examples
+- `better_image_preview_page.dart` - Image preview examples
 - `better_marquee_page.dart` - Marquee examples
 - `better_collapse_page.dart` - Collapse examples
 - `better_skeleton_page.dart` - Skeleton loading examples

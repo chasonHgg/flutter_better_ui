@@ -1,5 +1,14 @@
 
-## Unreleased
+## 2.0.18
+
+* Add `BetterImagePreview.show` with a required `List<String> images` API for full-screen network and asset image previews.
+* Add lazy page construction and adjacent-image precaching to balance switching performance and memory use.
+* Add horizontal and vertical paging, optional looping, initial position, localized close semantics, page index, and close/change callbacks.
+* Add pinch zoom, configurable double-tap zoom, and edge handoff so users can switch pages after panning a zoomed image to its boundary.
+* Add customizable image, loading, error, and index builders while retaining sensible default loading, error, and page-index UI.
+* Add `BetterImagePreviewPage` with localized examples for basic preview, vertical paging, close controls, custom index, custom loading/error states, and disabled double-tap zoom.
+
+## 2.0.17
 
 * Add `BetterSkeletonizer`, a skeleton loading wrapper that keeps the original child layout and replaces painting with gray placeholder shapes while loading.
 * Support automatic skeleton generation from child render objects, including text, images, rounded containers, circular avatars, clipped shapes, and decorated boxes.
@@ -8,9 +17,6 @@
 * Add light and dark theme defaults for skeleton colors, with `baseColor`, `lightBaseColor`, and `darkBaseColor` customization.
 * Keep scroll gestures available by default while skeletons are enabled, with optional `ignorePointers` support.
 * Add `BetterSkeletonPage` example with mixed list layouts to demonstrate skeleton rendering, scrolling, theme switching, and loading-state toggling.
-
-## 2.0.17
-
 * Add `BetterIndexBar.onChanged` to listen for active index changes from scrolling or touching the index bar.
 * Fix `BetterToast` in global toast mode so rapid repeated calls update the existing toast content instead of recreating the overlay, preventing flicker.
 * Fix `BetterToast` global toast auto-dismiss timing during rapid updates so the latest toast can disappear normally after updates stop.

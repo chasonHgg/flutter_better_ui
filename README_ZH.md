@@ -62,6 +62,7 @@
 ### 展示组件
 
 - **BetterSwiper** - 用于循环播放一组图片或内容
+- **BetterImagePreview** - 全屏图片预览，支持翻页、手势缩放和自定义状态
 - **BetterMarquee** - 用于循环播放展示一组消息通知
 - **BetterCollapse** - 折叠面板组件，用于展示和隐藏分组内容
 - **BetterSkeletonizer** - 骨架屏组件，可根据子组件布局自动绘制占位内容
@@ -80,7 +81,7 @@
 
 ```yaml
 dependencies:
-  flutter_better_ui: ^2.0.17
+  flutter_better_ui: ^2.0.18
 ```
 
 ### 初始化
@@ -830,6 +831,118 @@ BetterSwiper(
 ),
 ```
 
+### BetterImagePreview - 图片预览
+
+`BetterImagePreview` 使用 `PageView.builder` 按需构建页面，并预缓存当前图片的前后相邻图片。以 `http://` 或 `https://` 开头的地址使用网络图片加载，其余字符串按 Flutter Asset 路径处理。
+
+```dart
+// 基础用法，images 是必传参数
+await BetterImagePreview.show(
+  context: context, // 可省略，默认使用 BetterUi.currentContext
+  images: const [
+    'assets/images/cat.jpeg',
+    'https://example.com/image-1.jpg',
+    'https://example.com/image-2.jpg',
+  ],
+  startPosition: 0,
+  onChange: (index) {
+    print('当前图片：$index');
+  },
+  onClose: (index) {
+    print('关闭时的图片：$index');
+  },
+);
+```
+
+纵向切换及缩放控制：
+
+```dart
+BetterImagePreview.show(
+  images: images,
+  vertical: true,     // 上下切换，默认 false
+  doubleScale: false, // 关闭双击缩放，双指缩放仍可使用
+  closeOnTap: false,
+  closeable: true,
+);
+```
+
+图片放大后可单指移动；移动到边缘并继续拖动即可切换上一张或下一张，横向和纵向模式均支持。
+
+自定义页码：
+
+```dart
+BetterImagePreview.show(
+  images: images,
+  indexBuilder: (context, index, total) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12.bw, vertical: 5.bw),
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(14.bw),
+      ),
+      child: Text(
+        '${index + 1} / $total',
+        style: TextStyle(color: Colors.white, fontSize: 14.bsp),
+      ),
+    );
+  },
+);
+```
+
+自定义图片外观、加载和失败状态：
+
+组件默认显示白色加载指示器和加载失败图标；传入对应 Builder 后会替换默认状态。`imageBuilder` 用于包装内置图片，其 `child` 应保留在返回的组件树中。
+
+```dart
+BetterImagePreview.show(
+  images: images,
+  imageBuilder: (context, image, index, child) {
+    // child 是内置图片，必须保留才能显示图片及加载/失败状态
+    return Padding(
+      padding: EdgeInsets.all(20.bw),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12.bw),
+        child: child,
+      ),
+    );
+  },
+  loadingBuilder: (context, image, index) {
+    return Center(
+      child: CircularProgressIndicator(strokeWidth: 2.bw),
+    );
+  },
+  errorBuilder: (context, image, index) {
+    return Center(
+      child: Icon(Icons.broken_image_outlined, size: 40.bw),
+    );
+  },
+);
+```
+
+主要参数：
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `context` | `BuildContext?` | `BetterUi.currentContext` | 路由上下文 |
+| `images` | `List<String>` | 必传 | 网络图片地址或 Asset 路径，不能为空 |
+| `startPosition` | `int` | `0` | 初始图片索引，越界时自动限制到有效范围 |
+| `loop` | `bool` | `true` | 是否循环切换 |
+| `vertical` | `bool` | `false` | 是否使用上下切换 |
+| `doubleScale` | `bool` | `true` | 是否启用双击放大/还原 |
+| `minScale` / `maxScale` | `double` | `1` / `4` | 最小、最大缩放比例 |
+| `showIndex` | `bool` | `true` | 是否显示页码 |
+| `closeable` | `bool` | `false` | 是否显示关闭按钮 |
+| `closeOnTap` | `bool` | `true` | 是否点击图片关闭 |
+| `closePosition` | `BetterImagePreviewClosePosition` | `topRight` | 关闭按钮位置 |
+| `backgroundColor` | `Color` | `Colors.black` | 预览背景色 |
+| `transitionDuration` | `Duration` | `250ms` | 打开、关闭的淡入淡出时长 |
+| `onChange` / `onClose` | `ValueChanged<int>?` | `null` | 图片变化和预览关闭回调，参数为图片索引 |
+| `indexBuilder` | `Widget Function(...)` | `null` | 自定义页码；未传时显示默认页码 |
+| `imageBuilder` | `Widget Function(...)` | `null` | 包装内置图片组件 |
+| `loadingBuilder` / `errorBuilder` | `Widget Function(...)` | `null` | 自定义加载中和加载失败状态 |
+
+关闭按钮的语义提示读取 Flutter `MaterialLocalizations`，无需依赖特定的多语言库。
+
 ### BetterCollapse - 折叠面板
 
 ```dart
@@ -1191,6 +1304,7 @@ void main() async {
 - `better_date_picker_page.dart` - 日期选择器示例
 - `better_time_picker_page.dart` - 时间选择器示例
 - `better_swiper_page.dart` - 轮播示例
+- `better_image_preview_page.dart` - 图片预览示例
 - `better_marquee_page.dart` - 跑马灯示例
 - `better_collapse_page.dart` - 折叠面板示例
 - `better_skeleton_page.dart` - 骨架屏示例
