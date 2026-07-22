@@ -1,11 +1,10 @@
 
 ## 3.0.1
 
-* Add `BetterSlider`, a Vant-style slider with single-value and range selection modes.
+* Add `BetterSlider` with single-value and range selection modes.
 * Support configurable `min`, `max`, and `step` values, custom active/inactive colors, track height, thumb size, and custom thumb widgets.
-* Support disabled, read-only, reversed, and vertical sliders, including keyboard and accessibility actions for single-value sliders.
-* Add drag start, value change, and drag end callbacks for both single-value and range sliders.
-* Handle overlapping range thumbs by selecting the start or end thumb from the drag direction, so both thumbs remain movable.
+* Add `BetterSliderController` with `setValue`, `increase`, and `decrease` methods for controlling single-value sliders.
+* Trigger slider `onChanged` callbacks once after tap or drag interactions end.
 
 ## 3.0.0
 

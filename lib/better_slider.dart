@@ -2,11 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 
-/// A Vant-style slider for selecting a single value or a range.
+/// Controls the value displayed by a [BetterSlider].
+class BetterSliderController extends ValueNotifier<double> {
+  BetterSliderController({double initialValue = 0}) : super(initialValue);
+
+  /// Changes the slider to [value].
+  void setValue(double value) {
+    if (this.value == value) return;
+    this.value = value;
+  }
+
+  /// Increases the current value by [amount].
+  void increase([double amount = 1]) => setValue(value + amount);
+
+  /// Decreases the current value by [amount].
+  void decrease([double amount = 1]) => setValue(value - amount);
+}
+
+/// A slider for selecting a single value or a range.
 class BetterSlider extends StatefulWidget {
   const BetterSlider({
     super.key,
-    required this.value,
+    this.value = 0,
+    this.controller,
     required this.onChanged,
     this.onChangeStart,
     this.onChangeEnd,
@@ -23,6 +41,7 @@ class BetterSlider extends StatefulWidget {
     this.reverse = false,
     this.vertical = false,
     this.height,
+    this.tapAnimationDuration = const Duration(milliseconds: 200),
   }) : values = null,
        onRangeChanged = null,
        onRangeChangeStart = null,
@@ -52,7 +71,9 @@ class BetterSlider extends StatefulWidget {
     this.reverse = false,
     this.vertical = false,
     this.height,
+    this.tapAnimationDuration = const Duration(milliseconds: 200),
   }) : value = null,
+       controller = null,
        onChanged = null,
        onChangeStart = null,
        onChangeEnd = null,
@@ -62,6 +83,7 @@ class BetterSlider extends StatefulWidget {
        assert(step > 0, 'step must be greater than zero');
 
   final double? value;
+  final BetterSliderController? controller;
   final RangeValues? values;
   final ValueChanged<double>? onChanged;
   final ValueChanged<double>? onChangeStart;
@@ -86,6 +108,7 @@ class BetterSlider extends StatefulWidget {
 
   /// Required space along the main axis when [vertical] is true.
   final double? height;
+  final Duration tapAnimationDuration;
 
   bool get isRange => values != null;
 
@@ -93,10 +116,18 @@ class BetterSlider extends StatefulWidget {
   State<BetterSlider> createState() => _BetterSliderState();
 }
 
-class _BetterSliderState extends State<BetterSlider> {
+class _BetterSliderState extends State<BetterSlider>
+    with SingleTickerProviderStateMixin {
   late final ValueNotifier<double> _valueNotifier;
   late final ValueNotifier<RangeValues> _valuesNotifier;
   int _activeThumb = 0;
+  bool _interactionStarted = false;
+  bool _pointerMoved = false;
+  late final AnimationController _tapAnimationController;
+  double? _tapValueStart;
+  double? _tapValueEnd;
+  RangeValues? _tapRangeStart;
+  RangeValues? _tapRangeEnd;
 
   double get _value => _valueNotifier.value;
   RangeValues get _values => _valuesNotifier.value;
@@ -106,14 +137,41 @@ class _BetterSliderState extends State<BetterSlider> {
     super.initState();
     _valueNotifier = ValueNotifier(_normalizedValue);
     _valuesNotifier = ValueNotifier(_normalizedValues);
+    _tapAnimationController = AnimationController(
+      vsync: this,
+      duration: widget.tapAnimationDuration,
+    )..addListener(_handleTapAnimation);
+    widget.controller?.addListener(_handleControllerChanged);
+    if (widget.controller != null) _handleControllerChanged();
   }
 
   @override
   void didUpdateWidget(covariant BetterSlider oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?.removeListener(_handleControllerChanged);
+      widget.controller?.addListener(_handleControllerChanged);
+      if (widget.controller != null) {
+        _handleControllerChanged();
+      } else {
+        _valueNotifier.value = _normalizedValue;
+      }
+    }
     if (oldWidget.value != widget.value || oldWidget.values != widget.values) {
       _syncValues();
     }
+    if (oldWidget.tapAnimationDuration != widget.tapAnimationDuration) {
+      _tapAnimationController.duration = widget.tapAnimationDuration;
+    }
+  }
+
+  void _handleControllerChanged() {
+    final next = _snap(widget.controller!.value);
+    if (widget.controller!.value != next) {
+      widget.controller!.setValue(next);
+      return;
+    }
+    if (_valueNotifier.value != next) _valueNotifier.value = next;
   }
 
   void _syncValues() {
@@ -121,7 +179,8 @@ class _BetterSliderState extends State<BetterSlider> {
     _valuesNotifier.value = _normalizedValues;
   }
 
-  double get _normalizedValue => _clamp(widget.value ?? widget.min);
+  double get _normalizedValue =>
+      _snap(widget.controller?.value ?? widget.value ?? widget.min);
 
   RangeValues get _normalizedValues {
     final values = widget.values ?? RangeValues(widget.min, widget.min);
@@ -132,6 +191,8 @@ class _BetterSliderState extends State<BetterSlider> {
 
   @override
   void dispose() {
+    widget.controller?.removeListener(_handleControllerChanged);
+    _tapAnimationController.dispose();
     _valueNotifier.dispose();
     _valuesNotifier.dispose();
     super.dispose();
@@ -159,6 +220,7 @@ class _BetterSliderState extends State<BetterSlider> {
   }
 
   void _start(Offset position, Size size) {
+    _tapAnimationController.stop();
     final next = _valueFromPosition(position, size);
     if (widget.isRange) {
       // When both thumbs overlap, defer the choice until movement begins:
@@ -177,30 +239,89 @@ class _BetterSliderState extends State<BetterSlider> {
     } else {
       widget.onChangeStart?.call(_value);
     }
-    _update(position, size);
+  }
+
+  void _ensureStarted(Offset position, Size size) {
+    if (_interactionStarted) return;
+    _interactionStarted = true;
+    _pointerMoved = false;
+    _start(position, size);
+  }
+
+  (RangeValues, int) _rangeAt(double next) {
+    if (_activeThumb == -1) {
+      if (next == _values.start) return (_values, _activeThumb);
+      _activeThumb = next < _values.start ? 0 : 1;
+    }
+    if (_activeThumb == 0) {
+      return next > _values.end
+          ? (RangeValues(_values.end, next), 1)
+          : (RangeValues(next, _values.end), 0);
+    }
+    return next < _values.start
+        ? (RangeValues(next, _values.start), 0)
+        : (RangeValues(_values.start, next), 1);
   }
 
   void _update(Offset position, Size size) {
     final next = _valueFromPosition(position, size);
     if (widget.isRange) {
-      if (_activeThumb == -1) {
-        if (next == _values.start) return;
-        _activeThumb = next < _values.start ? 0 : 1;
-      }
-      _valuesNotifier.value = _activeThumb == 0
-          ? RangeValues(next.clamp(widget.min, _values.end), _values.end)
-          : RangeValues(_values.start, next.clamp(_values.start, widget.max));
-      widget.onRangeChanged?.call(_values);
+      final result = _rangeAt(next);
+      _valuesNotifier.value = result.$1;
+      _activeThumb = result.$2;
     } else {
       _valueNotifier.value = next;
-      widget.onChanged?.call(_value);
+      widget.controller?.setValue(next);
+    }
+  }
+
+  void _animateTap(Offset position, Size size) {
+    final next = _valueFromPosition(position, size);
+    if (widget.isRange) {
+      final result = _rangeAt(next);
+      _tapRangeStart = _values;
+      _tapRangeEnd = result.$1;
+      _activeThumb = result.$2;
+      _tapValueStart = null;
+      _tapValueEnd = null;
+    } else {
+      _tapValueStart = _value;
+      _tapValueEnd = next;
+      _tapRangeStart = null;
+      _tapRangeEnd = null;
+    }
+    _interactionStarted = false;
+    _tapAnimationController.forward(from: 0).whenComplete(_notifyChanged);
+  }
+
+  void _handleTapAnimation() {
+    final progress = Curves.easeOut.transform(_tapAnimationController.value);
+    if (_tapRangeStart case final start?) {
+      final end = _tapRangeEnd!;
+      _valuesNotifier.value = RangeValues(
+        start.start + (end.start - start.start) * progress,
+        start.end + (end.end - start.end) * progress,
+      );
+    } else if (_tapValueStart case final start?) {
+      final end = _tapValueEnd!;
+      final next = start + (end - start) * progress;
+      _valueNotifier.value = next;
+      widget.controller?.setValue(next);
     }
   }
 
   void _end() {
+    if (!_interactionStarted) return;
+    _interactionStarted = false;
+    _notifyChanged();
+  }
+
+  void _notifyChanged() {
     if (widget.isRange) {
+      widget.onRangeChanged?.call(_values);
       widget.onRangeChangeEnd?.call(_values);
     } else {
+      widget.onChanged?.call(_value);
       widget.onChangeEnd?.call(_value);
     }
   }
@@ -210,6 +331,7 @@ class _BetterSliderState extends State<BetterSlider> {
     final next = _snap(_value + direction * widget.step);
     if (next == _value) return;
     _valueNotifier.value = next;
+    widget.controller?.setValue(next);
     widget.onChanged?.call(next);
     widget.onChangeEnd?.call(next);
   }
@@ -271,40 +393,51 @@ class _BetterSliderState extends State<BetterSlider> {
               widget.vertical ? buttonSize : constraints.maxWidth,
               widget.vertical ? constraints.maxHeight : buttonSize,
             );
-            return GestureDetector(
+            return Listener(
               behavior: HitTestBehavior.opaque,
-              onTapDown: widget.disabled || widget.readOnly
+              onPointerDown: widget.disabled || widget.readOnly
+                  ? null
+                  : (details) => _ensureStarted(details.localPosition, size),
+              onPointerMove: widget.disabled || widget.readOnly
                   ? null
                   : (details) {
-                      _start(details.localPosition, size);
-                      _end();
+                      _pointerMoved = true;
+                      _update(details.localPosition, size);
                     },
-              onPanStart: widget.disabled || widget.readOnly
+              onPointerUp: widget.disabled || widget.readOnly
                   ? null
-                  : (details) => _start(details.localPosition, size),
-              onPanUpdate: widget.disabled || widget.readOnly
+                  : (details) {
+                      if (_pointerMoved) {
+                        _end();
+                      } else {
+                        _animateTap(details.localPosition, size);
+                      }
+                    },
+              onPointerCancel: widget.disabled || widget.readOnly
                   ? null
-                  : (details) => _update(details.localPosition, size),
-              onPanEnd: widget.disabled || widget.readOnly
-                  ? null
-                  : (_) => _end(),
-              child: _SliderTrack(
-                value: _fraction(_value),
-                values: widget.isRange
-                    ? RangeValues(
-                        _fraction(_values.start),
-                        _fraction(_values.end),
-                      )
-                    : null,
-                reverse: widget.reverse,
-                vertical: widget.vertical,
-                barHeight: barHeight,
-                buttonSize: buttonSize,
-                activeColor: activeColor,
-                inactiveColor: inactiveColor,
-                button: widget.button,
-                startButton: widget.startButton,
-                endButton: widget.endButton,
+                  : (_) => _interactionStarted = false,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onPanStart: widget.disabled || widget.readOnly ? null : (_) {},
+                onPanUpdate: widget.disabled || widget.readOnly ? null : (_) {},
+                child: _SliderTrack(
+                  value: _fraction(_value),
+                  values: widget.isRange
+                      ? RangeValues(
+                          _fraction(_values.start),
+                          _fraction(_values.end),
+                        )
+                      : null,
+                  reverse: widget.reverse,
+                  vertical: widget.vertical,
+                  barHeight: barHeight,
+                  buttonSize: buttonSize,
+                  activeColor: activeColor,
+                  inactiveColor: inactiveColor,
+                  button: widget.button,
+                  startButton: widget.startButton,
+                  endButton: widget.endButton,
+                ),
               ),
             );
           },

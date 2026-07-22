@@ -55,7 +55,7 @@
 
 - **BetterPicker** - 选择器组件，支持单列、多列和级联选择
 - **BetterSwitch** - 开关组件，支持自定义样式和异步控制
-- **BetterSlider** - Vant 风格滑块，支持步进、范围、竖向、反向和自定义滑块按钮
+- **BetterSlider** - 滑块组件，支持步进、范围、竖向、反向和自定义滑块按钮
 - **BetterDatePicker** - 日期选择器，支持灵活的列类型和格式选项
 - **BetterTimePicker** - 时间选择器，支持灵活的列类型和格式选项
 
@@ -71,7 +71,7 @@
 - **BetterMarquee** - 用于循环播放展示一组消息通知
 - **BetterCollapse** - 折叠面板组件，用于展示和隐藏分组内容
 - **BetterSkeletonizer** - 骨架屏组件，可根据子组件布局自动绘制占位内容
-- **BetterProgress** - Vant 风格进度条，支持动画、自定义标签和控制器增减进度
+- **BetterProgress** - 进度条组件，支持动画、自定义标签和控制器增减进度
 
 ### 工具类
 
@@ -403,9 +403,7 @@ BetterSwitch(
   width: 50.bw,
   height: 30.bw,
   onChanged: (value) {
-    setState(() {
-      customBtnIsChecked = value;
-    });
+    print("开关状态: $value");
   },
   ballWidget: Container(
     width: 26.bw,
@@ -415,7 +413,7 @@ BetterSwitch(
       shape: BoxShape.circle,
     ),
     child: Icon(
-      customBtnIsChecked ? Icons.check : Icons.close,
+      Icons.check,
       color: Theme.of(context).primaryColor,
       size: 16.bw,
     ),
@@ -470,32 +468,35 @@ BetterCell(
 
 ### BetterSlider - 滑块
 
-`BetterSlider` 是一个用于选择单个数值或数值范围的 Vant 风格滑块，支持步进吸附、横向和竖向布局、反向、自定义滑块按钮以及范围滑块重合处理。组件内部使用 `ValueNotifier` 驱动更新，不依赖 `setState`。
+`BetterSlider` 用于选择单个数值或数值范围，支持步进吸附、横向和竖向布局、反向、自定义滑块按钮以及范围滑块重合处理。
 
 ```dart
-final value = ValueNotifier<double>(50);
-final range = ValueNotifier<RangeValues>(const RangeValues(20, 60));
-
 // 单值选择和步进吸附
-ValueListenableBuilder<double>(
-  valueListenable: value,
-  builder: (context, current, _) => BetterSlider(
-    value: current,
-    step: 10,
-    onChanged: (next) => value.value = next,
-    onChangeStart: (current) => print('开始：$current'),
-    onChangeEnd: (current) => print('结束：$current'),
-  ),
+BetterSlider(
+  value: 50,
+  step: 10,
+  onChanged: (next) => print('当前值：$next'),
+  onChangeStart: (current) => print('开始：$current'),
+  onChangeEnd: (current) => print('结束：$current'),
 ),
 
 // 范围选择
-ValueListenableBuilder<RangeValues>(
-  valueListenable: range,
-  builder: (context, current, _) => BetterSlider.range(
-    values: current,
-    onChanged: (next) => range.value = next,
-  ),
+BetterSlider.range(
+  values: const RangeValues(20, 60),
+  onChanged: (next) => print('当前范围：$next'),
 ),
+
+// 通过控制器操作滑块
+final sliderController = BetterSliderController(initialValue: 50);
+
+BetterSlider(
+  controller: sliderController,
+  onChanged: (next) => print('当前值：$next'),
+),
+
+sliderController.setValue(80);
+sliderController.increase();
+sliderController.decrease();
 
 // 竖向、反向和自定义滑块按钮
 BetterSlider(
@@ -522,15 +523,18 @@ BetterSlider(
 ),
 ```
 
-范围滑块重合时，向左拖动会选择起始滑块，向右拖动会选择结束滑块，因此两个滑块都可以继续操作。
+传入控制器时，控制器的值优先于 `value`。控制器所属对象销毁时，需要调用 `dispose()`。
+
+范围滑块重合时，向左拖动会选择起始滑块，向右拖动会选择结束滑块。两个滑块可以互相越过，返回的 `RangeValues` 始终按从小到大排列。
 
 #### BetterSlider 属性
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `value` | `double` | 必填 | 单值构造函数的当前值 |
+| `value` | `double` | `0` | 单值构造函数的初始值 |
+| `controller` | `BetterSliderController?` | `null` | 通过函数控制单值滑块 |
 | `values` | `RangeValues` | 必填 | `BetterSlider.range` 的当前范围 |
-| `onChanged` | `ValueChanged<double>` / `ValueChanged<RangeValues>` | 必填 | 选中值变化时触发 |
+| `onChanged` | `ValueChanged<double>` / `ValueChanged<RangeValues>` | 必填 | 点击或拖动结束后触发一次 |
 | `onChangeStart` / `onRangeChangeStart` | 回调 | `null` | 开始操作时触发 |
 | `onChangeEnd` / `onRangeChangeEnd` | 回调 | `null` | 结束操作时触发 |
 | `min` / `max` | `double` | `0` / `100` | 可选数值范围 |
@@ -545,10 +549,11 @@ BetterSlider(
 | `reverse` | `bool` | `false` | 反转数值方向 |
 | `vertical` | `bool` | `false` | 使用竖向布局 |
 | `height` | `double?` | `200.bw` | 竖向模式的主轴长度 |
+| `tapAnimationDuration` | `Duration` | `200ms` | 点击轨道时的滑动动画时长 |
 
 ### BetterProgress - 进度条
 
-`BetterProgress` 用于展示 0–100 的进度，数值超出范围时会自动限制。组件使用 `ValueListenableBuilder` 响应控制器变化，不依赖 `setState`。
+`BetterProgress` 用于展示 0–100 的进度，数值超出范围时会自动限制。
 
 ```dart
 // 基础用法
@@ -1276,13 +1281,7 @@ BetterSkeletonizer(
 )
 ```
 
-接口请求完成后，将 `enabled` 设为 `false`，即可恢复原组件绘制：
-
-```dart
-setState(() {
-  loading = false;
-});
-```
+接口请求完成后，将 `enabled` 更新为 `false`，即可恢复原组件绘制。
 
 #### 自定义颜色和动画
 

@@ -55,7 +55,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 
 - **BetterPicker** - Picker supporting single, multiple, and cascading selections
 - **BetterSwitch** - Customizable switch with loading state and async control
-- **BetterSlider** - Vant-style slider with stepped, range, vertical, reversed, and custom-thumb modes
+- **BetterSlider** - Slider with stepped, range, vertical, reversed, and custom-thumb modes
 - **BetterDatePicker** - Date picker with flexible column types and formatting options
 - **BetterTimePicker** - Time picker with flexible column types and formatting options
 
@@ -71,7 +71,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 - **BetterMarquee** - Used for looping and displaying a set of message notifications
 - **BetterCollapse** - Collapse panel for showing and hiding grouped content
 - **BetterSkeletonizer** - Skeleton loading wrapper that automatically renders placeholders from child layout
-- **BetterProgress** - Vant-style animated progress bar with custom pivots and controller-based updates
+- **BetterProgress** - Animated progress bar with custom pivots and controller-based updates
 
 ### Utilities
 
@@ -455,32 +455,35 @@ BetterSwitch(
 
 ### BetterSlider - Slider
 
-`BetterSlider` is a Vant-style slider for selecting one value or a range. It supports step snapping, horizontal and vertical layouts, reversed direction, custom thumbs, and overlapping range thumbs. Rendering is driven by `ValueNotifier`, with no `setState` inside the component.
+`BetterSlider` selects one value or a range. It supports step snapping, horizontal and vertical layouts, reversed direction, custom thumbs, and overlapping range thumbs.
 
 ```dart
-final value = ValueNotifier<double>(50);
-final range = ValueNotifier<RangeValues>(const RangeValues(20, 60));
-
 // Single value with step snapping
-ValueListenableBuilder<double>(
-  valueListenable: value,
-  builder: (context, current, _) => BetterSlider(
-    value: current,
-    step: 10,
-    onChanged: (next) => value.value = next,
-    onChangeStart: (current) => print('Start: $current'),
-    onChangeEnd: (current) => print('End: $current'),
-  ),
+BetterSlider(
+  value: 50,
+  step: 10,
+  onChanged: (next) => print('Value: $next'),
+  onChangeStart: (current) => print('Start: $current'),
+  onChangeEnd: (current) => print('End: $current'),
 ),
 
 // Range selection
-ValueListenableBuilder<RangeValues>(
-  valueListenable: range,
-  builder: (context, current, _) => BetterSlider.range(
-    values: current,
-    onChanged: (next) => range.value = next,
-  ),
+BetterSlider.range(
+  values: const RangeValues(20, 60),
+  onChanged: (next) => print('Range: $next'),
 ),
+
+// Control the slider programmatically
+final sliderController = BetterSliderController(initialValue: 50);
+
+BetterSlider(
+  controller: sliderController,
+  onChanged: (next) => print('Value: $next'),
+),
+
+sliderController.setValue(80);
+sliderController.increase();
+sliderController.decrease();
 
 // Vertical, reversed, and custom thumb examples
 BetterSlider(
@@ -507,15 +510,18 @@ BetterSlider(
 ),
 ```
 
-When range thumbs overlap, dragging left selects the start thumb and dragging right selects the end thumb, so either side remains accessible.
+The controller takes precedence over `value`. Dispose it when its owner is disposed.
+
+When range thumbs overlap, dragging left selects the start thumb and dragging right selects the end thumb. Either thumb can cross the other; the returned `RangeValues` remain ordered from low to high.
 
 #### BetterSlider properties
 
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | `double` | required | Current value for the single-value constructor |
+| `value` | `double` | `0` | Initial value for the single-value constructor |
+| `controller` | `BetterSliderController?` | `null` | Controls a single-value slider programmatically |
 | `values` | `RangeValues` | required | Current values for `BetterSlider.range` |
-| `onChanged` | `ValueChanged<double>` / `ValueChanged<RangeValues>` | required | Called whenever the selected value changes |
+| `onChanged` | `ValueChanged<double>` / `ValueChanged<RangeValues>` | required | Called once after a tap or drag interaction ends |
 | `onChangeStart` / `onRangeChangeStart` | callback | `null` | Called when interaction begins |
 | `onChangeEnd` / `onRangeChangeEnd` | callback | `null` | Called when interaction ends |
 | `min` / `max` | `double` | `0` / `100` | Selectable value limits |
@@ -530,10 +536,11 @@ When range thumbs overlap, dragging left selects the start thumb and dragging ri
 | `reverse` | `bool` | `false` | Reverses the value direction |
 | `vertical` | `bool` | `false` | Uses a vertical layout |
 | `height` | `double?` | `200.bw` | Main-axis extent in vertical mode |
+| `tapAnimationDuration` | `Duration` | `200ms` | Animation duration when tapping the track |
 
 ### BetterProgress - Progress Bar
 
-`BetterProgress` displays a value from 0 to 100 and automatically clamps out-of-range values. Controller updates are rendered with `ValueListenableBuilder`, so no `setState` is required.
+`BetterProgress` displays a value from 0 to 100 and automatically clamps out-of-range values.
 
 ```dart
 // Basic usage
@@ -1250,13 +1257,7 @@ BetterSkeletonizer(
 )
 ```
 
-When the request finishes, set `enabled` to `false` and the original child rendering is restored:
-
-```dart
-setState(() {
-  loading = false;
-});
-```
+When the request finishes, update `enabled` to `false` and the original child rendering is restored.
 
 #### Custom color and animation
 

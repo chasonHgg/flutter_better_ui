@@ -28,6 +28,8 @@ void main() {
     );
     final rect = tester.getRect(find.byType(BetterSlider));
     await tester.tapAt(Offset(rect.left + rect.width * .54, rect.center.dy));
+    expect(value, 0);
+    await tester.pumpAndSettle();
     expect(value, 50);
   });
 
@@ -46,6 +48,58 @@ void main() {
     expect(changed, isNull);
   });
 
+  testWidgets('onChanged fires only after dragging ends', (tester) async {
+    final changes = <double>[];
+    await tester.pumpWidget(
+      app(BetterSlider(value: 20, onChanged: changes.add)),
+    );
+    final rect = tester.getRect(find.byType(BetterSlider));
+    final gesture = await tester.startGesture(rect.centerLeft);
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(changes, isEmpty);
+
+    await gesture.moveTo(rect.center);
+    await tester.pump();
+    expect(changes, isEmpty);
+
+    await gesture.up();
+    await tester.pump();
+    expect(changes, hasLength(1));
+    expect(changes.single, 50);
+  });
+
+  testWidgets('controller changes and clamps the slider value', (tester) async {
+    final controller = BetterSliderController(initialValue: 20);
+    addTearDown(controller.dispose);
+    await tester.pumpWidget(
+      app(BetterSlider(controller: controller, onChanged: (_) {})),
+    );
+
+    controller.setValue(140);
+    await tester.pump();
+    expect(controller.value, 100);
+
+    controller.decrease(70);
+    await tester.pump();
+    expect(controller.value, 30);
+  });
+
+  testWidgets('slider responds before the drag touch slop is reached', (
+    tester,
+  ) async {
+    final controller = BetterSliderController(initialValue: 50);
+    addTearDown(controller.dispose);
+    await tester.pumpWidget(
+      app(BetterSlider(controller: controller, onChanged: (_) {})),
+    );
+    final rect = tester.getRect(find.byType(BetterSlider));
+    final gesture = await tester.startGesture(rect.center);
+    await gesture.moveBy(const Offset(4, 0));
+    await tester.pump();
+    expect(controller.value, greaterThan(50));
+    await gesture.up();
+  });
+
   testWidgets('range slider moves nearest thumb', (tester) async {
     RangeValues? changed;
     await tester.pumpWidget(
@@ -58,6 +112,7 @@ void main() {
     );
     final rect = tester.getRect(find.byType(BetterSlider));
     await tester.tapAt(Offset(rect.left + rect.width * .3, rect.center.dy));
+    await tester.pumpAndSettle();
     expect(changed, const RangeValues(30, 80));
   });
 
@@ -91,5 +146,23 @@ void main() {
     await tester.pump();
     expect(value.value.start, lessThan(50));
     expect(value.value.end, 50);
+  });
+
+  testWidgets('range thumbs can cross each other', (tester) async {
+    RangeValues? changed;
+    await tester.pumpWidget(
+      app(
+        BetterSlider.range(
+          values: const RangeValues(20, 80),
+          onChanged: (value) => changed = value,
+        ),
+      ),
+    );
+    final rect = tester.getRect(find.byType(BetterSlider));
+    await tester.dragFrom(
+      Offset(rect.left + rect.width * .2, rect.center.dy),
+      Offset(rect.width * .7, 0),
+    );
+    expect(changed, const RangeValues(80, 90));
   });
 }
