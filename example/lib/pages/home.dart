@@ -1,10 +1,11 @@
 import 'package:flutter_better_ui/better_cell.dart';
 import 'package:flutter_better_ui/better_picker.dart';
 import 'package:flutter_better_ui/better_picker_widget.dart';
+import 'package:flutter_better_ui/better_ui.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:example/i18n/translations.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -23,9 +24,7 @@ class Home extends StatelessWidget {
           //切换主题的图标
           IconButton(
             onPressed: () {
-              Get.changeThemeMode(
-                Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
-              );
+              BetterUi.toggleTheme();
             },
             //判断显示主题的图标
             icon: Icon(
@@ -75,7 +74,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterButton");
+                  context.push("/betterButton");
                 },
               ),
               BetterCell(
@@ -83,7 +82,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterCell");
+                  context.push("/betterCell");
                 },
               ),
               BetterCell(
@@ -91,14 +90,14 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterToast");
+                  context.push("/betterToast");
                 },
               ),
               BetterCell(
                 titleText: "弹出层".tr,
                 isShowArrowRight: true,
                 onTap: () {
-                  Get.toNamed("/betterPopup");
+                  context.push("/betterPopup");
                 },
               ),
               SizedBox(height: 20.bw),
@@ -109,7 +108,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterPicker");
+                  context.push("/betterPicker");
                 },
               ),
               BetterCell(
@@ -117,7 +116,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterSwitch");
+                  context.push("/betterSwitch");
                 },
               ),
               BetterCell(
@@ -125,7 +124,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterDatePicker");
+                  context.push("/betterDatePicker");
                 },
               ),
               BetterCell(
@@ -133,7 +132,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterTimePicker");
+                  context.push("/betterTimePicker");
                 },
               ),
               SizedBox(height: 20.bw),
@@ -144,14 +143,14 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterSwipeAction");
+                  context.push("/betterSwipeAction");
                 },
               ),
               BetterCell(
                 titleText: "滑动按钮".tr,
                 isShowArrowRight: true,
                 onTap: () {
-                  Get.toNamed("/betterSlideAction");
+                  context.push("/betterSlideAction");
                 },
               ),
               BetterCell(
@@ -159,7 +158,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterDialog");
+                  context.push("/betterDialog");
                 },
               ),
               SizedBox(height: 20.bw),
@@ -170,7 +169,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterSwiper");
+                  context.push("/betterSwiper");
                 },
               ),
               BetterCell(
@@ -178,7 +177,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterImagePreview");
+                  context.push("/betterImagePreview");
                 },
               ),
               BetterCell(
@@ -186,7 +185,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterMarquee");
+                  context.push("/betterMarquee");
                 },
               ),
               BetterCell(
@@ -194,7 +193,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterCollapse");
+                  context.push("/betterCollapse");
                 },
               ),
               BetterCell(
@@ -202,7 +201,14 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterSkeleton");
+                  context.push("/betterSkeleton");
+                },
+              ),
+              BetterCell(
+                titleText: "进度条".tr,
+                isShowArrowRight: true,
+                onTap: () {
+                  context.push("/betterProgress");
                 },
               ),
               SizedBox(height: 20.bw),
@@ -213,7 +219,7 @@ class Home extends StatelessWidget {
                 isShowArrowRight: true,
                 isShowBorder: true,
                 onTap: () {
-                  Get.toNamed("/betterIndexBar");
+                  context.push("/betterIndexBar");
                 },
               ),
             ],

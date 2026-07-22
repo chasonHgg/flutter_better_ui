@@ -4,7 +4,6 @@ import 'package:flutter_better_ui/better_picker_widget.dart';
 import 'package:flutter_better_ui/better_toast.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class BetterPickerPage extends StatelessWidget {
   const BetterPickerPage({super.key});

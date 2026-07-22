@@ -1,6 +1,6 @@
 name: flutter_better_ui
 description: "A modern Flutter UI component library that provides beautiful and easy-to-use widgets, with theme customization and responsive design. Actively maintained."
-version: 2.0.18
+version: 3.0.0
 repository: https://github.com/chasonHgg/better_ui.git
 homepage: https://github.com/chasonHgg/better_ui.git
 
@@ -11,7 +11,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  get: ^4.7.2
 
 dev_dependencies:
   flutter_test:

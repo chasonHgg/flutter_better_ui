@@ -3,7 +3,6 @@ import 'package:flutter_better_ui/better_button.dart';
 import 'package:flutter_better_ui/better_slide_action.dart';
 import 'package:flutter_better_ui/better_toast.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
-import 'package:get/get.dart';
 
 class BetterSlideActionPage extends StatefulWidget {
   const BetterSlideActionPage({super.key});

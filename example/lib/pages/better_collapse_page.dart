@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_better_ui/better_collapse.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter_better_ui/utils/color_util.dart';
-import 'package:get/get.dart';
 
 class BetterCollapsePage extends StatefulWidget {
   const BetterCollapsePage({super.key});
@@ -28,6 +27,7 @@ class _BetterCollapsePageState extends State<BetterCollapsePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         title: Text('折叠面板'.tr),
@@ -67,7 +67,7 @@ class _BetterCollapsePageState extends State<BetterCollapsePage> {
                   "折叠面板".tr,
                   style: TextStyle(
                     fontSize: 14.bsp,
-                    color: Get.isDarkMode
+                    color: isDark
                         ? Colors.white
                         : ColorUtil.hexToColor("#323232"),
                   ),
@@ -77,7 +77,7 @@ class _BetterCollapsePageState extends State<BetterCollapsePage> {
                     "1234",
                     style: TextStyle(
                       fontSize: 14.bsp,
-                      color: Get.isDarkMode
+                      color: isDark
                           ? ColorUtil.hexToColor("#707070")
                           : ColorUtil.hexToColor("#969799"),
                     ),

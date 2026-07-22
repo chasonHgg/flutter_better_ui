@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+export 'package:flutter_better_ui/i18n/better_localizations.dart';
+
 class BetterScreenUtil {
   static late MediaQueryData _mediaQuery;
   static late double _screenWidth;

@@ -4,7 +4,6 @@ import 'package:flutter_better_ui/better_cell.dart';
 import 'package:flutter_better_ui/better_switch.dart';
 import 'package:flutter_better_ui/better_toast.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
-import 'package:get/get.dart';
 
 class BetterSwitchPage extends StatefulWidget {
   const BetterSwitchPage({super.key});

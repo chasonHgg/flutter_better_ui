@@ -3,7 +3,6 @@ import 'package:flutter_better_ui/better_button.dart';
 import 'package:flutter_better_ui/better_dialog.dart';
 import 'package:flutter_better_ui/better_cell.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class BetterDialogPage extends StatefulWidget {
   const BetterDialogPage({super.key});

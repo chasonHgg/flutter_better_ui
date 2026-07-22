@@ -3,7 +3,6 @@ import 'package:flutter_better_ui/better_button.dart';
 import 'package:flutter_better_ui/better_swiper.dart';
 import 'package:flutter_better_ui/better_switch.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
-import 'package:get/get.dart';
 
 class BetterSwiperPage extends StatefulWidget {
   const BetterSwiperPage({super.key});

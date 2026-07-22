@@ -161,4 +161,8 @@ Map<String, String> enUS = {
   '评论': 'Comment',
   '浏览': 'Views',
   '转化': 'Conversion',
+  '进度条': 'Progress',
+  '线条粗细': 'Stroke Width',
+  '置灰': 'Inactive',
+  '函数控制': 'Function Control',
 };

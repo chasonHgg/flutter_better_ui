@@ -1,4 +1,14 @@
 
+## 3.0.0
+
+* Breaking change: adopt Flutter's native `MaterialApp` and `MaterialApp.router` application setup.
+* Merge runtime theme management into `BetterUi`, with `changeTheme`, `changeDarkTheme`, `changeThemes`, `changeThemeMode`, and `toggleTheme` APIs.
+* Add `BetterUi.builder` and `BetterUiConfig` so theme and locale changes rebuild the application from one global entry point.
+* Add `themeBuilder` and `darkThemeBuilder` for creating responsive themes after `BetterScreenUtil` has initialized with the actual screen dimensions.
+* Add lightweight internationalization to `BetterUi`, including locale switching, fallback locales, supported locale discovery, the `.tr` extension, and dynamic `.trParams` values.
+* Add safe pre-mount defaults to `BetterScreenUtil` so top-level `.bw`, `.bh`, `.br`, and `.bsp` calls do not throw `LateInitializationError`.
+* Update the example application to use `MaterialApp.router` with Better UI theme switching and localization.
+
 ## 2.0.18
 
 * Add `BetterImagePreview.show` with a required `List<String> images` API for full-screen network and asset image previews.

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_better_ui/better_button.dart';
 import 'package:flutter_better_ui/better_image_preview.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
-import 'package:get/get.dart';
 
 class BetterImagePreviewPage extends StatelessWidget {
   const BetterImagePreviewPage({super.key});

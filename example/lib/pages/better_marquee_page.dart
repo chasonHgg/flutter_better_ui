@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_better_ui/better_marquee.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter_better_ui/utils/color_util.dart';
-import 'package:get/get.dart';
 
 class BetterMarqueePage extends StatefulWidget {
   const BetterMarqueePage({super.key});

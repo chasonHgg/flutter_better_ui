@@ -8,6 +8,7 @@ import 'package:example/pages/better_image_preview_page.dart';
 import 'package:example/pages/better_marquee_page.dart';
 import 'package:example/pages/better_picker_page.dart';
 import 'package:example/pages/better_popup_page.dart';
+import 'package:example/pages/better_progress_page.dart';
 import 'package:example/pages/better_skeleton_page.dart';
 import 'package:example/pages/better_slide_action_page.dart';
 import 'package:example/pages/better_swipe_action_page.dart';
@@ -16,34 +17,84 @@ import 'package:example/pages/better_switch_page.dart';
 import 'package:example/pages/better_time_picker_page.dart';
 import 'package:example/pages/better_toast_page.dart';
 import 'package:example/pages/home.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:flutter_better_ui/better_ui.dart';
+import 'package:go_router/go_router.dart';
 
-final routes = [
-  GetPage(name: "/", page: () => const Home()),
-  GetPage(name: "/betterButton", page: () => const BetterButtonPage()),
-  GetPage(name: "/betterCell", page: () => const BetterCellPage()),
-  GetPage(name: "/betterToast", page: () => const BetterToastPage()),
-  GetPage(name: "/betterPopup", page: () => const BetterPopupPage()),
-  GetPage(name: "/betterPicker", page: () => const BetterPickerPage()),
-  GetPage(name: "/betterSwitch", page: () => const BetterSwitchPage()),
-  GetPage(name: "/betterDatePicker", page: () => const BetterDatePickerPage()),
-  GetPage(
-    name: "/betterSwipeAction",
-    page: () => const BetterSwipeActionPage(),
-  ),
-  GetPage(
-    name: "/betterSlideAction",
-    page: () => const BetterSlideActionPage(),
-  ),
-  GetPage(name: "/betterTimePicker", page: () => const BetterTimePickerPage()),
-  GetPage(name: "/betterMarquee", page: () => const BetterMarqueePage()),
-  GetPage(name: "/betterSwiper", page: () => const BetterSwiperPage()),
-  GetPage(
-    name: "/betterImagePreview",
-    page: () => const BetterImagePreviewPage(),
-  ),
-  GetPage(name: "/betterIndexBar", page: () => const BetterIndexBarPage()),
-  GetPage(name: "/betterCollapse", page: () => const BetterCollapsePage()),
-  GetPage(name: "/betterDialog", page: () => const BetterDialogPage()),
-  GetPage(name: "/betterSkeleton", page: () => const BetterSkeletonPage()),
-];
+final GoRouter router = GoRouter(
+  navigatorKey: BetterUi.navigatorKey,
+  routes: [
+    GoRoute(path: '/', builder: (context, state) => const Home()),
+    GoRoute(
+      path: '/betterButton',
+      builder: (context, state) => const BetterButtonPage(),
+    ),
+    GoRoute(
+      path: '/betterCell',
+      builder: (context, state) => const BetterCellPage(),
+    ),
+    GoRoute(
+      path: '/betterToast',
+      builder: (context, state) => const BetterToastPage(),
+    ),
+    GoRoute(
+      path: '/betterPopup',
+      builder: (context, state) => const BetterPopupPage(),
+    ),
+    GoRoute(
+      path: '/betterProgress',
+      builder: (context, state) => const BetterProgressPage(),
+    ),
+    GoRoute(
+      path: '/betterPicker',
+      builder: (context, state) => const BetterPickerPage(),
+    ),
+    GoRoute(
+      path: '/betterSwitch',
+      builder: (context, state) => const BetterSwitchPage(),
+    ),
+    GoRoute(
+      path: '/betterDatePicker',
+      builder: (context, state) => const BetterDatePickerPage(),
+    ),
+    GoRoute(
+      path: '/betterSwipeAction',
+      builder: (context, state) => const BetterSwipeActionPage(),
+    ),
+    GoRoute(
+      path: '/betterSlideAction',
+      builder: (context, state) => const BetterSlideActionPage(),
+    ),
+    GoRoute(
+      path: '/betterTimePicker',
+      builder: (context, state) => const BetterTimePickerPage(),
+    ),
+    GoRoute(
+      path: '/betterMarquee',
+      builder: (context, state) => const BetterMarqueePage(),
+    ),
+    GoRoute(
+      path: '/betterSwiper',
+      builder: (context, state) => const BetterSwiperPage(),
+    ),
+    GoRoute(
+      path: '/betterImagePreview',
+      builder: (context, state) => const BetterImagePreviewPage(),
+    ),
+    GoRoute(
+      path: '/betterIndexBar',
+      builder: (context, state) => const BetterIndexBarPage(),
+    ),
+    GoRoute(
+      path: '/betterCollapse',
+      builder: (context, state) => const BetterCollapsePage(),
+    ),
+    GoRoute(
+      path: '/betterDialog',
+      builder: (context, state) => const BetterDialogPage(),
+    ),
+    GoRoute(
+      path: '/betterSkeleton',
+      builder: (context, state) => const BetterSkeletonPage(),
+    ),
+  ],
+);

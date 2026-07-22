@@ -326,9 +326,12 @@ class BetterButton extends StatelessWidget {
       child: ElevatedButton(
         style: ButtonStyle(
           padding: WidgetStateProperty.all(EdgeInsets.zero),
+          minimumSize: WidgetStateProperty.all(Size.zero),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          elevation: WidgetStateProperty.all(0),
           backgroundColor: WidgetStateProperty.all(Colors.transparent),
           shadowColor: WidgetStateProperty.all(Colors.transparent),
+          surfaceTintColor: WidgetStateProperty.all(Colors.transparent),
           overlayColor: WidgetStateProperty.all(
             loading == true
                 ? Colors.transparent

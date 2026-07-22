@@ -3,7 +3,6 @@ import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_better_ui/utils/better_util.dart';
-import 'package:get/get.dart';
 
 enum _BetterPickerType { single, multi, cascade }
 

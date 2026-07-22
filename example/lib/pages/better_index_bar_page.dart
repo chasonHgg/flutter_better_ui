@@ -3,7 +3,6 @@ import 'package:flutter_better_ui/better_index_bar.dart';
 import 'package:flutter_better_ui/better_toast.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter_better_ui/utils/color_util.dart';
-import 'package:get/get.dart';
 
 class BetterIndexBarPage extends StatefulWidget {
   const BetterIndexBarPage({super.key});
@@ -57,13 +56,14 @@ class _BetterIndexBarPageState extends State<BetterIndexBarPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(title: Text('索引栏'.tr)),
-      backgroundColor: Get.isDarkMode
+      backgroundColor: isDark
           ? ColorUtil.hexToColor("#1c1c1e")
           : Colors.white,
       body: BetterIndexBar(
-        indexBarColor: Get.isDarkMode
+        indexBarColor: isDark
             ? ColorUtil.hexToColor("#fff")
             : ColorUtil.hexToColor("#323233"),
         indexBarActiveColor: ColorUtil.hexToColor("#1989fa"),
@@ -75,13 +75,13 @@ class _BetterIndexBarPageState extends State<BetterIndexBarPage> {
             child: Container(
               height: 100.bw,
               alignment: Alignment.center,
-              color: Get.isDarkMode
+              color: isDark
                   ? ColorUtil.hexToColor("#3a3a3c")
                   : ColorUtil.hexToColor("#fff"),
               child: Text(
                 "我是自定义内容".tr,
                 style: TextStyle(
-                  color: Get.isDarkMode
+                  color: isDark
                       ? ColorUtil.hexToColor("#ffffff")
                       : ColorUtil.hexToColor("#323233"),
                 ),
@@ -99,7 +99,7 @@ class _BetterIndexBarPageState extends State<BetterIndexBarPage> {
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.symmetric(horizontal: 16.bw),
                   decoration: BoxDecoration(
-                    color: Get.isDarkMode
+                    color: isDark
                         ? ColorUtil.hexToColor("#000")
                         : ColorUtil.hexToColor("#F7F8FA"),
                   ),
@@ -107,7 +107,7 @@ class _BetterIndexBarPageState extends State<BetterIndexBarPage> {
                     item,
                     style: TextStyle(
                       fontSize: 14.bsp,
-                      color: Get.isDarkMode
+                      color: isDark
                           ? ColorUtil.hexToColor("#ffffff")
                           : ColorUtil.hexToColor("#323233"),
                     ),
@@ -122,14 +122,14 @@ class _BetterIndexBarPageState extends State<BetterIndexBarPage> {
                       height: 44.bw,
                       alignment: Alignment.centerLeft,
                       decoration: BoxDecoration(
-                        color: Get.isDarkMode
+                        color: isDark
                             ? ColorUtil.hexToColor("#1c1c1e")
                             : Colors.white,
                         border: Border(
                           bottom: i == 9
                               ? BorderSide.none
                               : BorderSide(
-                                  color: Get.isDarkMode
+                                  color: isDark
                                       ? ColorUtil.hexToColor("#3a3a3c")
                                       : ColorUtil.hexToColor("#E5E5E5"),
                                   width: 1.bw,

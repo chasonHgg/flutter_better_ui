@@ -4,7 +4,6 @@ import 'package:flutter_better_ui/better_cell.dart';
 import 'package:flutter_better_ui/better_swipe_cell.dart';
 import 'package:flutter_better_ui/better_toast.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
-import 'package:get/get.dart';
 
 class BetterSwipeActionPage extends StatelessWidget {
   const BetterSwipeActionPage({super.key});

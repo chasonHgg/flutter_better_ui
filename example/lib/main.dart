@@ -1,43 +1,43 @@
-import 'package:flutter_better_ui/theme/themes/better_dark_theme.dart';
-import 'package:flutter_better_ui/theme/themes/better_light_theme.dart';
-import 'package:flutter_better_ui/better_ui.dart';
 import 'package:example/i18n/translations.dart';
 import 'package:example/router/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_better_ui/better_ui.dart';
+import 'package:flutter_better_ui/theme/themes/better_dark_theme.dart';
+import 'package:flutter_better_ui/theme/themes/better_light_theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-bool? isFirst = true;
-
-void main() async {
-  runApp(BetterUi(designWidth: 375, designHeight: 812, child: const MyApp()));
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    if (isFirst == true) {
-      isFirst = false;
-      Get.changeThemeMode(ThemeMode.system);
-    }
-    return GetMaterialApp(
-      navigatorKey: BetterUi.navigatorKey,
-      translations: I18nTranslations(),
-      locale: const Locale('zh', 'CN'),
-      fallbackLocale: const Locale('zh', 'CN'),
-      darkTheme: betterDarkTheme.copyWith(
-        appBarTheme: betterDarkTheme.appBarTheme.copyWith(
-          scrolledUnderElevation: 0,
-        ),
-      ),
-      theme: betterLightTheme.copyWith(
+void main() {
+  final translations = I18nTranslations();
+  runApp(
+    BetterUi(
+      designWidth: 375,
+      designHeight: 812,
+      themeBuilder: () => betterLightTheme.copyWith(
         appBarTheme: betterLightTheme.appBarTheme.copyWith(
           scrolledUnderElevation: 0,
         ),
       ),
-      themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      getPages: routes,
-      defaultTransition: Transition.cupertino,
-    );
-  }
+      darkThemeBuilder: () => betterDarkTheme.copyWith(
+        appBarTheme: betterDarkTheme.appBarTheme.copyWith(
+          scrolledUnderElevation: 0,
+        ),
+      ),
+      translations: translations.keys,
+      locale: const Locale('zh', 'CN'),
+      fallbackLocale: const Locale('zh', 'CN'),
+      builder: (context, config) {
+        return MaterialApp.router(
+          routeInformationProvider: router.routeInformationProvider,
+          routeInformationParser: router.routeInformationParser,
+          routerDelegate: router.routerDelegate,
+          locale: config.locale,
+          supportedLocales: config.supportedLocales,
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+          theme: config.theme,
+          darkTheme: config.darkTheme,
+          themeMode: config.themeMode,
+        );
+      },
+    ),
+  );
 }

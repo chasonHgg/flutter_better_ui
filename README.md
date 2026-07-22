@@ -8,6 +8,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 
 - 🎨 **Modern design** - Built on Material Design 3
 - 🌙 **Theming** - Light/Dark theme switching
+- 🌐 **Localization** - Runtime locale switching and parameterized translations
 - 📱 **Responsive** - Adapts to different screen sizes
 - ⚡ **High performance** - Optimized rendering
 - 🛠️ **Extensible** - Modular and easy to customize
@@ -31,7 +32,8 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/14.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/15.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/16.png" width="200"/>
-    <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/17.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/17.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/18.png" width="200"/>
 </div>
 
 ## 📦 Components
@@ -67,6 +69,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 - **BetterMarquee** - Used for looping and displaying a set of message notifications
 - **BetterCollapse** - Collapse panel for showing and hiding grouped content
 - **BetterSkeletonizer** - Skeleton loading wrapper that automatically renders placeholders from child layout
+- **BetterProgress** - Vant-style animated progress bar with custom pivots and controller-based updates
 
 ### Utilities
 
@@ -82,27 +85,60 @@ Add the dependency in `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_better_ui: ^2.0.18
+  flutter_localizations:
+    sdk: flutter
+  flutter_better_ui: ^3.0.0
 ```
 
 ### Initialize
 
 ```dart
-void main() async {
-  runApp(BetterUi(designWidth: 375, designHeight: 812, child: MyApp()));
-}
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: BetterUi.navigatorKey,
-      home: HomePage(),
-    );
-  }
+void main() {
+  runApp(
+    BetterUi(
+      designWidth: 375,
+      designHeight: 812,
+      // Use builders when the theme contains .bw/.bsp responsive values.
+      themeBuilder: () => betterLightTheme,
+      darkThemeBuilder: () => betterDarkTheme,
+      themeMode: ThemeMode.system,
+      translations: const {
+        'en_US': {'remaining_days': '@days days left'},
+        'zh_CN': {'remaining_days': '剩余 @days 天'},
+      },
+      locale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('en', 'US'),
+      builder: (context, config) => MaterialApp(
+        navigatorKey: BetterUi.navigatorKey,
+        theme: config.theme,
+        darkTheme: config.darkTheme,
+        themeMode: config.themeMode,
+        locale: config.locale,
+        supportedLocales: config.supportedLocales,
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        home: const HomePage(),
+      ),
+    ),
+  );
 }
 ```
+
+### Theme and locale switching
+
+```dart
+BetterUi.toggleTheme();
+BetterUi.changeThemeMode(ThemeMode.dark);
+BetterUi.changeTheme(customLightTheme);
+BetterUi.changeDarkTheme(customDarkTheme);
+
+BetterUi.updateLocale(const Locale('zh', 'CN'));
+
+'remaining_days'.trParams({'days': 3}); // 剩余 3 天
+```
+
+Use a native `MaterialApp` or `MaterialApp.router` inside `BetterUi.builder`.
 
 ## 📖 Usage Guide
 
@@ -414,6 +450,65 @@ BetterSwitch(
   },
 )
 ```
+
+### BetterProgress - Progress Bar
+
+`BetterProgress` displays a value from 0 to 100 and automatically clamps out-of-range values. Controller updates are rendered with `ValueListenableBuilder`, so no `setState` is required.
+
+```dart
+// Basic usage
+BetterProgress(percentage: 50),
+
+// Custom color, stroke width, and pivot
+BetterProgress(
+  percentage: 75,
+  strokeWidth: 8.bw,
+  color: Colors.red,
+  trackColor: const Color(0xffffe1e1),
+  pivotText: 'Active',
+  pivotColor: Colors.red,
+  pivotTextStyle: TextStyle(fontSize: 10.bsp),
+),
+
+// Hide the progress pivot
+BetterProgress(percentage: 25, showPivot: false),
+```
+
+Use `BetterProgressController` to set, increase, or decrease progress programmatically:
+
+```dart
+final progressController = BetterProgressController(initialValue: 50);
+
+BetterProgress(controller: progressController);
+
+progressController.increase();    // Increase by 10
+progressController.increase(5);   // Increase by 5
+progressController.decrease();    // Decrease by 10
+progressController.decrease(20);  // Decrease by 20
+progressController.setValue(75);  // Set to 75
+
+// Dispose it with the owning StatefulWidget
+progressController.dispose();
+```
+
+#### BetterProgress properties
+
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `percentage` | `double` | `0` | Progress used without a controller, from 0 to 100 |
+| `controller` | `BetterProgressController?` | `null` | Controls progress programmatically |
+| `strokeWidth` | `double?` | `4.bw` | Progress bar thickness |
+| `color` | `Color?` | Theme primary color | Progress color |
+| `trackColor` | `Color?` | Theme surface color | Track color |
+| `showPivot` | `bool` | `true` | Whether to show the progress pivot |
+| `pivotText` | `String?` | Percentage | Custom pivot text |
+| `pivotColor` | `Color?` | Progress color | Pivot background color |
+| `pivotTextColor` | `Color` | `Colors.white` | Pivot text color |
+| `pivotTextStyle` | `TextStyle?` | `null` | Pivot text style |
+| `borderRadius` | `BorderRadiusGeometry?` | Automatic | Progress bar border radius |
+| `animated` | `bool` | `true` | Whether progress changes are animated |
+| `animationDuration` | `Duration` | `300ms` | Animation duration |
+| `animationCurve` | `Curve` | `Curves.easeOut` | Animation curve |
 
 ### BetterSwipeCell - Swipeable Cell
 
@@ -1283,6 +1378,7 @@ See the `example/` directory for full usage examples:
 - `better_marquee_page.dart` - Marquee examples
 - `better_collapse_page.dart` - Collapse examples
 - `better_skeleton_page.dart` - Skeleton loading examples
+- `better_progress_page.dart` - Progress bar examples
 
 ## 🤝 Contributing
 

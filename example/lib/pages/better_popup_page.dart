@@ -5,7 +5,6 @@ import 'package:flutter_better_ui/theme/better_theme_extension.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class BetterPopupPage extends StatelessWidget {
   const BetterPopupPage({super.key});

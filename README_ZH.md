@@ -8,6 +8,7 @@
 
 - 🎨 **现代化设计** - 采用 Material Design 3 设计语言
 - 🌙 **主题支持** - 支持亮色/暗色主题切换
+- 🌐 **国际化** - 支持运行时切换语言和动态翻译参数
 - 📱 **响应式** - 适配不同屏幕尺寸
 - ⚡ **高性能** - 优化的渲染性能
 - 🛠️ **易扩展** - 模块化设计，易于定制
@@ -32,6 +33,7 @@
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/15.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/16.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/17.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/18.png" width="200"/>
 </div>
 
 ## 📦 组件列表
@@ -67,6 +69,7 @@
 - **BetterMarquee** - 用于循环播放展示一组消息通知
 - **BetterCollapse** - 折叠面板组件，用于展示和隐藏分组内容
 - **BetterSkeletonizer** - 骨架屏组件，可根据子组件布局自动绘制占位内容
+- **BetterProgress** - Vant 风格进度条，支持动画、自定义标签和控制器增减进度
 
 ### 工具类
 
@@ -82,28 +85,61 @@
 
 ```yaml
 dependencies:
-  flutter_better_ui: ^2.0.18
+  flutter_localizations:
+    sdk: flutter
+  flutter_better_ui: ^3.0.0
 ```
 
 ### 初始化
 
 ```dart
-void main() async {
-  runApp(BetterUi(designWidth: 375, designHeight: 812, child: MyApp()));
-}
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      // 必须指定
-      navigatorKey: BetterUi.navigatorKey,
-      home: HomePage(),
-    );
-  }
+void main() {
+  runApp(
+    BetterUi(
+      designWidth: 375,
+      designHeight: 812,
+      // 主题中使用 .bw/.bsp 时必须通过 builder 延迟创建。
+      themeBuilder: () => betterLightTheme,
+      darkThemeBuilder: () => betterDarkTheme,
+      themeMode: ThemeMode.system,
+      translations: const {
+        'zh_CN': {'remaining_days': '剩余 @days 天'},
+        'en_US': {'remaining_days': '@days days left'},
+      },
+      locale: const Locale('zh', 'CN'),
+      fallbackLocale: const Locale('zh', 'CN'),
+      builder: (context, config) => MaterialApp(
+        navigatorKey: BetterUi.navigatorKey,
+        theme: config.theme,
+        darkTheme: config.darkTheme,
+        themeMode: config.themeMode,
+        locale: config.locale,
+        supportedLocales: config.supportedLocales,
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        home: const HomePage(),
+      ),
+    ),
+  );
 }
 ```
+
+### 切换主题和语言
+
+```dart
+BetterUi.toggleTheme();
+BetterUi.changeThemeMode(ThemeMode.dark);
+BetterUi.changeTheme(customLightTheme);
+BetterUi.changeDarkTheme(customDarkTheme);
+
+BetterUi.updateLocale(const Locale('en', 'US'));
+
+'remaining_days'.trParams({'days': 3}); // 3 days left
+```
+
+请在 `BetterUi.builder` 中使用 Flutter 原生的 `MaterialApp` 或
+`MaterialApp.router`。
 
 ## 📖 使用指南
 
@@ -429,6 +465,65 @@ BetterCell(
   ),
 ),
 ```
+
+### BetterProgress - 进度条
+
+`BetterProgress` 用于展示 0–100 的进度，数值超出范围时会自动限制。组件使用 `ValueListenableBuilder` 响应控制器变化，不依赖 `setState`。
+
+```dart
+// 基础用法
+BetterProgress(percentage: 50),
+
+// 自定义颜色、粗细和标签
+BetterProgress(
+  percentage: 75,
+  strokeWidth: 8.bw,
+  color: Colors.red,
+  trackColor: const Color(0xffffe1e1),
+  pivotText: '进行中',
+  pivotColor: Colors.red,
+  pivotTextStyle: TextStyle(fontSize: 10.bsp),
+),
+
+// 隐藏进度标签
+BetterProgress(percentage: 25, showPivot: false),
+```
+
+通过 `BetterProgressController` 可以调用函数设置、增加或减少进度：
+
+```dart
+final progressController = BetterProgressController(initialValue: 50);
+
+BetterProgress(controller: progressController);
+
+progressController.increase();    // 默认增加 10
+progressController.increase(5);   // 增加 5
+progressController.decrease();    // 默认减少 10
+progressController.decrease(20);  // 减少 20
+progressController.setValue(75);  // 设置为 75
+
+// StatefulWidget 销毁时释放控制器
+progressController.dispose();
+```
+
+#### BetterProgress 属性
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `percentage` | `double` | `0` | 无控制器时显示的进度，范围 0–100 |
+| `controller` | `BetterProgressController?` | `null` | 通过函数控制进度 |
+| `strokeWidth` | `double?` | `4.bw` | 进度条粗细 |
+| `color` | `Color?` | 主题主色 | 进度颜色 |
+| `trackColor` | `Color?` | 主题表面色 | 轨道颜色 |
+| `showPivot` | `bool` | `true` | 是否显示进度标签 |
+| `pivotText` | `String?` | 百分比 | 自定义标签文字 |
+| `pivotColor` | `Color?` | 进度颜色 | 标签背景色 |
+| `pivotTextColor` | `Color` | `Colors.white` | 标签文字颜色 |
+| `pivotTextStyle` | `TextStyle?` | `null` | 标签文字样式 |
+| `borderRadius` | `BorderRadiusGeometry?` | 自动圆角 | 进度条圆角 |
+| `animated` | `bool` | `true` | 是否启用进度动画 |
+| `animationDuration` | `Duration` | `300ms` | 动画时长 |
+| `animationCurve` | `Curve` | `Curves.easeOut` | 动画曲线 |
 
 ### BetterCell - 列表单元格
 
@@ -1309,6 +1404,7 @@ void main() async {
 - `better_marquee_page.dart` - 跑马灯示例
 - `better_collapse_page.dart` - 折叠面板示例
 - `better_skeleton_page.dart` - 骨架屏示例
+- `better_progress_page.dart` - 进度条示例
 
 ## 🤝 贡献
 
