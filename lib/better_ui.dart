@@ -5,6 +5,7 @@ import 'package:flutter_better_ui/utils/better_util.dart';
 export 'better_image_preview.dart';
 export 'better_progress.dart';
 export 'better_skeleton.dart';
+export 'better_slider.dart';
 export 'i18n/better_localizations.dart';
 
 typedef BetterUiBuilder =

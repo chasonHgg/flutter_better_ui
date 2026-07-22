@@ -34,6 +34,7 @@
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/16.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/17.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/18.png" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/19.png" width="200"/>
 </div>
 
 ## 📦 组件列表
@@ -54,6 +55,7 @@
 
 - **BetterPicker** - 选择器组件，支持单列、多列和级联选择
 - **BetterSwitch** - 开关组件，支持自定义样式和异步控制
+- **BetterSlider** - Vant 风格滑块，支持步进、范围、竖向、反向和自定义滑块按钮
 - **BetterDatePicker** - 日期选择器，支持灵活的列类型和格式选项
 - **BetterTimePicker** - 时间选择器，支持灵活的列类型和格式选项
 
@@ -465,6 +467,84 @@ BetterCell(
   ),
 ),
 ```
+
+### BetterSlider - 滑块
+
+`BetterSlider` 是一个用于选择单个数值或数值范围的 Vant 风格滑块，支持步进吸附、横向和竖向布局、反向、自定义滑块按钮以及范围滑块重合处理。组件内部使用 `ValueNotifier` 驱动更新，不依赖 `setState`。
+
+```dart
+final value = ValueNotifier<double>(50);
+final range = ValueNotifier<RangeValues>(const RangeValues(20, 60));
+
+// 单值选择和步进吸附
+ValueListenableBuilder<double>(
+  valueListenable: value,
+  builder: (context, current, _) => BetterSlider(
+    value: current,
+    step: 10,
+    onChanged: (next) => value.value = next,
+    onChangeStart: (current) => print('开始：$current'),
+    onChangeEnd: (current) => print('结束：$current'),
+  ),
+),
+
+// 范围选择
+ValueListenableBuilder<RangeValues>(
+  valueListenable: range,
+  builder: (context, current, _) => BetterSlider.range(
+    values: current,
+    onChanged: (next) => range.value = next,
+  ),
+),
+
+// 竖向、反向和自定义滑块按钮
+BetterSlider(
+  value: 30,
+  vertical: true,
+  reverse: true,
+  height: 160.bw,
+  onChanged: (next) {},
+),
+
+BetterSlider(
+  value: 50,
+  buttonSize: 28.bw,
+  button: DecoratedBox(
+    decoration: const BoxDecoration(
+      color: Colors.blue,
+      shape: BoxShape.circle,
+    ),
+    child: Center(
+      child: Text('50', style: TextStyle(fontSize: 10.bsp)),
+    ),
+  ),
+  onChanged: (next) {},
+),
+```
+
+范围滑块重合时，向左拖动会选择起始滑块，向右拖动会选择结束滑块，因此两个滑块都可以继续操作。
+
+#### BetterSlider 属性
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `value` | `double` | 必填 | 单值构造函数的当前值 |
+| `values` | `RangeValues` | 必填 | `BetterSlider.range` 的当前范围 |
+| `onChanged` | `ValueChanged<double>` / `ValueChanged<RangeValues>` | 必填 | 选中值变化时触发 |
+| `onChangeStart` / `onRangeChangeStart` | 回调 | `null` | 开始操作时触发 |
+| `onChangeEnd` / `onRangeChangeEnd` | 回调 | `null` | 结束操作时触发 |
+| `min` / `max` | `double` | `0` / `100` | 可选数值范围 |
+| `step` | `double` | `1` | 数值步长和吸附间隔 |
+| `activeColor` / `inactiveColor` | `Color?` | 主题颜色 | 激活和未激活轨道颜色 |
+| `barHeight` | `double?` | `2.bw` | 轨道粗细 |
+| `buttonSize` | `double?` | `24.bw` | 滑块按钮尺寸和触摸区域 |
+| `button` | `Widget?` | `null` | 单值模式的自定义滑块按钮 |
+| `startButton` / `endButton` | `Widget?` | `null` | 范围模式的自定义滑块按钮 |
+| `disabled` | `bool` | `false` | 禁止交互并降低透明度 |
+| `readOnly` | `bool` | `false` | 禁止交互但不改变透明度 |
+| `reverse` | `bool` | `false` | 反转数值方向 |
+| `vertical` | `bool` | `false` | 使用竖向布局 |
+| `height` | `double?` | `200.bw` | 竖向模式的主轴长度 |
 
 ### BetterProgress - 进度条
 
@@ -1394,6 +1474,7 @@ void main() async {
 - `better_dialog_page.dart` - 弹出框示例
 - `better_picker_page.dart` - 选择器示例
 - `better_switch_page.dart` - 开关组件示例
+- `better_slider_page.dart` - 滑块和范围滑块示例
 - `better_cell_page.dart` - 列表单元格示例
 - `better_swipe_action_page.dart` - 滑动单元格示例
 - `better_slide_action_page.dart` - 滑动按钮示例

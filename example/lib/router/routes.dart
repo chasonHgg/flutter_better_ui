@@ -10,6 +10,7 @@ import 'package:example/pages/better_picker_page.dart';
 import 'package:example/pages/better_popup_page.dart';
 import 'package:example/pages/better_progress_page.dart';
 import 'package:example/pages/better_skeleton_page.dart';
+import 'package:example/pages/better_slider_page.dart';
 import 'package:example/pages/better_slide_action_page.dart';
 import 'package:example/pages/better_swipe_action_page.dart';
 import 'package:example/pages/better_swiper_page.dart';
@@ -43,6 +44,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/betterProgress',
       builder: (context, state) => const BetterProgressPage(),
+    ),
+    GoRoute(
+      path: '/betterSlider',
+      builder: (context, state) => const BetterSliderPage(),
     ),
     GoRoute(
       path: '/betterPicker',

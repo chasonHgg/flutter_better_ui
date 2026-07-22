@@ -34,6 +34,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/16.png" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/17.gif" width="200"/>
   <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/18.png" width="200"/>
+  <img src="https://raw.githubusercontent.com/chasonHgg/flutter_better_ui/refs/heads/main/readme_assets/19.png" width="200"/>
 </div>
 
 ## 📦 Components
@@ -54,6 +55,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 
 - **BetterPicker** - Picker supporting single, multiple, and cascading selections
 - **BetterSwitch** - Customizable switch with loading state and async control
+- **BetterSlider** - Vant-style slider with stepped, range, vertical, reversed, and custom-thumb modes
 - **BetterDatePicker** - Date picker with flexible column types and formatting options
 - **BetterTimePicker** - Time picker with flexible column types and formatting options
 
@@ -450,6 +452,84 @@ BetterSwitch(
   },
 )
 ```
+
+### BetterSlider - Slider
+
+`BetterSlider` is a Vant-style slider for selecting one value or a range. It supports step snapping, horizontal and vertical layouts, reversed direction, custom thumbs, and overlapping range thumbs. Rendering is driven by `ValueNotifier`, with no `setState` inside the component.
+
+```dart
+final value = ValueNotifier<double>(50);
+final range = ValueNotifier<RangeValues>(const RangeValues(20, 60));
+
+// Single value with step snapping
+ValueListenableBuilder<double>(
+  valueListenable: value,
+  builder: (context, current, _) => BetterSlider(
+    value: current,
+    step: 10,
+    onChanged: (next) => value.value = next,
+    onChangeStart: (current) => print('Start: $current'),
+    onChangeEnd: (current) => print('End: $current'),
+  ),
+),
+
+// Range selection
+ValueListenableBuilder<RangeValues>(
+  valueListenable: range,
+  builder: (context, current, _) => BetterSlider.range(
+    values: current,
+    onChanged: (next) => range.value = next,
+  ),
+),
+
+// Vertical, reversed, and custom thumb examples
+BetterSlider(
+  value: 30,
+  vertical: true,
+  reverse: true,
+  height: 160.bw,
+  onChanged: (next) {},
+),
+
+BetterSlider(
+  value: 50,
+  buttonSize: 28.bw,
+  button: DecoratedBox(
+    decoration: const BoxDecoration(
+      color: Colors.blue,
+      shape: BoxShape.circle,
+    ),
+    child: Center(
+      child: Text('50', style: TextStyle(fontSize: 10.bsp)),
+    ),
+  ),
+  onChanged: (next) {},
+),
+```
+
+When range thumbs overlap, dragging left selects the start thumb and dragging right selects the end thumb, so either side remains accessible.
+
+#### BetterSlider properties
+
+| Property | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `double` | required | Current value for the single-value constructor |
+| `values` | `RangeValues` | required | Current values for `BetterSlider.range` |
+| `onChanged` | `ValueChanged<double>` / `ValueChanged<RangeValues>` | required | Called whenever the selected value changes |
+| `onChangeStart` / `onRangeChangeStart` | callback | `null` | Called when interaction begins |
+| `onChangeEnd` / `onRangeChangeEnd` | callback | `null` | Called when interaction ends |
+| `min` / `max` | `double` | `0` / `100` | Selectable value limits |
+| `step` | `double` | `1` | Value increment and snapping interval |
+| `activeColor` / `inactiveColor` | `Color?` | theme colors | Active and inactive track colors |
+| `barHeight` | `double?` | `2.bw` | Track thickness |
+| `buttonSize` | `double?` | `24.bw` | Thumb hit area and default size |
+| `button` | `Widget?` | `null` | Custom thumb for a single-value slider |
+| `startButton` / `endButton` | `Widget?` | `null` | Custom range thumbs |
+| `disabled` | `bool` | `false` | Disables interaction and reduces opacity |
+| `readOnly` | `bool` | `false` | Disables interaction without changing opacity |
+| `reverse` | `bool` | `false` | Reverses the value direction |
+| `vertical` | `bool` | `false` | Uses a vertical layout |
+| `height` | `double?` | `200.bw` | Main-axis extent in vertical mode |
 
 ### BetterProgress - Progress Bar
 
@@ -1368,6 +1448,7 @@ See the `example/` directory for full usage examples:
 - `better_dialog_page.dart` - Dialog examples
 - `better_picker_page.dart` - Picker examples
 - `better_switch_page.dart` - Switch examples
+- `better_slider_page.dart` - Slider and range slider examples
 - `better_cell_page.dart` - List cell examples
 - `better_swipe_action_page.dart` - Swipe cell examples
 - `better_slide_action_page.dart` - Slide action examples

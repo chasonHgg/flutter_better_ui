@@ -120,6 +120,14 @@ class Home extends StatelessWidget {
                 },
               ),
               BetterCell(
+                titleText: "滑块".tr,
+                isShowArrowRight: true,
+                isShowBorder: true,
+                onTap: () {
+                  context.push("/betterSlider");
+                },
+              ),
+              BetterCell(
                 titleText: "日期选择".tr,
                 isShowArrowRight: true,
                 isShowBorder: true,
