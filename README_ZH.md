@@ -86,10 +86,7 @@
 在 `pubspec.yaml` 中添加依赖：
 
 ```yaml
-dependencies:
-  flutter_localizations:
-    sdk: flutter
-  flutter_better_ui: ^3.0.0
+flutter pub add flutter_better_ui
 ```
 
 ### 初始化

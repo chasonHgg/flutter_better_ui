@@ -86,10 +86,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 Add the dependency in `pubspec.yaml`:
 
 ```yaml
-dependencies:
-  flutter_localizations:
-    sdk: flutter
-  flutter_better_ui: ^3.0.0
+flutter pub add flutter_better_ui
 ```
 
 ### Initialize
