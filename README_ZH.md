@@ -72,6 +72,7 @@
 - **BetterCollapse** - 折叠面板组件，用于展示和隐藏分组内容
 - **BetterSkeletonizer** - 骨架屏组件，可根据子组件布局自动绘制占位内容
 - **BetterProgress** - 进度条组件，支持动画、自定义标签和控制器增减进度
+- **BetterPopover** - 气泡弹出框，支持 12 种位置、空间不足自动换向、自定义内容和亮暗主题
 
 ### 工具类
 
@@ -235,6 +236,35 @@ BetterPopup.show(
   ),
 );
 ```
+
+### BetterPopover - 气泡弹出框
+
+```dart
+BetterPopover(
+  placement: BetterPopoverPlacement.bottom,
+  enableAnimation: true,
+  animationDuration: const Duration(milliseconds: 180),
+  actions: const [
+    BetterPopoverAction(text: '新增', icon: Icon(Icons.add)),
+    BetterPopoverAction(text: '收藏', icon: Icon(Icons.favorite)),
+    BetterPopoverAction(text: '禁用选项', disabled: true),
+  ],
+  onSelect: (action) {
+    print(action.text);
+  },
+  child: BetterButton(text: '显示气泡'),
+)
+
+// 自定义内容和宽度
+BetterPopover(
+  width: 220.bw,
+  padding: EdgeInsets.all(16.bw),
+  content: const Text('自定义内容'),
+  child: BetterButton(text: '显示自定义内容'),
+)
+```
+
+当指定方向无法完整显示气泡或会遮挡触发组件时，`BetterPopover` 会自动切换到其他可用位置。
 
 ### BetterDialog - 弹出框
 

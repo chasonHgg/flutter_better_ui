@@ -72,6 +72,7 @@ A modern Flutter UI component library that provides beautiful and easy-to-use wi
 - **BetterCollapse** - Collapse panel for showing and hiding grouped content
 - **BetterSkeletonizer** - Skeleton loading wrapper that automatically renders placeholders from child layout
 - **BetterProgress** - Animated progress bar with custom pivots and controller-based updates
+- **BetterPopover** - Anchored action popover with 12 placements, automatic fallback, custom content, and light/dark themes
 
 ### Utilities
 
@@ -234,6 +235,36 @@ BetterPopup.show(
   ),
 );
 ```
+
+### BetterPopover - Popover
+
+```dart
+BetterPopover(
+  placement: BetterPopoverPlacement.bottom,
+  enableAnimation: true,
+  animationDuration: const Duration(milliseconds: 180),
+  actions: const [
+    BetterPopoverAction(text: 'Add', icon: Icon(Icons.add)),
+    BetterPopoverAction(text: 'Favorite', icon: Icon(Icons.favorite)),
+    BetterPopoverAction(text: 'Disabled', disabled: true),
+  ],
+  onSelect: (action) {
+    print(action.text);
+  },
+  child: BetterButton(text: 'Show popover'),
+)
+
+// Custom content and width
+BetterPopover(
+  width: 220.bw,
+  padding: EdgeInsets.all(16.bw),
+  content: const Text('Custom content'),
+  child: BetterButton(text: 'Show custom content'),
+)
+```
+
+`BetterPopover` automatically switches to another placement when the requested
+direction cannot fully display the popover without covering the trigger.
 
 ### BetterDialog - Dialog
 

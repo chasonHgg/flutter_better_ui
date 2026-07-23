@@ -5,6 +5,7 @@
 * Support configurable `min`, `max`, and `step` values, custom active/inactive colors, track height, thumb size, and custom thumb widgets.
 * Add `BetterSliderController` with `setValue`, `increase`, and `decrease` methods for controlling single-value sliders.
 * Trigger slider `onChanged` callbacks once after tap or drag interactions end.
+* Add `BetterPopover`, anchored popover with action items, disabled states, custom content, arrows, overlays, and 12 placement options.
 
 ## 3.0.0
 

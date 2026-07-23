@@ -5,6 +5,7 @@ import 'package:flutter_better_ui/theme/child_themes/better_collapse_theme.dart'
 import 'package:flutter_better_ui/theme/child_themes/better_dialog_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_picker_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
+import 'package:flutter_better_ui/theme/child_themes/better_popover_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_switch_theme.dart';
 import 'package:flutter_better_ui/utils/better_screen_util.dart';
 import 'package:flutter_better_ui/utils/color_util.dart';
@@ -77,6 +78,18 @@ ThemeData betterDarkTheme = ThemeData(
         backgroundColor: ColorUtil.hexToColor('#1c1c1e'),
         closeIconColor: ColorUtil.hexToColor('#ffffff'),
         closeIconSize: 22.bw,
+      ),
+      popoverTheme: BetterPopoverTheme(
+        backgroundColor: ColorUtil.hexToColor('#2f2f31'),
+        textColor: Colors.white,
+        disabledTextColor: ColorUtil.hexToColor('#68686b'),
+        dividerColor: ColorUtil.hexToColor('#454547'),
+        overlayColor: Colors.black.withAlpha(120),
+        shadowColor: Colors.black.withAlpha(100),
+        borderRadius: 8.bw,
+        actionHeight: 40.bw,
+        fontSize: 13.bsp,
+        iconSize: 18.bw,
       ),
       pickerTheme: BetterPickerTheme(
         headerBackgroundColor: ColorUtil.hexToColor('#3a3a3c'),

@@ -17,7 +17,6 @@ typedef BetterImagePreviewImageBuilder =
       Widget child,
     );
 
-/// A full-screen image viewer inspired by Vant's ImagePreview.
 class BetterImagePreview {
   const BetterImagePreview._();
 

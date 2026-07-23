@@ -22,7 +22,6 @@ class BetterProgressController extends ValueNotifier<double> {
   void decrease([double amount = 10]) => setValue(value - amount);
 }
 
-/// A Vant-style linear progress indicator with an optional percentage pivot.
 class BetterProgress extends StatelessWidget {
   const BetterProgress({
     super.key,

@@ -4,6 +4,7 @@ import 'package:flutter_better_ui/theme/child_themes/better_collapse_theme.dart'
 import 'package:flutter_better_ui/theme/child_themes/better_dialog_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_picker_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_popup_theme.dart';
+import 'package:flutter_better_ui/theme/child_themes/better_popover_theme.dart';
 import 'package:flutter_better_ui/theme/child_themes/better_switch_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
   final BetterCellTheme cellTheme;
   //弹出窗主题
   final BetterPopupTheme popupTheme;
+  final BetterPopoverTheme popoverTheme;
   // 选择器主题
   final BetterPickerTheme pickerTheme;
   // 开关主题
@@ -41,10 +43,11 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     required this.buttonTheme,
     required this.cellTheme,
     required this.popupTheme,
+    required this.popoverTheme,
     required this.pickerTheme,
     required this.switchTheme,
     required this.collapseTheme,
-    required this.dialogTheme
+    required this.dialogTheme,
   });
 
   @override
@@ -58,10 +61,11 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
     BetterButtonTheme? buttonTheme,
     BetterCellTheme? cellTheme,
     BetterPopupTheme? popupTheme,
+    BetterPopoverTheme? popoverTheme,
     BetterPickerTheme? pickerTheme,
     BetterSwitchTheme? switchTheme,
     BetterCollapseTheme? collapseTheme,
-    BetterDialogTheme? dialogTheme
+    BetterDialogTheme? dialogTheme,
   }) {
     return BetterThemeExtension(
       primaryColor: primaryColor ?? this.primaryColor,
@@ -73,10 +77,11 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       buttonTheme: buttonTheme ?? this.buttonTheme,
       cellTheme: cellTheme ?? this.cellTheme,
       popupTheme: popupTheme ?? this.popupTheme,
+      popoverTheme: popoverTheme ?? this.popoverTheme,
       pickerTheme: pickerTheme ?? this.pickerTheme,
       switchTheme: switchTheme ?? this.switchTheme,
-      collapseTheme:collapseTheme??this.collapseTheme,
-      dialogTheme: dialogTheme??this.dialogTheme
+      collapseTheme: collapseTheme ?? this.collapseTheme,
+      dialogTheme: dialogTheme ?? this.dialogTheme,
     );
   }
 
@@ -101,10 +106,19 @@ class BetterThemeExtension extends ThemeExtension<BetterThemeExtension> {
       buttonTheme: BetterButtonTheme.lerp(buttonTheme, other.buttonTheme, t),
       cellTheme: BetterCellTheme.lerp(cellTheme, other.cellTheme, t),
       popupTheme: BetterPopupTheme.lerp(popupTheme, other.popupTheme, t),
+      popoverTheme: BetterPopoverTheme.lerp(
+        popoverTheme,
+        other.popoverTheme,
+        t,
+      ),
       pickerTheme: BetterPickerTheme.lerp(pickerTheme, other.pickerTheme, t),
       switchTheme: BetterSwitchTheme.lerp(switchTheme, other.switchTheme, t),
-      collapseTheme: BetterCollapseTheme.lerp(collapseTheme, other.collapseTheme, t),
-      dialogTheme: BetterDialogTheme.lerp(dialogTheme, other.dialogTheme, t)
+      collapseTheme: BetterCollapseTheme.lerp(
+        collapseTheme,
+        other.collapseTheme,
+        t,
+      ),
+      dialogTheme: BetterDialogTheme.lerp(dialogTheme, other.dialogTheme, t),
     );
   }
 }
