@@ -41,6 +41,30 @@ class _BetterDialogPageState extends State<BetterDialogPage> {
               ),
               BetterCell(
                 height: 44.bw,
+                titleText: '自定义弹窗内容'.tr,
+                isShowBorder: true,
+                isShowArrowRight: true,
+                onTap: () {
+                  BetterDialog.showDialog(
+                    title: "标题".tr,
+                    content: "提示弹窗".tr,
+                    contentWidget: Padding(
+                      padding: EdgeInsets.fromLTRB(26.bw, 8.bw, 26.bw, 26.bw),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: '请输入内容'.tr,
+                            border: const OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+              BetterCell(
+                height: 44.bw,
                 titleText: '确认弹窗'.tr,
                 isShowBorder: true,
                 isShowArrowRight: true,

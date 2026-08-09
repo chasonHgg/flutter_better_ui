@@ -281,6 +281,23 @@ BetterDialog.showDialog(
   content: "This is an alert dialog without title",
 );
 
+// Custom dialog content (contentWidget takes precedence over content)
+BetterDialog.showDialog(
+  title: "Custom Content",
+  contentWidget: Padding(
+    padding: const EdgeInsets.fromLTRB(26, 8, 26, 26),
+    child: Material(
+      color: Colors.transparent,
+      child: TextField(
+        decoration: const InputDecoration(
+          hintText: "Please enter content",
+          border: OutlineInputBorder(),
+        ),
+      ),
+    ),
+  ),
+);
+
 // Confirmation dialog
 BetterDialog.showDialog(
   title: "Confirm",

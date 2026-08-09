@@ -281,6 +281,23 @@ BetterDialog.showDialog(
   content: "这是无标题提示弹窗内容",
 );
 
+// 自定义弹窗内容（contentWidget 的优先级高于 content）
+BetterDialog.showDialog(
+  title: "自定义内容",
+  contentWidget: Padding(
+    padding: const EdgeInsets.fromLTRB(26, 8, 26, 26),
+    child: Material(
+      color: Colors.transparent,
+      child: TextField(
+        decoration: const InputDecoration(
+          hintText: "请输入内容",
+          border: OutlineInputBorder(),
+        ),
+      ),
+    ),
+  ),
+);
+
 // 确认弹窗
 BetterDialog.showDialog(
   title: "确认",

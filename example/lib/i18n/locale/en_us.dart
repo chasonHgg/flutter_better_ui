@@ -102,6 +102,8 @@ Map<String, String> enUS = {
   '弹出窗': 'Dialog',
   '提示弹窗': 'Alert Dialog',
   '提示弹窗(无标题)': 'Alert Dialog(No Title)',
+  '自定义弹窗内容': 'Custom Dialog Content',
+  '请输入内容': 'Please enter content',
   '确认弹窗': 'Confirm Dialog',
   '确认': 'Confirm',
   '宽度延伸': 'Width Stretch',

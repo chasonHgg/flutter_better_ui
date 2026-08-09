@@ -14,6 +14,7 @@ class BetterDialog {
     Color? barrierColor,
     String? title,
     String? content,
+    Widget? contentWidget,
     bool showConfirmButton = true,
     bool showCancelButton = false,
     String confirmButtonText = "确认",
@@ -25,7 +26,7 @@ class BetterDialog {
     VoidCallback? onConfirm,
     VoidCallback? onCancel,
     bool isCloseWhenTap = true,
-    Widget? buttomWidget
+    Widget? buttomWidget,
   }) {
     final betterDialogContext = context ?? BetterUi.currentContext;
     if (betterDialogContext == null) {
@@ -63,7 +64,9 @@ class BetterDialog {
                               ColorUtil.hexToColor("#323232"),
                         ),
                       ),
-                    if (content != null)
+                    if (contentWidget != null)
+                      contentWidget
+                    else if (content != null)
                       Padding(
                         padding: EdgeInsetsGeometry.only(
                           top: 8.bw,
@@ -83,8 +86,9 @@ class BetterDialog {
                           ),
                         ),
                       ),
-                    if(buttomWidget!=null)buttomWidget,
-                    if ((showCancelButton || showConfirmButton) && buttomWidget==null)
+                    if (buttomWidget != null) buttomWidget,
+                    if ((showCancelButton || showConfirmButton) &&
+                        buttomWidget == null)
                       _renderDefaultButton(
                         context: context,
                         dialogTheme: dialogTheme,

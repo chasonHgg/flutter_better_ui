@@ -1,4 +1,9 @@
 
+## 3.0.2
+
+* Add `BetterDialog.contentWidget` for custom dialog content, with priority over the string `content` when both are provided.
+* Add a localized custom-content dialog example using a text input field.
+
 ## 3.0.1
 
 * Add `BetterSlider` with single-value and range selection modes.
