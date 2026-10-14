@@ -1493,7 +1493,7 @@ void main() async {
   test('RefreshImages', () async {
     await BetterAssets.generate(
       projectPath: '.', // 可选，默认向上查找最近的 pubspec.yaml 所在目录
-      imagePath: 'assets/images',
+      path: 'assets/images',
       codePath: 'lib/app_res',
       codeName: 'app_image',
       className: 'AppImages',

@@ -4,7 +4,7 @@ import 'dart:io';
 class BetterAssets {
   static Future<void> generate({
     String projectPath = '',
-    String imagePath = 'assets/images',
+    String path = 'assets/images',
     String codePath = 'lib/app_res',
     String codeName = 'app_image',
     String className = 'AppImages',
@@ -15,7 +15,7 @@ class BetterAssets {
     _log(verbose, logger, 'BetterAssets: generation started.');
 
     final projectDir = _resolveProjectDirectory(projectPath);
-    final imageDir = Directory(_joinPath(projectDir.path, imagePath));
+    final imageDir = Directory(_joinPath(projectDir.path, path));
     final outputFile = File(
       _joinPath(projectDir.path, '$codePath/$codeName.dart'),
     );
@@ -51,12 +51,12 @@ class BetterAssets {
       return aPath.compareTo(bPath);
     });
 
-    final entries = _buildEntries(imageFiles, imageDir.path, imagePath);
+    final entries = _buildEntries(imageFiles, imageDir.path, path);
     for (final entry in entries) {
       _log(verbose, logger, 'BetterAssets: ${entry.name} -> ${entry.value}');
     }
 
-    final output = _buildClass(className, imagePath, entries);
+    final output = _buildClass(className, path, entries);
 
     await outputFile.parent.create(recursive: true);
     await outputFile.writeAsString(output);

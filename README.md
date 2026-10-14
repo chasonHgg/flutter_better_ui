@@ -1470,7 +1470,7 @@ void main() async {
   test('RefreshImages', () async {
     await BetterAssets.generate(
       projectPath: '.', // Optional. Defaults to the nearest parent directory with pubspec.yaml.
-      imagePath: 'assets/images',
+      path: 'assets/images',
       codePath: 'lib/app_res',
       codeName: 'app_image',
       className: 'AppImages',
